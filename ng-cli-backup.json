@@ -1,0 +1,83 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "web"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "deployUrl": "https://pck.azureedge.net/srkweb/web-ms/",
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "./assets/icons/font-awesome-4.7.0/css/font-awesome.min.css",
+        "../node_modules/primeng/resources/primeng.min.css",
+        "../node_modules/primeng/resources/themes/omega/theme.css",
+        "../node_modules/devextreme/dist/css/dx.common.css",
+        "../node_modules/devextreme/dist/css/dx.light.css",
+        "./assets/date-time-picker/jquery.datetimepicker.css",
+        "../node_modules/owl.carousel/dist/assets/owl.carousel.min.css",
+        "../node_modules/owl.carousel/dist/assets/owl.theme.default.min.css",
+        "./assets/styles/styles.scss",
+        {
+          "input": "./assets/styles/client-color-theme/srkexports-color-theme/srkexports-color-theme.scss",
+          "output": "srkexports-color-theme"
+        },
+        {
+          "input": "./assets/styles/client-color-theme/hGoldie-color-theme/hGoldie-color-theme.scss",
+          "output": "hGoldie-color-theme"
+        }
+      ],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/moment/min/moment.min.js",
+        "../node_modules/underscore/underscore-min.js",
+        "../node_modules/waypoints/lib/jquery.waypoints.min.js",
+        "../node_modules/waypoints/lib/shortcuts/sticky.min.js",
+        "./assets/date-time-picker/jquery.datetimepicker.full.js",
+        "../node_modules/file-saver/FileSaver.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts",
+        "qa": "environments/environment.qa.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json"
+    },
+    {
+      "project": "src/tsconfig.spec.json"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "scss",
+    "component": {}
+  }
+}

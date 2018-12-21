@@ -1,0 +1,30 @@
+{
+    "success": true,
+    "data": {
+        "result": {
+            "entries": [],
+            "continuationToken": null
+        },
+        "response": {
+            "isSuccessful": true,
+            "statusCode": 200,
+            "body": {
+                "EnumerationResults": {
+                    "Prefix": "web-solitaire/my-test/",
+                    "Blobs": "",
+                    "NextMarker": ""
+                }
+            },
+            "headers": {
+                "transfer-encoding": "chunked",
+                "content-type": "application/xml",
+                "vary": "Origin",
+                "server": "Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0",
+                "x-ms-request-id": "6f78e99a-101e-0033-74dc-b90c08000000",
+                "x-ms-version": "2017-07-29",
+                "date": "Mon, 12 Mar 2018 08:33:01 GMT"
+            }
+        }
+    },
+    "message": "Got list of blobs."
+}
