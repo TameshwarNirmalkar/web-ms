@@ -28,8 +28,32 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "node_modules/primeng/resources/themes/nova-light/theme.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/bootstrap-scss/bootstrap.scss",
+              "node_modules/font-awesome/scss/font-awesome.scss",
+              "node_modules/animatewithsass/animate.scss",
+
+              "node_modules/devextreme/dist/css/dx.common.css",
+              "node_modules/devextreme/dist/css/dx.light.css",
+              "node_modules/owl.carousel/dist/assets/owl.carousel.min.css",
+              "node_modules/owl.carousel/dist/assets/owl.theme.default.min.css",
+              "node_modules/quill/dist/quill.core.css",
+              "node_modules/quill/dist/quill.snow.css",
+              "src/assets/date-time-picker/jquery.datetimepicker.css",
+              "src/styles.scss",
+              "src/assets/Ignite UI/css/themes/bootstrap4/default/infragistics.theme.css",
+              "src/assets/Ignite UI/css/structure/infragistics.css",
+              { "input": "src/assets/styles/client-color-theme/srkexports-color-theme/srkexports-color-theme.scss"},
+              { "input": "src/assets/styles/client-color-theme/hGoldie-color-theme/hGoldie-color-theme.scss"}
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules/animatewithsass/",
+                "node_modules/font-awesome/scss/",
+                "node_modules/bootstrap-scss/"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
