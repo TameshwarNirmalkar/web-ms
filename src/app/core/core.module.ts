@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SessionStorageService } from './services/session-storage.service';
 import { HttpClientModule } from '@angular/common/http';
+import { SessionStorageService } from './services/session-storage.service';
 
 import {
   AuthService,
@@ -26,7 +26,7 @@ import {
 @NgModule({
   imports: [
     HttpClientModule,
-    CommonModule,
+    CommonModule
   ],
   declarations: [],
   providers: [
@@ -49,7 +49,8 @@ import {
     ApplicationAuditService,
     ApplicationStorageService,
     SessionStorageService
-  ]
+  ],
+  exports: [ CommonModule, HttpClientModule ]
 })
 export class CoreModule {
 }
