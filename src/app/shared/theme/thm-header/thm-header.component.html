@@ -1,0 +1,139 @@
+<p-confirmDialog id="confirmDialog" #confirmDialog acceptIcon='' rejectIcon='' width="425" icon=confirmation-popup-icons></p-confirmDialog>
+
+<div id="headerContainerId" class="srkay-header ui-g ui-g-12 ui-g-nopad">
+  <div id="headerId" class="ui-g-7 ui-lg-7 ui-md-7 ui-sm-8 ui-g-nopad">
+    <div id="companyLogoContainer" class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-8 company-image ui-g-nopad">
+      <nav id="navButtonId" class="vertical_nav_menu__minify ui-g-1 ui-g-nopad">
+        <button id="collapseMenu" class="collapse_menu menu-border-bottom" (click)="collapseList()">
+          <i id="menuIconId" class="menu-icon">
+            <img id="iconId" class="menu-item-icon" src='../../../../assets/icons/menu-icon.svg' />
+          </i>
+        </button>
+      </nav>
+      <img id="companyLogoId" class="company-logo" src="../../assets/img/srk-logo.png" (click)="goToHomePage()">
+    </div>
+    <div id="searchFieldid" class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-4 search-field" align="middle">
+      <form id="globalStoneSearchFieldId" (ngSubmit)="onSubmit(searchForm.value)" autocomplete="off" [formGroup]="searchForm">
+        <div class="ui-g-7 ui-g-nopad fl">
+          <input id="searchId" #searchField type="search" formControlName="search_value" placeholder="{{'Search Stone ID'|translate}}">
+        </div>
+        <div class="ui-g-5 paddb0 paddr0 fl">
+          <div class="ui-g-2 ui-g-nopad">
+            <a id="uploadIcon" (click)="onSubmit(searchForm.value)">
+              <span class="icon-search" pTooltip="{{'GLOBAL_SEARCH_TEXT'|translate}}" tooltipPosition="bottom" tooltipEvent="hover"></span>
+            </a>
+          </div>
+          <div class="ui-g-10 paddt0 paddb0 paddr0 text-left">
+            <span class="">
+              <span *ngIf="!isFileUploaded" class="">
+                <input autocomplete="off" type="file" name="file-3[]" id="file-3" class="inputfile-2" data-multiple-caption="files selected"
+                  (change)="uploadExcel($event)" accept=".xls,.xlsx" />
+                <label for="file-3" class="fa fa-upload cursor-pointer " pTooltip="{{'UPLOAD_EXCEL_TEXT'|translate}}" tooltipPosition="bottom"
+                  tooltipEvent="hover">
+                  <span (click)="uploadExcel()"></span>
+                </label>
+              </span>
+              <label class="fileLength" *ngIf="fileLength > 0 && !fileExtError && !fileSizeError &&  isFileUploaded">{{selectedFileName}}</label>
+              <span *ngIf="isFileUploaded && !fileExtError && !fileSizeError" class="icon-close circle-close-icon" (click)="cancelFileSearch()"></span>
+              <br>
+              <label class="error" *ngIf="fileExtError">{{'Invalid file extention. only [xls, xlsx] allowed' |translate}}</label>
+              <label class="error" *ngIf="fileSizeError"> {{'File size is too big' |translate}}</label>
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="profileContainer" class="ui-g-5 ui-lg-5 ui-md-5 ui-sm-4 profile-main-box">
+    <ul class="header-details header-align-icons">
+      <li id="indiaCalendarTime" (click)="displaySrkCalendar()" class="cursor-pointer">
+        <span>
+          <img id="flagIcon" class="flag-icon-position" src="../../assets/img/flag.png">
+        </span>
+        <span id="indianTime" class="indianTime">{{indianTime | translate}} IST
+          <br>{{indianDate | translate}}</span>
+      </li>
+      <li class="profile-box" id="profileId" (click)="goToProfilePage()">
+        <span id="profileImage" class="login-icon profile-icon-header  icon-profile-place fl" pTooltip="{{'MY_PROFILE_TEXT'|translate}}"
+          tooltipPosition="bottom" tooltipEvent="hover"></span>
+        <span id="profileName" class=" profile-name ">
+          {{clientDisplayName | translate}}
+        </span>
+      </li>
+      <li id="notificationId" #notificationTarget>
+        <!--<a id="notificationIcon" class="fa" (click)="notificationOverlay.toggle($event, notificationTarget)">
+          <span id="notificationbell" class="login-icon icon-notification icon-w20"></span>
+          <div *ngIf="notificationCount !== 0" class="notification-circle-badge">
+            <span class="notification-count">{{notificationCount}}</span>
+          </div>
+        </a>-->
+        <a id="notificationIcon" class="fa" pTooltip="{{'NOTIFICATION_TEXT'|translate}}" tooltipPosition="bottom" tooltipEvent="hover"
+          (click)="openNotificationPopup()">
+          <span id="notificationbell" class="login-icon icon-notification icon-w20"></span>
+        </a>
+      </li>
+      <li class="logoutContainer">
+        <div class="icon-margin">
+          <div>
+            <a [dirStoreAudit]="'LOGOUT'" id="logoutBox" (click)="logout()">
+              <span id="logoutId" class="login-icon  icon-logout">
+              </span>
+            </a>
+          </div>
+          <div class="logout-text">
+            <label>Logout</label>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</div>
+
+
+<p-overlayPanel #notificationOverlay styleClass="notification-popup ">
+  <div class="notification-container">
+    <div class="ui-g-12 notification-header">
+      <span class="notifications-menu-title">Alerts</span>
+      <span class="new-notifiacation-msg"> ({{notificationCount}} new)</span>
+    </div>
+    <div class="ui-g-12 notification-details-meassage" *ngFor="let notification of mailNotifications | slice:0:9">
+      <label class="notification-subject">{{notification.MSG_SUBJECT}}</label>
+      <br>
+      <label class="notification-date">{{notification.ENTRY_DATE}}</label>
+    </div>
+  </div>
+</p-overlayPanel>
+
+<p-dialog id="surveyDialog" [(visible)]="surveyQuestionsObj.show_survey_overlay" *ngIf="surveyQuestionsObj?.show_survey_overlay"
+  [modal]="true" [responsive]="true" [width]="popupWidth" [minWidth]="500" [height]="popupHeight" [resizable]="true" [draggable]="true"
+  [closable]="false" [closeOnEscape]="false">
+  <p-header>
+    <div class="ui-g-12 survey-logo">
+      <img src="../../assets/img/srk-logo.png">
+    </div>
+  </p-header>
+  <div class="ui-g-12 survey-heading" *ngIf="surveyName">
+    <h2>{{surveyName}}</h2>
+  </div>
+  <ng-template [ngIf]="!isSurveyAvailable" [ngIfElse]="showSurveyPanel">
+    <div class="ui-g-12 no-view-request">{{'Loading..' | translate}}</div>
+  </ng-template>
+  <ng-template #showSurveyPanel>
+    <!-- <app-serenaway-survey *ngIf="!showValidationMessage" [json]="surveyQuesJson" (surveyOnCurrentPage)="currentPage($event)"
+      (surveyonCompletePage)="completePage($event)" [responseData]="surveyResponseData" [currentPage]="currentPageNumber"></app-serenaway-survey> -->
+  </ng-template>
+  <p-footer>
+    <button type="button" pButton (click)="askMeLaterAction()" label="Ask me later"></button>
+    <button type="button" pButton (click)="dontAskAgainAction()" label="Do not ask me again"></button>
+  </p-footer>
+</p-dialog>
+
+
+<dx-popover id="srkCalendarPopup" *ngIf="showSrkCalendar" target="#indiaCalendarTime" position="bottom" [closeOnOutsideClick]="true" [(visible)]="showSrkCalendar">
+  <div *dxTemplate="let data of 'content'">
+    <thm-date-picker id="srkCalendarPanel" [isInline]="true" [hideTimePicker]="true" [showDescriptionBox]="true" [page]="'header'"
+       [dateInDatePicker]='indianDate' [minDate]="indianDate"></thm-date-picker>
+  </div>
+</dx-popover>

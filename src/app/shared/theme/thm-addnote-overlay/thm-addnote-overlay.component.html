@@ -1,0 +1,68 @@
+<div dirScrollTop id="mainMargin">
+  <p-dialog *ngIf="visibleAddnoteOverlay" id="AddnoteOverlayId" appendTo="body" header="{{header| translate}}" [(visible)]="visibleAddnoteOverlay" (onHide)="cancelAddnote()" modal="modal" width="600" responsive="true">
+  <div id="AddnoteContentBoxId" class="ui-g-12 ui-g-nopad">
+    <div id="AddnoteContentHeaderBox" class="ui-g-3">
+      <label id="AddnoteContentlabel">{{'Note' | translate}}</label>
+    </div>
+    <div id="AddnoteContentValueBox" class="ui-g-9">
+      <input type="text"  [(ngModel)]="noteText"/>
+    </div>
+  </div>
+  <p-footer>
+    <button id="applyAddnoteBtnId" [icon]="saveNoteBtnIcon" [disabled]="saveNoteBtnIcon != 'none'" pButton (click)="addNote()"
+        label="{{'Add'|translate}}{{saveNoteBtnIcon != 'none'?'...':''}}" class="custom-btnPrimary">
+    </button>
+    <button id="closeConfirmBtnId"  [disabled]="saveNoteBtnIcon != 'none'"  pButton (click)="cancelAddnote()"
+        label="{{'Cancel'|translate}}" class="custom-btnBorder">
+    </button>
+
+  </p-footer>
+</p-dialog>
+
+<p-dialog *ngIf="visibleShownoteOverlay" id="ShownoteOverlayId" appendTo="body" [draggable]=false [resizable]=false
+  width="400" height="auto" header="{{'Comments' | translate}}"
+  [(visible)]="visibleShownoteOverlay" modal="modal" responsive="true" (onHide)="cancelAddnote()">
+  <div id="viewCommentsBox "  #scrollContainer class="ui-g-12 comment-box scrollable" *ngIf="CommentListForStone.length">
+    <div id="commentsList" class="ui-g ui-g-nopad" *ngFor="let noteData of CommentListForStone">
+      <div class="ui-g-2 "><span class="comment-image-icon">&nbsp;</span></div>
+      <div class="ui-g-10 ">
+        <div class="ui-g-12 ui-g-nopad comment-name">
+          {{clientName}}
+            <p-checkbox  [disabled]="disableSelection" name="groupname" class="grid-icon" value={{noteData.comment_id}} [(ngModel)]="selectedNoteId"
+              (onChange)="stoneSelected()"></p-checkbox>
+        </div>
+        <div id="{{noteData}}Id" class="ui-g-12  ui-g-nopad comment-comments">{{noteData.comment}}</div>
+
+        <div id="commentTime" class="ui-g-12  ui-g-nopad comment-datetime">
+          {{noteData.comment_date_time | customDate:'date'}} {{noteData.comment_date_time | customDate:'month'}} {{noteData.comment_date_time
+          | customDate:'timeAMPM'}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p-footer >
+    <div id="deleteMessageId" style="float:right;" >
+      {{selectAllLabel}}
+      <p-checkbox [disabled]="disableSelection" [(ngModel)]="allSelected" binary="true" (onChange)="selectAll($event)"></p-checkbox>
+    </div><br>
+
+    <button  *ngIf="!toggleCancelButtonPannelVisibile"  id="applyAddnoteBtnId" [icon]="deleteNoteBtnIcon" class="custom-btnPrimary"
+        [disabled]="!selectedNoteId.length" pButton (click)="deleteAction()"
+        label="{{'Delete'|translate}}" >
+    </button>
+
+    <div *ngIf="toggleCancelButtonPannelVisibile" >
+      <button id="applyAddnoteBtnId" [icon]="deleteNoteBtnIcon" class="custom-btnPrimary"
+        pButton (click)="deleteSelectedNotes()"
+        label="{{'Confirm Delete'|translate}}" >
+      </button>
+      <button id="applyAddnoteBtnId" class="custom-btnPrimary" pButton (click)="cancelDeleteAction()"
+        label="{{'Cancel'|translate}}" >
+      </button>
+    </div>
+
+  </p-footer>
+
+</p-dialog>
+</div>

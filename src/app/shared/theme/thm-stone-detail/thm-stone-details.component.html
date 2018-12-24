@@ -1,0 +1,484 @@
+<div class="ui-g" *ngIf="stoneDetails">
+  <div id="" class="ui-g-12 ui-g-nopad bg-white">
+    <div id="tagBoxId" class="ui-g-6 ui-md-12 ui-lg-6 ui-g-nopad" *ngIf="stoneDetails.tags">
+      <div id="chipsBoxId" [ngClass]="'ui-chips ui-widget'">
+        <ul id="chipsId" class="chipslabel" [ngClass]="{'ui-inputtext ui-state-default ui-corner-all ':true,'ui-state-focus':focus,'ui-state-disabled':disabled}"
+          [class.dropdownHeight]="showTagsList">
+          <li class="ui-chips-input-token">
+            <span id="iconId" class="fa fa-tag"></span>
+          </li>
+          <li id="{{item}}Id" #token *ngFor="let item of stoneDetails.tags; let i = index;" class="ui-chips-token tab-btn">
+            <span class="ui-chips-token-label">{{item.tagName}}
+              <span>
+                <i [ngClass]="item.isUpVote ? 'fa fa-thumbs-up' : 'fa fa-thumbs-o-up'" (click)="userActionFunction('upvote',item)"></i>
+              </span>
+              <span>{{item.upVoteCount}}</span>
+              <span>
+                <i [ngClass]="item.isDownVote ? 'fa fa-thumbs-down' : 'fa fa-thumbs-o-down'" (click)="userActionFunction('downvote',item)"></i>
+              </span>
+              <span>{{item.downVoteCount}}</span>
+            </span>
+          </li>
+          <li class="ui-chips-input-token">
+            <i class="fa fa-spinner fa-pulse" aria-hidden="true" *ngIf="showLoadingSymbol"></i>
+          </li>
+          <li id="chipsButtonBox" class="ui-chips-input-token">
+            <button id="addTagsButton" *ngIf="!showTagsList" (click)="showAddTags()" class="addtext">
+              <span *ngIf="!showTagsList" class="login-icon icon-add-circle icon-w20 icon-color-primary" id="iconId"></span>
+              <label class="add-tag-label">{{'Add Tags'|translate}}</label>
+            </button>
+          </li>
+        </ul>
+        <div>
+          <p-dropdown *ngIf="showTagsList" id="tagListDropbox" [options]="tagList" [(ngModel)]="selectedTags" filter="filter"
+            (onFocus)="clearSelectedTag()" (onChange)="addNewTags($event, stoneDetails.stone_id)" scrollHeight="150px"
+            autoWidth="true" placeholder="Select TAG">
+            <ng-template let-tag pTemplate="item">
+              <div class="ui-helper-clearfix">
+                <div class="tagDropbox">{{tag.label}}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+      </div>
+    </div>
+    <!-- ui-g-6 ui-md-12 ui-lg-6 -->
+    <div id="buttonSectionBox" class="ui-g-nopad text-responsive-right" [ngClass]="{'ui-g-6 ui-md-12 ui-lg-6':stoneDetails.tags, 'ui-g-12 ui-md-12 ui-lg-12':!stoneDetails.tags}">
+
+      <ng-template [dirCheckPermission]="'request_hold_btn'">
+        <button [dirStoreAudit]="'ADD TO HOLD'" id="holdButtonId" class="custom-btnBorder custom-btnBorder-detail"
+          (click)="requestHold()" *ngIf="requestHoldButton">{{'Request Hold' |translate}}</button>
+      </ng-template>
+
+      <ng-template [dirCheckPermission]="'ddc_btn'" >
+        <button [dirStoreAudit]="'ADD TO DDC'" id="ddcButtonId" *ngIf="applyDDCButton" class="custom-btnBorder custom-btnBorder-detail"
+          (click)="applyDDC()">{{'Apply DDC'|translate}}</button>
+      </ng-template>
+
+      <ng-template [dirCheckPermission]="'add_basket_btn'">
+        <button [dirStoreAudit]="'ADD TO BASKET'" id="basketButtonId" class="custom-btnBorder custom-btnBorder-detail"
+          (click)="addToMyBasket()" *ngIf="basketButton">{{'Add to Basket'|translate}}</button>
+      </ng-template>
+
+      <ng-template [dirCheckPermission]="'view_request_btn'">
+        <button [dirStoreAudit]="'VIEW REQUEST'" id="requestButtonId" class="custom-btnBorder custom-btnBorder-detail"
+          (click)="toggleViewRequestOverlay()" *ngIf="viewRequestButton">{{'View Request'|translate}}</button>
+      </ng-template>
+
+      <ng-template *ngIf="showConfirmationButton" [dirCheckPermission]="'confirm_btn'">
+        <button [dirStoreAudit]="'CONFIRM'" id="confirmButtonId" class="custom-btnPrimary custom-btnPrimary-detail"
+          (click)="confirmDiamonds()" *ngIf="confirmStoneButton">{{'Confirm'|translate}}</button>
+      </ng-template>
+
+    </div>
+  </div>
+  <div id="" class="ui-g-12 ui-g-nopad  marg-b10">
+    <div id="" class="ui-g-8 ui-md-12 ui-sm-12 ui-lg-8 ui-g-nopad bg-white">
+      <div id="seconRowId" class="ui-g-12 ui-g-nopad">
+        <div class="ui-g-12 ui-md-12 ui-lg-12 ui-g-nopad detail-head">{{'Diamond Details '|translate}}</div>
+        <div id="stoneName" class="ui-g-1 ui-md-1 ui-lg-1 ui-g-nopad borderr" *ngIf="stoneDetails.stone_id">
+          <div id="stoneIdName" class="stone-label-text">{{stoneDetails.stone_id}}
+            <span class="fl">
+              <span *ngIf="stoneDetails.countryCode">
+                <img id="{{stoneDetails.stone_id}}Flag" class="stone-flag-icon flag-align" [src]=stoneDetails.countryCode>
+              </span>
+              <span *ngIf="stoneDetails.color_legends">
+                <div id="{{stoneDetails.stone_id}}ColorId" class="color-indicator-panel" *ngFor="let color of stoneDetails.color_legends">
+                  <div id="{{stoneDetails.stone_id}}{{color}}Id" class="colorLagend_GRID color-legend-width-height"
+                    [style.background-color]="color | safeStyle"></div>
+                </div>
+              </span>
+            </span>
+          </div>
+          <div id="stoneIdText" class="detail-label text-left">{{'Stone ID' | translate}}</div>
+        </div>
+        <div id="stoneShapeId" class="ui-g-1 ui-md-1 ui-lg-1 ui-g-nopad borderr" *ngIf="stoneDetails">
+          <div id="stoneCaratId" class="stone-label-text">{{stoneDetails?.carat}} CRT</div>
+          <div id="stoneCaratTextId" class="detail-label  text-left" *ngIf="stoneDetails.shape">{{'Carat' | translate}}</div>
+        </div>
+        <div id="stoneShapeId" class="ui-g-1 ui-md-1 ui-lg-1 ui-g-nopad borderr" *ngIf="stoneDetails">
+          <div id="stonePayableId" class="stone-label-text">{{stoneDetails?.shape?.short_value}}</div>
+          <div class="detail-label text-left"> {{'Shape' | translate}}</div>
+        </div>
+        <div id="stoneShapeId" class="ui-g-1 ui-md-1 ui-lg-1 ui-g-nopad borderr" *ngIf="stoneDetails">
+          <div id="stoneCaratId" class="stone-label-text">{{stoneDetails?.clarity?.short_value}}</div>
+          <div id="stoneCaratTextId" class="detail-label  text-left" *ngIf="stoneDetails.shape">{{'Clarity' |
+            translate}}</div>
+        </div>
+        <div id="stoneShapeId" class="ui-g-1 ui-md-1 ui-lg-1 ui-g-nopad borderr" *ngIf="stoneDetails">
+          <div id="stonePayableId" class="stone-label-text text-ellipsis">{{stoneDetails?.color?.short_value}}</div>
+          <div class="detail-label text-left"> Color</div>
+        </div>
+        <div id="stoneName" class="ui-g-1 ui-md-1 ui-lg-1 ui-g-nopad borderr" *ngIf="stoneDetails">
+          <div id="stoneIdName" class="stone-label-text">{{stoneDetails?.certificate?.short_value}}</div>
+          <!--{{stoneDetails?.certificate_no}}-->
+          <div id="stoneIdText" class="detail-label text-left">{{'Certification' | translate}}</div>
+        </div>
+        <div id="stoneName" class="ui-g-1 ui-md-1 ui-lg-1 ui-g-nopad borderr" *ngIf="stoneDetails">
+          <div id="stoneIdName" class="stone-label-text">{{stoneDetails?.cut?.short_value}}</div>
+          <div id="stoneIdText" class="detail-label text-left">{{'Cut' | translate}}</div>
+        </div>
+        <div id="stoneName" class="ui-g-1 ui-md-1 ui-lg-1 ui-g-nopad borderr" *ngIf="stoneDetails">
+          <div id="stoneIdName" class="stone-label-text">{{stoneDetails?.polish?.short_value}}</div>
+          <div id="stoneIdText" class="detail-label text-left">{{'Polish' | translate}}</div>
+        </div>
+        <div id="stoneName" class="ui-g-1 ui-md-1 ui-lg-1 ui-g-nopad borderr" *ngIf="stoneDetails">
+          <div id="stoneIdName" class="stone-label-text">{{stoneDetails?.symmetry?.short_value}}</div>
+          <div id="stoneIdText" class="detail-label text-left">{{'Symmetry' | translate}}</div>
+        </div>
+        <div id="stoneName" class="ui-g-1 ui-md-1 ui-lg-1 ui-g-nopad borderr" *ngIf="stoneDetails">
+          <div id="stoneIdName" class="stone-label-text">{{stoneDetails?.fluor?.short_value}}</div>
+          <div id="stoneIdText" class="detail-label text-left">{{'Fluorescene' | translate}}</div>
+        </div>
+        <div id="stoneName" class="ui-g-1 ui-md-1 ui-lg-1 ui-g-nopad borderr" *ngIf="stoneDetails">
+          <div id="stoneIdName" class="stone-label-text">{{stoneDetails?.luster?.short_value}}</div>
+          <div id="stoneIdText" class="detail-label text-left">{{'Luster' | translate}}</div>
+        </div>
+        <div id="stoneName" class="ui-g-1 ui-md-1 ui-lg-1 ui-g-nopad borderr" *ngIf="stoneDetails">
+          <div id="stoneIdName" class="stone-label-text">{{stoneDetails?.shade?.short_value}}</div>
+          <div id="stoneIdText" class="detail-label text-left">{{'Shades' | translate}}</div>
+        </div>
+
+        <!--<div id="stonePriceId" class="ui-g-6 ui-g-nopad">
+          <div class="ui-g-4 border">
+            <div id="stonePayableId" class="stone-label-text">${{stoneDetails.price_srk | number : '1.2-2' }} </div>
+            <div class="paddt0 paddb0 detail-label text-left"> $/ct. SRK</div>
+          </div>
+
+          <div class="ui-g-4 border">
+            <div id="stoneDiscountId" class="stone-label-text">{{stoneDetails.rap_off}}%</div>
+            <div class="paddt0 paddb0 detail-label text-left"> {{'Rap Off'|translate}}</div>
+          </div>
+          <div class="ui-g-4">
+
+            <div id="rapPayableId" class="stone-label-text">${{stoneDetails.price_rap | number : '1.2-2'}}</div>
+            <div class="paddt0 paddb0 detail-label text-left">$Avg O. Rap</div>
+          </div>
+        </div>-->
+        <!-- <div id="rapPriceId" class="ui-g-3"> -->
+      </div>
+
+      <!--INCLUSIONS-->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 ui-g-nopad detail-head">{{'Inclusions'|translate}}</div>
+      <div class="ui-g-12 ui-md-12 ui-lg-12 paddt0 paddb0">
+
+
+        <div class="ui-g-12 ui-g-nopad">
+
+          <div class="ui-g-5 ui-md-5 ui-lg-5 ui-g-nopad">
+            <table class="tbl-inclusion-detail" width="100%;" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <th class="border" width='40%'>&nbsp;</th>
+                <td class="text-center border" width='15%'>
+                  <b>{{'Black'|translate}}</b>
+                </td>
+                <td class="text-center border" width='15%'>
+                  <b>{{'Spot'|translate}}</b>
+                </td>
+                <td class="text-center border" width='15%'>
+                  <b>{{'White'|translate}}</b>
+                </td>
+              </tr>
+              <tr>
+                <th class="text-center border">{{'Table'|translate}}</th>
+                <td class="text-center border" *ngIf="stoneDetails.table_black">{{stoneDetails.table_black.short_value}}</td>
+                <td class="text-center border" *ngIf="stoneDetails.table_spot">{{stoneDetails.table_spot.short_value}}</td>
+                <td class="text-center border" *ngIf="stoneDetails.table_white">{{stoneDetails.table_white.short_value}}</td>
+              </tr>
+              <tr>
+                <th class="border text-center">{{'Side'|translate}}</th>
+                <td class="border text-center" *ngIf="stoneDetails.side_black">{{stoneDetails.side_black.short_value}}</td>
+                <td class="border text-center" *ngIf="stoneDetails.side_spot">{{stoneDetails.side_spot.short_value}}</td>
+                <td class="border text-center" *ngIf="stoneDetails.side_white">{{stoneDetails.side_white.short_value}}</td>
+              </tr>
+            </table>
+
+          </div>
+          <div class="ui-g-7 ui-md-7 ui-lg-7 ui-g-nopad">
+            <table class="tbl-inclusion-detail" width="100%;" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <th class="border" width='40%'>&nbsp;</th>
+                <td class="text-center border" width='15%'>
+                  <b>{{'Table'|translate}}</b>
+                </td>
+                <td class="text-center border" width='15%'>
+                  <b>{{'Crown'|translate}}</b>
+                </td>
+                <td class="text-center border" width='15%'>
+                  <b>{{'Pavilion'|translate}}</b>
+                </td>
+                <td class="text-center border" width='15%'>
+                  <b>{{'Girdle'|translate}}</b>
+                </td>
+              </tr>
+              <tr>
+                <th class="text-center border">{{'Extra Facet'|translate}}</th>
+                <td class="text-center border" *ngIf="stoneDetails.table_extra_facet">{{stoneDetails.table_extra_facet.short_value}}</td>
+                <td class="text-center border" *ngIf="stoneDetails.crown_extra_facet">{{stoneDetails.crown_extra_facet.short_value}}</td>
+                <td class="text-center border" *ngIf="stoneDetails.pav_extra_facet">{{stoneDetails.pav_extra_facet.short_value}}</td>
+                <td class="text-center border"></td>
+              </tr>
+              <tr>
+                <th class="border text-center">{{'Open Inclusions'|translate}}</th>
+                <td class="border text-center" *ngIf="stoneDetails.table_open">{{stoneDetails.table_open.short_value}}</td>
+                <td class="border text-center" *ngIf="stoneDetails.crown_open">{{stoneDetails.crown_open.short_value}}</td>
+                <td class="border text-center" *ngIf="stoneDetails.pav_open">{{stoneDetails.pav_open.short_value}}</td>
+                <td class="border text-center" *ngIf="stoneDetails.girdle_open">{{stoneDetails.girdle_open.short_value}}</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="ui-g-4 ui-md-4 ui-lg-4 ui-g-nopad hidden" style="display: none">
+            <img id="haImageId" class="multimedia-image-container-ploat w85" [src]="stoneDetails.plot_url | safeUrl">
+          </div>
+        </div>
+      </div>
+      <!---->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 ui-g-nopad detail-head">{{'Comments'|translate}}</div>
+      <div class="ui-g-12 ui-md-12 ui-lg-12  paddt0 paddb0">
+
+        <div id="commentBoxId" class="">
+          <!--<div id="stoneLeftInfoId" class="ui-g-12 ui-md-12 ui-lg-12">-->
+          <div id="sgsBox" class="ui-g-4 ui-md-4 ui-lg-4 ui-g-nopad borderr paddb0 paddt0">
+            <div id="sgsId" class="ui-g-12 ui-md-12 ui-lg-12 label-comments  paddb0 paddt0">{{'SGS'|translate}}
+              {{'Comm.'|translate}}:</div>
+            <div id="sgsValueId" class="ui-g-12 ui-md-12 ui-lg-12 detail-value  paddb0 paddt0" *ngIf="stoneDetails.sgs">{{stoneDetails.sgs.toString()}}</div>
+          </div>
+          <div id="ktsBox" class="ui-g-4 ui-md-4 ui-lg-4 ui-g-nopad borderr  paddb0 paddt0">
+            <div id="ktsTextId" class="ui-g-12 ui-md-12 ui-lg-12 label-comments  paddb0 paddt0">{{'KTS'|translate}}:</div>
+            <div id="ktsValueId" class="ui-g-12 ui-md-12 ui-lg-12 detail-value  paddb0 paddt0" *ngIf="stoneDetails.kts">{{stoneDetails.kts.toString()}}</div>
+          </div>
+
+          <div id="labBox" class="ui-g-4 ui-md-4 ui-lg-4 ui-g-nopad borderr  paddb0 paddt0">
+            <div id="labTextId" class="ui-g-12 ui-md-12 ui-lg-12 label-comments  paddb0 paddt0">{{'Lab'|translate}}
+              {{'Comm.'|translate}}:</div>
+            <div id="labValueId" class="ui-g-12 ui-md-12 ui-lg-12 detail-value  paddb0 paddt0" *ngIf="stoneDetails.lab_comment">{{stoneDetails.lab_comment}}</div>
+          </div>
+          <!--</div>-->
+        </div>
+      </div>
+      <!--PARAMETERS-->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 ui-g-nopad detail-head paddb0 paddt0">{{'Parameters'|translate}}</div>
+      <div class="ui-g-12 ui-g-nopad">
+        <div id="parametersLeftInfoId" class="ui-g-3 ui-md-3 ui-lg-3 ui-g-nopad">
+          <div id="measurementBox" class="ui-g-12 ui-g-nopad" *ngIf="stoneDetails.length">
+            <div id="measurementStoneId" class="ui-g-6 detail-label text-left margintb0">{{'Measurement'|translate}}:</div>
+            <div id="measurementStoneValueId" class="ui-g-6 detail-value margintb0">{{stoneDetails.length}}-{{stoneDetails.width}}*{{stoneDetails.height}}</div>
+          </div>
+          <div id="totalDepthBox" class="ui-g-12 ui-g-nopad" *ngIf="stoneDetails.total_depth_percent">
+            <div id="totalDepthStoneId" class="ui-g-6 detail-label text-left margintb0">{{'Total Depth'|translate}}
+              (%):</div>
+            <div id="totalDepthStoneValueId" class="ui-g-6 detail-value margintb0">{{stoneDetails.total_depth_percent}}</div>
+          </div>
+          <div id="tableStoneBox" class="ui-g-12 ui-g-nopad" *ngIf="stoneDetails.table_percent">
+            <div id="tableStoneId" class="ui-g-6 detail-label text-left margintb0">{{'Table'|translate}} (%):</div>
+            <div id="tableValueId" class="ui-g-6 detail-value margintb0">{{stoneDetails.table_percent}}</div>
+          </div>
+          <div id="ratioBox" class="ui-g-12 ui-g-nopad" *ngIf="stoneDetails.ratio">
+            <div id="ratioStoneId" class="ui-g-6 detail-label text-left margintb0">{{'D/R'|translate}}:</div>
+            <div id="ratioStoneValueId" class="ui-g-6 detail-value margintb0">{{stoneDetails.ratio}}</div>
+          </div>
+          <div id="lenghtStoneBox" class="ui-g-12 ui-g-nopad" *ngIf="stoneDetails.length">
+            <div id="lengthTextId" class="ui-g-6 detail-label text-left margintb0">{{'Length'|translate}}:</div>
+            <div id="lengthValueId" class="ui-g-6 detail-value margintb0">{{stoneDetails.length}}</div>
+          </div>
+          <div id="widthStoneBox" class="ui-g-12 ui-g-nopad" *ngIf="stoneDetails.width">
+            <div id="stoneWidthTextId" class="ui-g-6 detail-label text-left margintb0">{{'Width'|translate}}:</div>
+            <div id="stoneWidthValueId" class="ui-g-6 detail-value margintb0">{{stoneDetails.width}}</div>
+          </div>
+          <div id="girdlePercentBox" class="ui-g-12 ui-g-nopad" *ngIf="stoneDetails.girdle_percent">
+            <div id="girdlePercentTextId" class="ui-g-6 detail-label text-left margintb0">{{'Girdle'|translate}} %:</div>
+            <div id="girdlePercentValueId" class="ui-g-6 detail-value margintb0">{{stoneDetails.girdle_percent}}</div>
+          </div>
+          <div id="girdleBox" class="ui-g-12 ui-g-nopad" *ngIf="stoneDetails.girdle">
+            <div id="girdleTextId" class="ui-g-6 detail-label text-left margintb0">{{'Girdle'|translate}}:</div>
+            <div id="girdleValueId" *ngIf="stoneDetails.girdle" class="ui-g-6 detail-value margintb0">{{stoneDetails.girdle.short_value}}
+              <span *ngIf="stoneDetails.tgirdle">-{{stoneDetails.tgirdle.short_value}}</span>
+            </div>
+          </div>
+        </div>
+        <div id="parametersCenterInfoId" class="ui-g-3 ui-md-3 ui-lg-3 ui-g-nopad">
+          <div id="lHalfBox" class="ui-g-12 ui-g-nopad" *ngIf="stoneDetails.lower_half > -1">
+            <div id="lHalfTextId" class="ui-g-6 detail-label text-left margintb0">{{'Lower'|translate}}
+              {{'Half'|translate}} (%):</div>
+            <div id="lHalfValueId" class="ui-g-6 detail-value margintb0">{{stoneDetails.lower_half}}</div>
+          </div>
+          <div id="sLengthBox" class="ui-g-12 ui-g-nopad" *ngIf="stoneDetails.star_length > -1">
+            <div id="sLengthTextId" class="ui-g-6 detail-label text-left margintb0">{{'S.'|translate}}
+              {{'Length'|translate}} (%):</div>
+            <div id="sLengthValueId" class="ui-g-6 detail-value margintb0">{{stoneDetails.star_length}}</div>
+          </div>
+          <div id="pAngleBox" class="ui-g-12 ui-g-nopad" *ngIf="stoneDetails.pav_angle">
+            <div id="pAngleTextId" class="ui-g-6 detail-label text-left margintb0">{{'Pavilion'|translate}}
+              {{'Angle'|translate}}:</div>
+            <div id="pAngleValueId" class="ui-g-6 detail-value margintb0">{{stoneDetails.pav_angle}}</div>
+          </div>
+          <div id="pHeightBox" class="ui-g-12 ui-g-nopad" *ngIf="stoneDetails.pav_height">
+            <div id="pHeightTextId" class="ui-g-6 detail-label text-left margintb0">{{'Pavilion'|translate}}
+              {{'Height'|translate}}:</div>
+            <div id="pHeightValueId" class="ui-g-6 detail-value margintb0">{{stoneDetails.pav_height}}</div>
+          </div>
+          <div id="cAngleBox" class="ui-g-12 ui-g-nopad" *ngIf="stoneDetails.crown_angle">
+            <div id="cAngleTextId" class="ui-g-6 detail-label text-left margintb0">{{'Crown'|translate}}
+              {{'Angle'|translate}}:</div>
+            <div id="cAngleValueId" class="ui-g-6 detail-value margintb0">{{stoneDetails.crown_angle}}</div>
+          </div>
+          <div id="cHeightBox" class="ui-g-12 ui-g-nopad" *ngIf="stoneDetails.crown_height">
+            <div id="cHeightTextId" class="ui-g-6 detail-label text-left margintb0">{{'Crown'|translate}}
+              {{'Height'|translate}}:</div>
+            <div id="cHeightValueId" class="ui-g-6 detail-value margintb0">{{stoneDetails.crown_height}}</div>
+          </div>
+          <div id="culetBox" class="ui-g-12 ui-g-nopad" *ngIf="stoneDetails.culet">
+            <div id="culetTextId" class="ui-g-6 detail-label text-left margintb0">{{'Culet'|translate}}:</div>
+            <div id="culetValueId" class="ui-g-6 detail-value margintb0">{{stoneDetails.culet.short_value}}</div>
+          </div>
+        </div>
+        <div id="parametersRightInfoId" class="ui-g-6 ui-md-6 ui-lg-6 ui-g-nopad">
+          <div class="diamond_details">
+            <div class="container-fluid">
+              <div class="sdm_information">
+                <div class="dSpec">
+                  <div class="divWhiteStone">
+                    <img src="/assets/img/diamond-float1.png" class="img-width">
+                    <div class="dia11">
+                      <span *ngIf="stoneDetails.star_length > -1" id="sLengthValueIdPara" class="lblStarlength">{{stoneDetails.star_length}}%</span>
+                      <span *ngIf="stoneDetails.table_percent" id="tableValueIdPara" class="lblTabelPerc">{{stoneDetails.table_percent}}%</span>
+                      <span *ngIf="stoneDetails.crown_angle" id="crownAnglePara" class="lblCrownAngle">{{stoneDetails.crown_angle}}</span>
+                      <span *ngIf="stoneDetails.crown_height" id="crownHeightPara" class="lblCrownHeight">{{stoneDetails.crown_height}}</span>
+                      <div class="dia22">o</div>
+                      <span *ngIf="stoneDetails.pav_angle" id="pavAnglePara" class="lblPavAngle">{{stoneDetails.pav_angle}}</span>
+                      <div class="dia33"> o</div>
+                      <span *ngIf="stoneDetails.total_depth_percent" id="totalDepthPercentPara" class="lblDepthPer">{{stoneDetails.total_depth_percent}}</span>
+                      <span *ngIf="stoneDetails.pav_height" id="pavHeightPara" class="lblPavHeight">{{stoneDetails.pav_height}}</span>
+
+                      <span *ngIf="stoneDetails.culet.long_value" id="culetLongValuePara" class="lblCuletDesc">{{stoneDetails.culet.short_value}}</span>
+                      <div class="dia44">
+                        <span *ngIf="stoneDetails.girdle" id="GirdlePara" class="lblGirdleDescription">{{stoneDetails.girdle.short_value}}
+                          <span *ngIf="stoneDetails.tgirdle">-{{stoneDetails.tgirdle.short_value}}</span>
+                        </span>
+                        <br>
+                        <span *ngIf="stoneDetails.girdle_percent" id="girdlePercentPara" class="lblGirdlePerc">{{stoneDetails.girdle_percent}}</span>
+                      </div>
+                      <span class="lblPavPer">{{stoneDetails.lower_half}}%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--COMMENTS-->
+
+      <!---->
+
+
+
+      <!---->
+
+
+    </div>
+    <div id="" class="ui-g-4 ui-md-12 ui-sm-12 ui-lg-4 ui-g-nopad">
+
+      <div id="displayBoxId" class="ui-g-12 multimedia-container" align="center" [ngClass]="{'holds-the-iframe': videoShow || digiPlotShow || certShow}">
+        <img id="multimediaImageId" *ngIf="imageShow" class="multimedia-image-container" [src]="stoneDetails.image_url | safeUrl">
+        <iframe *ngIf="videoShow" [src]="stoneDetails.movie_url +'&h=400&btn=0' | safeUrl" id="iframeMovie" height="420px" width="100%"
+          scrolling="no" frameborder="0" valign="top"></iframe>
+
+        <iframe *ngIf="digiPlotShow" [src]="stoneDetails.digiplot_url | safeUrl" id="iframeDigiPlot" height="420px"
+          width="100%" scrolling="no" frameborder="0" valign="top"></iframe>
+
+
+        <img *ngIf="haShow" id="haImageId" class="multimedia-image-container" [src]="stoneDetails.hna_url | safeUrl">
+        <img *ngIf="verifyShow" id="haImageId" class="multimedia-image-container" [src]="stoneDetails.image_url | safeUrl">
+        <iframe *ngIf="certShow" id="iframecert" [src]="stoneDetails.cert_url | safeUrl" height="420px" width="100%" scrolling="no"
+          frameborder="0" valign="top"></iframe>
+        <img *ngIf="plotShow" id="haImageId" class="multimedia-image-container-ploat" [src]="stoneDetails.plot_url | safeUrl">
+      </div>
+      <div id="buttonBoxId" class="ui-g-12 button-box">
+        <a [dirStoreAudit]="'IMAGE VIEW'" *ngIf="stoneDetails.image_url" id="imageButtonId" (click)="changeMultimedia(true,false,false,false,false,false, false)"
+          [class.dtl-icon-active]="imageShow" class="dtl-icon icon-image" pTooltip="Diamond View" tooltipPosition="bottom"
+          tooltipEvent="hover"> </a>
+        <a [dirStoreAudit]="'HD VIEW'" *ngIf="stoneDetails.movie_url" id="videoButtonId" class="dtl-icon icon-hd-video-movie" (click)="changeMultimedia(false,true,false,false,false,false,false)"
+          [class.dtl-icon-active]="videoShow" pTooltip="HD Movie" tooltipPosition="bottom" tooltipEvent="hover"></a>
+        <a [dirStoreAudit]="'HD VIEW'" *ngIf="stoneDetails.digiplot_url" id="digiPlotButtonId" [dirStoneMultimediaDetail]="{stoneid:stoneDetails,showMediaType: 'Digiplott'}"
+          [class.dtl-icon-active]="digiPlotShow" class="dtl-icon icon-g" pTooltip="Digiplot" tooltipPosition="bottom" tooltipEvent="hover"></a>
+        <a [dirStoreAudit]="'HA VIEW'" *ngIf="stoneDetails.hna_url" id="habuttonId" class="dtl-icon icon-hna" (click)="changeMultimedia(false,false,true,false,false,false,false)"
+          [class.dtl-icon-active]="haShow" pTooltip="H&A Diamond" tooltip Position="bottom" tooltipEvent="hover"></a>
+        <a *ngIf="stoneDetails.verify_url" id="verifyButtonId" class="dtl-icon icon-cert" (click)="changeMultimedia(false,false,false,true,false,false,false)"
+          [class.dtl-icon-active]="verifyShow" pTooltip="Verify" tooltipPosition="bottom" tooltipEvent="hover"></a>
+        <a [dirStoreAudit]="'PLOT VIEW'" *ngIf="stoneDetails.plot_url" id="ploatButtonId" class="dtl-icon icon-stone-big"
+          (click)="changeMultimedia(false,false,false,false,false,true,false)" [class.dtl-icon-active]="plotShow"
+          pTooltip="Plotting" tooltipPosition="bottom" tooltipEvent="hover"></a>
+        <a [dirStoreAudit]="'CERT VIEW'" *ngIf="stoneDetails.cert_url" id="certButtonId" class="dtl-icon icon-certificate"
+          (click)="changeMultimedia(false,false,false,false,true,false,false)" [class.dtl-icon-active]="certShow"
+          pTooltip="Certificate" tooltipPosition="bottom" tooltipEvent="hover"></a>
+        <a target="_blank" class="dtl-icon icon-verify anchorDefaultColor" pTooltip="Verify Certificate"
+          tooltipPosition="bottom" tooltipEvent="hover" href={{stoneDetails.cert_verify_url}}></a>
+        <a id="popupbuttonId" class="dtl-icon icon-enlarge-zoom" [dirStoneMultimediaDetail]="{stoneid:stoneDetails,showMediaType: enlargeMediaType}"
+          pTooltip="Zoom Image" tooltipPosition="bottom" tooltipEvent="hover"> </a>
+      </div>
+
+      <!--PRICE DETAILS-->
+      <div id="seconRowId" class="ui-g-12 ui-g-nopad">
+        <div class="ui-g-12 ui-md-12 ui-lg-12 ui-g-nopad detail-head hidden" style="display:none;">{{'Price Details
+          '|translate}}</div>
+        <div id="stoneShapeId" class="ui-g-3 ui-md-3 ui-lg-3 ui-g-nopad borderr" *ngIf="stoneDetails">
+          <div id="stoneCaratId" class="stone-label-text">${{stoneDetails.price_srk | number : '1.2-2' }}</div>
+          <div id="stoneCaratTextId" class="detail-label  text-left" *ngIf="stoneDetails.shape">{{'$/ct.' | translate}}</div>
+        </div>
+        <div id="stoneShapeId" class="ui-g-3 ui-md-3 ui-lg-3 ui-g-nopad borderr" *ngIf="stoneDetails">
+          <div id="stonePayableId" class="stone-label-text">{{stoneDetails.rap_off}}%</div>
+          <div class="detail-label text-left"> {{'R. Off' | translate}}</div>
+        </div>
+        <div id="stoneShapeId" class="ui-g-3 ui-md-3 ui-lg-3 ui-g-nopad borderr" *ngIf="stoneDetails">
+          <div id="stoneCaratId" class="stone-label-text">${{stoneDetails.price_srk * stoneDetails.carat | number :
+            '1.2-2'}}</div>
+          <div id="stoneCaratTextId" class="detail-label  text-left" *ngIf="stoneDetails.shape">{{'Amount' |
+            translate}}</div>
+        </div>
+        <ng-template [dirCheckPermission]="'terms_discount'">
+          <div id="stoneShapeId" class="ui-g-1 ui-md-1 ui-lg-1 ui-g-nopad borderr hidden" style="display:none;" *ngIf="stoneDetails">
+            <div id="stonePayableId" class="stone-label-text text-ellipsis">{{stoneDetails.termPercent}}%</div>
+            <div class="detail-label text-left">Term</div>
+          </div>
+        </ng-template>
+        <ng-template [dirCheckPermission]="'blind_discount'">
+          <div id="stoneName" class="ui-g-1 ui-md-1 ui-lg-1  ui-g-nopad borderr hidden" style="display:none;" *ngIf="stoneDetails">
+            <div id="stoneIdName" class="stone-label-text">{{stoneDetails.onlinePercent}}%</div>
+            <div id="stoneIdText" class="detail-label text-left">{{'Avg Blind' | translate}}</div>
+          </div>
+        </ng-template>
+        <ng-template [dirCheckPermission]="'weekly_volume_discount'">
+          <div id="stoneName" class="ui-g-1 ui-md-1 ui-lg-1 ui-g-nopad borderr hidden" style="display:none;" *ngIf="stoneDetails">
+            <div id="stoneIdName" class="stone-label-text">{{stoneDetails.wvdPercent}}%</div>
+            <div id="stoneIdText" class="detail-label text-left">{{'WVD' | translate}}</div>
+          </div>
+        </ng-template>
+        <div id="stoneName" class="ui-g-1 ui-md-1 ui-lg-1 ui-g-nopad borderr hidden" style="display:none;" *ngIf="stoneDetails && viewFinalPayableAndFinalOff">
+          <div id="stoneIdName" class="stone-label-text">${{stoneDetails.fDollarCaratAmount | number:'1.2-2'}}</div>
+          <div id="stoneIdText" class="detail-label text-left">{{'Final $/ct.' | translate}}</div>
+        </div>
+        <div id="stoneName" class="ui-g-1 ui-md-1 ui-lg-1  ui-g-nopad borderr hidden" style="display:none;" *ngIf="stoneDetails && viewFinalPayableAndFinalOff">
+          <div id="stoneIdName" class="stone-label-text">{{stoneDetails.fOffPercent}}%</div>
+          <div id="stoneIdText" class="detail-label text-left">{{'Final Off' | translate}}</div>
+        </div>
+        <div id="stoneName" class="ui-g-1 ui-md-1 ui-lg-1  ui-g-nopad borderr hidden" style="display:none;" *ngIf="stoneDetails && viewFinalPayableAndFinalOff">
+          <div id="stoneIdName" class="stone-label-text">${{stoneDetails.fAmount | number : '1.2-2'}}</div>
+          <div id="stoneIdText" class="detail-label text-left">{{'Final Payable' | translate}}</div>
+        </div>
+        <div id="stoneName" class="ui-g-3 ui-md-3 ui-lg-3  ui-g-nopad borderr" *ngIf="stoneDetails">
+          <div id="stoneIdName" class="stone-label-text">${{stoneDetails.price_rap | number : '1.2-2'}}</div>
+          <div id="stoneIdText" class="detail-label text-left">{{'O. Rap' | translate}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <thm-request-overlay [visibleOverlay]="popupVisible" [apiUrl]="apiLink" [stoneList]="selectedStones" (toggleOverlay)="toggleOverlay($event)"></thm-request-overlay>
+  <thm-confirm-overlay [visibleConfirmOverlay]="confirmOverlayVisible" (toggleConfirmOverlay)="toggleConfirmOverlay($event)"
+    [stoneList]="selectedStones"></thm-confirm-overlay>
+  <thm-ddc-overlay #thmDdcOverlay [visibleDdcOverlay]="ddcOverlayVisible" (toggleDdcOverlay)="toggleDdcOverlay($event)"
+    [stoneList]="ddcStones" [previousDdcHour]="definedDDCHour"></thm-ddc-overlay>
+  <thm-multimedia-popup #themeMultimediaPopUp [displayMultimediaPopup]="toggleMultimediaPopup" [popUpMultimediaInfo]="stoneMultimediaInfo"
+    (closePopup)="toggleCloseMultimediaPopUp($event)"></thm-multimedia-popup>
+</div>

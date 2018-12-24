@@ -1,0 +1,714 @@
+ .wrapper-search-tab
+ {margin: 0 auto !important;}
+.tbl-inclusion-detail{margin:3px !important;  }
+.w85{width: 85%;}
+.detail-head {    background-color: #ccc;    padding: 2px;    font-size: 90%;}
+.detail-value{font-size: 11px; }
+.tbl-inclusion-detail td.border, .tbl-inclusion-detail th.border{font-size: 11px;padding: 0px 5px}
+.margint20 {  margin-top: 20px;}
+#buttonMenuBar {  margin-bottom: 15px;}
+.chips {  display: inline-block;  font-size: 12px;}
+.stone-label-text {  font-weight: bold;  font-size: 11px;margin: 4px 0px;}
+.stone-left-box {  padding: 0;}
+.stone-mini-image { max-width: 40px;margin-top: 10px;}
+.multimedia-button {  padding: 5px;  font-size: 16px;  padding: 5px 10px;}
+.multimedia-button-active {  padding: 5px;  font-size: 16px;  padding: 5px 10px;}
+.btn-tab {  border-radius: 3px;  padding: 8px 15px;  margin: 5px;  float: left;  text-transform: uppercase;  background-color: transparent;  font-weight: bold;  outline: none;}
+.btn-tab-active {  border-radius: 3px;  padding: 8px 15px;  margin: 5px;  float: left;  text-transform: uppercase;  font-weight: bold;  outline: none;  border-radius: 100px;cursor: pointer;}
+.detail-tab-active {  border-radius: 3px;  padding: 8px 15px;  margin: 5px;  float: left;  text-transform: uppercase;  font-weight: bold;  outline: none;  border-radius: 100px;}
+
+.button-section {  float: right;}
+.multimedia-image {  width: 100%;  max-width: 260px;}
+.multimedia-box {  height: 280px;}
+.multimedia-image-ploat {  width: 100%;  max-width: 320px;margin-top: 20px;}
+.confirm-button {  border-radius: 3px;  padding: 8px 15px;  margin: 5px;  float: right;}
+.fixed {  position: fixed;  top: 80;  z-index: 9999;}
+.dropdownHeight {  height: auto;}
+.header-box {  text-align: center;}
+.stuck {  position: fixed;  top: 300px;  z-index: 15;}
+.button-box {  text-align: center;}
+a {  cursor: pointer;}
+.ha-inclusion-box {  width: auto;  height: 170px;}
+.detail-label { clear: both; text-align: right;margin: 0px 0px;font-size: 10px}
+.detail-value {  text-align: left;}
+#commentBoxId .detail-value {  text-align: left;min-height: 26px;border-bottom: 1px solid #cccccc;}
+.tab-btn {  padding: 6px 10px;  border-radius: 3px;  margin: 3px 5px;  font-size: 12px;}
+.addtext {  font-size: 18px;  border: 0;  background-color: transparent;  vertical-align: top; cursor: pointer;}
+.chipslabel {  border: 0;}
+.ui-chips-token .ui-chips-token-label {  margin: 0;  font-size: 12px;  text-transform: uppercase;}
+.label-Head {  font-size: 16px;  font-weight: bold;padding: 15px 20px;}
+a.download-btn { font-size: 16px;}
+.tbl-inclusion {  width: 350px; border: 1px solid #ccc; }
+.tbl-inclusion td {  padding: 15px 10px;}
+.tbl-inclusion th { border-right: 1px solid #ccc;   padding: 15px 10px;}
+.tbl-inclusion td.borderr,.tbl-inclusion th.borderr { border-right: 1px solid #ccc; padding: 15px 10px;}
+.ui-button-text {    padding: .0em 1em !important; }
+.multimedia-image-full{width: 100%; padding:20px; }
+.paddt0{padding-top:0px }
+.paddb0{padding-bottom:0px }
+.details-box,.inclusions-box,.parameters-box,.stone-info-box {  margin: 0;  border-radius: 5px;  margin: 5px 0;}
+.detail-tab-active {  border-radius: 3px;  padding: 8px 15px;  margin: 5px;  float: left;  text-transform: uppercase;  font-weight: bold;  outline: none;  border-radius: 100px}
+.diamond-facet-image{width:360px}
+.diamond-facet-box{text-align: center;}
+.detail-head{
+    text-align: center;
+    background-color: #bebec3;
+}
+.tbl-inclusion-detail{
+    margin: 15px 0px;
+}
+#parametersLeftInfoId .detail-label,#parametersCenterInfoId .detail-label{
+    font-weight: bold;
+    color:#000000;
+    font-size: 11px;
+}
+.borderr{    
+    margin: 0px 0px;
+    padding: 0px 8px;
+    border: 0px;
+    -webkit-box-shadow: 8px 0 6px -6px #cccccc;
+    -moz-box-shadow: 8px 0 6px -6px #cccccc;
+    box-shadow: 8px 0 6px -6px #cccccc;
+}
+.bg-white{
+    -webkit-box-shadow: 8px 0 6px -6px #cccccc;
+    -moz-box-shadow: 8px 0 6px -6px #cccccc;
+    box-shadow: 8px 0 6px -6px #cccccc;
+}
+.clear{
+    clear:both;
+}
+.dtl-icon, .dtl-icon-active{font-size: 24px;
+padding: 3px 5px;}
+.dSpec, .dm_fulldetails .dm_img, .spn3, .spn9
+        {
+            display: inline-block;
+        }
+        .dSpec
+        {
+            position: relative;
+             width: 300px;
+            font-size: 11px;
+        }
+        .divWhiteStone
+        {
+             width: 300px;
+            /*height: 270px;*/
+            height: 210px;
+            text-align: left;
+        }
+        .img-width
+        {
+            /*width: 100%;*/
+            width: 300px;
+        }
+        .dia11
+        {
+            position: absolute;
+            top: 0px;
+            width: 300px;
+            /*height: 270px;*/
+            height: 210px;
+        }
+        .lblStarlength
+        {
+            margin-left: 22%;
+            position: absolute;
+            top: 8%;
+        }
+        .lblTabelPerc
+        {
+            margin-left: 55%;
+            position: absolute;
+            top: 5%;
+        }
+        .lblCrownAngle
+        {
+            margin-left: 90%;
+            position: absolute;
+            top: 19%;
+        }
+        .dia22
+        {
+            font-size: 8px;
+            margin-top: 0px;
+            padding-left: 99%;
+            padding-top: 11%;
+            text-align: left;
+
+        }
+        .lblCrownHeight
+        {
+                margin-left: 69%;
+                position: absolute;
+                top: 17%;
+        }
+        .lblPavAngle
+        {
+            margin-left: 88%;
+            position: absolute;
+            top: 37%;
+        }
+        .dia33
+        {
+            font-size: 8px;
+            margin-top: 0px;
+            padding-left: 96%;
+            padding-top: 5%;
+            text-align: left;
+        }
+        .lblDepthPer
+        {
+            margin-left: 60%;
+            position: absolute;
+            top: 32%;
+        }
+        .lblPavHeight
+        {
+            margin-left: 68%;
+            position: absolute;
+            top: 40%;
+        }
+        .lblPavPer
+        {
+            margin-left: 32%;
+            position: absolute;
+            top: 64%;
+        }
+        .lblCuletDesc
+        {
+            margin-left: 64%;
+            position: absolute;
+            top: 76%;
+        }
+        .dia44
+        {
+                margin-left: 2%;
+                position: absolute;
+                top: 25%;
+                width: 60px;
+        }
+        @media screen and (max-width: 1600px){
+           .dia44 {
+                margin-left: 6%;
+                top: 19%;
+                width: 60px;
+            }
+            .lblPavPer {
+                margin-left: 33%;
+                top: 65%;
+            }
+            .lblStarlength {
+                margin-left: 23%;
+                top: 8%;
+            }
+            .lblTabelPerc {
+                margin-left: 56%;
+                top: 6%;
+            }
+            .lblCrownAngle {
+                margin-left: 91%;
+                top: 20%;
+            }
+            .lblCrownHeight {
+                margin-left: 70%;
+                top: 17%;
+            }
+            .dia22 {
+                font-size: 8px;
+                margin-top: 0px;
+                padding-left: 96%;
+                padding-top: 11%;
+                text-align: left;
+            }
+            .lblPavAngle {
+                margin-left: 87%;
+                top: 37%;
+            }
+            .lblDepthPer {
+                margin-left: 62%;
+                top: 32%;
+            }
+            .lblPavHeight {
+                margin-left: 70%;
+                top: 40%;
+            }
+            .lblCuletDesc {
+                margin-left: 64%;
+                top: 75%;
+            }
+        }
+        @media screen and (max-width: 1440px){
+            .dia44 {
+                margin-left: 6%;
+                top: 19%;
+                width: 60px;
+            }
+            .lblPavPer {
+                margin-left: 33%;
+                top: 65%;
+            }
+            .lblStarlength {
+                margin-left: 23%;
+                top: 8%;
+            }
+            .lblTabelPerc {
+                margin-left: 56%;
+                top: 6%;
+            }
+            .lblCrownAngle {
+                margin-left: 91%;
+                top: 20%;
+            }
+            .lblCrownHeight {
+                margin-left: 70%;
+                top: 17%;
+            }
+            .dia22 {
+                font-size: 8px;
+                margin-top: 0px;
+                padding-left: 96%;
+                padding-top: 11%;
+                text-align: left;
+            }
+            .lblPavAngle {
+                margin-left: 87%;
+                top: 37%;
+            }
+            .lblDepthPer {
+                margin-left: 62%;
+                top: 32%;
+            }
+            .lblPavHeight {
+                margin-left: 70%;
+                top: 40%;
+            }
+            .lblCuletDesc {
+                margin-left: 64%;
+                top: 75%;
+            }
+        }
+        @media screen and (max-width: 1366px){
+            .multimedia-image-container{
+                max-height: 500px;
+                max-width: 400px;
+            }
+            .lblStarlength {
+                margin-left: 22%;
+                top: 9%;
+            }
+            .lblTabelPerc {
+                margin-left: 56%;
+                top: 5%;
+            }
+            .lblCrownAngle {
+                margin-left: 92%;
+                top: 20%;
+            }
+            .lblCrownHeight {
+                margin-left: 70%;
+                top: 17%;
+            }
+            .dia22 {
+                font-size: 8px;
+                margin-top: -10px;
+                padding-left: 100%;
+                padding-top: 14%;
+                text-align: left;
+            }
+            .lblPavAngle {
+                margin-left: 90%;
+                top: 34%;
+            }
+            .dia33 {
+                font-size: 8px;
+                margin-top: 0px;
+                padding-left: 99%;
+                padding-top: 3%;
+                text-align: left;
+            }
+            .lblDepthPer {
+                margin-left: 61%;
+                top: 32%;
+            }
+            .lblPavHeight {
+                margin-left: 70%;
+                top: 40%;
+            }
+            .lblCuletDesc {
+                margin-left: 64%;
+                top: 76%;
+            }
+            .dia44 {
+                margin-left: 6%;
+                top: 17%;
+                width: 60px;
+            }
+            .lblPavPer {
+                margin-left: 32%;
+                top: 64%;
+            }
+            .stone-label-text {
+                font-size: 11px;
+            }
+        }
+        @media screen and (max-width: 1280px){
+            #parametersLeftInfoId .detail-label,#parametersCenterInfoId .detail-label{
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .lblCrownAngle {
+                margin-left: 91%;
+                top: 16%;
+            }
+            .lblStarlength {
+                margin-left: 22%;
+                top: 6%;
+            }
+            .lblTabelPerc {
+                margin-left: 56%;
+                top: 5%;
+            }
+            .lblCrownHeight {
+                margin-left: 70%;
+                top: 14%;
+            }
+            .dia22 {
+                font-size: 8px;
+                margin-top: 0px;
+                padding-left: 100%;
+                padding-top: 12%;
+                text-align: left;
+            }
+            .lblPavAngle {
+                margin-left: 90%;
+                top: 26%;
+            }
+            .dia33 {
+                font-size: 8px;
+                margin-top: 0px;
+                padding-left: 99%;
+                padding-top: 3%;
+                text-align: left;
+            }
+            .lblCuletDesc {
+                margin-left: 64%;
+                top: 56%;
+            }
+            .dia44 {
+                margin-left: 3%;
+                top: 17%;
+                width: 60px;
+            }
+            .lblPavPer {
+                margin-left: 32%;
+                top: 47%;
+            }
+            .lblPavHeight {
+                margin-left: 70%;
+                top: 30%;
+            }
+            .lblDepthPer {
+                margin-left: 61%;
+                top: 24%;
+            }
+
+
+             .multimedia-image-container{
+                max-height: 500px;
+                max-width: 400px;
+            }
+            .lblStarlength {
+                margin-left: 22%;
+                top: 9%;
+            }
+            .lblTabelPerc {
+                margin-left: 56%;
+                top: 5%;
+            }
+            .lblCrownAngle {
+                margin-left: 92%;
+                top: 20%;
+            }
+            .lblCrownHeight {
+                margin-left: 70%;
+                top: 17%;
+            }
+            .dia22 {
+                font-size: 8px;
+                margin-top: -10px;
+                padding-left: 100%;
+                padding-top: 14%;
+                text-align: left;
+            }
+            .lblPavAngle {
+                margin-left: 90%;
+                top: 34%;
+            }
+            .dia33 {
+                font-size: 8px;
+                margin-top: 0px;
+                padding-left: 99%;
+                padding-top: 3%;
+                text-align: left;
+            }
+            .lblDepthPer {
+                margin-left: 61%;
+                top: 32%;
+            }
+            .lblPavHeight {
+                margin-left: 70%;
+                top: 40%;
+            }
+            .lblCuletDesc {
+                margin-left: 64%;
+                top: 76%;
+            }
+            .dia44 {
+                margin-left: 6%;
+                top: 17%;
+                width: 60px;
+            }
+            .lblPavPer {
+                margin-left: 32%;
+                top: 64%;
+            }
+            .stone-label-text {
+                font-size: 11px;
+            }
+        }
+        @media screen and (max-width: 1024px){
+            .lblStarlength {
+                margin-left: 23%;
+                top: 8%;
+            }
+            .lblTabelPerc {
+                margin-left: 56%;
+                top: 5%;
+            }
+            .lblCrownAngle {
+                margin-left: 91%;
+                top: 20%;
+            }
+            .lblCrownHeight {
+                margin-left: 68%;
+                top: 17%;
+            }
+            .dia22 {
+                font-size: 8px;
+                margin-top: 0px;
+                padding-left: 99%;
+                padding-top: 12%;
+                text-align: left;
+            }
+            .lblPavAngle {
+                margin-left: 91%;
+                top: 36%;
+            }
+            .dia33 {
+                font-size: 8px;
+                margin-top: 0px;
+                padding-left: 100%;
+                padding-top: 2%;
+                text-align: left;
+            }
+            .lblDepthPer {
+                margin-left: 61%;
+                top: 32%;
+            }
+            .lblPavHeight {
+                margin-left: 68%;
+                top: 40%;
+            }
+            .lblCuletDesc {
+                margin-left: 66%;
+                top: 78%;
+            }
+            .dia44 {
+                margin-left: 5%;
+                top: 20%;
+                width: 60px;
+            }
+            .lblPavPer {
+                margin-left: 32%;
+                top: 64%;
+            }
+        }
+        @media screen and (max-width: 768px){
+            .lblTabelPerc {
+                margin-left: 58%;
+                top: 11%;
+            }
+            .lblCrownAngle {
+                margin-left: 91%;
+                top: 31%;
+            }
+            .lblCrownHeight {
+                margin-left: 71%;
+                top: 27%;
+            }
+            .lblPavAngle {
+                margin-left: 90%;
+                top: 47%;
+            }
+            .lblDepthPer {
+                margin-left: 62%;
+                top: 44%;
+            }
+            .lblPavHeight {
+                margin-left: 71%;
+                top: 55%;
+            }
+            .lblCuletDesc {
+                margin-left: 66%;
+                top: 98%;
+            }
+            .dia44 {
+                margin-left: 11%;
+                top: 32%;
+                width: 60px;
+            }
+            .lblPavPer {
+                margin-left: 34%;
+                top: 86%;
+            }
+        }
+        @media screen and (max-width: 500px)
+        {
+            .diamond_details
+            {
+                width: 100%;
+                overflow: hidden;
+            }
+            .dSpec
+            {
+                font-size: 12px;
+            }
+            .divWhiteStone
+            {
+                width: 230px;
+                height: 300px;
+                text-align: left;
+            }
+            .img-width
+            {
+                width: 100%;
+                width: 280px !important;
+            }
+            .dia11
+            {
+                position: absolute;
+                top: 0px;
+                width: 100%;
+                height: 370px;
+            }
+            .lblStarlength
+            {
+                margin-left: 14%;
+                position: absolute;
+                top: 4%;
+            }
+            .lblTabelPerc
+            {
+                margin-left: 32%;
+                position: absolute;
+                top: 4%;
+            }
+            .lblCrownAngle
+            {
+                margin-left: 54%;
+                position: absolute;
+                top: 11%;
+            }
+            .dia22
+            {
+                font-size: 8px;
+                margin-top: 0px;
+                padding-left: 57%;
+                padding-top: 8%;
+                text-align: right;
+            }
+            .lblCrownHeight
+            {
+                margin-left: 41%;
+                position: absolute;
+                top: 11%;
+            }
+            .lblPavAngle
+            {
+                margin-left: 54%;
+                position: absolute;
+                top: 65px;
+            }
+            .dia33
+            {
+                font-size: 8px;
+                margin-top: 0px;
+                padding-left: 57%;
+                padding-top: 2%;
+            }
+            .lblDepthPer
+            {
+                margin-left: 36%;
+                position: absolute;
+                top: 18%;
+            }
+            .lblPavHeight
+            {
+                margin-left: 40%;
+                position: absolute;
+                top: 84px;
+            }
+            .lblPavPer
+            {
+                margin-left: 20%;
+                position: absolute;
+                top: 132px;
+            }
+            .lblCuletDesc
+            {
+                margin-left: 37%;
+                position: absolute;
+                top: 152px;
+            }
+            .dia44
+            {
+                margin-left: 4%;
+                position: absolute;
+                top: 40px;
+                width: 60px;
+            }
+        }
+      #dropdownTagsId .ui-dropdown-panel .ui-dropdown-list {
+    padding: .4em;
+    border: 0 none;
+    max-height: 50px !important;
+}
+
+.add-tag-label{padding-left: 8px; cursor: pointer;}
+.margintb0
+{
+    padding-top:0 ;
+    padding-bottom:0 ;
+}
+.label-comments
+{
+font-size: 12px;
+}
+.multimedia-container {
+    min-height: 375px;
+    margin-bottom: 0px;
+}
+ 
+ .struck-details-page {
+    max-height: 100%;
+    overflow-y: auto;
+}
+.tbl-inclusion-detail, .tbl-inclusion-detail{
+    font-size: 11px;
+    padding: 0 5px;
+    text-align: center;
+}
+.anchorDefaultColor{
+    color: inherit
+}

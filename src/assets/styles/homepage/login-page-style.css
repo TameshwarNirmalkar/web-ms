@@ -1,0 +1,403 @@
+﻿.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
+
+.text_right {
+  text-align: right;
+}
+
+.text_left {
+  text-align: left;
+}
+
+.text_center {
+  text-align: center;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.clearfix {
+  clear: both;
+  /*content:" "; never use this property error in opera*/
+  display: block;
+  font-size: inherit;
+  height: 0;
+  line-height: 0;
+}
+
+.mainBox {
+  height: 100%;
+}
+
+.videobox {
+  background-color: #161618;
+  width: 66%;
+  height: 100vh;
+}
+
+.loginbox {
+  width: 34%;
+}
+
+.bgvid {
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  margin-top: 145px;
+}
+
+.container-height100 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.bg-color, .bg-white, .body-bg {
+  background-color: #fff;
+}
+
+.loginForm-content {
+  margin: 0 auto;
+  float: none;
+  width: 90%;
+}
+
+div.commonBox {
+  height: 100vh;
+  position: relative;
+  background-color: #fff;
+  z-index: 999;
+}
+
+.login-title {
+  font-size: 40px;
+  padding-left: 15px;
+  font-weight: 400;
+  line-height: normal;
+  color: #434453;
+  margin: 0px 0px 40px 50px;
+  padding: 0px;
+}
+
+.login-icon {
+  font-size: 20px;
+  padding: 10px;
+}
+
+.input_wrapper {
+  width: 100%;
+  margin-top: 25px;
+}
+
+.button {
+  position: relative;
+  margin-top: 15px;
+  margin-left: 35px;
+}
+
+.input-box {
+  position: relative;
+  margin-top: 5px;
+  padding: 0px 10px!important;
+}
+
+.input-box .icon {
+  width: 30px;
+  float: left;
+  display: block;
+  padding-top: 10px;
+}
+
+.input-box input {
+  width: calc(100% - 45px);
+  float: left;
+}
+
+input[type=text],
+input[type=password] {
+  padding: 10px 10px;
+  color: #4e4c4d;
+  border: 0!important;
+  border-bottom: 1px solid #cacee1!important;
+  margin-left: 15px;
+}
+
+.login, .pass {
+  border-bottom: 1px solid silver;
+  border-radius: 0;
+}
+
+.log-in {
+  background: #afdde9 !important;
+  display: block;
+  position: relative;
+  width: 90%;
+  padding: 12px 8px;
+  margin: 8px 5%;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid #89afb9 !important;
+  border-radius: 0.2em;
+  transition: all 0.3s ease-out;
+  font-weight: bold;
+  text-transform: capitalize;
+  color: #434453 !important;
+}
+
+
+input[type=text].log-in,
+input[type=password].log-in
+{
+  font-size: 14px;
+    line-height: 16px;
+    padding: 10px 10px 10px 5px;
+    -webkit-appearance: none;
+     
+    margin-left: 15px;
+    border: 0px !important;
+    border-bottom: 1px solid #ccc !important;
+    border-radius: 0;
+}
+
+.forget_box {
+  margin: 30px 10px 30px 40px;
+}
+
+div.forgotPwd {
+  width: 50%;
+  margin: auto 0;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.forgotPwd, .registerNow{
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.forgot-pwd {
+  margin-left: 15px;
+}
+
+.forgot-pwd, .loginfooter, .registrt-now {
+  color: #262a42;
+}
+
+div.registerNow {
+  width: 50%;
+  margin: auto 0;
+  text-align: right;
+  padding-right: 15px;
+}
+
+.loginfooter {
+  width: 100%;
+  margin-left: 15px;
+  margin-top: 70px;
+  text-align: center;
+}
+
+.loginfooter a {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #4e4c4d;
+  display: inline;
+}
+.marg-l0
+{margin-left: 0px;}
+.padd-l15
+{padding-left: 15px;}
+.marg-t10
+{margin-top: 10px;}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-size: 12px;
+  color: #bfbdbd;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+  font-size: 12px;
+  color: #bfbdbd;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+:-ms-input-placeholder { /* IE 10+ */
+  font-size: 12px;
+  color: #bfbdbd;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  font-size: 12px;
+  color: #bfbdbd;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+/*Registration page*/
+
+
+.signupbox .category{
+  padding: 20px 0px 0px 10px;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.signupbox .category p{
+  margin: 0px;
+  font-weight: 100;
+  font-size: 14px;
+}
+
+.signupbox .upload-photo .category, .signupbox .agree .category{
+  font-size: 14px;
+}
+
+.signupbox .input_wrapper{
+  margin-top: 0;
+  padding-top: 80px;
+}
+
+.signupbox .header-fix{
+  width: 100%;
+  background-color: white;
+  height: 80px;
+  position: fixed;
+  z-index: 999;
+}
+
+.signupbox{
+  width: 34%;
+  overflow-y: scroll;
+}
+
+.signupbox .input-box{
+  margin-bottom: 35px;
+  margin-top: 0px;
+}
+
+.signupbox .dropdown-list .input-data{
+  padding: 7px 7px;
+  border: 1px solid #cacee1;
+  width: calc(100% - 52px);
+  font-size: 14px;
+  margin-bottom: 7px;
+  margin-left: 3px;
+}
+
+.signupbox .dropdown-list{
+  padding: 5px 0px;
+}
+
+.signupbox .login-title{
+  margin: 8px 8px;
+}
+
+.signupbox .upload-photo button{
+  border: 1px solid;
+  padding: 10px;
+  background-color: white;
+}
+
+.signupbox .upload{
+  padding: 20px 0px;
+}
+
+.agree input{
+  -webkit-appearance: checkbox;
+  width: auto;
+}
+
+.agree .check{
+  padding: 10px 10px;
+}
+.error{
+  margin-left: 45px;
+}
+
+@media (max-width: 1024px) {
+  .forget_box {
+    margin: 30px 5px 30px 35px;
+  }
+  .error{
+    margin-left: 35px;
+  }
+}
+
+@media (max-width: 991px) {
+  .videobox {
+    width: 60%;
+  }
+  .loginbox {
+    width: 40%;
+  }
+  .forget_box a{
+    font-size: 12px;
+  }
+  .forget_box {
+      margin: 30px 0px 30px 30px;
+  }
+}
+
+@media (max-width: 767px) {
+  .videobox {
+    width: 100%;
+    height: auto;
+  }
+
+  .loginbox, .commonBox, .signupbox {
+    width: 100%;
+  }
+
+  div.commonBox {
+    height: auto;
+    padding: 75px 0;
+  }
+
+  .signupbox .input_wrapper{
+    padding-top: 0;
+  }
+
+  .signupbox .header-fix{
+    position: relative;
+  }
+
+}
+
+
+#forgot-password-section, #reset-password-section, #registration-section, #registration-container, #verify-otp-section{
+
+  display: none;
+
+}
+
+.closeButton {
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  padding: 1rem;
+  z-index: 1000;
+}
+.closeButton .close-icon{
+  font-size: 18px;
+}
+a,a:hover,a:active{
+  color:#262a42!important;
+}

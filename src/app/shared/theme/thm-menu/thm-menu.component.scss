@@ -1,0 +1,138 @@
+  .menu--icon,
+  .menu--label,
+  .menu--link {
+    display: block;
+  }
+  .vertical_nav__minify {
+    position: absolute;
+    // min-height: 890px;
+    width: 55px;
+    -moz-transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    z-index: 999;
+  }
+  .vertical_nav__minify .menu--label {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 50px;
+    padding-left: 16px;
+    font-weight: 500;
+    width: 65%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .vertical_nav .menu--label {
+    display: block;
+  }
+  .menu--icon {
+    float: left;
+    display: block;
+  }
+  :active,
+  :focus {
+    outline: 0;
+  }
+  .vertical_nav {
+    width: 200px;
+    -moz-transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+  }
+  .menu {
+    position: absolute;
+    top: 0;
+    bottom: 40px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  .menu--icon,
+  .menu--label {
+    line-height: 50px;
+  }
+  .menu--label {
+    padding-top: 5px;
+  }
+  .menu--item {
+    position: relative;
+    min-height: 40px;
+  }
+  .menu--link {
+    overflow: hidden;
+    font-size: 0.875rem;
+    text-decoration: none;
+    font-weight: 400;
+    height: 62px;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .icon-Twin-Shape-Round:before {
+    font-size: 20px;
+  }
+  .menu--icon {
+    padding: 0 50px 0 0;
+    width: 20px;
+    font-size: 20px;
+  }
+  .collapse_menu .collapse_menu--icon {
+    float: right;
+    width: 45px;
+    font-size: 30px;
+  }
+  .collapse_menu .collapse_menu--icon:before {
+    content: "\f053";
+  }
+  .icon {
+    padding: 20px 15px;
+    width: 20px;
+    height: 20px;
+    display: table;
+    font-size: 20px;
+  }
+  .menu-icon-bottom {
+    border-bottom: 1px solid rgba(255, 255, 255, .3);
+  }
+  .menu-value-label {
+    position: absolute;
+    left: 18px;
+    /* height: 20px; */
+    padding: 0;
+    margin: 0;
+    width: 34px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 16px;
+    top: 4px;
+  }
+
+  .liveflag-value-label {
+   position: absolute;
+    left: 22px;
+    padding: 0;
+    margin: 0;
+    width: 30px;
+    height:15px;
+    font-size: 10px;
+    text-align: center;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 16px;
+    color:white;
+    background:red;
+    top: 1px;
+  }
+  .active-menu i.menu--icon span {}
+
+  .flag-icon {
+    max-width: 70px;
+    max-height: 70px;
+    padding: 15px;
+  }
+  .icon-Twin-Shape-Round:before {
+    content: "\E952";
+}

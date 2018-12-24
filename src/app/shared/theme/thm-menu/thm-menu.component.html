@@ -1,0 +1,27 @@
+<nav id="navMenuContainerId" class="vertical_nav__minify" [style.height.px]='navMenuContainerHeight'>
+  <ul id="jsMenu" class="menu">
+    <li id="{{item.label}}ContainerId" *ngFor="let item of menuList" class="menu--item"
+        [class.menu-icon-bottom]="(item.name === 'confirmations_menu') || (item.name === 'profile_menu')">
+      <a id="{{item.label}}RouteId" title="{{item.label}}" (click)="fetchExportMemo(item.routeLink)"
+         [routerLink]="item.routeLink"
+         routerLinkActive="active-menu" class="ui-g ui-g-nopad menu--link">
+        <span id="{{item.label}}Container">
+          <span class="menu-value-label" *ngIf="item.count">{{item.count}}</span>
+          <div class="ribbon ribbon-top-right" *ngIf="item.liveFlag">
+            <span>{{item.liveFlag}}</span>
+          </div>
+          <i id="{{item.label}}IconBox" class="menu--icon">
+            <span id={{item.routeLink}} class="icon {{item.iconClass}}"
+                  *ngIf="!item.countryFlag; else showNormalIcon"></span>
+            <ng-template #showNormalIcon>
+              <img class="flag-icon" [src]=item.countryFlag>
+            </ng-template>
+          </i>
+        </span>
+        <span id="{{item.label}}LabelContainer" class="label-padding">
+          <div id={{item.label}} class="menu--label">{{item.label | translate}}</div>
+        </span>
+      </a>
+    </li>
+  </ul>
+</nav>

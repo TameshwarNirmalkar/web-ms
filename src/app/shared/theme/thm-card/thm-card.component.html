@@ -1,0 +1,32 @@
+<div id="{{cardData.cardId}}Heading" class="ui-g-7 heading">
+  <label id="{{cardData.cardId}}HeadingId" class="heading-text" [ngClass]="{'card-main-skeleton': !cardData.mainDisplayValue}">
+    <a id="{{cardData.cardId}}RedirectLink" (click)="navigateTo(cardData)">{{cardData.mainDisplayValue}}</a>
+  </label>
+</div>
+<div id="{{cardData.cardId}}Icon" class="ui-g-5 card-icon" align="right" [ngClass]="{'card-image-skeleton':!cardData.icon}">
+  <span id="{{cardData.cardId}}IconId" *ngIf="cardData?.cardId !== '8'; else showRecommendIcon" class="dashboard-card {{cardData.icon}}"></span>
+  <ng-template #showRecommendIcon>
+    <img src="./assets/icons/recommended.png" style="height: 42px; width: 42px;">
+  </ng-template>
+</div>
+<div id="{{cardData.cardId}}SubContent" class="ui-g-12 sub-content">
+  <label id="{{cardData.cardId}}SubContentId" class="sub-content-text" [ngClass]="{'card-main-text-skeleton': !cardData.mainDisplayText}">{{cardData.mainDisplayText}}</label>
+</div>
+<div id="{{cardData.cardId}}FooterId" class="ui-g-12 footer">
+  <div class="ui-g-6 footer-left ui-g-nopad">
+    <span id="{{cardData.cardId}}LeftFooterId" [ngClass]="{'card-footer-skeleton': !cardData.footerLeftName}">
+      <label id="{{cardData.cardId}}LeftFooterLink" class="footer-link" [ngClass]="{'cursor-pointer': (cardData.cardId==='2' || cardData.cardId === '8')}"
+        (click)="cardLeftFooterNavigation(cardData)">
+        {{cardData.footerLeftName}}
+      </label>
+    </span>
+  </div>
+  <div class="ui-g-6 footer-right ui-g-nopad">
+    <span id="{{cardData.cardId}}RightFooterId" [ngClass]="{'card-footer-skeleton': !cardData.footerRightName}">
+      <label id="{{cardData.cardId}}RightFooterLink" class="footer-link" [ngClass]="{'cursor-pointer': (cardData.cardId==='2' || cardData.cardId === '8')}"
+        (click)="cardRightFooterNavigation(cardData)">
+        {{cardData.footerRightName}}
+      </label>
+    </span>
+  </div>
+</div>

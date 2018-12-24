@@ -7,6 +7,7 @@ import { ErrorHandlerService } from './error-handler.service';
 import { SessionTimeoutService } from './session-timeout.service';
 import { ApplicationStorageService } from './application-storage.service';
 import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
@@ -144,7 +145,7 @@ export class AuthService {
     }
   }
 
-  isValidUser(userName: string, password: string) {
+  isValidUser(userName: string, password: string): Observable<any> {
     const loginData = this.createLoginData(userName, password);
     return this.http.post(this.applicationData.getEnvironment().AuthenticationApi
       + '/auth/login/' + this.applicationData.getEnvironment().AuthenticationVersion, loginData).pipe(
@@ -202,7 +203,7 @@ export class AuthService {
     return roleNames[0];
   }
 
-  sendOtp(data) {
+  sendOtp(data): Observable<any> {
     data = JSON.stringify(data);
     const url = `${this.applicationData.getEnvironment().NotificationApi}/notification/SMS/sendOTPSMSandMail/
     ${this.applicationData.getEnvironment().NotificationVersion}`;
@@ -212,7 +213,7 @@ export class AuthService {
     );
   }
 
-  verifyOtp(data) {
+  verifyOtp(data): Observable<any> {
     data = JSON.stringify(data);
     const url = `${this.applicationData.getEnvironment().NotificationApi}/notification/SMS/verifyOTP/
     ${this.applicationData.getEnvironment().NotificationVersion}`;
@@ -222,7 +223,7 @@ export class AuthService {
     );
   }
 
-  registerUser(userData) {
+  registerUser(userData): Observable<any> {
     const data = this.createRegistrationData(userData);
     const url = `${this.applicationData.getEnvironment().AuthenticationApi}
     /auth/registration/${this.applicationData.getEnvironment().AuthenticationVersion}`;
@@ -237,7 +238,7 @@ export class AuthService {
     );
   }
 
-  uploadUserDocument(documentData) {
+  uploadUserDocument(documentData): Observable<any> {
     const headerData = new HttpHeaders();
     headerData.append('enctype', 'multipart/form-data');
     headerData.append('Accept', 'application/json');
@@ -272,7 +273,7 @@ export class AuthService {
     return JSON.stringify(registrationData);
   }
 
-  logoutUser() {
+  logoutUser(): Observable<any> {
     const url = `${this.applicationData.getEnvironment().LogoutApi}
     /auth/logout/${this.applicationData.getEnvironment().LogoutVersion}`;
     return this.http.get(url).pipe(
@@ -326,7 +327,7 @@ export class AuthService {
     this.router.navigate(['']);
   }
 
-  requestPasswordForgot(data) {
+  requestPasswordForgot(data): Observable<any> {
     const forgotJson = {};
     forgotJson['email_id'] = data;
     forgotJson['org_name'] = this.applicationData.getOrgName();
@@ -343,7 +344,7 @@ export class AuthService {
     );
   }
 
-  requestChangePassword(userName, password) {
+  requestChangePassword(userName, password): Observable<any> {
     const headerData = new HttpHeaders();
     headerData.append('Accept', 'application/json');
     headerData.append('calling_entity', 'UI');
@@ -360,7 +361,7 @@ export class AuthService {
     );
   }
 
-  requestPasswordReset(jsonValue, token) {
+  requestPasswordReset(jsonValue, token): Observable<any> {
     const headerData = new HttpHeaders();
     headerData.append('Accept', 'application/json');
     headerData.append('calling_entity', 'UI');
@@ -407,7 +408,7 @@ export class AuthService {
     }
   }
 
-  authenticateLoginAs(token, loginName) {
+  authenticateLoginAs(token, loginName): Observable<any> {
     this.token = token;
     return this.http.get(this.applicationData.getEnvironment().AdminApi + '/solitaire-admin/web/loginas/' +
       this.applicationData.getEnvironment().AdminVersion + '?login_name=' + loginName).pipe(

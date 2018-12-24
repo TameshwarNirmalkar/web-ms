@@ -1,0 +1,123 @@
+.stone-label-text {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.stone-mini-image {
+  max-width: 40px;
+  margin-top: -10px;
+}
+
+.multimedia-button {
+  padding: 5px;
+  font-size: 16px;
+  padding: 5px 10px;
+}
+
+.multimedia-button-active {
+  padding: 5px;
+  font-size: 16px;
+  padding: 5px 10px;
+}
+
+.multimedia-image {
+  width: 100%;
+  max-width: 420px;
+  padding-top: 10px;
+}
+
+.multimedia-box {
+  height: 430px;
+  padding-top: 14px !important;
+}
+
+.multimedia-image-ploat {
+  width: 100%;
+  max-width: 367px;
+  margin-top: 75px;
+}
+
+.center-align {
+  text-align: center;
+}
+
+.detail-label {
+  text-align: center;
+  clear: both;
+}
+
+.multimedia-image-full {
+  width: 100%;
+  padding: 20px;
+}
+
+.dtl-icon,
+.dtl-icon-active {
+  font-size: 24px;
+  padding: 3px 5px;
+}
+
+.multimedia-image-twin {
+  width: 100%;
+}
+.basic-details-heading{ font-weight: bold;}
+.details-box{ padding: 14px;}
+.twin-view-link{ text-decoration: underline;}
+.twin-image-view{ font-weight: bold}
+.std-head{background-color: #ccc; border:1px solid #aaa }
+.std-label{background-color: #fff; border:1px solid #aaa;border-right:0px; cursor: pointer; }
+.std-label-head {background-color: #fff; border:1px solid #aaa; }
+
+
+.std-value1{background-color: #fff; border:1px solid #aaa;border-right:0px; font-size: 13px; }
+
+
+
+.bold{font-weight: bold }
+.stn_detail_wrap {
+    height: 555px;
+    overflow-y: scroll;
+    clear: both;
+}
+.button-section-box{
+  height: 20px !important;
+  padding-top: 0px !important;
+}
+
+#iframeMovie .frameContainer
+{
+  width:100%!important;
+}
+.stn_tab_list {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+.stn_tab_list .ui-g-2 a {
+    font-size: 12px;
+    border-right: 1px solid #000 !important;
+    padding: 0 6px;
+}
+.stn_tab_list .ui-g-2:last-child a
+{
+
+border-right:0 !important;
+}
+.stn_tab_list .ui-g-2 {
+    width: auto;
+    padding: 0px 0;
+    border-bottom:1px solid transparent;
+}
+.stn_tab_list .ui-g-2.active {
+    border-bottom:2px solid #333;;
+}
+
+    @media screen and (max-width: 1366px){
+
+.std-head{background-color: #ccc; border:1px solid #aaa; font-size: 10px; }
+.std-label{background-color: #fff; border:1px solid #aaa;border-right:0px; font-size: 10px; }
+.std-label-head {background-color: #fff; border:1px solid #aaa; font-size: 10px; }
+
+
+.std-value1{background-color: #fff; border:1px solid #aaa;border-right:0px; font-size: 10px; }
+
+    }

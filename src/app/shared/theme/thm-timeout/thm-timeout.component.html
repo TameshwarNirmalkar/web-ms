@@ -1,0 +1,8 @@
+<p-dialog [showHeader]="false" [(visible)]="sessionOverlay" modal="modal" width="500" [closeOnEscape]="false" [resizable]="false" [dismissableMask]="false" [draggable]="false">
+  <div id="sessionHeader" class="session-header">{{sessionHeader}}</div>
+  <div id="sessionText" class="session-message">{{'Do you want to continue' | translate}} ?</div>
+  <p-footer id="buttonSessionBarId" class="text-right">
+    <button id="yesContinueSessionId" type="button" class="custom-btnPrimary" (click)="renewSession()">Continue my session</button>
+    <button id="noLogoutId" type="button" class="custom-btnPrimary" (click)="initiateLogOut()">Log me out</button>
+  </p-footer>
+</p-dialog>

@@ -1,0 +1,71 @@
+img {
+  min-height: 100%;
+  width: 100%;
+  height: 99.3vh;
+}
+
+.login-page-img{
+  min-height: 100%;
+  width: 100%;
+  height: auto;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  padding: 20px;
+  cursor: pointer;
+  font-size: 20px;
+  height: 40px;
+  top: 0px
+}
+
+.uppertext{
+  text-align: center;
+  padding-top: 10px;
+  min-height: 40px;
+}
+.lowertext{
+  text-align: center;
+  min-height: 40px;
+}
+
+.close img {
+  height: 20px;
+  width: 20px;
+}
+
+#bgvid {
+  width: 100%;
+  display: block;
+  object-fit: fill;
+}
+
+#mainBoxId {
+  background-color: #161618;
+  height: 100%;
+}
+
+.close-icon {
+  font-size: 20px;
+}
+
+
+
+div#commonBox {
+  height: 100vh;
+  position: relative;
+}
+
+.container-height100 {
+  display: flex;
+  align-items: center;
+}
+
+@media(max-width: 768px) {
+  .close-icon {
+    font-size: 15px;
+  }
+}
+
+.iframe-video{height:98vh}

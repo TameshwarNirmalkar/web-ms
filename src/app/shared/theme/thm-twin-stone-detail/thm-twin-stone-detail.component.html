@@ -1,0 +1,579 @@
+<div dirScrollTop id="stoneInfoBoxId" class="ui-g margint20" *ngIf="twinStones">
+
+
+
+  <div id="twinStoneDetailContainer" class="ui-g-5 details-box">
+
+    <div id="buttonSectionBox" class="ui-g-12 stn_tab_list std-head" align="left">
+      <div id='basic' class="ui-g-2 scrl bold active">
+        <a (click)="stoneDetailScroll('BasicDiv','basic')">{{'Basic Details'| translate}}</a>
+      </div>
+      <div id='make' class="ui-g-2 scrl bold">
+        <a (click)="stoneDetailScroll('MakeDiv','make')">{{'Make Details'| translate}}</a>
+      </div>
+      <div id='inclu' class="ui-g-2 scrl bold">
+        <a (click)="stoneDetailScroll('IncluDiv','inclu')">{{'Inclusions'| translate}}</a>
+      </div>
+      <div id='comm' class="ui-g-2 scrl bold">
+        <a (click)="stoneDetailScroll('CommDiv','comm')">{{'Comments'| translate}}</a>
+      </div>
+      <div id='param' class="ui-g-2 scrl bold">
+        <a (click)="stoneDetailScroll('ParamDiv','param')">{{'Parameters'| translate}}</a>
+      </div>
+      <div id='price' class="ui-g-2 scrl bold">
+        <a (click)="stoneDetailScroll('PriceDiv','price')">{{'Price'| translate}}</a>
+      </div>
+    </div>
+    <div class="stn_detail_wrap" (scroll)="onScrollAddActiveClass()">
+      <div class="ui-g-12 std-head std-head bold" id='BasicDiv'>{{'Basic Details'| translate}}</div>
+      <div class="ui-g-12 padd0">
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Stone" tooltipPosition="bottom">{{'Stone' | translate}} ID</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}StoneId">{{stone?.stone_id}}</label>
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Shape" tooltipPosition="bottom">{{'Shape' | translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}ShapeText" *ngIf="stone.shape">{{stone?.shape?.long_value}}</label>
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Clarity" tooltipPosition="bottom">{{'Clarity' | translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}ClarityText" *ngIf="stone.clarity">{{stone?.clarity?.long_value}}</label>
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Color" tooltipPosition="bottom">{{'Color' | translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}ColorText" *ngIf="stone.color">{{stone?.color?.long_value}}</label>
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Carat" tooltipPosition="bottom">{{'Carat' | translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}CaratText" *ngIf="stone.carat">{{stone?.carat}}</label>
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Cert. No." tooltipPosition="bottom">{{'Cert. No.' | translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}Clarity" *ngIf="stone.certificate_no">{{stone?.certificate?.long_value }}{{' '}}{{stone?.certificate_no}}
+              <!--<div id="firstStoneCertificatesId" class="ui-g-8 ui-g-nopad stone-label-text">-->
+              <span *ngIf="stone?.cert_url">
+                <a [dirStoreAudit]="'CERT DOWNLOAD'" (click)="downloadCertificate(cert_url)" class="info-icon icon-download" pTooltip="Download Certificate"
+                  tooltipPosition="bottom" tooltipEvent="hover">
+                </a>
+              </span>
+              <span *ngIf="stone?.cert_verify_url">
+                <a [dirStoreAudit]="'CERT VIEW'" [href]=stone?.cert_verify_url target="_blank" class="info-icon icon-verify" pTooltip="Verify Certificate"
+                  tooltipPosition="bottom" tooltipEvent="hover">
+                </a>
+              </span>
+              <!--</div>-->
+            </label>
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="H&A" tooltipPosition="bottom">{{'H&A'| translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}HnA" *ngIf="stone.hna">{{stone?.hna?.long_value}}</label>
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Shade" tooltipPosition="bottom">{{'Shade'| translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}Shade" *ngIf="stone.shade">{{stone?.shade?.long_value}}</label>
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Luster" tooltipPosition="bottom">{{'Luster'| translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}Luster" *ngIf="stone.luster">{{stone?.luster?.long_value}}</label>
+          </div>
+        </div>
+      </div>
+      <div class=" ui-g-12 padd0" id='MakeDiv'>
+        <div class="ui-g-12 std-head bold">{{'Make Details'| translate}}</div>
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Cut" tooltipPosition="bottom">{{'Cut'| translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}Cut" *ngIf="stone.cut">{{stone?.cut?.long_value}}</label>
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Polish" tooltipPosition="bottom">{{'Polish'| translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}Polish" *ngIf="stone.polish">{{stone?.polish?.long_value}}</label>
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Symmetry" tooltipPosition="bottom">{{'Symmetry'| translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}Symmetry" *ngIf="stone.symmetry">{{stone?.symmetry?.long_value}}</label>
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Fluorescence" tooltipPosition="bottom">{{'Fluorescence'| translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}Flour" *ngIf="stone.fluor">{{stone?.fluor?.long_value}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class=" ui-g-12 padd0" id='IncluDiv'>
+        <div class="ui-g-12 std-head bold">{{'Inclusions'| translate}}</div>
+        <div class="ui-g-12 ui-g-nopad">
+          <div class="ui-g ui-g-12 ui-g-nopad">
+            <div class="ui-g-2  std-label"></div>
+            <div class="ui-g-5 padd0  " *ngFor="let stone of twinStones">
+              <div class="ui-g-6 std-value1 bold" id="{{stone.stone_id}}TableHeading">{{'Table' | translate}}</div>
+              <div class="ui-g-6 std-value1  bold" id="{{stone.stone_id}}SideHeading">{{'Side' | translate}}</div>
+            </div>
+          </div>
+          <div class="ui-g ui-g-12 ui-g-nopad">
+            <div class="ui-g-2  std-label bold" pTooltip="Black" tooltipPosition="bottom">{{'Black'| translate}}</div>
+            <div class="ui-g-5 padd0  " *ngFor="let stone of twinStones">
+              <div class="ui-g-6 std-value1" id="{{stone.stone_id}}TableBlack" *ngIf="stone.table_black">{{stone?.table_black?.long_value}}</div>
+              <div class="ui-g-6 std-value1" id="{{stone.stone_id}}SideBlack" *ngIf="stone.side_black">{{stone?.side_black?.long_value}}</div>
+            </div>
+          </div>
+          <div class="ui-g ui-g-12 ui-g-nopad">
+            <div class="ui-g-2  std-label bold" pTooltip="Spot" tooltipPosition="bottom">{{'Spot'| translate}}</div>
+            <div class="ui-g-5 padd0 " *ngFor="let stone of twinStones">
+              <div class="ui-g-6 std-value1" id="{{stone.stone_id}}TableSPot" *ngIf="stone.table_spot">{{stone?.table_spot?.long_value}}</div>
+              <div class="ui-g-6 std-value1" id="{{stone.stone_id}}SideSpot" *ngIf="stone.side_spot">{{stone?.side_spot?.long_value}}</div>
+            </div>
+          </div>
+          <div class="ui-g ui-g-12 ui-g-nopad">
+            <div class="ui-g-2  std-label bold" pTooltip="White" tooltipPosition="bottom">{{'White'| translate}}</div>
+            <div class="ui-g-5 padd0   " *ngFor="let stone of twinStones">
+              <div class="ui-g-6 std-value1" id="{{stone.stone_id}}TableWhite" *ngIf="stone.table_white">{{stone?.table_white?.long_value | titlecase }}</div>
+              <div class="ui-g-6 std-value1" id="{{stone.stone_id}}SideWhite" *ngIf="stone.side_white">{{stone?.side_white?.long_value | titlecase }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui-g-12 ui-g-nopad">
+          <div class="ui-g ui-g-12 ui-g-nopad">
+            <div class="ui-g-2 std-label bold"></div>
+            <div class="ui-g-5 padd0" *ngFor="let stone of twinStones">
+              <div class="ui-g-6 std-value1  bold" id="{{stone.stone_id}}ExtraHeading">{{'Extra facet' | translate}}</div>
+              <div class="ui-g-6 std-value1  bold" id="{{stone.stone_id}}OpenHeading">{{'Open Inclusion' | translate}}</div>
+            </div>
+          </div>
+          <div class="ui-g ui-g-12 ui-g-nopad">
+            <div class="ui-g-2  std-label bold" pTooltip="Table" tooltipPosition="bottom">{{'Table'| translate}}</div>
+            <div class="ui-g-5 padd0" *ngFor="let stone of twinStones">
+              <div class="ui-g-6 std-value1" id="{{stone.stone_id}}TableTable" *ngIf="stone.table_extra_facet">{{stone?.table_extra_facet?.long_value}}</div>
+              <div class="ui-g-6 std-value1" id="{{stone.stone_id}}OpenTable" *ngIf="stone.table_open">{{stone?.table_open?.long_value}}</div>
+            </div>
+          </div>
+          <div class="ui-g ui-g-12 ui-g-nopad">
+            <div class="ui-g-2  std-label bold" pTooltip="Crown" tooltipPosition="bottom">{{'Crown'| translate}}</div>
+            <div class="ui-g-5 padd0" *ngFor="let stone of twinStones">
+              <div class="ui-g-6 std-value1" id="{{stone.stone_id}}ExtraCrown" *ngIf="stone.crown_extra_facet">{{stone?.crown_extra_facet?.long_value}}</div>
+              <div class="ui-g-6 std-value1" id="{{stone.stone_id}}OpenCrown" *ngIf="stone.crown_open">{{stone?.crown_open?.long_value}}</div>
+
+            </div>
+          </div>
+          <div class="ui-g ui-g-12 ui-g-nopad">
+            <div class="ui-g-2  std-label bold" pTooltip="Pavilion" tooltipPosition="bottom">{{'Pavilion'| translate}}</div>
+            <div class="ui-g-5 padd0" *ngFor="let stone of twinStones">
+              <div class="ui-g-6 std-value1" id="{{stone.stone_id}}PavilionExtra" *ngIf="stone.pav_extra_facet">{{stone?.pav_extra_facet?.long_value}}</div>
+              <div class="ui-g-6 std-value1" id="{{stone.stone_id}}PavilionOpen" *ngIf="stone.pav_open">{{stone?.pav_open?.long_value}}</div>
+            </div>
+          </div>
+
+          <div class="ui-g ui-g-12 ui-g-nopad">
+            <div class="ui-g-2  std-label bold" pTooltip="Girdle" tooltipPosition="bottom">{{'Girdle'| translate}}</div>
+            <div class="ui-g-5 padd0" *ngFor="let stone of twinStones">
+              <div class="ui-g-6 std-value1" id="{{stone.stone_id}}GirdleExtra">&nbsp;</div>
+              <div class="ui-g-6  std-value1" id="{{stone.stone_id}}GirdleOpen" *ngIf="stone.girdle_open">{{stone?.girdle_open?.long_value}}</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class=" ui-g-12 padd0" id='CommDiv'>
+        <div class="ui-g-12 std-head bold">{{'Comments' | translate}}</div>
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold">SGS {{'Comments' | translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}SGSComments" *ngIf="stone.sgs">
+              {{stone?.sgs?.toString()}}
+            </label>
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Key To Symbol" tooltipPosition="bottom">{{'Key To Symbol'}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}KTSComments" *ngIf="stone.kts">
+              {{stone?.kts?.toString()}}
+            </label>
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Lab Comment" tooltipPosition="bottom">{{'Lab Comments' | translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}LabComments" *ngIf="stone.lab_comment">
+              {{stone?.lab_comment}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class=" ui-g-12 padd0" id='ParamDiv'>
+        <div class="ui-g-12 std-head bold">{{'Parameters Details'| translate}}</div>
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Measurement" tooltipPosition="bottom">{{'Measurement'| translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}Measurement" *ngIf="stone.length">{{stone?.length}}-{{stone?.width}}*{{stone?.height}}</label>
+          </div>
+        </div>
+
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Total Depth" tooltipPosition="bottom">{{'Total Depth'| translate}}(%)</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}Measurement" *ngIf="stone.total_depth_percent">{{stone?.total_depth_percent}}</label>
+          </div>
+        </div>
+
+
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Table" tooltipPosition="bottom">{{'Table'| translate}}(%)</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}TablePercentage">{{stone?.table_percent}}</label>
+          </div>
+        </div>
+
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="D/R" tooltipPosition="bottom">{{'D/R'| translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}Ratio">{{stone?.ratio}}</label>
+          </div>
+        </div>
+
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Length" tooltipPosition="bottom">{{'Length'| translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}Length">{{stone?.length}}</label>
+          </div>
+        </div>
+
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Width" tooltipPosition="bottom">{{'Width'| translate}}</div>
+          <div class="ui-g-5  std-label-head" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}Width">{{stone?.width}}</label>
+          </div>
+        </div>
+
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Girdle %" tooltipPosition="bottom">{{'Girdle'| translate}} %</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}GirdlePercent">{{stone?.girdle_percent}}</label>
+          </div>
+        </div>
+
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Girdle" tooltipPosition="bottom">{{'Girdle'| translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}Girdle" *ngIf="stone.girdle">{{stone?.girdle?.short_value}}</label>
+            <label id="{{stone.stone_id}}Tgirdle" *ngIf="stone.tgirdle">-{{stone?.tgirdle?.short_value}}</label>
+          </div>
+        </div>
+
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Lower Half" tooltipPosition="bottom">{{'Lower'|translate}} {{'Half'|translate}}(%)</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}LowerHalf" *ngIf="stone.lower_half">{{stone?.lower_half}}</label>
+          </div>
+        </div>
+
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="S.Length" tooltipPosition="bottom">S.{{'Length' | translate}}(%)</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}Slenth" *ngIf="stone.star_length">{{stone?.star_length}}</label>
+          </div>
+        </div>
+
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Pavilion Angle" tooltipPosition="bottom">{{'Pavilion'|translate}} {{'Angle'|translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}PavAngle" *ngIf="stone.pav_angle">{{stone?.pav_angle}}</label>
+          </div>
+        </div>
+
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Pavilion Height" tooltipPosition="bottom">{{'Pavilion'|translate}} {{'Height'|translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}PavHeight" *ngIf="stone.pav_height">{{stone?.pav_height}}</label>
+          </div>
+        </div>
+
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Crown Angle" tooltipPosition="bottom">{{'Crown'|translate}} {{'Angle'|translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}CrownAngle" *ngIf="stone.crown_angle">{{stone?.crown_angle}}</label>
+          </div>
+        </div>
+
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Crown Height" tooltipPosition="bottom">{{'Crown'|translate}} {{'Height'|translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}CrownHeight" *ngIf="stone.crown_height">{{stone?.crown_height}}</label>
+          </div>
+        </div>
+
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="Culet" tooltipPosition="bottom">{{'Culet'| translate}}</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}Culet" *ngIf="stone.culet">{{stone?.culet?.long_value}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class=" ui-g-12 padd0" id='PriceDiv'>
+        <div class="ui-g-12 std-head bold">{{'Price'| translate}}</div>
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="SRK $/ct." tooltipPosition="bottom">SRK $/ct.</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}PriceInfo" *ngIf="stone.price_srk">${{stone?.price_srk | number : '1.2-2' }}</label>
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="off%" tooltipPosition="bottom">Off%</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}RapOff" *ngIf="stone.rap_off">{{stone?.rap_off }}%</label>
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 ui-g-nopad">
+          <div class="ui-g-2  std-label bold" pTooltip="O.Rap" tooltipPosition="bottom">O.Rap</div>
+          <div class="ui-g-5  std-value1" *ngFor="let stone of twinStones">
+            <label id="{{stone.stone_id}}ORap" *ngIf="stone.price_rap">${{stone?.price_rap | number : '1.2-2'}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="clerfix"></div>
+    </div>
+  </div>
+
+
+
+
+  <div id="twinStoneUpperContainer" class="ui-g ui-g-7 ui-md-12 ui-lg-7 stone-info-box     ">
+    <div id="buttonSectionBox" class="ui-g-12 button-section-box" align="right">
+      <ng-template [dirCheckPermission]="'request_hold_btn'">
+        <button [dirStoreAudit]="'ADD TO HOLD'" *ngIf="stoneObj?.isAllowedHoldButton" id="holdButtonId" class="custom-btnBorder" (click)="requestHold()">{{'Request Hold' |translate}}</button>
+      </ng-template>
+
+      <ng-template [dirCheckPermission]="'ddc_btn'" *ngIf="twinStones[0].business_process && twinStones[1].business_process">
+        <button [dirStoreAudit]="'ADD TO DDC'" *ngIf="stoneObj?.isDDCButtonAllowed" id="ddcButtonId" class="custom-btnBorder" (click)="applyDDC()">{{'Apply DDC'|translate}}</button>
+      </ng-template>
+
+      <ng-template [dirCheckPermission]="'add_basket_btn'">
+        <button [dirStoreAudit]="'ADD TO BASKET'" *ngIf="stoneObj?.isBasketAllowed" id="basketButtonId" class="custom-btnBorder" (click)="addToMyBasket()">{{'Add to Basket'|translate}}</button>
+      </ng-template>
+
+      <ng-template [dirCheckPermission]="'view_request_btn'">
+        <button [dirStoreAudit]="'VIEW REQUEST'" *ngIf="stoneObj?.isViewRequest" id="requestButtonId" class="custom-btnBorder" (click)="toggleViewRequestOverlay()">{{'View Request'|translate}}</button>
+      </ng-template>
+
+      <ng-template [dirCheckPermission]="'confirm_btn'">
+        <button [dirStoreAudit]="'CONFIRM'" *ngIf="stoneObj?.isConfirmedButtonAllowed" id="confirmButtonId" class="custom-btnPrimary" (click)="confirmDiamonds()">{{'Confirm'|translate}}</button>
+      </ng-template>
+    </div>
+    <div id="stoneMultimediaBox" class="ui-g-12 ui-md-12 ui-lg-12" *ngIf="twinStones">
+
+      <div class="ui-g-12 ui-md-12 ui-lg-12" [hidden]="!showCombineView && showDetailView">
+        <div id="combineViewDisplayBoxId" class="ui-g-12" align="center">
+          <img id="sddImageUrlId" class="multimedia-image-twin multimedia-box" [src]="twinStones[0].std_image_url | safeUrl">
+        </div>
+      </div>
+      <div class="ui-g-12 ui-md-12 ui-lg-12" *ngIf="videoShowST1" [hidden]="showCombineView && !showDetailView">
+        <div id="displayBoxId" class="ui-g-12 multimedia-box" align="center">
+          <iframe *ngIf="videoShowST1" [src]="twinStones[0].std_movie_url | safeUrl" id="iframeMovie" height="100%" width="100%" scrolling="no"
+            frameborder="0" valign="top"></iframe>
+        </div>
+      </div>
+      <div class="ui-g-12 ui-md-12 ui-lg-6" *ngIf="!videoShowST1" [hidden]="showCombineView && !showDetailView">
+        <div id="displayBoxId" class="ui-g-12 multimedia-box" align="center">
+          <img id="multimediaImageId" *ngIf="imageShowST1" class="multimedia-image" [src]="twinStones[0].image_url | safeUrl">
+          <iframe *ngIf="digiPlotShowST1" [src]="twinStones[0].digiplot_url | safeUrl" id="iframeDigiPlot" height="100%" width="100%"
+            scrolling="no" frameborder="0" valign="top"></iframe>
+          <img *ngIf="haShowST1" id="haImageId" class="multimedia-image-ploat" [src]="twinStones[0].hna_url | safeUrl">
+          <img *ngIf="verifyShowST1" id="haImageId" class="multimedia-image" [src]="twinStones[0].image_url | safeUrl">
+          <iframe *ngIf="certShowST1" id="iframecert" [src]="twinStones[0].cert_url | safeUrl" height="100%" width="100%" scrolling="no"
+            frameborder="0" valign="top"></iframe>
+          <img *ngIf="plotShowST1" id="haImageId" class="multimedia-image-ploat" [src]="twinStones[0].plot_url | safeUrl">
+        </div>
+
+        <div class="ui-g-12 center-align hidden">
+          <span>{{twinStones[0].stone_id}}</span>
+        </div>
+      </div>
+
+      <div class="ui-g-12 ui-md-12 ui-lg-6" *ngIf="!videoShowST1" [hidden]="showCombineView && !showDetailView">
+        <div id="displayBoxId" class="ui-g-12 multimedia-box" align="center">
+          <img id="multimediaImageId" *ngIf="imageShow" class="multimedia-image" [src]="twinStones[1].image_url | safeUrl">
+          <iframe *ngIf="digiPlotShow" [src]="twinStones[1].digiplot_url | safeUrl" id="iframeDigiPlot" height="100%" width="100%"
+            scrolling="no" frameborder="0" valign="top"></iframe>
+          <img *ngIf="haShow" id="haImageId" class="multimedia-image-ploat" [src]="twinStones[1].hna_url | safeUrl">
+          <img *ngIf="verifyShow" id="haImageId" class="multimedia-image" [src]="twinStones[1].image_url | safeUrl">
+          <iframe *ngIf="certShow" id="iframecert" [src]="twinStones[1].cert_url | safeUrl" height="100%" width="100%" scrolling="no"
+            frameborder="0" valign="top"></iframe>
+          <img *ngIf="plotShow" id="haImageId" class="multimedia-image-ploat" [src]="twinStones[1].plot_url | safeUrl">
+        </div>
+        <div id="buttonBoxId" class="ui-g-12 center-align hidden">
+          <a [dirStoreAudit]="'IMAGE VIEW'" *ngIf="twinStones[1].image_url" id="imageButtonId" (click)="changeMultimedia(true,false,false,false,false,false,false)"
+            [class.dtl-icon-active]="imageShow" class="dtl-icon icon-image" pTooltip="Diamond View" tooltipPosition="bottom"
+            tooltipEvent="hover"> </a>
+          <a [dirStoreAudit]="'HD VIEW'" *ngIf="twinStones[1].movie_url" id="videoButtonId" class="dtl-icon icon-hd-video-movie" (click)="changeMultimedia(false,true,false,false,false,false,false)"
+            [class.dtl-icon-active]="videoShow" pTooltip="HD Movie" tooltipPosition="bottom" tooltipEvent="hover"></a>
+          <a [dirStoreAudit]="'HD VIEW'" *ngIf="twinStones[1].digiplot_url" id="digiPlotButtonId2" [dirStoneMultimediaDetail]="{stoneid:twinStones[0].stone_id,isDigiPlot: true}"
+            [class.dtl-icon-active]="digiPlotShow" class="dtl-icon icon-g" pTooltip="Digiplot" tooltipPosition="bottom" tooltipEvent="hover"></a>
+          <a [dirStoreAudit]="'HA VIEW'" *ngIf="twinStones[1].hna_url" id="habuttonId" class="dtl-icon icon-hna" (click)="changeMultimedia(false,false,true,false,false,false,false)"
+            [class.dtl-icon-active]="haShow" pTooltip="H&A Diamond" tooltipPosition="bottom" tooltipEvent="hover"></a>
+          <a *ngIf="twinStones[1].verify_url" id="verifyButtonId" class="dtl-icon icon-cert" (click)="changeMultimedia(false,false,false,true,false,false,false)"
+            [class.dtl-icon-active]="verifyShow" pTooltip="Verify" tooltipPosition="bottom" tooltipEvent="hover"></a>
+          <a [dirStoreAudit]="'CERT VIEW'" *ngIf="twinStones[1].cert_url" id="certButtonId" class="dtl-icon icon-certificate" (click)="changeMultimedia(false,false,false,false,true,false,false)"
+            [class.dtl-icon-active]="certShow" pTooltip="Certificate" tooltipPosition="bottom" tooltipEvent="hover"></a>
+          <a [dirStoreAudit]="'PLOT VIEW'" *ngIf="twinStones[1].plot_url" id="ploatButtonId" class="dtl-icon icon-stone-big" (click)="changeMultimedia(false,false,false,false,false,true,false)"
+            [class.dtl-icon-active]="plotShow" pTooltip="Plotting" tooltipPosition="bottom" tooltipEvent="hover"></a>
+          <!--<a id="popupbuttonId" class="dtl-icon icon-enlarge-zoom" (click)="toggleMultimediaOverlay()" pTooltip="Enlarge" tooltipPosition="bottom" tooltipEvent="hover"> </a>-->
+          <a id="popupbuttonId" class="dtl-icon icon-enlarge-zoom" [dirStoneMultimediaDetail]="{stoneid:twinStones[0].stone_id,isDigiPlot: false}"
+            pTooltip="Zoom Image" tooltipPosition="bottom" tooltipEvent="hover"> </a>
+        </div>
+        <div class="ui-g-12 center-align hidden">
+          <span>{{twinStones[1].stone_id}}</span>
+        </div>
+      </div>
+      <div id="buttonBoxId" class="ui-g-12 center-align">
+        <a [dirStoreAudit]="'IMAGE VIEW'" *ngIf="twinStones[0].image_url" id="imageButtonId" (click)="changeMultimediaST1(true,false,false,false,false,false,false)"
+          [class.dtl-icon-active]="imageShowST1" class="dtl-icon icon-image" pTooltip="Diamond View" tooltipPosition="bottom"
+          tooltipEvent="hover"> </a>
+        <a [dirStoreAudit]="'HD VIEW'" *ngIf="twinStones[0].std_movie_url" id="videoButtonId" class="dtl-icon icon-hd-video-movie"
+          (click)="changeMultimediaST1(false,true,false,false,false,false,false)" [class.dtl-icon-active]="videoShowST1" pTooltip="HD Movie"
+          tooltipPosition="bottom" tooltipEvent="hover"></a>
+        <a [dirStoreAudit]="'HD VIEW'" *ngIf="twinStones[0].digiplot_url" id="digiPlotButtonId1" [dirStoneMultimediaDetail]="{stoneid1:twinStones[0],stoneid2:twinStones[1],showMediaType: 'Digiplott'}"
+          [class.dtl-icon-active]="digiPlotShowST1" class="dtl-icon icon-g" pTooltip="Digiplot" tooltipPosition="bottom" tooltipEvent="hover"></a>
+        <a [dirStoreAudit]="'HA VIEW'" *ngIf="twinStones[0].hna_url" id="habuttonId" class="dtl-icon icon-hna" (click)="changeMultimediaST1(false,false,true,false,false,false,false)"
+          [class.dtl-icon-active]="haShowST1" pTooltip="H&A Diamond" tooltipPosition="bottom" tooltipEvent="hover"></a>
+        <a *ngIf="twinStones[0].verify_url" id="verifyButtonId" class="dtl-icon icon-cert" (click)="changeMultimediaST1(false,false,false,true,false,false,false)"
+          [class.dtl-icon-active]="verifyShowST1" pTooltip="Verify" tooltipPosition="bottom" tooltipEvent="hover"></a>
+        <a [dirStoreAudit]="'CERT VIEW'" *ngIf="twinStones[0].cert_url" id="certButtonId" class="dtl-icon icon-certificate" (click)="changeMultimediaST1(false,false,false,false,true,false,false)"
+          [class.dtl-icon-active]="certShowST1" pTooltip="Certificate" tooltipPosition="bottom" tooltipEvent="hover"></a>
+        <a [dirStoreAudit]="'PLOT VIEW'" *ngIf="twinStones[0].plot_url" id="ploatButtonId" class="dtl-icon icon-stone-big" (click)="changeMultimediaST1(false,false,false,false,false,true,false)"
+          [class.dtl-icon-active]="plotShowST1" pTooltip="Plotting" tooltipPosition="bottom" tooltipEvent="hover"></a>
+        <!--<a id="popupbuttonId" class="dtl-icon icon-enlarge-zoom" (click)="toggleMultimediaOverlayST1()" pTooltip="Enlarge" tooltipPosition="bottom" tooltipEvent="hover"> </a>-->
+        <a id="popupbuttonId" class="dtl-icon icon-enlarge-zoom" [dirStoneMultimediaDetail]="{stoneid1:twinStones[0],stoneid2:twinStones[1],showMediaType:showMedia}"
+          pTooltip="Zoom Image" tooltipPosition="bottom" tooltipEvent="hover"> </a>
+      </div>
+      <div class="ui-g-12 ui-md-12 ui-lg-12 ui-g-nopad hidden">
+        <div class="ui-g-6 paddl0 paddr0">
+          <a (click)="displayCombineView()" class="twin-view-link" [ngClass]="{'twin-image-view': showCombineView && !showDetailView}">{{'Combine View'|translate}} </a>
+        </div>
+        <div class="ui-g-6 paddr0 paddl0">
+          <a (click)="displayDetailView()" class="twin-view-link" [ngClass]="{'twin-image-view': !showCombineView && showDetailView}">
+            {{'Detail View'| translate}}</a>
+        </div>
+      </div>
+    </div>
+    <div id="firstRowId" class="ui-g-12 ui-md-12 ui-lg-12 ">
+      <div id="seconRowId" class="ui-g-12">
+        <div id="stoneImageBoxId" class="ui-g-12 ui-g-nopad text-center">
+          <img id="stoneImageId" class="stone-mini-image" [src]=twinStones[0].std_image_url>
+        </div>
+      </div>
+      <div id="thirdRowId" class="ui-g-4 ui-md-12 ui-lg-12 paddt0 paddr0 paddl0">
+        <div id="basicStoneDtl" class="ui-g-4 paddl0 paddr0">
+          <div class="ui-g-12 row-b">
+            <div class="ui-g-8 ui-g-nopad stone-label-text text-center">{{twinStones[0].stone_id}}
+              <span class="fr">
+                <span class="grid-icon-container" *ngIf="twinStones[0].countryCode">
+                  <img id="{{twinStones[0].stone_id}}Flag" class="stone-flag-icon thm-details-align" [src]=twinStones[0].countryCode>
+                </span>
+                <span *ngIf="twinStones[0].color_legends">
+                  <div id="{{twinStones[0].stone_id}}ColorId" class="color-indicator-panel" *ngFor="let color of twinStones[0].color_legends">
+                    <div id="{{twinStones[0].stone_id}}{{color}}Id" class="colorLagend_GRID" [style.background-color]="color | safeStyle"></div>
+                  </div>
+                </span>
+              </span>
+            </div>
+            <div class="ui-g-8 ui-g-nopad detail-label">Stone Id</div>
+          </div>
+          <!--<div id="stoneShapeId" class="ui-g-12  row-b">
+            <div class="ui-g-4 ui-g-nopad detail-label  text-left">SRK $/ct.</div>
+            <div class="ui-g-8 ui-g-nopad stone-label-text">${{twinStones[0].price_srk}}</div>
+          </div>
+          <div id="certificateDtl" class="ui-g-12 paddr0 row-b" *ngIf="twinStones[0].certificate && twinStones[0].certificate_no">
+           <div class="ui-g-4 ui-g-nopad detail-label  text-left">{{'Certification'|translate}}</div>
+            <div id="firstStoneCertificatesId" class="ui-g-8 ui-g-nopad stone-label-text"> {{twinStones[0]?.certificate?.long_value}} {{twinStones[0].certificate_no}}
+              <span *ngIf="twinStones[0].cert_url">
+              <a [dirStoreAudit]="'CERT DOWNLOAD'" [href]=twinStones[0].cert_url download class="info-icon icon-download" pTooltip="Download Certificate" tooltipPosition="bottom" tooltipEvent="hover">
+              </a>
+            </span>
+              <span *ngIf="twinStones[0].cert_verify_url">
+              <a [dirStoreAudit]="'CERT VIEW'" [href]=twinStones[0].cert_verify_url target="_blank" class="info-icon icon-verify" pTooltip="Verify Certificate" tooltipPosition="bottom" tooltipEvent="hover">
+              </a>
+            </span>
+            </div>
+
+          </div>-->
+        </div>
+        <div id="stoneShapeId" class="ui-g-4 paddr0 paddl0" *ngIf="twinStones && twinStones[0]">
+          <div id="stoneCaratTextId" class="ui-g-12 row-b">
+            <div class="ui-g-8 ui-g-nopad stone-label-text text-center">{{twinStones[0]?.std_grp_no}}</div>
+            <div class="ui-g-8 ui-g-nopad detail-label">Pair Id</div>
+          </div>
+        </div>
+        <div id="secondStoneDtl" class="ui-g-4 paddr0 paddl0">
+          <div id="stoneImageBoxId" class="ui-g-12 row-b">
+            <div class="ui-g-8 ui-g-nopad stone-label-text text-center">{{twinStones[1]?.stone_id}}
+              <span class="fr">
+                <span class="grid-icon-container" *ngIf="twinStones[1].countryCode">
+                  <img id="{{twinStones[1].stone_id}}Flag" class="stone-flag-icon thm-details-align" [src]=twinStones[1].countryCode>
+                </span>
+                <span *ngIf="twinStones[1].color_legends">
+                  <div id="{{twinStones[1].stone_id}}ColorId" class="color-indicator-panel" *ngFor="let color of twinStones[1].color_legends">
+                    <div id="{{twinStones[1].stone_id}}{{color}}Id" class="colorLagend_GRID" [style.background-color]="color | safeStyle"></div>
+                  </div>
+                </span>
+              </span>
+            </div>
+            <div class="ui-g-8 ui-g-nopad detail-label">Stone Id</div>
+          </div>
+          <!--<div id="stoneShapeId" class="ui-g-12  row-b">
+            <div class="ui-g-4 ui-g-nopad detail-label  text-left">SRK $/ct.</div>
+            <div class="ui-g-8 ui-g-nopad stone-label-text">${{twinStones[1]?.price_srk}}</div>
+
+          </div>
+          <div id="secondCertStoneDtl" class="ui-g-12  row-b paddr0" *ngIf="twinStones[1].certificate && twinStones[1].certificate_no">
+            <div class="ui-g-4 ui-g-nopad detail-label  text-left">{{'Certification'|translate}}</div>
+            <div id="secondStoneCertificatesId" class="ui-g-8 ui-g-nopad stone-label-text"> {{twinStones[1]?.certificate?.long_value}} {{twinStones[1].certificate_no}}
+              <span *ngIf="twinStones[1].cert_url">
+              <a [dirStoreAudit]="'CERT DOWNLOAD'" [href]=twinStones[1].cert_url download class="info-icon icon-download" pTooltip="Download Certificate" tooltipPosition="bottom" tooltipEvent="hover">
+              </a>
+            </span>
+              <span *ngIf="twinStones[1].cert_verify_url">
+              <a [dirStoreAudit]="'CERT VIEW'" [href]=twinStones[1].cert_verify_url target="_blank" class="info-icon icon-verify" pTooltip="Verify Certificate" tooltipPosition="bottom" tooltipEvent="hover">
+              </a>
+            </span>
+            </div>
+
+          </div>-->
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <thm-request-overlay [visibleOverlay]="popupVisible" [apiUrl]="viewRequestApiLink" [stoneList]="twinStoneIds" (toggleOverlay)="toggleOverlay($event)"></thm-request-overlay>
+  <thm-confirm-overlay [visibleConfirmOverlay]="confirmOverlayVisible" (toggleConfirmOverlay)="toggleConfirmOverlay($event)"
+    [stoneList]="twinStoneIds"></thm-confirm-overlay>
+  <thm-ddc-overlay #thmDdcOverlay [visibleDdcOverlay]="ddcOverlayVisible" (toggleDdcOverlay)="toggleDdcOverlay($event)" [stoneList]="twinStoneIds"></thm-ddc-overlay>
+  <thm-multimedia-popup #themeMultimediaPopUp [displayMultimediaPopup]="toggleMultimediaPopup" [popUpMultimediaInfo]="stoneMultimediaInfo"
+    (closePopup)="toggleCloseMultimediaPopUp($event)"></thm-multimedia-popup>
+</div>

@@ -1,0 +1,14 @@
+<div class="uppertext" id="upperid" *ngIf="!showLiveVideoContainer" [innerHtml]="upperText | safeHtml"></div>
+<div *ngIf="videoExten;else showNormalBox" id='centerDiv'  class="div_container">
+  <video autoplay name="media" id="bgvid"  [style.background]="backGroundColor" loop *ngIf="!showLiveVideoContainer">
+    <source *ngIf="loginPageVideo" [src]="loginPageVideo | safeUrl" type="video/mp4">
+  </video>
+  <iframe id="bgvid" class="iframe-video" *ngIf="showLiveVideoContainer" [src]="loginPageVideo | safeUrl" frameborder="0" 
+    allowfullscreen></iframe>
+</div>
+<ng-template #showNormalBox>
+  <div class="img_div_container" id='centerDiv'>
+    <img class="login-page-img" id="bgvid" [style.background]="backGroundColor" [src]="loginPageVideo | safeUrl">
+  </div>
+</ng-template>
+<div class="lowertext" id="lowerid" *ngIf="!showLiveVideoContainer" [innerHtml]="lowerText | safeHtml"></div>

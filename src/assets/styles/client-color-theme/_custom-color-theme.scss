@@ -1,0 +1,1715 @@
+.heading {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.dx-tabs-wrapper>.dx-tab.dx-tab-selected>.dx-tab-content>.dx-tab-text {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.active-filter,
+.active-filter-menu {
+  border-bottom: 3px solid $borderColorTabActive_BorderColor;
+  color: $borderColorTabActive_BorderColor !important;
+}
+
+.filter-components {
+  color: $btnDarkTab_FontColor;
+}
+
+.ui-button .ui-widget .ui-state-default .ui-button-text-only .ui-state-active {
+  background-color: $btnPrimary_BGColor;
+}
+
+.ui-growl-item-container.ui-state-highlight.ui-growl-message-success .fa,
+.ui-growl-item-container.ui-state-highlight.ui-corner-all.ui-shadow.ui-growl-message-error .fa,
+.ui-button .fa {
+  color: $iconFontColorPrimary_FontColor;
+}
+
+.ui-state-default,
+.ui-state-default {
+  border: 1px solid $borderColorGridCell_BorderColor;
+}
+
+.ui-selectbutton .ui-button.ui-state-active,
+.ui-togglebutton.ui-button.ui-state-active {
+  color: $btnPrimary_FontColor;
+  background-color: $btnPrimary_BGColor;
+}
+
+.ui-chkbox .ui-chkbox-icon {
+  background-color: $btnPrimary_BGColor;
+  color: $btnPrimary_FontColor;
+}
+
+.icon {
+  // color: $iconFontColorPrimary_FontColor;
+}
+
+.component-cards-heading {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.middle-container-heading {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.selected {
+  color: $btnPrimary_FontColor !important;
+  background: $btnPrimary_BGColor !important;
+  border: $btnBorder_BorderColor !important;
+}
+
+.modify-search-icon {
+  border: 3px $btnBorder_BGColor $btnBorder_BGColor;
+}
+
+button.button.confirm-button {
+  background-color: $btnPrimary_BGColor;
+  color: $btnPrimary_FontColor;
+  border: 1px solid $btnBorder_BorderColor;
+}
+
+button.button {
+  border: 1px solid $btnBorder_BorderColor;
+  color: $btnBorder_FontColor;
+}
+
+label.triangle-border {
+  border-color: transparent transparent $btnDarkTab_BorderColor transparent;
+}
+
+div.select-stone {
+  border-bottom: 1px solid $btnDarkTab_BorderColor;
+}
+
+.dx-tab.dx-tab-selected {
+  border-bottom: 3px solid $borderColorTabActive_BorderColor;
+  color: $txtHeadPrimary_FontColor;
+  font-weight: bolder;
+}
+
+.multimedia-button {
+  color: $btnBorder_FontColor !important;
+}
+
+.multimedia-button-active {
+  color: $btnBorder_FontColor;
+}
+
+.btn-border {
+  border: 1px solid $btnBorder_BorderColor;
+  color: $btnBorder_FontColor;
+}
+
+.btn-tab {
+  border: 0px solid $btnDarkTab_BorderColor;
+}
+
+.btn-tab-active {
+  border: 0px solid $btnDarkTab_BorderColor;
+  background-color: $btnDarkTab_BGColor;
+}
+
+.label-Head {
+  color: $txtHeadPrimary_FontColor;
+}
+
+// button#viewMoreButton{
+//  border: solid 1px #26afef;
+// }
+.table-header {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.owl-theme .owl-nav [class*=owl-] {
+  color: $btnBorder_FontColor;
+  background-color: $btnBorder_BGColor !important;
+  border: 2px solid $btnDarkTab_BorderColor !important;
+}
+
+.owl-theme .owl-nav [class*=owl-]:hover {
+  color: $btnBorder_FontColor;
+  background-color: $btnBorder_BGColor !important;
+}
+
+.ui-widget-content .ui-button:focus,
+.ui-button:enabled:hover,
+.ui-button:focus {
+  // border: 1px solid #1f89ce !important;
+  background: $btnPrimary_BGColor !important;
+  color: $btnPrimary_FontColor;
+  border: 1px solid $btnPrimary_BorderColor;
+}
+
+/*NEW Color - Ravi*/
+
+.fa {
+  color: $iconFontColorPrimary_FontColor;
+}
+
+/*Custom - Button*/
+
+.custom-btnPrimary {
+  background-color: $btnPrimary_BGColor !important;
+  border-color: $btnPrimary_BorderColor !important;
+  color: $btnPrimary_FontColor !important;
+}
+
+.custom-btnPrimary-Disable {
+  background-color: $btnPrimary_BGColor_Disable !important;
+  border-color: $btnPrimary_BorderColor !important;
+  color: $btnPrimary_FontColor !important;
+}
+
+.custom-btnSecondary {
+  background-color: $btnSecondary_BGColor !important;
+  border-color: $btnSecondary_BorderColor !important;
+  color: $btnSecondary_FontColor !important;
+}
+
+.custom-btnBorder {
+  background-color: $btnBorder_BGColor;
+  border-color: $btnBorder_BorderColor !important;
+  color: $btnBorder_FontColor !important;
+}
+
+/*-----------------------------------------------------------------------------------------------------------------------------------*/
+
+h3 {
+  color: $txtHeadPrimary_FontColor
+}
+
+/*Placeholder*/
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: $placeholder_FontColor;
+}
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: $placeholder_FontColor;
+}
+
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: $placeholder_FontColor;
+}
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: $placeholder_FontColor;
+}
+
+/*-----------------------------------------------------------------------------------------------------------------------------------*/
+
+/* Color Lagend */
+
+.color-lagend-icon {
+  border-left: 1px solid $borderColorGridCell_BorderColor
+}
+
+.colorLagend_RecentlyUploded {
+  background-color: $colorLagend_RecentlyUploded;
+}
+
+.colorLagend_BTOB {
+  background-color: $colorLagend_BTOB;
+}
+
+.colorLagend_DAYP {
+  background-color: $colorLagend_DAYP;
+}
+
+.colorLagend_Basket {
+  background-color: $colorLagend_Basket;
+}
+
+.colorLagend_Default {
+  background-color: $error;
+}
+
+.colorLagend_Common {
+  background-color: $colorLagend_Common;
+}
+
+.colorLagend_BusinessProcess {
+  background-color: $colorLagend_BusinessProcess;
+}
+
+.colorLagend_NewArrival {
+  background-color: $colorLagend_NewArrival;
+}
+
+.color-scroll-icon {
+  border-left: 1px solid $borderColorGridCell_BorderColor
+}
+
+/*-----------------------------------------------------------------------------------------------------------------------------------*/
+
+/* comment Design */
+
+.comment-image-icon {
+  border-color: $btnPrimary_BorderColor !important;
+}
+
+.comment-name {
+  color: $txt_Color;
+}
+
+.comment-comments {
+  color: $txt_Color;
+}
+
+.comment-datetime {
+  color: $txtColorDtlLight_FontColor;
+}
+
+.view-request-label-text {
+  color: $txtHeadPrimary_FontColor;
+}
+
+/*-----------------------------------------------------------------------------------------------------------------------------------*/
+
+.header-details li {
+  border-left: 1px solid $borderColorGridHead_BorderColor;
+}
+
+input {
+  background: $input_BGColor !important;
+  color: $txt_Color !important;
+  border: 1px solid $input_BorderColor !important;
+}
+
+.input-border {
+  border-color: $input_BorderColor !important;
+}
+
+.drop-border {
+  border-color: $input_BorderColor !important;
+}
+
+input:focus {
+  outline: none;
+}
+
+.close {
+  color: $closeBtnFontColor;
+}
+
+.border-bottom {
+  border: 0px !important;
+  border-bottom: 1px solid $input_BorderColor !important;
+}
+
+.dx-texteditor-container input {
+  border: 0px !important;
+}
+
+/*Prime NG Override*/
+
+.dx-datagrid-nowrap.dx-datagrid-headers .dx-header-row>td>.dx-datagrid-text-content,
+.small-label {
+  color: $txt_Color;
+}
+
+.dx-checkbox-checked .dx-checkbox-icon {
+  color: $btnPrimary_FontColor;
+  background-color: $btnPrimary_BGColor;
+  border: solid 1px $checkBox_BorderCoolor
+}
+
+.dx-checkbox-icon {
+  border: solid 1px $checkBox_BorderCoolor
+}
+
+.dx-checkbox.dx-state-hover .dx-checkbox-icon {
+  border: solid 1px $checkBox_BorderCoolor
+}
+
+/*.ui-widget-header .ui-button, .ui-widget-content .ui-button, .ui-button { background-color:$btnPrimary_BGColor !important; color: $btnPrimary_FontColor  !important; border-color: $btnPrimary_BorderColor  !important; }*/
+
+/*-----------------------------------------------------------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------------------------------------------------------*/
+
+.icon-logout {
+  color: $txtColorLink_Color;
+}
+
+.menu-icon {
+  color: $bg_Color;
+}
+
+.notavailable {
+  background-color: $notavailable;
+  color: $bg_Color
+}
+
+.icon-color-primary {
+  color: $txtColorLink_Color;
+}
+
+/*Page Level*/
+
+.panel-stone-value {
+  color: $txtHeadPrimary_FontColor !important
+}
+
+/* Login Page: Authentication*/
+
+.login-icon,
+.close-icon {
+  color: $iconFontColorPrimary_FontColor;
+}
+
+.rc-anchor-light {
+  background-color: $pageBackgroundColor;
+}
+
+.login-title {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.icon-label {
+  color: $iconFontColorPrimary_FontColor;
+}
+
+.buttonBlue:hover {
+  background: $buttonLoginColor;
+  color: $boxContentColor;
+}
+
+.forgot-pwd,
+.registrt-now,
+.loginfooter {
+  color: $txt_Color;
+}
+
+.loginfooter a {
+  color: $txtColorLink_Color;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+
+/* Login Page: Component*/
+
+.bg-color,
+.body-bg,
+.bg-white {
+  background-color: $bg_Color;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+
+/* Registration Page: Component*/
+
+.registration-subheading,
+.registration-heading {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.inputfile-2+label {
+  color: $btnBorder_FontColor;
+  border: $btnBorder_BorderColor;
+}
+
+.inputfile-2+label:hover,
+.inputfile-2.has-focus+label,
+.inputfile-2:focus+label {
+  color: $btnBorder_FontColor;
+}
+
+.agree-text,
+.proof-text {
+  color: $btnBorder_FontColor;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+
+/* OTP Page: Component*/
+
+.otp-title {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.otp-text {
+  color: $txt_Color;
+}
+
+.resend {
+  color: $rowHoverColor_FontColor;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*Profile Page*/
+
+.profile-title {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.profile-label {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.profile-label-light {
+  color: $txtColorLight_FontColor;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*Dashboard*/
+
+.chatboat-text,
+.icon-chat {
+  color: $bg_Color
+}
+
+.dashboard-heading {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.dashboard-card {
+  color: $iconFontColorPrimary_FontColor;
+}
+
+.profile-icon,
+.confirmations-icon {
+  color: $iconFontColorPrimary_FontColor;
+}
+
+.weeklydisc-icon,
+.info-icon {
+  color: $iconFontColorPrimary_FontColor;
+}
+
+.carousel-item {
+  border: 0px solid $pageBackgroundColor;
+  background-color: $bg_Color;
+}
+
+#carouselId .carousel-item {
+  background-color: $bg_Color;
+}
+
+//** This css is only specific to recommended dashboard card
+#cardData8Id {
+  border-radius: 14px;
+  border-left: 5px solid $recommendedCardBorderColor;
+  border-bottom: 5px solid $recommendedCardBorderColor;
+}
+
+//.fa {  color: $txtColorLink_Color;}
+.tp-box__side {
+  background: $bg_Color;
+  color: $txt_Color;
+}
+
+.adv-box {
+  background: $boxContentColor;
+  border: solid 1px $borderColorTabPrimary_BorderColor;
+}
+
+.search-box {
+  background-color: $bg_Color;
+  border: solid 1px $borderColorTabPrimary_BorderColor;
+}
+
+.graph-box {
+  background: $bg_Color;
+  border: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+.view-all {
+  background-color: $bg_Color;
+  border: 1px solid $txtColorLink_Color;
+  color: $txtColorLink_Color;
+}
+
+.contact-text {
+  color: $txt_Color;
+}
+
+.recent-confirmation-heading {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.recent-confirmation-box {
+  background: $bg_Color;
+  border: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+.contact-container {
+  background-color: $bg_Color;
+  border: solid 1px $borderColorTabPrimary_BorderColor;
+}
+
+.card-back-heading,
+.card-front-heading {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.savings-label,
+.week-date-label {
+  color: $leftMenuBar_DefaultFontColor;
+}
+
+.savings-label {
+  color: $txt_Color;
+}
+
+.heading-text {
+  color: $txtColorLight_FontColor;
+}
+
+.column-header {
+  border-top: 2px solid $borderColorTabPrimary_BorderColor;
+  border-bottom: 2px solid $borderColorTabPrimary_BorderColor;
+}
+
+.column-text {
+  color: $txt_Color;
+}
+
+/*Specific Search*/
+
+.icon-selected {
+  color: $btnPrimary_BGColor !important;
+}
+
+.dx-datagrid-rowsview.dx-datagrid-nowrap.dx-scrollable.dx-scrollable-both.dx-scrollable-native.dx-scrollable-native-android.dx-scrollable-scrollbar-simulated.dx-visibility-change-handler.dx-last-row-border {
+  color: $datagridFontColor;
+}
+
+// .dx-datagrid .dx-row > td{border: 3px solid $datagridRowColor !important};
+.box-default.prdrag {
+  border: 2px solid $colorLagend_Default !important;
+}
+
+.box-b2b.prdrag {
+  border: 2px solid $colorLagend_BTOB !important;
+}
+
+.box-basket.prdrag {
+  border: 2px solid $colorLagend_Basket !important;
+}
+
+.box-unselect.prdrag {
+  background: #D9D9F3 !important;
+}
+
+.box-common.prdrag {
+  border: 2px solid $colorLagend_Common !important;
+}
+
+.box-dayp.prdrag {
+  border: 2px solid $colorLagend_DAYP !important;
+}
+
+.box-blink {
+  animation: blink .5s step-end infinite alternate;
+}
+
+@keyframes blink {
+  50% {
+    border-color: black;
+  }
+}
+
+.column-data-border,
+.no-column-data-border {
+  border-bottom: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+.column-data-text {
+  color: $txt_Color;
+}
+
+.column-data-border:hover {
+  background-color: $rowHoverColor_BGColor;
+}
+
+.icon-hover {
+  color: $txtColorLink_Color;
+}
+
+.contact-icons {
+  color: $iconFontColorPrimary_FontColor;
+}
+
+.main-text-table {
+  color: $txt_Color;
+}
+
+.date-table {
+  color: $txtColorDtlLight_FontColor;
+}
+
+.stone-box-table.box-content-table {
+  color: $bg_Color;
+  background-color: $btnSecondary_BGColor;
+}
+
+.new-box-table.box-content-table {
+  color: $btnBorder_FontColor;
+  background-color: $btnPrimary_BGColor;
+}
+
+.stone-bottom-content-table {
+  color: $txt_Color;
+}
+
+.row-border-table {
+  border-top: 1px solid $borderColorGridCell_BorderColor;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*Saved Search*/
+
+.scroll-container {
+  border: solid 1px $borderColorGridHead_BorderColor;
+}
+
+.stone-box.box-content {
+  color: $bg_Color;
+  background-color: $btnSecondary_BGColor;
+}
+
+.new-box.box-content {
+  color: $btnBorder_FontColor;
+  background-color: $btnPrimary_BGColor;
+}
+
+.search-data {
+  background-color: $bg_Color;
+  border-bottom: solid 1px $borderColorGridHead_BorderColor;
+}
+
+.main-text {
+  color: $txt_Color;
+}
+
+.date {
+  color: $txtHeadPrimaryLight_FontColor;
+}
+
+.stones-bottom-content {
+  color: $txt_Color;
+}
+
+.new-bottom-content {
+  color: $txt_Color;
+}
+
+.save-search-button {
+  background-color: $bg_Color;
+  border: solid 1px $btnBorder_BorderColor;
+  color: $btnBorder_FontColor;
+}
+
+.save-button {
+  background-color: $btnPrimary_BGColor;
+  color: $bg_Color;
+}
+
+.bottom-saved-text {
+  color: $txt_Color;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*Result*/
+
+.grid-icon {
+  color: $iconFontColorPrimary_FontColor;
+}
+
+.grid-icon-top {
+  color: $iconFontColorPrimary_FontColor;
+}
+
+.add-icon {
+  color: $iconFontColorPrimary_FontColor;
+}
+
+.like-icon {
+  color: $iconFontColorPrimary_FontColor;
+}
+
+/* Sone Details Page: Component*/
+
+.details-box,
+.inclusions-box,
+.parameters-box,
+.stone-info-box {
+  background: $bg_Color;
+  border: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+.close-btn {
+  border: 1px solid $iconFontColorPrimary_FontColor;
+}
+
+.info-second-row {
+  border-top: 1px solid $borderColorTabPrimary_BorderColor;
+  border-bottom: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+.chips {
+  background-color: $borderColorTabPrimary_BorderColor
+}
+
+.stone-label-text {
+  color: $txt_Color;
+}
+
+.stone-left-box {
+  border-right: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+.multimedia-button {
+  color: $txtColorLight_FontColor;
+}
+
+.btn-tab {
+  color: $txtColorLight_FontColor;
+}
+
+.detail-tab-active {
+  background-color: $btnPrimary_BGColor !important;
+  color: $borderColorTabActive_BorderColor !important;
+}
+
+.certificates-box {
+  border-top: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+.header-box {
+  border-right: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+.header-title {
+  border-bottom: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+.main-header {
+  border-bottom: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+.table-box {
+  border: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+.detail-label {
+  color: $txtHeadPrimaryLight_FontColor;
+  clear: both;
+}
+
+.detail-value {
+  color: $txt_Color;
+}
+
+.tab-btn {
+  background-color: $lblWithBG_BGColor;
+  color: $txt_Color;
+}
+
+.addtext {
+  color: $btnBorder_FontColor;
+}
+
+a.download-btn {
+  color: $btnBorder_FontColor;
+}
+
+.tbl-inclusion td {
+  color: $txt_Color;
+}
+
+.tbl-inclusion th {
+  border-right: 1px solid $borderColorTabPrimary_BorderColor;
+  border-bottom: 1px solid $borderColorTabPrimary_BorderColor;
+  color: $txt_Color;
+}
+
+.tbl-inclusion td.borderr,
+.tbl-inclusion th.borderr {
+  border-right: 1px solid $borderColorTabPrimary_BorderColor;
+  color: $txt_Color;
+}
+
+.multimedia-button-selected {
+  color: $txt_Color !important;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------*/
+
+/* View Request Page: Component*/
+
+.page-title {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.raw-box-container {
+  background-color: $bg_Color;
+  border: 1px solid $borderColorGridHead_BorderColor !important;
+}
+
+.lbl-viewrequest-value-large {
+  color: $txt_Color;
+}
+
+.lbl-viewrequest-value-small {
+  color: $txtColorDtlLight_FontColor;
+}
+
+.lbl-viewrequest-value-stones {
+  color: $btnBorder_FontColor;
+}
+
+.lbl-viewrequest-value-comments {
+  color: $txt_Color;
+}
+
+.icon-btn-add {
+  color: $txtColorLink_Color;
+}
+
+.icon-btn-links {
+  color: $txtColorLink_Color;
+}
+
+.dx-texteditor-container {
+  border-color: $btnSecondary_BGColor !important;
+}
+
+.dx-toolbar-label>div {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.delete-record,
+.delete-record:hover {
+  background-color: $btnBorder_BGColor !important;
+  color: $iconFontColorPrimary_FontColor !important;
+}
+
+.stone-Selected {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.popup-label,
+.popup-label-large {
+  color: $txt_Color;
+}
+
+.popup-label-small {
+  color: $txtColorDtlLight_FontColor
+}
+
+.borderl {
+  border-left: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+.borderr {
+  border-right: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+.bordert {
+  border-top: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+.borderb {
+  border-bottom: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+.border-full {
+  border: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+/*Packet Page*/
+
+.grid-container {
+  background-color: $bg_Color;
+}
+
+.box {
+  border: 1px solid $borderColor;
+  background-color: $bg_Color;
+}
+
+.box-icon {
+  color: $myPacketTextColor;
+}
+
+.box-icon a {
+  color: $myPacketTextColor;
+}
+
+.lbl-packet-value-large {
+  color: $txt_Color;
+}
+
+.lbl-packet-value-small {
+  color: $txtColorDtlLight_FontColor;
+}
+
+.lbl-packet-value-large-active,
+.lbl-packet-value-small-active {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.grid-title {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.packet-page-title {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.panel-color {
+  background-color: $bg_Color;
+}
+
+.last-content {
+  border-right: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+.info-panel {
+  border-bottom: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+.text-bold,
+.text-bold a {
+  color: $txtHeadPrimary_FontColor !important;
+}
+
+/*B TO B*/
+
+.b2b-main-title {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.b2b-main-date {
+  color: $txt_Color;
+}
+
+.b2b-main-time {
+  color: $txtColorDtlLight_FontColor;
+}
+
+.b2b-main-time-remain {
+  color: $txt_Color;
+}
+
+.MyBasket-title {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.MyBasket-label {
+  color: $txt_Color;
+}
+
+.MyBasket-label-large {
+  color: $txt_Color;
+}
+
+.MyBasket-label-small {
+  color: $txtColorDtlLight_FontColor;
+}
+
+.MyBasket-label-large-active {
+  color: $txtHeadSecondary_FontColor;
+}
+
+.MyBasket-label-small-active {
+  color: $txtHeadSecondary_FontColor;
+}
+
+.MySubmission-title {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.MySubmission-label {
+  color: $txt_Color;
+}
+
+.MySubmission-label-large {
+  color: $txt_Color;
+}
+
+.MySubmission-label-small {
+  color: $txtColorDtlLight_FontColor;
+}
+
+.MySubmission-label-large-active {
+  color: $txtHeadSecondary_FontColor;
+}
+
+.MySubmission-label-small-active {
+  color: $txtHeadSecondary_FontColor;
+}
+
+.panel-icon,
+.panel-icon img {
+  color: $txtColorLink_Color;
+}
+
+.border-icon {
+  border: 1px dashed $txtColorLink_Color;
+}
+
+// left side Menu bar
+.menu--link {
+  color: $leftMenuBar_DefaultFontColor;
+  background-color: $leftMenuBarDefault_BackgroundColor
+}
+
+.menu--link:hover,
+.menu--link:hover {
+  color: $leftMenuBar_DefaultFontColor;
+  background: $leftMenuBar_HoverBGColor;
+}
+
+.active-menu {
+  color: $leftMenuBar_ActiveFontColor !important;
+  background: $leftMenuBarActive_BackgroundColor !important;
+}
+
+// .vertical_nav__minify{background-color: $leftMenuBarDefault_BackgroundColor}
+.collapse_menu {
+  background-color: $leftMenuBarDefault_BackgroundColor
+}
+
+.collapse_menu:hover {
+  color: $leftMenuBar_ActiveFontColor;
+  background: $leftMenuBar_HoverBGColor;
+}
+
+.component-cards {
+  border-bottom: solid 1px $btnSecondary_BorderColor;
+}
+
+.dx-tabpanel .dx-tab-selected:before {
+  border-top: 2px solid $borderColorTabActive_BorderColor;
+}
+
+.menu-value-label {
+  color: $leftMenuBarActive_BackgroundColor;
+}
+
+.menu--link.active-menu .menu-value-label {
+  color: $leftMenuBarDefault_BackgroundColor;
+}
+
+// header part
+.srkay-header {
+  background-color: $bg_Color;
+}
+
+input:-moz-placeholder {
+  color: $placeholder_FontColor;
+}
+
+input::-webkit-input-placeholder {
+  color: $placeholder_FontColor;
+}
+
+// some primeNg & dev exterme-override class
+.ui-dialog .ui-dialog-titlebar {
+  color: $txtHeadPrimary_FontColor;
+  background: $bg_Color;
+  border-bottom: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+.ui-dialog .ui-dialog-titlebar-close {
+  background-color: $bg_Color;
+}
+
+.ui-dialog .ui-dialog-titlebar-icon:hover {
+  background-color: $bg_Color;
+}
+
+.ui-button {
+  background-color: $btnPrimary_BGColor;
+}
+
+.ui-dialog .ui-dialog-titlebar-icon {
+  color: $iconFontColorPrimary_FontColor;
+}
+
+.dx-datagrid {
+  color: $datagridFontColor;
+}
+
+.ui-widget-content .ui-state-highlight {
+  border-color: $btnDarkTab_BorderColor;
+  background: $borderColorTabPrimary_BorderColor;
+  color: $txt_Color !important
+}
+
+#caratChartContainer .dxrs-view .dxrs-series-group .dxc-series .dxc-markers {
+  fill: $leftMenuBarDefault_BackgroundColor;
+  stroke: $leftMenuBarDefault_BackgroundColor;
+}
+
+/*DDC*/
+
+.ddc-main-title {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.grid-container {
+  background-color: $bg_Color;
+  border: 1px solid $borderColorTabPrimary_BorderColor;
+}
+
+.lbl-ddc-value-large {
+  color: $txt_Color;
+}
+
+.lbl-ddc-value-small {
+  color: $txtColorDtlLight_FontColor;
+}
+
+.lbl-ddc-value-large-active,
+.lbl-ddc-value-small-active,
+.lbl-packet-value-small-active {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.status-box {
+  color: $bg_Color;
+}
+
+.notAvailable-status-box {
+  background-color: $notavailable;
+}
+
+.available-status-box {
+  background-color: $available;
+}
+
+.remainedTime-status-box {
+  background-color: $iconFontColorPrimary_FontColor
+}
+
+.confirmed-status-box {
+  background-color: $btnDarkTab_BGColor;
+}
+
+/*DAYP*/
+
+.dayp-title {
+  color: $txtHeadPrimary_FontColor;
+}
+
+// app-packets .ui-tabview .ui-tabview-panel {border-top: 2px solid $borderColorTabPrimary_BorderColor}
+.ui-tabview .ui-tabview-nav>li.ui-state-default {
+  background: none;
+  border: 0px;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.ui-tabview .ui-tabview-nav>li:not(.ui-state-active):not(.ui-state-disabled):hover {
+  background-color: $pageBackgroundColor;
+}
+
+.ui-tabview .ui-tabview-nav>li.ui-state-active {
+  border-bottom: 2px solid $txtHeadPrimary_FontColor
+} // basket
+.baske-page-title {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.lbl-basket-value-large {
+  color: $txt_Color;
+}
+
+.lbl-basket-value-small {
+  color: $txtColorDtlLight_FontColor;
+}
+
+.lbl-basket-value-stones {
+  color: $btnBorder_FontColor;
+}
+
+.hold-icon-btn-links {
+  color: $txtColorLink_Color;
+} // confirmation
+.lbl-confirmation-value-large {
+  color: $txt_Color;
+}
+
+.lbl-confirmation-value-small {
+  color: $txtColorDtlLight_FontColor;
+} // HOLD list
+.hold-page-title {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.hold-raw-box-container {
+  background-color: $bg_Color;
+  border-color: $borderColorGridHead_BorderColor !important;
+}
+
+.lbl-hold-value-large {
+  color: $txt_Color;
+}
+
+.lbl-hold-value-small {
+  color: $txtColorDtlLight_FontColor;
+}
+
+.lbl-hold-value-stones {
+  color: $btnBorder_FontColor;
+}
+
+.lbl-viewrequest-value-comments {
+  color: $txt_Color;
+}
+
+.restore-packet-link {
+  color: $txtColorLink_Color
+}
+
+.expand-link {
+  color: $txtColorLink_Color
+}
+
+.lbl-selected-stone-value-large {
+  color: $btnBorder_FontColor;
+}
+
+.success-message {
+  color: $success;
+}
+
+.error {
+  color: $error;
+}
+
+/*Prime NG*/
+
+.ui-dropdown label.ui-dropdown-label {
+  color: $placeholder_FontColor;
+} // .dx-datagrid.dx-datagrid-borders > .dx-datagrid-header-panel{ border-right: 1px solid $borderColor ; border-left: 1px solid $borderColor;}
+.dx-icon,
+.dx-placeholder {
+  color: $iconFontColorPrimary_FontColor !important;
+}
+
+.dx-searchbox .dx-icon-search:before {
+  color: $iconFontColorPrimary_FontColor !important;
+}
+
+.diamond-b2b {
+  color: $btnDarkTab_BGColor;
+  border-bottom: 2px solid $btnDarkTab_BorderColor;
+}
+
+.div-notification-head {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.div-notification-head span {
+  color: $txtColorLight_FontColor;
+}
+
+.div-notification-label-head {
+  color: $txt_Color
+}
+
+.div-notification-label-text {
+  color: $txtColorLight_FontColor
+}
+
+.notifications-menu-title {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.ui-state-active a,
+.ui-widget-content .ui-state-active a,
+.ui-widget-header .ui-state-active a {
+  color: $borderColorTabActive_BorderColor
+}
+
+.notification-details-meassage {
+  border-bottom: solid 1px $borderColor;
+}
+
+.notification-header::after {
+  border-bottom: solid 13px $borderColor;
+}
+
+.notification-date {
+  color: $txtColorDtlLight_FontColor;
+}
+
+.notification-circle-badge {
+  background-color: $notificationHighlightColor
+}
+
+.notification-subject {
+  color: $txt_Color
+}
+
+.new-notifiacation-msg {
+  color: $txtColorDtlLight_FontColor;
+}
+
+.forgot-password-heading {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.ui-widget-content .ui-button,
+.ui-button {
+  background-color: $btnPrimary_BGColor;
+  border: 1px solid $btnPrimary_BorderColor;
+  color: $btnPrimary_FontColor
+}
+
+.ui-widget-content .ui-button:enabled:hover {
+  border: 1px solid $btnPrimary_BorderColor;
+  color: $btnPrimary_FontColor
+}
+
+.span.ui-button-text.ui-c {
+  color: $btnPrimary_FontColor
+}
+
+.ui-chkbox .ui-chkbox-box {
+  border: solid 1px $checkBox_BorderCoolor
+}
+
+.ui-chkbox-box:not(.ui-state-disabled):not(.ui-state-active):hover {
+  border: solid 1px $checkBox_BorderCoolor;
+  background-color: $input_BGColor
+}
+
+.ui-state-active a,
+.ui-widget-content .ui-state-active a,
+.ui-widget-header .ui-state-active a {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.confirm-reorder-content {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.confirm-loading-content {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.packet-box {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.packet-box-selected {
+  background: $btnDarkTab_BGColor;
+  border: solid 1px $borderColorTabActive_BorderColor;
+}
+
+.chat-bot-button {
+  background-color: $btnDarkTab_BGColor;
+}
+
+.chat-bot-header {
+  background-color: $chatBot_BgColor
+}
+
+.chat-bot-footer {
+  border-top: 1px solid $btnDarkTab_BorderColor
+}
+
+.chat-bot-popup {
+  border: 1px solid $btnDarkTab_BorderColor;
+}
+
+.mesaage-container::-webkit-scrollbar-thumb {
+  background-color: $chatBot_BgColor;
+}
+
+.mesaage-container::-moz-scrollbar-thumb {
+  background-color: $chatBot_BgColor
+}
+
+.price-component-field {
+  border: solid 1px $inputSecondary_BorderColor !important;
+}
+
+.tag-component-dropdown {
+  border: solid 1px $inputSecondary_BorderColor;
+}
+
+.caret-input {
+  border: solid 1px $inputSecondary_BorderColor !important;
+}
+
+.comments-component-dropdown {
+  border: solid 1px $inputSecondary_BorderColor;
+}
+
+.parameters-component-dropdown {
+  border: solid 1px $inputSecondary_BorderColor;
+}
+
+.parameters-component-field {
+  border: solid 1px $inputSecondary_BorderColor !important;
+}
+
+.selectedstone-border-bottom {
+  border-bottom: 1px solid $inputSecondary_BorderColor !important
+}
+
+.selectedstone-border-top {
+  border-top: 2px solid $inputSecondary_BorderColor !important
+}
+
+.online,
+.text-green {
+  color: $success;
+}
+
+.offline,
+.text-red {
+  color: $error;
+}
+
+// .active-menu i.menu--icon span{color:$leftMenuBar_ActiveFontColor !important;}
+.dayp-main-title {
+  color: $txtHeadPrimary_FontColor;
+}
+
+// event details
+.event-box {
+  background: $bg_Color;
+  border: solid 1px $borderColorTabPrimary_BorderColor;
+  border-radius: 4px;
+}
+
+.event-dashboard-heading {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.event-name {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.event-cards {
+  background-color: $bg_Color;
+  border: solid 1px $borderColorTabPrimary_BorderColor;
+}
+
+.event-info {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.counts-info-event {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.counts-number-event {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.download-link {
+  color: $txtColorLink_Color
+}
+
+.book-appointment-title {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.sub-title-bookappointment {
+  color: $txtHeadPrimary_FontColor;
+}
+
+//Appointment
+.lbl-appointment-value-large {
+  color: $txt_Color;
+}
+
+.lbl-appointment-value-small {
+  color: $txtColorDtlLight_FontColor;
+}
+
+.lbl-appointmnet-value-stones {
+  color: $btnBorder_FontColor;
+}
+
+.lbl-appointment-value-comments {
+  color: $txt_Color;
+}
+
+.dayp-main-date {
+  color: $txt_Color;
+}
+
+.dayp-main-time {
+  color: $txtColorDtlLight_FontColor;
+}
+
+.dayp-main-time-remain {
+  color: $txt_Color;
+}
+
+.compare-stone-card {
+  background-color: $bg_Color;
+  border: 1px solid $borderColorTabPrimary_BorderColor;
+  height: 336px;
+}
+
+.basic-details-info {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.basic-details-heading {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.coming-soon {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.radio-button input[type="radio"] {
+  color: $txtHeadPrimary_FontColor;
+}
+
+.no-saved-search {
+  color: $txtHeadPrimary_FontColor
+}
+
+.profile-name {
+  color: $txtHeadPrimary_FontColor
+}
+
+.twin-view-link {
+  color: $txtColorLink_Color
+}
+
+.no-search-result {
+  color: $txtHeadPrimary_FontColor
+}
+
+.loading-data {
+  color: $txtHeadPrimary_FontColor
+}
+
+.no-view-request {
+  color: $txtHeadPrimary_FontColor
+}
+
+.ui-widget-content {
+  border: 0px;
+  border-top: 1px solid $borderColorTabPrimary_BorderColor;
+  ;
+}
+
+.online,
+.text-green {
+  color: $success !important;
+}
+
+.offline,
+.text-red {
+  color: $error !important;
+}
+
+.ui-tabview-close {
+  border: 1px solid $iconFontColorPrimary_FontColor;
+}
+
+.ui-tabview-close {
+  border: 1px solid $iconFontColorPrimary_FontColor;
+}
+
+.circle-close-icon {
+  border: 1px solid $iconFontColorPrimary_FontColor;
+  color: $iconFontColorPrimary_FontColor
+}
+
+.ui-progressbar .ui-progressbar-value {
+  border: none;
+  background: $leftMenuBarActive_BackgroundColor
+}
+
+.ui-progressbar-label {
+  color: $leftMenuBarDefault_BackgroundColor;
+}
+
+.disabled-radio-buttons {
+  background-color: $btnPrimary_BGColor_Disable
+}
+
+.middle input[type="radio"]:checked+.box {
+  background-color: $leftMenuBarActive_BackgroundColor
+}
+
+.notification-container {
+  border: solid 1px $borderColor;
+}
+
+.ui-autocomplete-panel .ui-autocomplete-list-item {
+  border-bottom: 1px solid $txtHeadPrimaryLight_FontColor;
+  border-radius: 0px;
+}
+
+.dtl-icon-active {
+  color: $btnPrimary_BGColor !important;
+}
+
+.active-mail-icon {
+  color: $leftMenuBarActive_BackgroundColor;
+}
+
+.color-icon-gray {
+  color: $btnSecondary_BGColor;
+}
+
+.custom-button {
+  background-color: $closeBtnFontColor;
+  border: 1px solid $cardTextColor;
+}
+
+.dx-datagrid-rowsview .dx-selection.dx-row>td,
+.dx-datagrid-rowsview .dx-selection.dx-row:hover>td {
+  background-color: $rowSelectionColor;
+}
+
+/*Specific Search*/
+
+.icon-selected {
+  color: $btnPrimary_BGColor !important;
+}
+
+.dx-datagrid-rowsview.dx-datagrid-nowrap.dx-scrollable.dx-scrollable-both.dx-scrollable-native.dx-scrollable-native-android.dx-scrollable-scrollbar-simulated.dx-visibility-change-handler.dx-last-row-border {
+  color: $datagridFontColor;
+}
+
+// .dx-datagrid .dx-row > td{border: 1px solid $datagridRowColor !important};
+.ui-growl-image,
+.ui-growl-icon-close {
+  color: #fff !important;
+}
+
+.srk-event-color-legend {
+  background-color: $srkEventColor;
+}
+
+.xdsoft_date.xdsoft_day_of_week.srk-holiday,
+.srk-office-close-color-legend {
+  background-color: $srkOfficeCloseColor !important;
+}
+.w3-black,.w3-hover-black:hover{color:#fff!important;background-color:#afafb8!important}
+.w3-button:hover{color:#afafb8!important;background-color:#ccc!important}
+.stone-detail{background-color:rgba(159, 170, 184, 0.84);color:#333333;background-color: $bg_Color}
+.stone-count{color: #333333}
+.title{color: #333333}
+.bring-top{background-color: $boxContentColor}
+.vid-tit{background-color: $bg_Color}

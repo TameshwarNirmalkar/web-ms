@@ -1,0 +1,727 @@
+<div class="ui-g ui-g-nopad raw-box-container fade">
+  <div class="ui-g-2 ui-md-2 ui-lg-2 ui-g-nopad">
+    <label id="selectedStoneId" class="packet-page-title">
+      {{'Selected Stone' | translate}}</label>
+  </div>
+  <div class="ui-g-10 ui-md-10 ui-lg-10 ui-g-nopad text-right" *ngIf="showButtonList">
+    <ng-template [dirCheckPermission]="'stone_compare_btn'">
+      <button [dirStoreAudit]="'COMPARE'" id="stoneCompareBtnId" class="custom-btnBorder" *ngIf="((stoneObj?.selectedStoneArray?.length < 2) || (stoneObj.selectedStoneArray.length > 4)); else showBtn"
+        pTooltip="Please select min 2 stones or max 4 stones" tooltipPosition="top" tooltipEvent="hover" appendTo="body">{{'Compare'|translate}}</button>
+      <ng-template #showBtn>
+        <button [dirStoreAudit]="'COMPARE'" id="stoneCompareBtnId" class="custom-btnBorder" (click)="compareStone(stoneObj)">{{'Compare'|translate}}</button>
+      </ng-template>
+    </ng-template>
+    <button id="removeAppointmentButtonId" class="custom-btnBorder" (click)="removeStonesFromAppointment(stoneObj)"
+      *ngIf="showButtonList.removeAppointmentStone">{{'Remove'|translate}}</button>
+    <span *ngFor="let event of eventDetails">
+      <button [dirStoreAudit]="'ADD TO SHOW/EVENT'" id="{{event.button_name}}AddToPreEventStoneId" class="btn-show custom-btnBorder"
+        (click)="addStonesToEvent(stoneObj,event)" *ngIf="showButtonList.addToEvent && isPreSelectEventPermissible && event.button_allowed > 0">
+        {{event.button_name | titlecase}}
+      </button>
+    </span>
+    <button [dirStoreAudit]="'ADD TO PREDAYP'" id="addToDaypStoneId" class="custom-btnBorder btn-dayp" (click)="addStonesToPreDayp(stoneObj)"
+      *ngIf="showButtonList.addToDayp && isPreDaypActive">{{'Add to Pre-DAYP Selection' |translate}}</button>
+
+    <button [dirStoreAudit]="'MAKE A NOTE'" id="addNoteForStoneId" class="custom-btnBorder" (click)="addNoteForStone(stoneObj)"
+      *ngIf="showButtonList.addNote">{{'Add Note' |translate}}</button>
+
+    <ng-template [dirCheckPermission]="'create_packet_btn'">
+      <button [dirStoreAudit]="'ADD TO PACKET'" *ngIf="showPacket" id="addpacketId" class="custom-btnBorder" (click)="addToPacket(stoneObj)">{{'Add
+        to Packet' |translate}}</button>
+    </ng-template>
+
+    <button [dirStoreAudit]="'DELETE VIEW REQUEST'" id="removeButtonId" class="custom-btnBorder" (click)="removeStonesFromList(stoneObj)"
+      *ngIf="showButtonList.removeViewRequestStone">{{'Remove'|translate}}</button>
+
+    <button [dirStoreAudit]="'DELETE BASKET'" id="removeBasketButtonId" class="custom-btnBorder" (click)="removeBasketStonesFromList(stoneObj)"
+      *ngIf="showButtonList.removeBasket">{{'Remove'|translate}}</button>
+
+    <button [dirStoreAudit]="'HOLD RELEASE'" id="releaseButton" class="custom-btnBorder" (click)="removeHold(stoneObj)"
+      *ngIf="showButtonList.release">{{'Release' | translate}}</button>
+
+    <ng-template [dirCheckPermission]="'request_hold_btn'">
+      <button [dirStoreAudit]="'ADD TO HOLD'" id="holdPastButtonId" class="custom-btnBorder" (click)="requestHold(stoneObj)"
+        *ngIf="showButtonList.requestHold">{{'Request Hold'|translate}}</button>
+    </ng-template>
+
+    <ng-template [dirCheckPermission]="'ddc_btn'">
+      <button [dirStoreAudit]="'ADD TO DDC'" id="ddcButtonId" class="custom-btnBorder" (click)="applyDDC(stoneObj)"
+        *ngIf="showButtonList.applyDDC">{{'Apply DDC' |translate}}</button>
+    </ng-template>
+
+    <button [dirStoreAudit]="'DELETE DDC'" id="ddcRemoveBtn" class="custom-btnBorder" (click)="removeDDC(stoneObj)"
+      *ngIf="showButtonList.removeDDC">{{'Remove DDC' | translate}}</button>
+
+    <button [dirStoreAudit]="'ADD TO DDC'" id="updateddcBtn" class="custom-btnBorder" (click)="updateSelectedStoneDDC(stoneObj)"
+      *ngIf="showButtonList.updateDDC">{{'Update DDC' |translate}}</button>
+
+    <ng-template [dirCheckPermission]="'add_basket_btn'">
+      <button [dirStoreAudit]="'ADD TO BASKET'" id="addBasketId" class="custom-btnBorder" (click)="addToMyBasket(stoneObj)"
+        *ngIf="showButtonList.addToBasket">{{'Add to Basket' |translate}}</button>
+    </ng-template>
+
+    <ng-template [dirCheckPermission]="'view_request_btn'">
+      <button [dirStoreAudit]="'VIEW REQUEST'" id="requestPastButtonId" class="custom-btnBorder" (click)="toggleViewRequestOverlay(stoneObj)"
+        *ngIf="showButtonList.viewRequest">{{'View Request'|translate}}</button>
+    </ng-template>
+
+
+    <ng-template [dirCheckPermission]="'confirm_btn'">
+      <button [dirStoreAudit]="'CONFIRM'" id="selectedStonePanelconfirmButtonId" class="custom-btnPrimary" (click)="confirmDiamonds(stoneObj)"
+        *ngIf="showButtonList.confirmButton">{{'Confirm'|translate}}</button>
+    </ng-template>
+
+  </div>
+  <div class="ui-g ui-g-12 ui-g-nopad" *ngIf="stoneObj">
+    <div class="ui-g-12 ui-lg-12 ui-md-12">
+      <div class="detail-box">
+        <label id="stonesCountId" class="lbl-selected-stone-value-large" *ngIf="stoneObj.selectedStoneArray">
+          <a (click)="toggleSelectedStoneTable()" [class.stone-Selected]="toggleTable">{{stoneObj.selectedStoneArray.length}}</a>
+        </label>
+        <br>
+        <label id="stoneTextId" class="lbl-packet-value-small">
+          <a [class.stone-Selected]="toggleTable">{{"STONES" |translate}}</a>
+        </label>
+      </div>
+      <div class="detail-box" *ngIf="stoneObj.panelData">
+        <label id="caratValueId" class="lbl-packet-value-large">{{(stoneObj.panelData.total_carat || 0) | number}}</label>
+        <br>
+        <label id="caratTextId" class="lbl-packet-value-small">{{"Carat" |translate}}</label>
+      </div>
+      <div class="detail-box" *ngIf="stoneObj.panelData">
+        <label id="rateValueId" class="lbl-packet-value-large">{{(stoneObj.panelData.avg_rate || 0) |
+          currency:'USD':true:'1.2-2'}}</label>
+        <br>
+        <label id="rateTextId" class="lbl-packet-value-small">{{"AVG_RATE/CT." |translate}}</label>
+      </div>
+      <div class="detail-box" *ngIf="stoneObj.panelData">
+        <label id="offValueId" class="lbl-packet-value-large" *ngIf="stoneObj.panelData.avg_rap_off && stoneObj.panelData.avg_rap_off > 0; else showPlusValue">{{stoneObj.panelData.avg_rap_off
+          || 0 | number:'1.2-2'}}%</label>
+        <ng-template #showPlusValue>
+          <label id="offValueId" class="lbl-packet-value-large">+{{((stoneObj.panelData.avg_rap_off * -1) || 0) |
+            number:'1.2-2'}}%</label>
+        </ng-template>
+        <br>
+        <label id="offTextId" class="lbl-packet-value-small">{{"AVG_R.OFF" |translate}}</label>
+      </div>
+      <div class="detail-box" *ngIf="stoneObj.panelData">
+        <label id="discountValueId" class="lbl-packet-value-large">{{(stoneObj.panelData.total_amount || 0 )|
+          currency:'USD':true:'1.2-2'}}</label>
+        <br>
+        <label id="discountTextId" class="lbl-packet-value-small">{{'Amount' |translate }}</label>
+      </div>
+      <ng-template [dirCheckPermission]="'terms_discount'">
+        <div class="detail-box" *ngIf="stoneObj.panelData && stoneObj.panelData.term_off">
+          <label id="discountValueId" class="lbl-packet-value-large">{{(stoneObj.panelData.term_off || 0) |
+            number:'1.2-2'}}%</label>
+          <br>
+          <label id="discountTextId" class="lbl-packet-value-small">{{"TERM" |translate}}</label>
+        </div>
+      </ng-template>
+      <ng-template [dirCheckPermission]="'blind_discount'">
+        <div class="detail-box" *ngIf="stoneObj.panelData && stoneObj.panelData.online_off  !== null" pTooltip="{{'AVG_BLIND_DISCOUNT_MESSAGE' | translate}}"
+          tooltipPosition="top" tooltipEvent="hover">
+          <label id="discountValueId" class="lbl-packet-value-large">{{(stoneObj.panelData.online_off || 0) |
+            number:'1.4-4'}}%</label>
+          <br>
+          <label id="discountTextId" class="lbl-packet-value-small">{{"Avg Blind" |translate}}</label>
+        </div>
+      </ng-template>
+      <ng-template [dirCheckPermission]="'weekly_volume_discount'">
+        <div class="detail-box" *ngIf="stoneObj.panelData">
+          <label id="discountValueId" class="lbl-packet-value-large">{{(stoneObj.panelData.wvd_off || 0) |
+            number:'1.4-4'}}%</label>
+          <br>
+          <label id="discountTextId" class="lbl-packet-value-small">WVD</label>
+        </div>
+      </ng-template>
+      <ng-template [dirCheckPermission]="'co_op_discount'">
+        <div class="detail-box" *ngIf="stoneObj.panelData && stoneObj.panelData.coop_off">
+          <label id="discountValueId" class="lbl-packet-value-large">{{(stoneObj.panelData.coop_off || 0) |
+            number:'1.2-2'}}%</label>
+          <br>
+          <label id="discountTextId" class="lbl-packet-value-small">{{"CO_OP_OFF"| translate}}</label>
+        </div>
+      </ng-template>
+      <ng-template [dirCheckPermission]="'event_discount'">
+        <div class="detail-box" *ngIf="stoneObj.panelData && stoneObj.panelData.event_off">
+          <label id="discountValueId" class="lbl-packet-value-large">{{(stoneObj.panelData.event_off || 0) |
+            number:'1.2-2'}}%</label>
+          <br>
+          <label id="discountTextId" class="lbl-packet-value-small">{{"EVENET_OFF" |translate}}</label>
+        </div>
+      </ng-template>
+      <div class="detail-box" *ngIf="stoneObj.panelData && viewFinalPayableAndFinalOff">
+        <label id="savingValueId" class="lbl-packet-value-large">{{(stoneObj.panelData.total_fCt || 0) |
+          currency:'USD':true:'1.2-2'}}</label>
+        <br>
+        <label id="savingTextId" class="lbl-packet-value-small">{{"FINAL_ $/CT" | translate}}</label>
+      </div>
+      <div class="detail-box last-content" *ngIf="stoneObj.panelData && stoneObj.panelData.f_off && viewFinalPayableAndFinalOff">
+        <label id="discountValueId" class="lbl-packet-value-large" *ngIf="stoneObj.panelData.avg_rap_off && stoneObj.panelData.avg_rap_off > 0; else showPlusFinalOffValue">{{stoneObj.panelData.f_off
+          || 0 | number:'1.2-2'}}%</label>
+        <ng-template #showPlusFinalOffValue>
+          <label id="discountValueId" class="lbl-packet-value-large"> +{{((stoneObj.panelData.f_off * -1) || 0) |
+            number:'1.2-2'}}%</label>
+        </ng-template>
+
+        <br>
+        <label id="discountTextId" class="lbl-packet-value-small">{{"FINAL_OFF" |translate}}</label>
+      </div>
+      <div class="detail-box" *ngIf="stoneObj.panelData && viewFinalPayableAndFinalOff">
+        <label id="payableValueId" class="lbl-packet-value-large-active text-bold">
+          <b>{{(stoneObj.panelData.final_payable || 0) | currency:'USD':true:'1.2-2'}}</b>
+        </label>
+        <br>
+        <label id="payabletextId" class="lbl-packet-value-small">{{"Final Payable" |translate}}</label>
+      </div>
+      <div class="detail-box" *ngIf="stoneObj.panelData">
+        <label id="payableValueId" class="lbl-packet-value-large-active text-bold">
+          <b>{{(stoneObj.panelData.avg_rap_rate || 0) | currency:'USD':true:'1.2-2'}}</b>
+        </label>
+        <br>
+        <label id="payabletextId" class="lbl-packet-value-small">{{"AVG_OFF_RAP" |translate}}</label>
+      </div>
+      <div class="detail-box" *ngIf="conversionRate && conversionRate !== 0">
+        <label id="conversionRateId" class="lbl-packet-value-large-active text-bold">
+          <b>{{(conversionRate) | currency:'INR':true:'1.2-2'}}</b>
+        </label>
+        <br>
+        <label id="conversionRateId" class="lbl-packet-value-small">{{"Conv. Rt." |translate}}</label>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="selected-stone-table-container fade" *ngIf="stoneObj && toggleTable && stoneObj?.selectedStoneArray?.length > 0">
+  <div class="ui-g-12 ui-g-nopad" style="position: relative">
+    <div class="ui-g-12 color-lagend-panel">
+      <div class="ui-g-4 download-icons">
+      </div>
+      <div class="ui-g-8 text-right">
+        <div class="color-lagend-container-selected-component fr">
+          <div (click)="setColorLegendFilterValue($event, 'bidToBuy')" class="box-color-lagend">
+            <span class="colorLagend_BTOB"></span>
+            <label>{{'Bid To Buy' |translate}}</label>
+          </div>
+          <div (click)="setColorLegendFilterValue($event, 'underBusinessProcess')" class="box-color-lagend">
+            <span class="colorLagend_BusinessProcess"></span>
+            <label>
+              {{'Under Business Process' |translate}}</label>
+          </div>
+          <div (click)="setColorLegendFilterValue($event, 'newArrival')" class="box-color-lagend">
+            <span class="colorLagend_NewArrival"></span>
+            <label>{{'New Arrival' |translate}}</label>
+          </div>
+          <div (click)="setColorLegendFilterValue($event, 'recentlyUploaded')" class="box-color-lagend">
+            <span class="colorLagend_RecentlyUploded"></span>
+            <label>{{'Recently Uploaded' |translate}}</label>
+          </div>
+          <div class="color-lagend-icon">
+            <span>
+              <a>
+                <span id="downloadSearch" class="grid-icon-top icon-download" (click)="showDowaloadOptions()" pTooltip="{{'DOWNLOAD_TEXT' |translate}}"
+                  tooltipPosition="bottom" tooltipEvent="hover"> </span>
+              </a>
+            </span>
+            <span>
+              <a>
+                <span [dirStoreAudit]="'EMAIL LIST'" class="grid-icon-top icon-email" id="mail" (click)="sendExcelMail()"
+                  pTooltip="{{'MAIL_ME_TEXT'|translate}}" tooltipPosition="bottom" tooltipEvent="hover"></span>
+              </a>
+            </span>
+            <button id="selectedThmLeftId" class="icon-Next-Round grid-icon-top scroll-button" (mousedown)="scrollTableInInterval('left')"
+              (mouseup)="stopScrolling()" (click)="scrollTable('left')" pTooltip="{{'LEFT_SCROLL_TEXT' |translate}}"
+              tooltipPosition="top" tooltipEvent="hover"></button>
+            <button id="selectedThmRightId" class="icon-Previous-Round grid-icon-top scroll-button" (mousedown)="scrollTableInInterval('right')"
+              (mouseup)="stopScrolling()" (click)="scrollTable('right')" pTooltip="{{'RIGHT_SCROLL_TEXT' |translate}}"
+              tooltipPosition="top" tooltipEvent="hover"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui-g-12  fade ui-g-nopad grid-container" [hidden]="!stoneObj && !stoneObj.selectedStoneArray && !(stoneObj.selectedStoneArray.length > 0) && !toggleTable && !selectedColumnList && !discountColumnVisible">
+      <dx-data-grid #thmSelectedStoneContainer [hidden]='isVisiableInfraGrid' id="selectedStoneContainerStock"
+        [dataSource]=stoneObj.selectedStoneArray [allowColumnReordering]="true" [allowColumnResizing]="true"
+        [columnAutoWidth]="true" [showColumnLines]="true" [showRowLines]="true" [showBorders]="true" [cacheEnabled]="true"
+        [rowAlternationEnabled]="false" [height]="gridHeight" (onCellPrepared)="onCellPrepared($event, stoneObj)">
+        <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+        <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+        <dxo-scrolling mode="virtual" showScrollbar="always" useNative="false"></dxo-scrolling>
+        <!--<dxo-showScrollbar [onScroll]="always"></dxo-showScrollbar>-->
+        <dxo-search-panel [visible]="true" placeholder="{{'Search'|translate}}"></dxo-search-panel>
+        <dxi-column caption="" [allowHiding]="false" [width]="30" dataType="string" [fixed]="true" [allowReordering]="false"
+          [allowFiltering]="false" [allowHeaderFiltering]="false" [allowResizing]="false" cellTemplate="checkboxTemplate"
+          headerCellTemplate="selectAllCheckboxTemplate" alignment="center"></dxi-column>
+        <div *dxTemplate="let data of 'selectAllCheckboxTemplate'">
+          <p-checkbox name="selectedStoneContainerStockSelectedTable" label="" id="selectedStoneContainerStockSelectALlId"
+            binary="true" (onChange)="isAllCheckboxSelected(stoneObj)" [(ngModel)]="stoneObj.isAllSelectedStoneSelected"></p-checkbox>
+        </div>
+        <dxi-column dataType="string" [allowHiding]="false" width="{{isColumnExpanded ? 275 : 130}}" [width]="columnWidth"
+          [fixed]="true" [allowReordering]="false" cellTemplate="Diamond_Template" headerCellTemplate="stoneDetailsHeaderTemplate"
+          alignment="left" [allowSorting]="false"></dxi-column>
+        <dxi-column caption="Cert." [width]="allColumnWidth.cert" dataField="certificate.short_value" [visible]="selectedColumnList.Certificate.entity_value"
+          [visibleIndex]="selectedColumnList.Certificate.order" cellTemplate="viewCertificate" [allowFiltering]="true"
+          dataType="string" [allowHeaderFiltering]="true" alignment="center">
+        </dxi-column>
+        <div *dxTemplate="let data of 'viewCertificate'" class="CertIcon">
+          <a class="view-cert" tooltipPosition="bottom" tooltipEvent="hover" [dirStoneMultimediaDetail]="{stoneid:data.data,showMediaType:'PDF'}">{{data.data.certificate.short_value}}</a>
+        </div>
+        <dxi-column caption="Shape" dataField="shape.short_value" dataType="string" [width]="allColumnWidth.shape"
+          [allowFiltering]="true" [allowSorting]="true" [visibleIndex]="selectedColumnList.Shape.order"
+          [allowHeaderFiltering]="true" alignment="center"></dxi-column>
+        <dxi-column caption="Clarity" dataField="clarity.short_value" dataType="string" [width]="allColumnWidth.clarity"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.Clarity.order"
+          [visible]="selectedColumnList.Clarity.entity_value" alignment="center"></dxi-column>
+        <dxi-column caption="Color" dataField="color.short_value" dataType="string" [width]="allColumnWidth.color"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.Colour.order"
+          [visible]="selectedColumnList.Colour.entity_value" alignment="center" cellTemplate="colorTemplate"></dxi-column>
+        <div *dxTemplate="let data of 'colorTemplate'">
+          <span class="color-ellipsis" *ngIf="data?.data?.color?.short_value?.length > 1;else showNormalBox" pTooltip={{data?.data?.color?.short_value}}
+            tooltipPosition="bottom" tooltipEvent="hover">{{data.data.color.short_value}}</span>
+          <ng-template #showNormalBox>{{data.data.color.short_value}}</ng-template>
+        </div>
+        <dxi-column caption="Carat" dataField="carat" dataType="string" [width]="allColumnWidth.carat" [allowFiltering]="true"
+          [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.Carat.order" [visible]="selectedColumnList.Carat.entity_value"
+          alignment="center"></dxi-column>
+        <dxi-column caption="$/ct." dataField="price_srk" dataType="number" [width]="allColumnWidth.dollarCt"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.DollarCT.order"
+          [visible]="selectedColumnList.DollarCT.entity_value" alignment="center" cellTemplate="dollarPerCarat"></dxi-column>
+        <dxi-column caption="OFF%" dataField="rap_off" dataType="string" [width]="allColumnWidth.off" [allowFiltering]="true"
+          [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.Off.order" [visible]="selectedColumnList.Off.entity_value"
+          alignment="center"></dxi-column>
+        <dxi-column caption="Amount" [width]="allColumnWidth.amount" [allowFiltering]="true" [allowSorting]="true"
+          [allowHeaderFiltering]="true" dataField="amount" [visibleIndex]="selectedColumnList.Amount.order" [visible]="selectedColumnList.Amount.entity_value"
+          dataType="number" alignment="center"></dxi-column>
+        <dxi-column caption="O. Amount($)" dataType="string" [width]="90" [allowFiltering]="true" [allowSorting]="true"
+          [allowHeaderFiltering]="true" [allowReordering]="true" cellTemplate="oAmountTemplate" [visibleIndex]="4"
+          alignment="center"></dxi-column>
+        <ng-template [dirCheckPermission]="'blind_discount'">
+          <dxi-column caption="Online %" dataField="onlinePercent" dataType="string" [width]="80" [allowFiltering]="true"
+            [allowSorting]="true" [allowHeaderFiltering]="true" [allowReordering]="true" [visibleIndex]="4"
+            cellTemplate="online_percent" alignment="center"></dxi-column>
+        </ng-template>
+        <ng-template [dirCheckPermission]="'terms_discount'">
+          <dxi-column caption="Term %" dataField="termPercent" dataType="string" [width]="80" [allowFiltering]="true"
+            [allowSorting]="true" [allowHeaderFiltering]="true" [allowReordering]="true" [visibleIndex]="4"
+            cellTemplate="term_percent" [visible]="discountColumnVisible.is_term_active" alignment="center"></dxi-column>
+        </ng-template>
+        <ng-template [dirCheckPermission]="'weekly_volume_discount'">
+          <dxi-column caption="WVD %" dataField="wvdPercent" dataType="string" [width]="80" [allowFiltering]="true"
+            [allowSorting]="true" [allowHeaderFiltering]="true" [allowReordering]="true" [visibleIndex]="4"
+            cellTemplate="wvd_percent" alignment="center"></dxi-column>
+        </ng-template>
+        <ng-template [dirCheckPermission]="'co_op_discount'">
+          <dxi-column caption="Co-Op %" dataField="coopPercent" dataType="string" [width]="80" [allowFiltering]="true"
+            [allowSorting]="true" [allowHeaderFiltering]="true" [allowReordering]="true" [visibleIndex]="4"
+            cellTemplate="coop_percent" [visible]="discountColumnVisible.is_comm_active" alignment="center"></dxi-column>
+        </ng-template>
+        <ng-template [dirCheckPermission]="'event_discount'">
+          <dxi-column caption="Event %" dataField="eventPercent" dataType="string" [width]="80" [allowFiltering]="true"
+            [allowSorting]="true" [allowHeaderFiltering]="true" [allowReordering]="true" [visibleIndex]="4"
+            cellTemplate="event_percent" [visible]="discountColumnVisible.is_company_event_active" alignment="center"></dxi-column>
+        </ng-template>
+        <dxi-column caption="F. $/ct." *ngIf="viewFinalPayableAndFinalOff" dataType="string" [width]="70"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [allowReordering]="true"
+          cellTemplate="fDollarTemplate" [visibleIndex]="4" alignment="center"></dxi-column>
+        <dxi-column caption="F. Off %" *ngIf="viewFinalPayableAndFinalOff" dataField="fOffPercent" dataType="string"
+          [width]="80" [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [allowReordering]="true"
+          [visibleIndex]="4" cellTemplate="fOff_percent" alignment="center"></dxi-column>
+        <dxi-column caption="F. Amount($)" *ngIf="viewFinalPayableAndFinalOff" dataType="string" [width]="90"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [allowReordering]="true"
+          cellTemplate="fAmountTemplate" [visibleIndex]="4" alignment="center"></dxi-column>
+
+        <dxi-column caption="Cut" dataField="cut.short_value" dataType="string" [width]="allColumnWidth.cut"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.cut.order"
+          [visible]="selectedColumnList.cut.entity_value" alignment="center">
+        </dxi-column>
+        <dxi-column caption="Pol" dataField="polish.short_value" dataType="string" [width]="allColumnWidth.pol"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.polish.order"
+          [visible]="selectedColumnList.polish.entity_value" alignment="center">
+        </dxi-column>
+        <dxi-column caption="Sym" dataField="symmetry.short_value" dataType="string" [width]="allColumnWidth.sym"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.symmetry.order"
+          [visible]="selectedColumnList.symmetry.entity_value" alignment="center">
+        </dxi-column>
+        <dxi-column caption="Fluor" dataField="fluor.short_value" dataType="string" [width]="allColumnWidth.fluor"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.fluorescence.order"
+          [visible]="selectedColumnList.fluorescence.entity_value" alignment="center">
+        </dxi-column>
+
+        <dxi-column caption="Measurement" dataField="measurement" dataType="string" [width]="allColumnWidth.measurement"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [allowReordering]="true"
+          [visibleIndex]="selectedColumnList.Measurement.order" [visible]="selectedColumnList.Measurement.entity_value"
+          alignment="center"></dxi-column>
+        <dxi-column caption="D/R" dataField="ratio" dataType="string" [width]="allColumnWidth.dr" [allowFiltering]="true"
+          [allowSorting]="true" [allowHeaderFiltering]="true" [allowReordering]="true" [visibleIndex]="selectedColumnList.DR.order"
+          [visible]="selectedColumnList.DR.entity_value" alignment="center"></dxi-column>
+        <dxi-column caption="TAB" dataField="table_percent" dataType="string" [width]="allColumnWidth.tab"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [allowReordering]="true"
+          [visibleIndex]="selectedColumnList.Tab.order" [visible]="selectedColumnList.Tab.entity_value" alignment="center"></dxi-column>
+        <dxi-column caption="TD" dataField="total_depth_percent" dataType="string" [width]="allColumnWidth.td"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [allowReordering]="true"
+          [visibleIndex]="selectedColumnList.Td.order" [visible]="selectedColumnList.Td.entity_value" alignment="center"></dxi-column>
+
+        <dxi-column caption="Shd" dataField="shade.short_value" dataType="string" [width]="allColumnWidth.shd"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.shade.order"
+          [visible]="selectedColumnList.shade.entity_value" alignment="center"></dxi-column>
+        <dxi-column caption="Lust" dataField="luster.short_value" dataType="string" [width]="allColumnWidth.lus"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.luster.order"
+          [visible]="selectedColumnList.luster.entity_value" alignment="center"></dxi-column>
+
+        <dxi-column caption="TW" dataField="table_white.short_value" dataType="string" [width]="allColumnWidth.tw"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.table_white.order"
+          [visible]="selectedColumnList.table_white.entity_value" alignment="center"></dxi-column>
+        <dxi-column caption="SW" dataField="side_white.short_value" dataType="string" [width]="allColumnWidth.sw"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.side_white.order"
+          [visible]="selectedColumnList.side_white.entity_value" alignment="center"></dxi-column>
+
+        <dxi-column caption="TB" dataField="table_black.short_value" dataType="string" [width]="allColumnWidth.tb"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.table_black.order"
+          [visible]="selectedColumnList.table_black.entity_value" alignment="center"></dxi-column>
+        <dxi-column caption="SB" dataField="side_black.short_value" dataType="string" [width]="allColumnWidth.sb"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.side_black.order"
+          [visible]="selectedColumnList.side_black.entity_value" alignment="center"></dxi-column>
+
+        <dxi-column caption="SGS Comment" dataField="sgs" dataType="string" [width]="allColumnWidth.sgs"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" cellTemplate="SgsTemplate"
+          [visibleIndex]="selectedColumnList.SGS.order" [visible]="selectedColumnList.SGS.entity_value" alignment="left"></dxi-column>
+
+        <dxi-column caption="TS" dataField="table_spot.short_value" dataType="string" [width]="allColumnWidth.ts"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.table_spot.order"
+          [visible]="selectedColumnList.table_spot.entity_value" alignment="center"></dxi-column>
+        <dxi-column caption="SS" dataField="side_spot.short_value" dataType="string" [width]="allColumnWidth.ss"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.side_spot.order"
+          [visible]="selectedColumnList.side_spot.entity_value" alignment="center"></dxi-column>
+
+        <dxi-column caption="TO" dataField="table_open.short_value" dataType="string" [width]="allColumnWidth.to"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.table_open.order"
+          [visible]="selectedColumnList.table_open.entity_value" alignment="center"></dxi-column>
+        <dxi-column caption="CO" dataField="crown_open.short_value" dataType="string" [width]="allColumnWidth.co"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.crown_open.order"
+          [visible]="selectedColumnList.crown_open.entity_value" alignment="center"></dxi-column>
+        <dxi-column caption="PO" dataField="pav_open.short_value" dataType="string" [width]="allColumnWidth.po"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.pav_open.order"
+          [visible]="selectedColumnList.pav_open.entity_value" alignment="center"></dxi-column>
+        <dxi-column caption="GO" dataField="girdle_open.short_value" dataType="string" [width]="allColumnWidth.go"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.girdle_open.order"
+          [visible]="selectedColumnList.girdle_open.entity_value" alignment="center"></dxi-column>
+
+        <dxi-column caption="T EF" dataField="table_extra_facet.short_value" dataType="string" [width]="allColumnWidth.tef"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.table_EF.order"
+          [visible]="selectedColumnList.table_EF.entity_value" alignment="center"></dxi-column>
+        <dxi-column caption="C EF" dataField="crown_extra_facet.short_value" dataType="string" [width]="allColumnWidth.cef"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.crown_EF.order"
+          [visible]="selectedColumnList.crown_EF.entity_value" alignment="center"></dxi-column>
+        <dxi-column caption="P EF" dataField="pav_extra_facet.short_value" dataType="string" [width]="allColumnWidth.pef"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.pav_EF.order"
+          [visible]="selectedColumnList.pav_EF.entity_value" alignment="center"></dxi-column>
+
+        <dxi-column caption="Key To Symbol" dataType="string" dataField="kts" [width]="allColumnWidth.kts"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.Key_To_Symbol.order"
+          [visible]="selectedColumnList.Key_To_Symbol.entity_value" alignment="left"></dxi-column>
+        <dxi-column caption="Lab Comments" dataType="string" dataField="lab_comment" [width]="allColumnWidth.lab"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.Lab_Comments.order"
+          [visible]="selectedColumnList.Lab_Comments.entity_value" alignment="left"></dxi-column>
+        <dxi-column caption="Girdle %" dataType="string" dataField="girdle_percent" [width]="allColumnWidth.girdle"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.GirdlePer.order"
+          [visible]="selectedColumnList.GirdlePer.entity_value" alignment="center"></dxi-column>
+        <dxi-column caption="H&A" dataType="string" dataField="hna.long_value" [width]="allColumnWidth.ha"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.HandA.order"
+          [visible]="selectedColumnList.HandA.entity_value" alignment="center"></dxi-column>
+        <dxi-column caption="CertNo" dataType="string" dataField="certificate_no" [width]="allColumnWidth.certNo"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.Certificate_No.order"
+          [visible]="selectedColumnList.Certificate_No.entity_value" alignment="center"></dxi-column>
+        <dxi-column caption="Rap $/ct." dataType="string" dataField="price_rap" [width]="allColumnWidth.rap"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.Rap_Dollar_CT.order"
+          [visible]="selectedColumnList.Rap_Dollar_CT.entity_value" alignment="center"></dxi-column>
+        <dxi-column caption="Eligible" dataType="string" dataField="eligibility" [width]="allColumnWidth.eligible"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.Eligible.order"
+          [visible]="selectedColumnList.Eligible.entity_value" alignment="center"></dxi-column>
+        <div *dxTemplate="let data of 'stoneDetailsHeaderTemplate'">
+          <label class="fl">Diamond Details</label>
+          <div *ngIf="!isColumnExpanded" id="NavigationRight" class="custom-button" (click)="scrollColumn()" pTooltip="{{'EXPAND_DETAILS_TEXT' |translate}}"
+            tooltipPosition="bottom" tooltipEvent="hover">></div>
+          <div *ngIf="isColumnExpanded" id="NavigationLeft" class="custom-button" (click)="scrollColumn()" pTooltip="{{'COLLAPSE_DETAILS_TEXT' |translate}}"
+            tooltipPosition="bottom" tooltipEvent="hover"><</div>
+           </div> 
+          <div *dxTemplate="let data of 'checkboxTemplate'">
+              <span id="selectedStoneContainerStockNotAvailableStoneBox" class="grid-icon-container" *ngIf="data.data.stone_state === 6 || data.data.stone_state === 0 || (data.data.stone_state === 3 && data.data.reason_code !== 1 && !isHold); else showCheckbox">
+              </span>
+              <ng-template #showCheckbox>
+                <span class="grid-icon-container">
+                  <p-checkbox id="{{data.data.stone_id}}selectedStoneContainerStockId" name="selectedStoneContainerStockName"
+                    value="{{data.data.stone_id}}" [(ngModel)]="stoneObj.selectedStones" (onChange)="filterSelectedStones(stoneObj,data.data.stone_id)"
+                    [style.padding.px]="4"></p-checkbox>
+                </span>
+              </ng-template>
+          </div>
+          <div *dxTemplate="let data of 'Diamond_Template'">
+            <span class="grid-icon-container" *ngIf="showPacket">
+              <a [dirStoreAudit]="'ADD TO PACKET'" *ngIf="data.data.packet_count>0; else notInPacket">
+                <span id="{{data.data.stone_id}}SelectedPktId" class="grid-icon icon-packet-added text-green" (click)="togglePacketOverlay(data.data)"
+                  pTooltip="{{'Select Packet'|translate}}" tooltipPosition="bottom" tooltipEvent="hover"></span>
+              </a>
+              <ng-template #notInPacket>
+                <a [dirStoreAudit]="'ADD TO PACKET'">
+                  <span id="{{data.data.stone_id}}PktId" class="grid-icon icon-packet-add" (click)="togglePacketOverlay(data.data)"
+                    pTooltip="{{'Select Packet'|translate}}" tooltipPosition="bottom" tooltipEvent="hover"></span>
+                </a>
+              </ng-template>
+            </span>
+
+            <span class="grid-icon-container">
+              <a (click)="showStoneMediaIconsPanel(data.data,$event,thmMediaIcon)">
+                <span id="{{data.data.stone_id}}selectedStoneContainerStockViewId" class="grid-icon icon-media"></span>
+              </a>
+            </span>
+            <span class="grid-icon-container-stoneid strike-text" *ngIf="data.data.stone_state === 6 || data.data.stone_state === 0 || (data.data.stone_state === 3 && data.data.reason_code !== 1 && !isHold); else availableStoneId">
+              <label title="{{'STONE_NOT_AVAILABLE' | translate }}">{{data.data.stone_id}}</label>
+            </span>
+            <ng-template #availableStoneId>
+              <span [dirStoreAudit]="'STONE DETAIL VIEW'" class="grid-icon-container-stoneid" (click)="addStoneDetailTab(data.data)">
+                <a>{{data.data.stone_id}}</a>
+              </span>
+            </ng-template>
+            <span class="grid-icon-container" *ngIf="data.data.isTwin && isIconVisible">
+              <a [dirStoreAudit]="'STD DETAIL VIEW'" id="{{data.data.stone_id}}selectedStoneContainerStockSTDId"
+                [dirCustomEventAccessHandler]="'twin_diamond_detail_view'" (customEvent)="addTwinStoneInfoTab(data.data.std_grp_no)">
+                <span class="icon icon-Twin-Shape-Round"></span>
+              </a>
+            </span>
+            <span class="grid-icon-container mart0" *ngIf="(data.data.totalViewed > -1  && !(data.data.totalViewed === 0 && data.data.totalViewedByUser === 0)) && isIconVisible">
+              <div class="icon-with-text">
+                <span id="{{data.data.stone_id}}selectedStoneContainerStockTotViewId" class="grid-icon icon-online-view">
+                </span>
+                <br>
+                <label>
+                  <span pTooltip="{{'OTHERS_VIEW_TEXT'|translate}}" tooltipPosition="bottom" tooltipEvent="hover">{{data.data.totalViewed}}</span>
+                  <span *ngIf="data.data.totalViewedByUser > -1" pTooltip="{{'MY_VIEW_TEXT'|translate}}"
+                    tooltipPosition="bottom" tooltipEvent="hover">/{{data.data.totalViewedByUser}}</span>
+                </label>
+              </div>
+            </span>
+            <span class="grid-icon-container mart0" *ngIf="data.data.totalViewRequest && isIconVisible">
+              <div class="icon-with-text">
+                <span id="{{data.data.stone_id}}selectedStoneContainerStockViewReqId" class="grid-icon icon-my-view"
+                  pTooltip="{{(data.data.viewRequestStatus=== 2?'ALREADY_VIEWED_TEXT':'VIEW_REQUEST_TEXT') |translate}}"
+                  tooltipPosition="bottom" tooltipEvent="hover" [ngClass]="{'text-red': data.data.viewRequestStatus=== 2}">
+                </span>
+                <br>
+                <label *ngIf="data.data.totalViewRequest > 1"> {{data.data.totalViewRequest}}</label>
+              </div>
+            </span>
+            <span class="grid-icon-container" *ngIf="data.data.isBasket && isIconVisible">
+              <span id="{{data.data.stone_id}}selectedStoneContainerStockCartId" pTooltip="{{(data.data.basketStatus==='<'?'BASKET_PRICE_REVISED_TEXT':'BASKET_TEXT') |translate}}"
+                tooltipPosition="bottom" tooltipEvent="hover" class="grid-icon icon-cart" [ngClass]="{ 'text-red': data.data.basketStatus==='<'}"></span>
+            </span>
+            <span class="grid-icon-container" *ngIf="data.data.isRecommended && isIconVisible">
+              <span id="{{data.data.stone_id}}selectedStoneContainerStockRecommendedId" pTooltip="{{'Recommended Stone'|translate}}"
+                tooltipPosition="bottom" tooltipEvent="hover" class="grid-icon srk-recommend"></span>
+            </span>
+            <span class="grid-icon-container" *ngIf="data.data.isOnHold && isIconVisible">
+              <span id="{{data.data.stone_id}}selectedStoneContainerStockholdId" class="grid-icon icon-hold-list-option-2">
+              </span>
+            </span>
+            <ng-template [dirCheckPermission]="'ddc_btn'">
+              <span class="grid-icon-container" *ngIf="data.data.business_process && isIconVisible">
+                <a (click)="updateDDC(data.data)">
+                  <span pTooltip="{{(data.data.ddcStatus==='ACTIVE'?'DDC_ACTIVE':(data.data.ddcStatus==='INACTIVE'?'DDC_INACTIVE':'DDC_PUT')) |translate}}"
+                    tooltipPosition="bottom" tooltipEvent="hover" id="{{data.data.stone_id}}selectedStoneContainerStockDDCId"
+                    class="grid-icon icon-ddc" [ngClass]="{'text-green': data.data.ddcStatus==='ACTIVE','text-red': data.data.ddcStatus==='INACTIVE'}">
+                  </span>
+                </a>
+              </span>
+            </ng-template>
+            <span class="grid-icon-container" *ngIf="data.data.b2b_state === 1 && isIconVisible">
+              <a (click)="openBTB(data.data)">
+                <span id="{{data.data.stone_id}}SelectedB2BId" pTooltip="{{(data.data.isBtbUpdated === 1?'BID_SAVED':(data.data.isBtbUpdated === 2?'FINAL_SUBMITTED':'B2B_ACTIVE'))|translate}}"
+                  tooltipPosition="bottom" tooltipEvent="hover" [ngClass]="{'text-green': data.data.isBtbUpdated === 2,'text-red': data.data.isBtbUpdated === 1}"
+                  class="grid-icon icon-b2b"> </span>
+              </a>
+            </span>
+            <!-- <span class="grid-icon-container" *ngIf="data.data.isDayP">
+                  <span  id="{{data.data.stone_id}}selectedStoneContainerStockDaypId" class="grid-icon icon-dayp" >
+                  </span>
+                  </span> -->
+            <span class="grid-icon-container" *ngIf="data.data.showHoldIcon && isIconVisible">
+              <span *ngIf="data.data.showHoldIcon" id="{{data.data.stone_id}}showHoldIcon" pTooltip="{{'HOLD_ICON_DETAIL_TEXT'|translate}}"
+                tooltipPosition="bottom" class="grid-icon icon-hold-list-option-2"></span>
+            </span>
+            <span class="grid-icon-container mart0" *ngIf="data.data.haveNote && isIconVisible">
+              <a>
+                <span id="{{data.data.stone_id}}SelectedNotes" class="grid-icon icon-note" pTooltip="{{'NOTE'|translate}}"
+                  tooltipPosition="bottom" tooltipEvent="hover" (click)="showAllCommentsForStone(data.data.notes)">
+                </span>
+                <br>
+                <span *ngIf="data.data.haveNote" id="{{data.data.stone_id}}notesCount" class="note" (click)="showAllCommentsForStone(data.data.notes)">{{data.data.totalNotes}}
+                </span>
+              </a>
+            </span>
+            <span class="grid-icon-container" *ngIf="data.data.countryCode && isIconVisible">
+              <img id="{{data.data.stone_id}}Flag" class="stone-flag-icon" [src]=data.data.countryCode pTooltip={{data.data.tooltipMessage}}
+                tooltipPosition="bottom" tooltipEvent="hover">
+            </span>
+            <span *ngIf="data.data.color_legends" class="color-right color-legend-box thm-selected-legend" [ngClass]="{'show-packet-legend': showPacket}">
+              <div id="{{data.data.stone_id}}selectedStoneContainerStockColorId" class="color-indicator-panel" *ngFor="let color of data.data.color_legends">
+                <div id="{{data.data.stone_id}}selectedStoneContainerStock{{color}}Id" class="colorLagend_BTOB"
+                  [ngClass]="{'color-legend-width-height':  isColumnExpanded === false, 'color-legend-height-width':  isColumnExpanded === true}"
+                  [style.background-color]="color | safeStyle"></div>
+              </div>
+            </span>
+          </div>
+          <div *dxTemplate="let data of 'Notes_Template'">
+            <span class="note">{{data.data.note}}</span>
+          </div>
+          <div *dxTemplate="let data of 'Diff_Template'">
+            <span>{{data.data.diffPercent | number:'1.2-2'}}</span>
+          </div>
+          <div *dxTemplate="let data of 'White_Template'">
+            {{data.data.table_white.short_value}} / {{data.data.side_white.short_value}}
+          </div>
+          <div *dxTemplate="let data of 'Black_Template'">
+            {{data.data.table_black.short_value}} / {{data.data.side_black.short_value}}
+          </div>
+          <div *dxTemplate="let data of 'Spot_Template'">
+            {{data.data.table_spot.short_value}} / {{data.data.side_spot.short_value}}
+          </div>
+          <div *dxTemplate="let data of 'CPSF_Template'">
+            {{data.data.cut.short_value}} - {{data.data.polish.short_value}} - {{data.data.symmetry.short_value}} -
+            {{data.data.fluor.short_value}}
+          </div>
+          <div *dxTemplate="let data of 'SL_Template'">
+            {{data.data.shade.short_value}} / {{data.data.luster.short_value}}
+          </div>
+          <div *dxTemplate="let data of 'DR_Template'">
+            {{data.data.length}}-{{data.data.width}}*{{data.data.height}} / {{data.data.ratio}}
+          </div>
+          <div *dxTemplate="let data of 'Price_Template'">
+            <div class="new_price">{{data.data.price_srk | number:'1.2-2'}}</div>
+          </div>
+          <div *dxTemplate="let data of 'TableTemplate'">
+            <span id="depthId" class="depth-tab">{{data.data.table_percent}}/{{data.data.total_depth_percent}}</span>
+          </div>
+          <div *dxTemplate="let data of 'SgsTemplate'">
+            <span>{{data.data.sgs.toString()}}</span>
+          </div>
+          <div *dxTemplate="let data of 'online_percent'">
+            {{data.data.onlinePercent | number:'1.2-2'}}
+          </div>
+          <div *dxTemplate="let data of 'Notes_Template'">
+            <span class="note">{{data.data.note}}</span>
+          </div>
+          <div *dxTemplate="let data of 'Diff_Template'">
+            <span>{{data.data.diffPercent | number:'1.2-2'}}</span>
+          </div>
+          <div *dxTemplate="let data of 'White_Template'">
+            {{data.data.table_white.short_value}} / {{data.data.side_white.short_value}}
+          </div>
+          <div *dxTemplate="let data of 'Black_Template'">
+            {{data.data.table_black.short_value}} / {{data.data.side_black.short_value}}
+          </div>
+          <div *dxTemplate="let data of 'Spot_Template'">
+            {{data.data.table_spot.short_value}} / {{data.data.side_spot.short_value}}
+          </div>
+          <div *dxTemplate="let data of 'CPSF_Template'">
+            {{data.data.cut.short_value}} - {{data.data.polish.short_value}} - {{data.data.symmetry.short_value}} -
+            {{data.data.fluor.short_value}}
+          </div>
+          <div *dxTemplate="let data of 'SL_Template'">
+            {{data.data.shade.short_value}} / {{data.data.luster.short_value}}
+          </div>
+          <div *dxTemplate="let data of 'DR_Template'">
+            {{data.data.length}}-{{data.data.width}}*{{data.data.height}} / {{data.data.ratio}}
+          </div>
+          <div *dxTemplate="let data of 'Price_Template'">
+            <div class="new_price">{{data.data.price_srk | number:'1.2-2'}}</div>
+          </div>
+          <div *dxTemplate="let data of 'TableTemplate'">
+            <span id="depthId" class="depth-tab">{{data.data.table_percent}}/{{data.data.total_depth_percent}}</span>
+          </div>
+          <div *dxTemplate="let data of 'SgsTemplate'">
+            <span>{{data.data.sgs.toString()}}</span>
+          </div>
+          <div *dxTemplate="let data of 'online_percent'">
+            {{data.data.onlinePercent | number:'1.2-2'}}
+          </div>
+
+          <div *dxTemplate="let data of 'term_percent'">
+            {{data.data.termPercent | number:'1.2-2'}}
+          </div>
+
+          <div *dxTemplate="let data of 'wvd_percent'">
+            {{data.data.wvdPercent | number:'1.2-2'}}
+          </div>
+
+          <div *dxTemplate="let data of 'coop_percent'">
+            {{data.data.coopPercent | number:'1.2-2'}}
+          </div>
+
+          <div *dxTemplate="let data of 'event_percent'">
+            {{data.data.eventPercent | number:'1.2-2'}}
+          </div>
+
+          <div *dxTemplate="let data of 'fOff_percent'">
+            {{data.data.fOffPercent | number:'1.2-2'}}
+          </div>
+
+          <div *dxTemplate="let data of 'fDollarTemplate'">
+            <span id="shapeCaptionId" class="caption">{{data.data.fDollarCaratAmount | number:'1.2-2'}}</span>
+          </div>
+
+          <div *dxTemplate="let data of 'fAmountTemplate'">
+            <span id="depthId" class="depth-tab">
+              {{data.data.fAmount | number:'1.2-2'}}</span>
+          </div>
+          <div *dxTemplate="let data of 'oAmountTemplate'">
+            <span id="shapeCaptionId" class="caption">{{data.data.oAmount | number:'1.2-2'}}</span>
+          </div>
+          <div *dxTemplate="let data of 'dollarPerCarat'">
+            <span id="dollarCaratTemplate" class="caption">{{data.data.price_srk | number:'1.2-2'}}</span>
+          </div>
+      </dx-data-grid>
+      <thm-selected-grid #thmSelectedStoneContainer [hidden]="!isVisiableInfraGrid" [(tableData)]="stoneObj.selectedStoneArray"
+        [widthInfo]="allColumnWidth" [gridHeight]="gridHeight" (singleRowSelected)="filterSelectedStonesOfInfraGrid(stoneObj, $event)"
+        (twinDiamondDetailInNewTab)="addTwinStoneInfoTab($event)" (stoneDetailInNewTab)="addStoneInfoTab($event)"
+        (updateDDCClicked)="updateDDC($event)" [gridName]="'selectedStoneGrid'" [resultObject]="stoneObj"
+        [selectedStoneTableIsVisible]="stoneObj.toggleTableDisplay" (displayNotesForSingleStoneInDialog)="showAllCommentsForStone($event)"
+        [selectedStonesArray]="stoneObj.selectedStones" (addStoneToPacket)="stoneToOperateInPacket($event)"
+        [visiblePacketIcon]="showPacket" [packetIconDataForGrid]="packetIconDataForGrid" [userSelectedColumns]="selectedColumnList"
+        [currentSelectedStones]="stoneObj.selectedStoneTable" [stonesActedOn]="stonesActedOn" (displayIconsOverlay)="stoneMediaIconPanel($event)"
+        [tabActive]="stoneObj.isActive" (b2bIconPopup)="openBTB($event)" [colorLegendFilter]="colorLegendFilterValue">
+      </thm-selected-grid>
+    </div>
+  </div>
+</div>
+<thm-multimedia-popup #themeMultimediaPopUp [displayMultimediaPopup]="toggleMultimediaPopup" [popUpMultimediaInfo]="stoneMultimediaInfo"
+  (closePopup)="toggleCloseMultimediaPopUp($event)"></thm-multimedia-popup>
+<thm-ddc-overlay #thmDdcOverlay [visibleDdcOverlay]="ddcOverlayVisible" [stoneList]="ddcStones" [previousDdcHour]="definedDDCHour"
+  (toggleDdcOverlay)="toggleDdcOverlay($event)"></thm-ddc-overlay>
+<thm-confirm-overlay [visibleConfirmOverlay]="confirmOverlayVisible" (toggleConfirmOverlay)="toggleConfirmOverlay($event)"
+  [stoneList]="selectedStones"></thm-confirm-overlay>
+<thm-addnote-overlay #thmAddnoteOverlay [visibleAddnoteOverlay]="addnoteOverlayVisible" [visibleShownoteOverlay]="commentsOverlayVisible"
+  [stoneIdList]="selectedStones" [CommentListForStone]="allNotesForStone" (toggleAddNoteOverlay)="toggleAddNoteOverlay($event)"></thm-addnote-overlay>
+<thm-request-overlay [visibleOverlay]="requestPopupVisible" [apiUrl]="apiLink" [stoneList]="selectedStones"
+  (toggleOverlay)="toggleOverlay($event)"></thm-request-overlay>
+<thm-bid-to-buy-overlay [visibleBTBOverlay]="btbOverlayVisible" [stoneList]="btbSelectedStones" (toggleBTBOverlay)="toggleBTBOverlay($event)"
+  [BTBdataLoaded]="isBTBDataLoaded" [BTBClosed]="isBTBClosed"></thm-bid-to-buy-overlay>
+<dx-popover target="#downloadSearch" position="bottom" [width]="141" [(visible)]="downloadPopOverVisible">
+  <div *dxTemplate="let data of 'content'">
+    <p-listbox [options]="downloadOptions" [(ngModel)]="selectedDownloadType" [style]="{'max-height':'250px'  , 'max-width':'100%'}"
+      (onChange)="downloadResult(stoneObj)">
+      <ng-template let-opt pTemplate="item">
+        <div class="ui-helper-clearfix">
+          <span style="font-size:14px;margin:15px 10px 0 0">{{opt.label}}</span>
+        </div>
+      </ng-template>
+    </p-listbox>
+  </div>
+</dx-popover>
+<thm-mediaicon #thmMediaIcon></thm-mediaicon>
+<thm-media-icon *ngIf="displayIconOverlay" [stoneObj]="iconDisplayStoneObject" [posX]="iconOverlayXPosition" [posY]="iconOverlayYPosition"
+  (closeIconOverlay)="closeGridIconOverlay($event)">
+</thm-media-icon>
+<p-dialog appendTo="body" header="{{'Compare Stones' | translate}}" [(visible)]="toggleComparePopup" [closeOnEscape]="false"
+  [modal]="true" (onHide)="closeCompareStoneOverlay()"  *ngIf="toggleComparePopup" [draggable]="false">
+  <thm-stone-compare [stoneData]="selectedStonesObject" (refreshAllNotes)="refreshAllStoneNote(stoneObj)"
+    (noStoneAvailable)="closeCompareStoneOverlay()"></thm-stone-compare>
+</p-dialog>

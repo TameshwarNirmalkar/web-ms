@@ -1,0 +1,43 @@
+<p-dialog header="{{'View Request' |translate}}" appendTo="body" *ngIf="visibleOverlay" [(visible)]="visibleOverlay" modal="modal" width="500" responsive="true" (onHide)="toggleViewRequestOverlay(false)">
+  <!-- <div id="overlayBox" class="ui-g-12"> -->
+    <div id="dateTimeBox" class="ui-g-12">
+      <div id="dateTimeTextId" class="ui-g-12 view-request-label-text">
+        {{'Select date and time' |translate}}
+      </div>
+      <div id="dateTimePicker" class="ui-g-12 date-picker-container">
+        <thm-date-picker [isInline]="true" [(ngModel)]="dateTime" [page]="'ViewRequest'" [showDescriptionBox]="true" [dateInDatePicker]="indianDate" [minDate]="indianDate"></thm-date-picker>
+      </div>
+    </div>
+    <div id="commentBoxId" class="ui-g-12">
+      <div id="commentHeadingID" class="ui-g-12 view-request-label-text">{{'Comments' |translate}}</div>
+      <div id="commentTextId" class="ui-g-12">
+        <input id="commentId" type="text" [(ngModel)]="comment" placeholder="{{'Enter Comment' |translate}}">
+      </div>
+      <div id="loadBox" *ngIf="isRequested" class="icon-load">
+        <i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>
+      </div>
+      <div id="errorMessageRequestId" class="ui-g-12 error" *ngIf="errorMessage">
+        {{errorMessage | translate}}
+      </div>
+      <div id="responseMessageBox" class="ui-g-12 error stone-display-container" *ngIf="responseMessage && !successRequest">
+        {{responseMessage | translate}}
+      </div>
+      <div id="responseSuccessMessageBox" class="ui-g-12 success-message stone-display-container" *ngIf="responseMessage && successRequest">
+        {{responseMessage | translate}}{{successStoneList}}
+      </div>
+      <div id="noStoneMessageBox" class="ui-g-12 error" *ngIf="!stoneList || stoneList.length === 0">
+        {{'Please select some stones.' |translate}}
+      </div>
+    </div>
+    <p-footer id="buttonBoxId">
+      <div id="successCheckId" *ngIf="!successRequest; else close">
+        <button id="saveOverlayId" class="custom-btnPrimary" [disabled]="!stoneList || stoneList.length === 0 || isRequested" (click)="storeViewRequestDetails(dateTime,comment)">{{'Save' | translate}}</button>
+        <button id="cancelOverlayId" class="custom-btnBorder" (click)="toggleViewRequestOverlay(true)">{{'Cancel' | translate}}</button>
+      </div>
+      <ng-template #close >
+        <button id="closeButtonBox" class="custom-btnBorder" (click)="toggleViewRequestOverlay(true)">{{'Close' | translate}}({{ticks}})</button>
+      </ng-template>
+    </p-footer>
+  <!-- </div> -->
+</p-dialog>
+

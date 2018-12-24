@@ -1,0 +1,6 @@
+<dx-tooltip target="#{{targetElement.id}}" [(visible)]="showTooltip">
+  <div *dxTemplate="let data = data of 'content'">
+    <label class="tooltip-heading">{{tooltipHeading | translate}}</label>
+    <p class="tooltip-content">{{tooltipMessage | translate}}</p>
+  </div>
+</dx-tooltip>

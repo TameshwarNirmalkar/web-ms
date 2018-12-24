@@ -1,0 +1,68 @@
+<p-dialog id="ddcOverlayId" appendTo="body" header="{{'Request DDC'| translate}}" [(visible)]="visibleDdcOverlay" (onHide)="cancelStoneDDC()"
+  modal="modal" width="700" responsive="true">
+  <div class="ui-g ui-g-12 loading-box " *ngIf="loadingDDCData; else showContent">
+    <div id="ddcLoadingMessageId" class="ui-g  ui-g-12 ddc-loading-content">
+      <label class="ui-g-12 ui-g-nopad ">{{ errorMessage | translate}}</label>
+    </div>
+  </div>
+  <ng-template #showContent>
+    <div id="ddcContentBoxId" *ngIf="normalDDCStoneList && normalDDCStoneList?.length > 0" class="ui-g-12 ui-g-nopad">
+      <div id="regularStockDDC" class="ui-g-12 text-center">
+        <label id="ddcRegularLabel">
+          <b class="ddc-main-title">{{'REGULAR_STOCK' | translate}}</b>
+        </label>
+      </div>
+      <div id="stoneList" class="ui-g-12 text-center">
+        {{'DELIVERY_DDC_MESSAGE' | translate}}
+      </div>
+      <div id="stoneList" class="ui-g-3">
+        <b class="ddc-main-title" id="ddcStoneLabel">{{'Stone ID' | translate}}</b>
+      </div>
+      <div id="stoneList" class="ui-g-9">
+        <span id=ddcStoneList>{{normalDDCStoneList.toString()}}</span>
+      </div>
+      <div id="ddcContentHeaderBox" class="ui-g-3">
+        <b class="ddc-main-title" id="ddcContentlabel">{{'Select DDC Hours' | translate}}</b>
+      </div>
+      <div id="ddcContentValueBox" class="ui-g-9">
+        <p-selectButton [options]="normalDDCHoursList" [(ngModel)]="selectedDdcHour"></p-selectButton>
+      </div>
+      <br>
+    </div>
+
+    <div *ngFor="let event of eventsInfoList" class="ui-g-12 ui-g-nopad">
+      <div id="ddcContentBoxId" class="ui-g-12 ui-g-nopad">
+        <div *ngIf="event.event_name" id="regularStockDDC{{event.event_name}}" class="ui-g-12 text-center">
+          <b>{{event.event_name}}</b>
+        </div>
+        <div *ngIf="event.ddc_message" id="stoneList{{event.event_name}}" class="ui-g-12 text-center">
+          {{event.ddc_message}}
+        </div>
+        <div *ngIf="eventDDCHourList" id="stoneList" class="ui-g-3">
+          <label id="ddcStoneLabel{{event.event_name}}">{{'Stone ID' | translate}}</label>
+        </div>
+        <div *ngIf="event.stone_id" id="stoneIdList{{event.event_name}}" class="ui-g-9">
+          <span id=ddcStoneList>{{event.stone_id.toString()}}</span>
+        </div>
+        <div *ngIf="eventDDCHourList.length > 0" id="ddcContentHeaderBoxTitle{{event.event_name}}" class="ui-g-3">
+          <label id="ddcContentlabel">{{'Select DDC Hours' | translate}}</label>
+        </div>
+        <div *ngIf="eventDDCHourList.length > 0" id="ddcContentValueBox{{event.event_name}}" class="ui-g-9">
+          <p-selectButton [options]="eventDDCHourList" (onChange)="selectedButton(event)" [(ngModel)]="event.selectedEventDDCHour"></p-selectButton>
+        </div>
+      </div>
+      <br>
+    </div>
+    <div class="ui-g-12 text-right">
+      <button [dirStoreAudit]="'ADD TO DDC'" *ngIf="!previousDdcHour" id="applyDdcBtnId" class="custom-btnPrimary" type="button" (click)="applyStoneDDC('save')"
+        [disabled]="isRequested">
+        <i *ngIf="isRequested" class="fa fa-spinner fa-pulse loader-align" aria-hidden="true"></i> {{'Apply'| translate}}</button>
+      <button [dirStoreAudit]="'ADD TO DDC'" *ngIf="previousDdcHour" id="updateDdcBtnId" class="custom-btnBorder" type="button" (click)="applyStoneDDC('update')"
+        [disabled]="isRequested"> 
+        <i *ngIf="isRequested" class="fa fa-spinner fa-pulse loader-align" aria-hidden="true"></i> {{'Update' |translate}}</button>
+      <button [dirStoreAudit]="'DELETE DDC'" *ngIf="previousDdcHour" id="removeDdcBtnId" class="custom-btnBorder" type="button" (click)="removeStoneDDC()" [disabled]="isRequested">
+        <i *ngIf="isRemoveRequested" class="fa fa-spinner fa-pulse loader-align" aria-hidden="true"></i> {{'Remove' |translate}}</button>
+      <button id="closeConfirmBtnId" class="custom-btnBorder" type="button" (click)="cancelStoneDDC()">{{'Cancel' |translate}}</button>
+    </div>
+  </ng-template>
+</p-dialog>

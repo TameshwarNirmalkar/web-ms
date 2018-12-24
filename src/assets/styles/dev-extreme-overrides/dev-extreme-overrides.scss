@@ -1,0 +1,332 @@
+.dx-widget {
+  font-family: "Noto Sans";
+}
+
+.dx-popup-content {
+  width: 100%;
+  height: 100%;
+  padding: 10px !important;
+  background: rgba(224, 229, 82, 0.41);
+}
+
+.dx-focused {
+  outline: none !important;
+}
+
+.dx-template-wrapper {
+  width: 100%;
+  white-space: normal;
+}
+
+.dx-tabpanel {
+  padding: 45px 20px 0 0;
+}
+
+.dx-tabpanel {
+  padding: 0;
+}
+
+.dx-tabs-wrapper {
+  display: flex;
+}
+
+.dx-tabs-wrapper:focus {
+  outline: 0;
+}
+
+.dx-tab {
+  width: auto;
+  text-align: left;
+}
+
+.dx-template-wrapper {
+  white-space: inherit;
+}
+
+.dx-searchbar {
+  width: 350px;
+  padding-bottom: 0 !important;
+}
+
+.dx-tab.dx-tab-selected {
+  background-color: transparent;
+}
+
+.dx-tabpanel .dx-multiview-wrapper {
+  border: 0;
+  outline: 0;
+}
+
+.dx-tabs {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  font-size: 16px;
+  color: #7e868f;
+  outline: 0;
+}
+
+.dx-tabpanel .dx-tab-selected:before {
+  outline: 0;
+}
+
+.dx-item .dx-multiview-item .dx-item-selected,
+.dx-state-focused .dx-tab-selected:after {
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+}
+
+.dx-tab-selected:after {
+  border-left: 0;
+  border-right: 0;
+}
+
+.dx-toolbar .dx-toolbar-after {
+  padding: 10px;
+  left: 0;
+  z-index: 9;
+  position: absolute;
+}
+
+.dx-tabpanel.dx-state-focused .dx-multiview-wrapper {
+  border: none;
+}
+
+.dx-tabpanel.dx-state-focused .dx-tab:not(.dx-tab-selected):before {
+  border: 0 !important;
+}
+
+.dx-tabpanel .dx-tab {
+  width: auto !important;
+}
+
+.dx-popup-content {
+  background: transparent;
+}
+
+.dx-overlay-shader {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+#ddcGridContainer .dx-datagrid .dx-row>td {
+  border-left: 1px solid #ddd;
+}
+
+.dx-datagrid-headers {
+  color: #262a42;
+  font-weight: bold;
+}
+
+.dx-datagrid-headers .dx-datagrid-table .dx-row>td {
+  border: 1px solid #e0e0e0 !important;
+  text-align: center !important;
+}
+
+// .dx-datagrid .dx-column-lines > td {
+// border-left: 1px solid #e0e0e0 !important;
+// border-right: 1px solid #e0e0e0 !important;
+// }
+//
+// .dx-datagrid .dx-row-alt > td {
+// background-color: #ffffff !important;
+// }
+// .dx-datagrid-headers .dx-datagrid-table .dx-row > td{
+// border:  1px solid  #e0e0e0 !important;
+// }
+.dx-texteditor-container {
+  border-radius: 30px;
+  border: 1px solid;
+}
+
+.dx-texteditor {
+  border: 0px;
+}
+
+.dx-datagrid .dx-row>td {
+  border-right: 0px;
+  padding: 3px 2px;
+  font-size: 12px;
+}
+
+.dx-datagrid-rowsview .dx-row>td {
+  text-align: center;
+}
+
+.dx-toolbar-label>div {
+  font-size: 24px
+}
+
+.dx-popup-title .dx-closebutton.dx-state-hover {
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.dx-popup-title .dx-closebutton.dx-state-focused {
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.dx-popup-title.dx-toolbar .dx-toolbar-after,
+.dx-popup-title.dx-toolbar .dx-toolbar-before {
+  width: 100%;
+}
+
+.dx-popup-title .dx-closebutton {
+  position: absolute;
+  right: 0px;
+  top: 8px;
+}
+
+.dx-datagrid-headers .dx-datagrid-table .dx-row>td,
+.dx-datagrid-content .dx-datagrid-table .dx-row>td {
+  vertical-align: middle !important;
+  
+}
+
+.dx-tab.dx-state-hover {
+  background-color: transparent !important;
+}
+
+.dx-tabpanel.dx-state-focused .dx-multiview-wrapper {
+  border-bottom: 0px !important;
+  border-right: 0px !important;
+  border-left: 0px !important;
+}
+
+/*Data Table [Grid]*/
+
+.dx-datagrid-nowrap.dx-datagrid-headers .dx-header-row>td>.dx-datagrid-text-content {
+  font-size: 14px;
+}
+
+.small-label {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.dx-datagrid-rowsview .dx-select-checkboxes-hidden>tbody>tr>td>.dx-select-checkbox {
+  display: inline-block;
+}
+
+.dx-tabpanel .dx-tab {
+  border-bottom: 2px solid hsla(0, 0%, 0%, 0) !important;
+}
+
+.dx-tabpanel .dx-tab-selected:before {
+  margin-top: 2px
+}
+
+.dx-datagrid-columns-separator,
+.dx-datagrid-columns-separator-transparent {
+  height: 100%;
+  display: none;
+}
+
+#ddcGridContainer .dx-header-row {
+  height: 0px !important;
+}
+
+#ddcGridContainer .dx-row {
+  height: 55px;
+  vertical-align: middle;
+}
+
+#ddcGridContainer .dx-datagrid-content .dx-datagrid-table .dx-header-row>td {
+  vertical-align: top;
+}
+
+#packetGridContainer .dx-row {
+  vertical-align: middle;
+}
+
+#packetGridContainer .dx-datagrid-content .dx-datagrid-table .dx-row>td {
+  vertical-align: middle;
+}
+
+// #selectedStoneContainer  .dx-row {height: 60px !important; vertical-align:middle; }
+// #selectedStoneContainer  .dx-datagrid-content .dx-datagrid-table .dx-row > td{vertical-align: middle;}
+/*Data Grid*/
+
+.dx-datagrid-content .dx-datagrid-table .dx-row>td:first-child {
+  border-left: 0px !important
+}
+
+.dx-datagrid-header-panel {
+  min-height: 60px;
+}
+
+.dx-toolbar .dx-texteditor {
+  width: 160px !important;
+}
+
+// DX tabs
+.dx-tab.dx-tab-selected {
+  margin-bottom: -2px;
+}
+
+.dx-tabs {
+  border: none;
+}
+
+.dx-tabpanel .dx-tab-selected:before {
+  border: none;
+}
+
+.dx-tab.dx-state-focused:after {
+  border: 0;
+}
+
+.dx-tabpanel .dx-multiview-wrapper {
+  border: 0;
+}
+
+.dx-datagrid-nowrap.dx-datagrid-headers .dx-header-row>td>.dx-datagrid-text-content {
+  font-size: 12px;
+}
+
+/*.dx-widget{font-size: 12px;  }*/
+
+.dx-focused:focus {
+  outline: none;
+}
+
+.dx-datagrid-focus-overlay {
+  border: 0px;
+}
+
+/*Don't Delete or modify This CSS : Ravi*/
+
+.dx-datagrid-content .dx-datagrid-table .dx-row>td.dx-group-cell {
+  text-align: left !important
+}
+
+.dx-item.dx-multiview-item.dx-item-selected,
+.dx-multiview-item-container {
+  transform: none !important;
+  /* This override is to make search filter tabs position fixed on top */
+}
+
+.dx-template-wrapper.dx-item-content.dx-tab-content>span {
+  display: flex;
+  align-items: center;
+}
+
+.dx-datagrid-text-content {
+  width: 95%;
+}
+
+.dx-datagrid-rowsview .dx-row:nth-child {
+  font-weight: 510;
+}
+
+.dx-datagrid-rowsview.dx-datagrid-nowrap.dx-scrollable.dx-scrollable-both.dx-scrollable-native.dx-scrollable-native-android.dx-scrollable-scrollbar-simulated.dx-visibility-change-handler.dx-last-row-border {
+  font-weight: 450;
+}
+
+
+.dx-loadpanel-content,.dx-loadindicator{
+  height: 240px !important;
+  width: 220px !important;
+  padding: 0px !important;
+}

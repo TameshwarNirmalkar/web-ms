@@ -25,7 +25,7 @@ export class EventDetailsService {
     return this.getEventDetailsInfo();
   }
 
-  getEventDetailsInfo() {
+  getEventDetailsInfo(): Observable<any> {
     return this.http.get(this.applicationDataService.getEnvironment().EventApi
       + '/event/running/' + this.applicationDataService.getEnvironment().EventApiVersion).pipe(
       map(res => {
@@ -47,30 +47,29 @@ export class EventDetailsService {
       );
   }
 
-  getEventKamDetailsInfo(eventId) {
+  getEventKamDetailsInfo(eventId): Observable<any> {
     return this.http.get(this.applicationDataService.getEnvironment().EventApi
-      + '/event/' + eventId + '/kamDetail/' + this.applicationDataService.getEnvironment().EventApiVersion).pipe(
-      map((responseData) => {
-        // const responseData = response;
-        if (!responseData['error_status'] &&
-          MessageCodesComparator.AreEqual(responseData['code'], MessageCodes.EVENT_KDFEF_200)) {
-          return responseData['kamDetail'];
-        } else {
-          return {};
-        }
-      }),
-      catchError(err => {
-        return this.errorHandler.handleError('EventDetailsService:getEventKamDetailsInfo', err); 
-      })
-    );
+      + '/event/' + eventId + '/kamDetail/' + this.applicationDataService.getEnvironment().EventApiVersion)
+      .pipe(
+        map((responseData: any) => {
+          // const responseData = response;
+          if (!responseData.error_status &&
+            MessageCodesComparator.AreEqual(responseData.code, MessageCodes.EVENT_KDFEF_200)) {
+            return responseData.kamDetail;
+          } else {
+            return {};
+          }
+        }),
+        catchError(err => {
+          return this.errorHandler.handleError('EventDetailsService:getEventKamDetailsInfo', err); 
+        })
+      );
   }
 
-  fetchEventHighlights(eventId) {
+  fetchEventHighlights(eventId): Observable<any> {
     return this.http.get(this.applicationDataService.getEnvironment().EventApi
       + '/event/' + eventId + '/highlights/card/' + this.applicationDataService.getEnvironment().EventApiVersion).pipe(
-      map((response) => {
-        return response;
-      }),
+      map(response => response),
       catchError(err => this.errorHandler.handleError('EventDetailsService:getEventKamDetailsInfo', err))
     );
   }
@@ -79,12 +78,10 @@ export class EventDetailsService {
     return this.eventInfo;
   }
 
-  fetchEventImages(eventId) {
+  fetchEventImages(eventId): Observable<any> {
     return this.http.get(this.applicationDataService.getEnvironment().EventApi
       + '/event/' + eventId + '/images/' + this.applicationDataService.getEnvironment().EventApiVersion).pipe(
-        map((response) => {
-        return response;
-      }),
+        map(response => response),
       catchError(err => this.errorHandler.handleError('EventDetailsService:fetchEventImages', err))
     );
   }
@@ -161,27 +158,23 @@ export class EventDetailsService {
     });
   }
 
-  fetchAvailableEventDates(eventId) {
+  fetchAvailableEventDates(eventId): Observable<any> {
     return this.http.get(this.applicationDataService.getEnvironment().EventApi
       + '/event/' + eventId + '/available/dates/' + this.applicationDataService.getEnvironment().EventApiVersion).pipe(
-      map((response) => {
-        return response;
-      }),
+      map( response => response),
       catchError(err => this.errorHandler.handleError('EventDetailsService:fetchAvailableEventDates', err))
     );
   }
 
-  fetchAvailableDaySlots(eventId, date) {
+  fetchAvailableDaySlots(eventId, date): Observable<any> {
     return this.http.get(this.applicationDataService.getEnvironment().EventApi
       + '/event/' + eventId + '/available/' + date + '/slots/' + this.applicationDataService.getEnvironment().EventApiVersion).pipe(
-        map((response) => {
-          return response;
-        }),
+        map( response =>  response),
         catchError(err => this.errorHandler.handleError('EventDetailsService:fetchAvailableDaySlots', err))
       );
   }
 
-  fetchAvailableTimeSlots(eventId, date, day) {
+  fetchAvailableTimeSlots(eventId, date, day): Observable<any> {
     return this.http.get(`${this.applicationDataService.getEnvironment().EventApi}
     /event/${eventId}/available/${date}/slots/${day}/${this.applicationDataService.getEnvironment().EventApiVersion}`).pipe(
       map((response) => {
@@ -191,7 +184,7 @@ export class EventDetailsService {
     );
   }
 
-  submitAppointmentRequest(appointmentObj) {
+  submitAppointmentRequest(appointmentObj): Observable<any> {
     return this.http.post(this.applicationDataService.getEnvironment().EventApi
       + '/event/' + this.authService.getLoginName() + '/appointment/book/' + this.applicationDataService.getEnvironment().EventApiVersion,
       appointmentObj).pipe(
@@ -202,88 +195,78 @@ export class EventDetailsService {
       );
   }
 
-  fetchSubmittedAppointment(eventId) {
+  fetchSubmittedAppointment(eventId) : Observable<any> {
     return this.http.get(`${this.applicationDataService.getEnvironment().EventApi}
       /event/${eventId}/appointment/list/${this.applicationDataService.getEnvironment().EventApiVersion}`).pipe(
-      map((response: Response) => {
-        return response.json();
-      }),
+      map(response => response),
       catchError(err => this.errorHandler.handleError('EventDetailsService:fetchSubmittedAppointment', err))
     );
   }
 
-  updateAppointmentRequest(appointmentObj) {
+  updateAppointmentRequest(appointmentObj): Observable<any> {
     return this.http.post(`${this.applicationDataService.getEnvironment().EventApi}
       /event/${this.authService.getLoginName()}/appointment/update/${this.applicationDataService.getEnvironment().EventApiVersion}`,
       appointmentObj).pipe(
-        map((response) => {
-          return response;
-        }),
+        map( response => response),
         catchError(err => this.errorHandler.handleError('EventDetailsService:updateAppointmentRequest', err))
       );
   }
 
-  addStoneViewShow(showObj, eventId) {
+  addStoneViewShow(showObj, eventId): Observable<any> {
     return this.http.post(`${this.applicationDataService.getEnvironment().EventApi}
-      /event/${eventId}/selection/viewInShow/${this.applicationDataService.getEnvironment().EventApiVersion}`,
-      showObj).pipe(
-        map((response) => {
-          return response;
-        }),
+      /event/${eventId}/selection/viewInShow/
+      ${this.applicationDataService.getEnvironment().EventApiVersion}`, showObj)
+      .pipe(
+        map(response => response),
         catchError(err => this.errorHandler.handleError('EventDetailsService:addStoneViewShow', err))
     );
   }
 
-  requestCancelAppointment(cancelObj, eventId) {
+  requestCancelAppointment(cancelObj, eventId): Observable<any> {
     const httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify(cancelObj)
     };
     return this.http.delete(`${this.applicationDataService.getEnvironment().EventApi}
       /event/${eventId}/appointment/delete/${this.applicationDataService.getEnvironment().EventApiVersion}`,
-      httpOptions).pipe(
-        map((response) => {
-          return response;
-        }),
+      httpOptions)
+      .pipe(
+        map(response => response),
         catchError(err => this.errorHandler.handleError('EventDetailsService:requestCancelAppointment', err))
       );
   }
 
-  fetchPreSelectedEventStones(eventId) {
+  fetchPreSelectedEventStones(eventId): Observable<any> {
     return this.http.get(`${this.applicationDataService.getEnvironment().EventApi}
-      /event/${eventId}/selection/list/${this.applicationDataService.getEnvironment().EventApiVersion}`).pipe(
-      map((response) => {
-        return response;
-      }),
+      /event/${eventId}/selection/list/${this.applicationDataService.getEnvironment().EventApiVersion}`)
+    .pipe(
+      map( response => response),
       catchError(err => this.errorHandler.handleError('EventDetailsService:fetchPreSelectedEventStones', err))
     );
   }
 
-  checkPreEventSelectionPermission() {
+  checkPreEventSelectionPermission(): Observable<any> {
     return this.http.get(`${this.applicationDataService.getEnvironment().EventApi}
       /event/${this.authService.getLoginName()}/selection/checkPermission/
-      ${this.applicationDataService.getEnvironment().EventApiVersion}`).pipe(
-      map((res) => {
-        return res;
-      }),
-      catchError(err => this.errorHandler.handleError('AuthService:checkPreEventSelectionPermission', err))
-    );
+      ${this.applicationDataService.getEnvironment().EventApiVersion}`)
+      .pipe(
+        map(res => res),
+        catchError(err => this.errorHandler.handleError('AuthService:checkPreEventSelectionPermission', err))
+      );
   }
 
-  addStoneToEvent(stoneObj, eventId) {
+  addStoneToEvent(stoneObj, eventId): Observable<any> {
     const stoneBody = {
       'stone_ids': stoneObj
     };
     return this.http.post(`${this.applicationDataService.getEnvironment().EventApi}
       /event/${eventId}/selection/add/${this.applicationDataService.getEnvironment().EventApiVersion}`,
       JSON.stringify(stoneBody)).pipe(
-      map((response) => {
-        return response;
-      }),
+      map(response => response),
       catchError(err => this.errorHandler.handleError('EventDetailsService:addStoneToEvent', err))
     );
   }
 
-  removePreSelectedStones(eventId, stoneObj) {
+  removePreSelectedStones(eventId, stoneObj): Observable<any> {
     const stoneBody = {
       'stone_ids': stoneObj
     };
@@ -297,7 +280,7 @@ export class EventDetailsService {
       );
   }
 
-  removeStoneFromAppointment(obj, eventCode) {
+  removeStoneFromAppointment(obj, eventCode): Observable<any> {
     const payload = {body: JSON.stringify(obj)};
     const httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }), payload
@@ -312,7 +295,7 @@ export class EventDetailsService {
     );
   }
 
-  addNewComments(comment, id) {
+  addNewComments(comment, id): Observable<any> {
     const commentData = {
       appointment_id: Number(id),
       comment: comment

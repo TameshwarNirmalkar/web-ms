@@ -1,0 +1,51 @@
+<div class="ui-g-12 event-box">
+  <div class="ui-g-6 ui-g-nopad text-center">
+    <div class="ui-g-12 paddb0">
+      <label class="event-dashboard-heading">SRK AT</label>
+    </div>
+    <div class="ui-g-12 paddb0">
+      <label class="event-dashboard-heading">{{eventInfo.event_name}}</label>
+    </div>
+    <div class="ui-g-12 paddb0 event-info">
+      {{eventInfo.event_start_date | customDate : 'dateWithMonth'}} - {{eventInfo.event_end_date | customDate : 'dateWithMonth'}}
+    </div>
+    <div class="ui-g-12 paddb0 event-info">
+      {{eventInfo.event_venue | titlecase}}
+    </div>
+    <div class="ui-g-12 paddb0 event-info">
+      {{'BOOTH_NO' | translate}}: {{eventInfo.booth_number}}
+    </div>
+    <div class="ui-g-12 text-center" *ngIf="remainingTime > 0">
+      <div class="ui-g-3 paddl0 paddr0">
+        <label>{{"Days" |translate}}</label><br>
+        <label><b>{{eventDays}}</b> </label>
+      </div>
+      <div class="ui-g-3 paddl0 paddr0">
+        <label>{{"Hours" |translate}}</label><br>
+        <label> <b>{{eventHour}}</b> </label>
+      </div>
+      <div class="ui-g-3 paddl0 paddr0">
+        <label>{{"Minutes" |translate}}</label><br>
+        <label><b>{{eventMinute}} </b></label>
+      </div>
+      <div class="ui-g-3 paddl0 paddr0">
+        <label>{{"Seconds" |translate}}</label><br>
+        <label><b>{{eventSeconds}} </b></label>
+      </div>
+    </div>
+  </div>
+  <div class="ui-g-6 text-center">
+    <div class="ui-g-12">
+      <img class="flag-img" [src]=countryFlagPath>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-2"></div>
+      <div class="ui-g-8 text-center event-info">
+        {{eventInfo.message}}
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <button [dirStoreAudit]="'BOOK APPOINTMENT'" id={{eventInfo.event_id}} class="custom-btnPrimary book-appointment-button" [disabled]="false" (click)="redirectToEvent(eventInfo)">{{'BOOK_APPOINTMENT' | translate}}</button>
+    </div>
+  </div>
+</div>

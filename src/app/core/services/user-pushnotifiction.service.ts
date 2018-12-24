@@ -4,6 +4,7 @@ import { ErrorHandlerService } from './error-handler.service';
 import { AuthService } from './auth.service';
 import { ApplicationDataService } from './application-data.service';
 import { LoggerService } from './logger.service';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UserPushNotificationService {
@@ -16,7 +17,7 @@ export class UserPushNotificationService {
   ) { }
 
 
-  fetchMessage(isAll) {
+  fetchMessage(isAll): Observable<any> {
     const data = {
       login_name: this.authService.getLoginName(),
       email_count: isAll

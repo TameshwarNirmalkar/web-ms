@@ -1,0 +1,12 @@
+<dx-popover target="#{{targetId}}" position="bottom" [width]="141" [(visible)]="filterPopOverVisible">
+  <div *dxTemplate="let data of 'content'">
+    <p-listbox [options]="filterOptions" [(ngModel)]="selectedFilterOption" [style]="{'max-height':'280px'  , 'max-width':'100%'}"
+      (onChange)="filterOperations()">
+      <ng-template let-opt pTemplate="item">
+        <div class="ui-helper-clearfix">
+          <span style="font-size: 14px; margin: 15px 10px 0 0">{{opt.label}}</span>
+        </div>
+      </ng-template>
+    </p-listbox>
+  </div>
+</dx-popover>

@@ -1,0 +1,1183 @@
+app-serenaway-survey .body {
+  color: #333;
+}
+
+app-serenaway-survey .sv_prev_btn {
+  display: none !important;
+}
+
+app-serenaway-survey .loading {
+  width: 50px;
+  height: 50px;
+}
+
+app-serenaway-survey #SQT {
+  margin-left: 30px !important;
+}
+
+app-serenaway-survey #questionString {
+  /*color: white;*/
+  /* white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;*/
+  position: static;
+  font-weight: initial;
+  margin-left: 22px;
+  /*word-break: break-word;*/
+}
+
+.clickPhotoButton,
+.captureImage,
+.w3-button {
+  display: none !important;
+}
+
+app-serenaway-survey .alignmentPosition {
+  margin-left: 41%;
+  display: block;
+  width: 42%;
+}
+
+@media screen and (max-width: 768px) {
+  app-serenaway-survey .languageSelect {
+    width: 40%;
+  }
+  app-serenaway-survey .alignmentPosition {
+    margin-left: 24.5% !important;
+    display: block !important;
+    width: 133% !important;
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1200px) {
+  app-serenaway-survey .alignmentPosition {
+    margin-left: 29% !important;
+    display: block !important;
+    width: 100% !important;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  app-serenaway-survey .alignmentPosition {
+    margin-left: 31.5% !important;
+    display: block !important;
+    width: 100% !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  app-serenaway-survey #SQT {
+    margin-left: 17% !important;
+    float: left !important;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  app-serenaway-survey #SQT {
+    margin-left: 5% !important;
+    float: left;
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1200px) {
+  app-serenaway-survey #SQT {
+    margin-left: 5% !important;
+    float: left;
+  }
+}
+
+app-serenaway-survey .accordion-collapse-panel {
+  word-wrap: break-word !important;
+  display: inline-block !important;
+  width: 100% !important;
+}
+
+app-serenaway-survey #accordion .panel {
+  border: none;
+  box-shadow: none;
+  border-radius: 5px !important;
+  margin-bottom: 5px; // border: 2px solid #9a91ff;
+}
+
+app-serenaway-survey #accordion .panel-heading {
+  padding: 0;
+  border-radius: 0;
+  border: none;
+}
+
+app-serenaway-survey #accordion .panel-body {
+  font-size: 14px;
+  background: #f2f2f2;
+  /*padding: 15px 20px;*/
+  line-height: 25px;
+  border: none;
+  position: relative;
+  display: table;
+  width: 100%;
+}
+
+// html{
+//   overflow-y: hidden;
+// }
+app-serenaway-survey .w3-container {
+  display: none;
+}
+
+.custom-file-input {
+  border-radius: 5px;
+}
+
+// .panel-body{
+//   height: 90vh;
+//   overflow-y: auto;
+// }
+app-serenaway-survey #accordion .panel-body:after {
+  content: "";
+  position: absolute;
+  top: -15px;
+  right: 50px;
+  border: 15px solid transparent; // border-bottom: 0px solid #ccc;
+}
+
+app-serenaway-survey .progress-bar {
+  background-color: darkgray;
+}
+
+app-serenaway-survey .serena-que-full {
+  /*background-color: #ddf8de;*/
+  background-color: #fff;
+  /*border: 1px solid darkgray;*/
+  vertical-align: top;
+  border: 2px solid #9a91ff;
+}
+
+/*.serena-que-text {
+  background-color: #ddf8de;
+  background-color: #fff;
+  color: darkgray;
+  font-size: 24px;
+}*/
+
+app-serenaway-survey .serena-que-media {
+  /*background-color: #ddf8de;
+  background-color: #fff;
+  padding-bottom: 10px;*/
+  margin-top: 10px;
+}
+
+/*.serena-que {
+  border-bottom: 1px solid darkgray;
+  display: table;
+  width: 100%;
+}*/
+
+app-serenaway-survey .serena-ans-option {
+  margin-left: 0px;
+  text-align: center;
+  /*background-color: rgba(0,0,0,0.06);*/
+  margin-top: 15px;
+}
+
+app-serenaway-survey .serena-checkbox:checked+.serena-label {
+  background: #ffffff !important;
+  color: rgb(51, 51, 51) !important
+}
+
+@media screen and (max-width:767px) {
+  app-serenaway-survey .serena-que-text {
+    text-align: left;
+  }
+  .serena-ans-option>label {
+    text-align: center;
+  }
+  .serena-ans-option,
+  .serena-que-media {
+    text-align: center;
+    /*padding-right: 20px;*/
+  }
+}
+
+app-serenaway-survey input[type="button"] {
+  border: none;
+  color: white;
+  overflow: hidden;
+  padding: 0;
+  text-transform: uppercase;
+  width: 150px;
+  height: 40px;
+  background-color: #AFDDE9;
+  border: 1px solid #89AFB9;
+  color: green;
+}
+
+app-serenaway-survey .surveyTitle {
+  color: darkgray;
+  text-align: center;
+}
+
+app-serenaway-survey header {
+  background-color: darkgray !important;
+}
+
+app-serenaway-survey footer {
+  background-color: darkgray !important;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+}
+
+app-serenaway-survey .foot-copy,
+.foot-link {
+  text-align: center;
+  padding: 10px 20px 10px 20px;
+}
+
+app-serenaway-survey .foot-copy {
+  padding: 0px 20px 10px 20px;
+}
+
+app-serenaway-survey .header-logo {
+  margin: 15px;
+}
+
+app-serenaway-survey .right-pane {
+  position: relative;
+  background-color: #f2f2f2;
+  height: 100%;
+}
+
+app-serenaway-survey .content {
+  height: auto;
+  width: 100%;
+  position: fixed;
+  overflow: auto;
+  overflow-x: hidden;
+  top: 100px;
+  bottom: 37px;
+  padding: 10px;
+  /*background-color: #fff*/
+  background: #c6cbca;
+}
+
+@media screen and (max-width:768px) {
+  app-serenaway-survey .md-button {
+    width: auto;
+  }
+  app-serenaway-survey .content {
+    position: static;
+    overflow-x: hidden;
+    /*margin-bottom: 10px;*/
+  }
+  app-serenaway-survey footer {
+    position: relative;
+  }
+  app-serenaway-survey .right-pane {
+    display: none;
+  }
+}
+
+app-serenaway-survey .serena-radio,
+.serena-checkbox {
+  display: none;
+  &:not(:disabled)~label {
+    cursor: pointer;
+  }
+  &:disabled~.serena-label {
+    color: hsla(150, 5%, 75%, 1);
+    border-color: hsla(150, 5%, 75%, 1);
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+}
+
+app-serenaway-survey .serena-label {
+  height: 100%;
+  display: block;
+  padding: 10px;
+  text-align: center;
+  position: relative;
+  border: 5px solid rgba(0, 0, 0, 0.06);
+} // app-serenaway-survey .form-inline .checkbox label, .form-inline .radio label {
+//   // padding-left: 15px;
+//   margin-top: 2% !important;
+// }
+app-serenaway-survey .checkbox label,
+.radio label {
+  padding-left: 10px;
+}
+
+.ansDiv {
+  padding: 10px;
+  margin: 10px 0px 0px 0px;
+}
+
+app-serenaway-survey.checkbox,
+app-serenaway-survey .radio-inline {
+  line-height: 100%;
+}
+
+@media (min-width: 768px) {
+  app-serenaway-survey .form-inline .checkbox label,
+  .form-inline .radio label {
+    padding-left: 9px;
+    font-size: 14px !important;
+    color: rgb(51, 51, 51)
+  }
+}
+
+app-serenaway-survey .serena-checkbox:checked+.serena-label,
+.serena-radio:checked+.serena-label {
+  background-color: rgba(0, 0, 0, 0.06);
+  color: darkgray;
+}
+
+app-serenaway-survey .serena-checkbox:not(:checked)+.serena-label::after {
+  color: #333333 !important;
+  content: '';
+  font-size: 15px;
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 20px;
+  width: 20px;
+  line-height: 20px;
+  text-align: center;
+  background-color: #fff;
+  border: 2px solid darkgray;
+}
+
+app-serenaway-survey .serena-checkbox:checked+.serena-label::after {
+  color: #333333 !important;
+  content: '✔';
+  font-size: 15px;
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 20px;
+  width: 20px;
+  line-height: 20px;
+  text-align: center;
+  background-color: #fff;
+  border: 2px solid darkgray;
+}
+
+app-serenaway-survey .serena-radio:not(:checked)+.serena-label::after {
+  color: #333333 !important;
+  content: '';
+  font-size: 15px;
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 20px;
+  width: 20px;
+  border-radius: 15px;
+  text-align: center;
+  background-color: #fff;
+  border: 2px solid darkgray;
+}
+
+app-serenaway-survey .serena-radio:checked+.serena-label::after {
+  color: #333333 !important;
+  content: '✔';
+  font-size: 15px;
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 20px;
+  width: 20px;
+  border-radius: 15px;
+  text-align: center;
+  background-color: #fff;
+  border: 2px solid darkgray;
+}
+
+.sv_complete_btn {
+  margin-bottom: 15px;
+}
+
+/*PROGRESS BAR */
+
+app-serenaway-survey .center-block {
+  margin-right: 10px;
+  margin-left: 10px;
+  height: 10px;
+}
+
+app-serenaway-survey .progress-bar {
+  font-size: 10px;
+  line-height: 9px;
+}
+
+app-serenaway-survey .text {
+  /*transform: translateY(35%);*/
+  max-width: 250px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+app-serenaway-survey .surveystatistic {
+  color: #fff !important;
+}
+
+@media (max-width: 400px) {
+  app-serenaway-survey .text {
+    max-width: 215px;
+  }
+}
+
+@media (max-width: 360px) {
+  app-serenaway-survey .text {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 330px) {
+  app-serenaway-survey .text {
+    max-width: 150px;
+  }
+}
+
+//  app-serenaway-survey .serena-rating {
+//     height: 70px !important;
+//     width: 200px !important;
+//     display: inline-grid !important;
+//     position: initial !important;
+//     border-radius: 5px !important;
+//     color: #000!important;
+//     border: 2px solid #dadfe6 !important;
+// }
+app-serenaway-survey .serena-rating {
+  padding-top: 15px;
+  height: 55px;
+  min-width: 10%;
+  width: auto;
+  text-align: center;
+  display: inline-grid;
+  position: initial;
+  border-radius: 5px !important;
+  color: #000 !important;
+  border: 2px solid #dadfe6 !important;
+}
+
+app-serenaway-survey #questionString app-serenaway-survey .btn-group {
+  width: 100%;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+app-serenaway-survey .btn-default.active,
+app-serenaway-survey .btn-default:active,
+app-serenaway-survey .open>.dropdown-toggle.btn-default {
+  color: #333 !important;
+  background-color: #dadfe6 !important;
+  border-color: #dadfe6 !important;
+}
+
+app-serenaway-survey input[type="button"] {
+  background-color: #AFDDE9 !important;
+  border: 1px solid #89AFB9 !important;
+  color: black !important;
+  border-radius: 3px;
+} // cursor: pointer !important;
+/*@media screen and (max-width:767px) {
+  .serena-rating {
+    text-align: center;
+  }
+}*/
+
+app-serenaway-survey .col-md-12.col-sm-12.col-xs-12.serena-que-text .text {
+  white-space: normal;
+}
+
+/*TABLE */
+
+app-serenaway-survey .serena-table {
+  margin-bottom: 0px;
+}
+
+app-serenaway-survey .serena-table-thead .serena-table-th {
+  font-weight: 400; // background: #ccc;
+  color: #000;
+}
+
+app-serenaway-survey .serena-table-tr {
+  background: #f4f7f8;
+  border-bottom: 1px solid #FFF;
+  margin-bottom: 5px;
+}
+
+app-serenaway-survey .serena-table-tr:nth-child(even) {
+  background: #e8eeef;
+}
+
+app-serenaway-survey .serena-table-th,
+.serena-table-td {
+  text-align: left;
+  padding: 20px;
+  font-weight: 300;
+}
+
+app-serenaway-survey .responsive-table {
+  margin-bottom: 0px;
+}
+
+@media screen and (max-width: 767px) {
+  app-serenaway-survey .responsive-table {
+    overflow-x: auto;
+  }
+}
+
+@media screen and (max-width: 497px) {
+  app-serenaway-survey .btn-group {
+    transform: translateX(25%) !important;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  app-serenaway-survey .btn-group {
+    transform: translateX(25%) !important;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  app-serenaway-survey .responsive-table {
+    width: 312px;
+  }
+  app-serenaway-survey .btn-group {
+    transform: translateX(18%) !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  app-serenaway-survey .responsive-table {
+    width: 275px;
+  }
+  app-serenaway-survey .btn-group {
+    transform: translateX(13%) !important;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  app-serenaway-survey .responsive-table {
+    width: 260px;
+  }
+  app-serenaway-survey .btn-group {
+    transform: translateX(11%) !important;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  app-serenaway-survey .responsive-table {
+    width: 220px;
+  }
+  app-serenaway-survey .btn-group {
+    transform: translateX(5%) !important;
+  }
+}
+
+@media screen and (max-width: 310px) {
+  app-serenaway-survey .responsive-table {
+    width: 200px;
+  }
+  app-serenaway-survey .btn-group {
+    transform: translateX(3%) !important;
+  }
+}
+
+app-serenaway-survey .loading {
+  width: 50px;
+  height: 50px;
+}
+
+app-serenaway-survey #SQT {
+  margin-left: 30px !important;
+}
+
+app-serenaway-survey #questionString {
+  /*color: white;*/
+ /* white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;*/
+  position: static;
+  font-weight: initial;
+  /*word-break: break-word;*/
+}
+
+app-serenaway-survey md-toast {
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate3d(-50%, 0, 0) !important;
+}
+
+app-serenaway-survey .languageSelect {
+  width: 40%;
+}
+
+app-serenaway-survey .reportTextColor {
+  color: #fff;
+}
+
+app-serenaway-survey .alignmentPosition {
+  margin-left: 41%;
+  display: block;
+  width: 42%;
+}
+
+@media screen and (max-width: 768px) {
+  app-serenaway-survey .languageSelect {
+    width: 40%;
+  }
+  app-serenaway-survey .alignmentPosition {
+    margin-left: 24.5% !important;
+    display: block !important;
+    width: 133% !important;
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1200px) {
+  app-serenaway-survey .alignmentPosition {
+    margin-left: 29% !important;
+    display: block !important;
+    width: 100% !important;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  app-serenaway-survey .alignmentPosition {
+    margin-left: 31.5% !important;
+    display: block !important;
+    width: 100% !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  app-serenaway-survey #SQT {
+    margin-left: 17% !important;
+    float: left !important;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  app-serenaway-survey #SQT {
+    margin-left: 5% !important;
+    float: left;
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1200px) {
+  app-serenaway-survey #SQT {
+    margin-left: 5% !important;
+    float: left;
+  }
+}
+
+app-serenaway-survey .accordion-collapse-panel {
+  word-wrap: break-word !important;
+  display: inline-block !important;
+  width: 100% !important;
+}
+
+app-serenaway-survey #accordion .panel-heading {
+  padding: 0;
+  border-radius: 0;
+  border: none;
+}
+
+app-serenaway-survey #accordion .panel-title a {
+  padding: 4px !important;
+  font-size: 16px !important;
+  font-weight: bold !important; // background: #9a91ff !important;
+  // color: white!important;
+  // border-bottom: 1px solid #ccc !important;
+  // transition: all 0.5s ease 0s !important;
+}
+
+//
+// app-serenaway-survey #accordion .panel-title a:hover {
+//   background: #9a91ff !important;
+//   color: #fff !important;
+// }
+app-serenaway-survey #accordion .panel-body {
+  font-size: 14px !important;
+  background: #f2f2f2 !important;
+  /*padding: 15px 20px;*/
+  line-height: 25px !important;
+  border: none !important;
+  position: relative !important;
+  display: table !important;
+  width: 100% !important;
+}
+
+app-serenaway-survey #accordion .panel-body:after {
+  content: "";
+  position: absolute;
+  top: -15px;
+  right: 50px;
+  border: 15px solid transparent; // border-bottom: 0px solid #ccc;
+}
+
+app-serenaway-survey .progress-bar {
+  background-color: darkgray;
+}
+
+app-serenaway-survey .serena-que-full {
+  /*background-color: #ddf8de;*/
+  background-color: #fff;
+  /*border: 1px solid darkgray;*/
+  vertical-align: top;
+}
+
+/*.serena-que-text {
+  background-color: #ddf8de;
+  background-color: #fff;
+  color: darkgray;
+  font-size: 24px;
+}*/
+
+app-serenaway-survey .serena-que-media {
+  /*background-color: #ddf8de;
+  background-color: #fff;
+  padding-bottom: 10px;*/
+  margin-top: 10px;
+}
+
+/*.serena-que {
+  border-bottom: 1px solid darkgray;
+  display: table;
+  width: 100%;
+}*/
+
+app-serenaway-survey .serena-ans-option {
+  margin-left: 0px;
+  text-align: center;
+  /*background-color: rgba(0,0,0,0.06);*/
+  margin-top: 15px;
+}
+
+@media screen and (max-width:767px) {
+  app-serenaway-survey .serena-que-text {
+    text-align: left;
+  }
+  app-serenaway-survey .serena-ans-option>label {
+    text-align: center;
+  }
+  app-serenaway-survey .serena-ans-option,
+  .serena-que-media {
+    text-align: center;
+    /*padding-right: 20px;*/
+  }
+}
+
+app-serenaway-survey .modal-backdrop {
+  position: initial;
+}
+
+app-serenaway-survey .modal-backdrop {
+  background: none;
+}
+
+app-serenaway-survey .btn-bs-file {
+  position: relative;
+}
+
+app-serenaway-survey .custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+app-serenaway-survey .custom-file-input {
+  position: relative;
+  background-color: #f2f2f2;
+  vertical-align: middle;
+  line-height: 32px;
+}
+
+app-serenaway-survey .custom-file-input::before {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  height: 33px;
+  line-height: 32px;
+  vertical-align: middle;
+  color: white;
+  content: 'Browse';
+  display: inline-block;
+  background: #ffffff;
+  border-radius: 3px;
+  padding: 0px 18px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  font-size: 10pt;
+  color: #333333;
+  border: 1px solid #e2e2e2;
+}
+
+app-serenaway-survey select {
+  width: 100%;
+  background-color: #ffffff;
+  height: 35px;
+}
+
+app-serenaway-survey .custom-file-input:hover::before {
+  border-color: black;
+}
+
+app-serenaway-survey .custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+app-serenaway-survey .clickButton {
+  margin-bottom: 5%;
+  margin-left: 82%;
+  margin-right: 70%;
+  margin-top: 2%;
+}
+
+app-serenaway-survey .snapPicPhoto {
+  margin-left: 0;
+  margin-top: 0;
+  height: 37px;
+  width: 100%;
+  line-height: 100%;
+  border: 1px solid #e2e2e2;
+}
+
+app-serenaway-survey .fileUploadButton {
+  margin-left: 1%;
+}
+
+app-serenaway-survey .captureImage {
+  width: 99%;
+  border-radius: 9px;
+  margin-top: 5% !important;
+  margin-left: 0.8%;
+  margin-right: 1.5%;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+}
+
+app-serenaway-survey .alignment {
+  padding-left: 14px;
+}
+
+app-serenaway-survey .sizeAlignment {
+  padding-left: 0%;
+  padding-bottom: 6px;
+  margin-top: 0%;
+}
+
+app-serenaway-survey .ajax-loader {
+  visibility: hidden;
+  background-color: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  z-index: +100 !important;
+  width: 100%;
+  height: 100%;
+}
+
+app-serenaway-survey .ajax-loader img {
+  position: relative;
+  max-height: 20%;
+  top: 50%;
+  margin: 0 45% 0 45%;
+}
+
+app-serenaway-survey .clickPhotoButton {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-bottom: 7px;
+  cursor: pointer;
+}
+
+app-serenaway-survey .fileImagePreview {
+  max-width: 96%;
+}
+
+@media only screen and (max-width: 768px) {
+  app-serenaway-survey .snapPicPhoto {
+    margin-left: 2%;
+    margin-top: -6%;
+    width: 212px;
+  }
+  app-serenaway-survey .sizeAlignment {
+    padding-left: 4px;
+    padding-bottom: 6px;
+    margin-top: 26%;
+  }
+  app-serenaway-survey .alignment {
+    padding-left: 4px;
+  }
+  app-serenaway-survey .fileUploadButton {
+    margin-top: 2% !important;
+  }
+  app-serenaway-survey .captureImage {
+    width: 98%;
+    margin-top: 15%;
+  }
+  app-serenaway-survey .takeSnapDiv {
+    display: none;
+  }
+  app-serenaway-survey .fileImagePreview {
+    max-width: 96%;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  app-serenaway-survey .snapPicPhoto {
+    margin-left: 1%;
+    margin-top: 0%;
+  }
+  app-serenaway-survey .sizeAlignment {
+    padding-left: 8%;
+    padding-bottom: 6px;
+    margin-top: 4%;
+  }
+  app-serenaway-survey .alignment {
+    padding-left: 4px;
+  }
+  app-serenaway-survey .fileUploadButton {
+    margin-top: 2% !important;
+  }
+  app-serenaway-survey .captureImage {
+    width: 98%;
+    margin-top: 15%;
+  }
+  app-serenaway-survey .takeSnapDiv {
+    display: none;
+  }
+  app-serenaway-survey .fileImagePreview {
+    max-width: 96%;
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1200px) {
+  app-serenaway-survey .snapPicPhoto {
+    margin-left: 2%;
+    margin-top: 0%;
+  }
+  app-serenaway-survey .sizeAlignment {
+    padding-left: 6%;
+    padding-bottom: 6px;
+    margin-top: 3%;
+  }
+  app-serenaway-survey .alignment {
+    padding-left: 4px;
+  }
+  app-serenaway-survey .fileUploadButton {
+    margin-top: 2% !important;
+  }
+  app-serenaway-survey .captureImage {
+    width: 98%;
+    margin-top: 15%;
+  }
+  app-serenaway-survey .takeSnapDiv {
+    display: none;
+  }
+  app-serenaway-survey .fileImagePreview {
+    max-width: 96%;
+  }
+}
+
+app-serenaway-survey .img-circle {
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+}
+
+app-serenaway-survey ::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+app-serenaway-survey ::-webkit-scrollbar:vertical {
+  width: 12px;
+}
+
+app-serenaway-survey ::-webkit-scrollbar:horizontal {
+  height: 12px;
+}
+
+app-serenaway-survey ::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .5);
+  border-radius: 10px;
+  border: 2px solid #ffffff;
+}
+
+app-serenaway-survey ::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+app-serenaway-survey .loadingImage {
+  background: transparent url('https://service.betterregulation.com/sites/all/themes/bootstrap_subtheme/images/loader.gif') center no-repeat;
+}
+
+/*checkbx and radiobutton option colors*/
+
+.serena-checkbox:checked+.serena-label,
+.serena-radio:checked+.serena-label {
+  background-color: rgba(0, 0, 0, 0.06);
+  color: darkgray !important;
+}
+
+.serena-checkbox:not(:checked)+.serena-label::after {
+  color: darkgray !important;
+  border: 2px solid darkgray !important;
+}
+
+.serena-checkbox:checked+.serena-label::after {
+  color: darkgray !important;
+  border: 2px solid darkgray !important;
+}
+
+.serena-radio:not(:checked)+.serena-label::after {
+  color: darkgray !important;
+  border: 2px solid darkgray !important;
+}
+
+.serena-radio:checked+.serena-label::after {
+  color: darkgray !important;
+  border: 2px solid darkgray !important;
+}
+
+/*progress-bar color*/
+
+.progress-bar {
+  background-color: darkgray !important;
+}
+
+/*question border*/
+
+.svd_container .svd_content .svd_survey_designer .svd_editors .svd_questions_editor .panel-body .svd_question {
+  border-color: darkgray !important;
+}
+
+app-serenaway-survey #accordion .panel-title a {
+  background-color: darkgray !important;
+}
+
+app-serenaway-survey #accordion .panel-title a {
+  padding: 4px !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+  background: #ffffff !important;
+  border-bottom: 1px solid #dddddd;
+}
+
+app-serenaway-survey #accordion .panel {
+  border: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+}
+
+app-serenaway-survey .serena-label {
+  border: none !important;
+  padding: 0px;
+}
+
+app-serenaway-survey .serena-checkbox:not(:checked)+.serena-label::after,
+app-serenaway-survey .serena-radio:not(:checked)+.serena-label::after,
+app-serenaway-survey .serena-checkbox:checked+.serena-label::after,
+app-serenaway-survey .serena-radio:checked+.serena-label::after {
+  left: 20% !important;
+  top: 0px;
+  zoom: .6;
+  bottom: 0px;
+  margin: auto;
+  background: gainsboro;
+}
+
+app-serenaway-survey #SQT {
+  margin-left: -7px !important;
+}
+
+.serena-checkbox:checked+.serena-label,
+.serena-radio:checked+.serena-label {
+  background-color: white;
+  color: rgb(51, 51, 51) !important
+}
+
+app-serenaway-survey .form-inline {
+  width: 0% !important;
+}
+
+app-serenaway-survey .text {
+  margin-top: -25px !important;
+}
+
+app-serenaway-survey .text {
+  margin-left: 20px !important; // width: 230px!important;
+  width: 100%;
+  margin-top: 7px !important;
+}
+
+app-serenaway-survey .serena-checkbox:not(:checked)+.serena-label::after {
+  top: 0px !important;
+}
+
+app-serenaway-survey .serena-radio:not(:checked)+.serena-label::after {
+  top: 0px !important;
+}
+
+app-serenaway-survey #questionString {
+  margin-left: 0px !important;
+}
+
+.serena-textarea,
+.serena-textbox.form-control {
+  width: 100%;
+  min-height: 35px;
+  border-radius: 5px;
+  border: 1px solid rgb(166, 166, 166);
+}
+
+app-serenaway-survey .fileUploadButton {
+  display: none;
+}
+
+app-serenaway-survey .serena-radio:not(:disabled)~label,
+.serena-checkbox:not(:disabled)~label {
+  cursor: pointer;
+  padding-left: 9px;
+  font-size: 14px;
+  color: rgb(51, 51, 51)
+}
+
+span[data-bind="attr: {id: 'tickmark' + question.name}"] {
+  display: none !important;
+}
+
+#surveyElement {
+  font-family: 'NexaLight';
+  overflow:auto;
+  border:1px solid transparent;
+  display: inline;
+
+}
+
+.ui-dialog.ui-widget .ui-dialog-content {
+    overflow: auto!important;
+}
+/*p-dialog#surveyDialog .ui-dialog-titlebar{position: absolute !important;z-index: 9  !important;}*/
+app-serenaway-survey #accordion .panel-title a{border: 0px;}
+  hr{display: none;}
+  .ansDiv{font-size: 16px;}
+  .ansDiv img{display: block;margin-top: 10px;}
+  #surveyElement div {
+    margin-top: -5px;
+    font-size:18px;
+}
+.survey-heading h2{margin: 10px auto;font-size:24px; }
+#surveyDialog .ui-dialog-content {
+  padding: 0px !important;
+}

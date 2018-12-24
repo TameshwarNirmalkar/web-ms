@@ -1,0 +1,489 @@
+<div dirScrollTop id="stoneCompareMainContainerId" class="ui-g stone-compare-box" *ngIf="stoneData">
+  <div class="ui-g-12 ui-g-nopad text-right">
+    <button *ngIf="stoneButtonList?.addNote" [dirStoreAudit]="'MAKE A NOTE'" id="addNoteForStoneCompareId" class="custom-btnBorder" (click)="addNoteForStone()">{{'Add Note' |translate}}</button>
+    <!--<ng-template [dirCheckPermission]="'create_packet_btn'" *ngIf="showPacket">
+      <button [dirStoreAudit]="'ADD TO PACKET'" id="addpacketId" class="custom-btnBorder" (click)="addToPacket()">{{'Add to Packet' |translate}}</button>
+    </ng-template>-->
+    <ng-template [dirCheckPermission]="'request_hold_btn'">
+      <button *ngIf="stoneButtonList?.requestHold" [dirStoreAudit]="'ADD TO HOLD'" id="requestHoldCompareId" class="custom-btnBorder" (click)="requestHold()">{{'Request Hold' |translate}}</button>
+    </ng-template>
+    <ng-template [dirCheckPermission]="'ddc_btn'">
+      <button *ngIf="stoneButtonList?.applyDDC" [dirStoreAudit]="'ADD TO DDC'" id="ddcButtonCompareId" class="custom-btnBorder" (click)="applyDDC()">{{'Apply DDC' |translate}}</button>
+    </ng-template>
+    <ng-template [dirCheckPermission]="'add_basket_btn'">
+      <button *ngIf="stoneButtonList?.addBasket" [dirStoreAudit]="'ADD TO BASKET'" id="addBasketCompareId" class="custom-btnBorder" (click)="addToMyBasket()">{{'Add to Basket' |translate}}</button>
+    </ng-template>
+    <ng-template [dirCheckPermission]="'view_request_btn'">
+      <button *ngIf="stoneButtonList?.viewRequest" [dirStoreAudit]="'VIEW REQUEST'" id="viewRequestCompareId" class="custom-btnBorder" (click)="toggleViewRequestOverlay()">{{'View Request' |translate}}
+      </button>
+    </ng-template>
+    <ng-template [dirCheckPermission]="'confirm_btn'">
+      <button *ngIf="stoneButtonList?.confirmButton" [dirStoreAudit]="'CONFIRM'" id="selectedStonePanelconfirmButtonCompareId" class="custom-btnPrimary" (click)="confirmDiamonds()">{{'Confirm' |translate}}
+      </button>
+    </ng-template>
+  </div>
+  <div id="imageContainerId" class="ui-g-12">
+    <div class="ui-g-1"></div>
+    <div class="ui-g-2 compare-stone-card ui-g-nopad width20" *ngFor="let stone of stoneData">
+      <div id="{{stone.stone_id}}StoneId" class="ui-g-12 text-center">
+        <p-checkbox name="compareStones" id="{{stone.stone_id}}StoneCheckboxId" value={{stone.stone_id}} label="{{stone.stone_id}}"
+          (onChange)="onChangeSelectedStones($event, stone)" [(ngModel)]="selectedStones" [style.margin.px]="0"></p-checkbox>
+        <span id="{{stone.stone_id}}CloseButton" class="icon-close circle-close-icon" (click)="closeStoneObject(stone.stone_id)"></span>
+      </div>
+      <div id="stoneMultimediaBox" class="ui-g-12 ui-md-12 ui-lg-12">
+        <div id="displayBoxId" class="ui-g-12 multimedia-box" align="center">
+          <img id="{{stone.stone_id}}MultimediaImageId" *ngIf="stone.imageShow" class="multimedia-image" [src]="stone.image_url | safeUrl">
+          <iframe *ngIf="stone.videoShow" [src]="stone.movie_url +'&h=250&btn=0' | safeUrl" id="{{stone.stone_id}}iframeMovie" height="100%"
+            width="100%" scrolling="no" frameborder="0" valign="top"></iframe>
+          <iframe *ngIf="stone.digiPlotShow" [src]="stone.digiplot_url | safeUrl" id="iframe{{stone.stone_id}}DigiPlot" height="100%"
+            width="100%" scrolling="no" frameborder="0" valign="top"></iframe>
+          <img *ngIf="stone.haShow" id="{{stone.stone_id}}haImageId" class="multimedia-image" [src]="stone.hna_url | safeUrl">
+          <img *ngIf="stone.verifyShow" id="{{stone.stone_id}}verifyImageId" class="multimedia-image" [src]="stone.image_url | safeUrl">
+          <iframe *ngIf="stone.certShow" id="{{stone.stone_id}}Iframecert" [src]="stone.cert_url | safeUrl" height="100%" width="100%"
+            scrolling="no" frameborder="0" valign="top"></iframe>
+          <img *ngIf="stone.plotShow" id="{{stone.stone_id}}PlotImageId" class="multimedia-image-ploat" [src]="stone.plot_url | safeUrl">
+        </div>
+        <div id="buttonBoxId" class="ui-g-12 text-center">
+          <a [dirStoreAudit]="'IMAGE VIEW'" *ngIf="stone.image_url" id="{{stone.stone_id}}ImageButtonId" (click)="changeMultimedia(true,false,false,false,false,false,false,stone)"
+            [class.dtl-icon-active]="stone.imageShow" class="dtl-icon icon-image" pTooltip="Diamond View" tooltipPosition="bottom"
+            tooltipEvent="hover"> </a>
+          <a [dirStoreAudit]="'HD VIEW'" *ngIf="stone.movie_url" id="{{stone.stone_id}}VideoButtonId" class="dtl-icon icon-hd-video-movie"
+            (click)="changeMultimedia(false,true,false,false,false,false,false,stone)" [class.dtl-icon-active]="stone.videoShow"
+            pTooltip="HD Movie" tooltipPosition="bottom" tooltipEvent="hover"></a>
+          <a [dirStoreAudit]="'HD VIEW'" *ngIf="stone.digiplot_url" id="{{stone.stone_id}}digiPlotButtonId" (click)="toggleMultimediaOverlay(stone); changeMultimedia(false,false,false,false,false,false,true,stone)"
+            [class.dtl-icon-active]="stone.digiPlotShow" class="dtl-icon icon-g" pTooltip="Digiplot" tooltipPosition="bottom"
+            tooltipEvent="hover"></a>
+          <a [dirStoreAudit]="'HA VIEW'" *ngIf="stone.hna_url" id="{{stone.stone_id}}HabuttonId" class="dtl-icon icon-hna" (click)="changeMultimedia(false,false,true,false,false,false,false,stone)"
+            [class.dtl-icon-active]="stone.haShow" pTooltip="H&A Diamond" tooltipPosition="bottom" tooltipEvent="hover"></a>
+          <a *ngIf="stone.verify_url" id="{{stone.stone_id}}VerifyButtonId" class="dtl-icon icon-cert" (click)="changeMultimedia(false,false,false,true,false,false,false,stone)"
+            [class.dtl-icon-active]="stone.verifyShow" pTooltip="Verify" tooltipPosition="bottom" tooltipEvent="hover"></a>
+          <a [dirStoreAudit]="'CERT VIEW'" *ngIf="stone.cert_url" id="{{stone.stone_id}}CertButtonId" class="dtl-icon icon-certificate"
+            (click)="changeMultimedia(false,false,false,false,true,false,false,stone)" [class.dtl-icon-active]="stone.certShow"
+            pTooltip="Certificate" tooltipPosition="bottom" tooltipEvent="hover"></a>
+          <a [dirStoreAudit]="'PLOT VIEW'" *ngIf="stone.plot_url" id="{{stone.stone_id}}PloatButtonId" class="dtl-icon icon-stone-big"
+            (click)="changeMultimedia(false,false,false,false,false,true,false,stone)" [class.dtl-icon-active]="stone.plotShow"
+            pTooltip="Plotting" tooltipPosition="bottom" tooltipEvent="hover"></a>
+          <a id="{{stone.stone_id}}PopupbuttonId" class="dtl-icon icon-enlarge-zoom" (click)="toggleMultimediaOverlay(stone)" pTooltip="Zoom Image"
+            tooltipPosition="bottom" tooltipEvent="hover"> </a>
+        </div>
+      </div>
+      <div class="ui-g-12 paddt0">
+        <div class="ui-g-4 ui-g-nopad" *ngIf="stone.shape">
+          <div id="{{stone.stone_id}}ShapeLongValue" class="stone-shape-value" title="{{stone.shape.long_value}}">{{stone.shape.long_value}}</div>
+        </div>
+        <div id="{{stone.stone_id}}ClarityLongValue" class="ui-g-2 ui-g-nopad text-center" *ngIf="stone.clarity">{{stone.clarity.long_value}}</div>
+        <div id="{{stone.stone_id}}ColorLongValue" class="ui-g-2 ui-g-nopad text-center stone-color" *ngIf="stone.color" title="{{stone.color.short_value}}">{{stone.color.short_value}}</div>
+        <div id="{{stone.stone_id}}CaratLongValue" class="ui-g-4 ui-g-nopad text-right" *ngIf="stone.carat">
+          <div class="stone-shape-value" title="CRT: {{stone.carat}}">CRT: {{stone.carat}}</div>
+        </div>
+      </div>
+      <div class="ui-g-12 ui-g-nopad">
+        <span class="grid-icon-container" *ngIf="(stone.totalViewed > -1  && !(stone.totalViewed === 0 && stone.totalViewedByUser === 0)) ">
+          <div class="icon-with-text count-view-width">
+            <span id="{{stone.stone_id}}selectedStoneContainerStockTotViewId" class="grid-icon icon-online-view">
+            </span>
+            <br>
+            <label>
+              <span pTooltip="{{'OTHERS_VIEW_TEXT'|translate}}" tooltipPosition="bottom" tooltipEvent="hover">{{stone.totalViewed}}</span>
+              <span *ngIf="stone.totalViewedByUser > -1" pTooltip="{{'MY_VIEW_TEXT'|translate}}"
+                tooltipPosition="bottom" tooltipEvent="hover">/{{stone.totalViewedByUser}}</span>
+            </label>
+          </div>
+        </span>
+        <span class="grid-icon-container compare-page-icon" *ngIf="stone.totalViewRequest">
+          <div class="icon-with-text count-view-width">
+            <span class="grid-icon icon-my-view" [ngClass]="{'text-green': stone.viewRequestStatus=== 2}"></span>
+            <br>
+            <label *ngIf="stone.totalViewRequest > 1"> {{stone.totalViewRequest}}</label>
+          </div>
+        </span>
+        <span class="grid-icon-container compare-page-icon" *ngIf="stone.isRecommended">
+          <span class="grid-icon srk-recommend"></span>
+        </span>
+        <span class="grid-icon-container compare-page-icon" *ngIf="stone.isOnHold">
+          <span class="grid-icon icon-hold-list-option-2"></span>
+        </span>
+        <span class="grid-icon-container compare-page-icon" *ngIf="stone.isBasket">
+          <span class="grid-icon icon-cart" pTooltip="{{(stone.basketStatus==='<'?'BASKET_PRICE_REVISED_TEXT':'BASKET_TEXT') |translate}}"
+            tooltipPosition="bottom" tooltipEvent="hover" [ngClass]="{ 'text-red': stone.basketStatus==='<'}"></span>
+        </span>
+        <span class="grid-icon-container compare-page-icon" *ngIf="stone.b2b_state === 1 && !isbtbPage">
+          <a (click)="openBTB(stone)">
+            <span [ngClass]="{'text-green': stone.isBtbUpdated === 2,'text-red': stone.isBtbUpdated === 1}" class="grid-icon icon-b2b"
+              pTooltip="{{(stone.isBtbUpdated === 1?'BID_SAVED':(stone.isBtbUpdated === 2?'FINAL_SUBMITTED':'B2B_ACTIVE'))|translate}}"
+              tooltipPosition="bottom" tooltipEvent="hover"> </span>
+          </a>
+        </span>
+        <ng-template [dirCheckPermission]="'ddc_btn'">
+          <span class="grid-icon-container compare-page-icon" *ngIf="stone.business_process">
+            <a id="{{stone.stone_id}}DdcStoneId" (click)="updateDDC(stone)">
+              <span pTooltip="{{(stone.ddcStatus==='ACTIVE'?'DDC_ACTIVE':(stone.ddcStatus==='INACTIVE'?'DDC_INACTIVE':'DDC_PUT')) |translate}}"
+                tooltipPosition="bottom" tooltipEvent="hover" class="grid-icon icon-ddc" [ngClass]="{'text-green': stone.ddcStatus==='ACTIVE','text-red': stone.ddcStatus==='INACTIVE'}"></span>
+            </a>
+          </span>
+        </ng-template>
+        <span class="grid-icon-container" *ngIf="stone.isTwin">
+          <span pTooltip="{{'TWIN_DIAMOND_DETAIL_TEXT' |translate}}" tooltipPosition="bottom" tooltipEvent="hover" id="{{stone.stone_id}}SelectedStockPanelSTDId"
+            class=" icon-Twin-Shape-Round "></span>
+        </span>
+        <span class="grid-icon-container compare-page-icon" *ngIf="stone.haveNote">
+          <a>
+            <span id="{{stone.stone_id}}SelectedNotes" class="grid-icon icon-note" pTooltip="{{'NOTE'|translate}}" tooltipPosition="bottom"
+              tooltipEvent="hover" (click)="showAllCommentsForStone(stone.notes)"> </span>
+            <br>
+            <span *ngIf="stone.haveNote" id="{{stone.stone_id}}notesCount" class="note-label" (click)="showAllCommentsForStone(stone.notes)">{{stone.totalNotes}}
+            </span>
+          </a>
+        </span>
+        <span class="grid-icon-container" *ngIf="stone.countryCode">
+          <img id="{{stone.stone_id}}Flag" class="stone-flag-icon" [src]=stone.countryCode>
+        </span>
+        <span>
+          <span class="color-indicator-panel" *ngFor="let color of stone.color_legends">
+            <div class="colorLagend_GRID" [style.background-color]="color | safeStyle"></div>
+          </span>
+        </span>
+      </div>
+
+    </div>
+  </div>
+  <div class="ui-g-12 ui-g-nopad">
+    <div class="ui-g-12 text-bold">{{'Basic Details'| translate}}</div>
+    <div class="ui-g-12">
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Stone' | translate}} ID</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label id="{{stone.stone_id}}StoneId" class="basic-details-info">{{stone.stone_id}}</label>
+        </div>
+      </div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Shape' | translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label id="{{stone.stone_id}}ShapeText" *ngIf="stone.shape" class="basic-details-info">{{stone.shape.long_value}}</label>
+        </div>
+      </div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Clarity' | translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label id="{{stone.stone_id}}ClarityText" *ngIf="stone.clarity" class="basic-details-info">{{stone.clarity.long_value}}</label>
+        </div>
+      </div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Color' | translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label id="{{stone.stone_id}}ColorText" *ngIf="stone.color" class="basic-details-info">{{stone.color.long_value}}</label>
+        </div>
+      </div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Carat' | translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label id="{{stone.stone_id}}CaratText" *ngIf="stone.carat" class="basic-details-info">{{stone.carat}}</label>
+        </div>
+      </div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Certificate No.' | translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label id="{{stone.stone_id}}Clarity" *ngIf="stone.certificate_no" class="basic-details-info">{{stone.certificate_no}}</label>
+        </div>
+      </div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Certificate Lab' | translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label id="{{stone.stone_id}}CertificateLab" *ngIf="stone.certificate" class="basic-details-info">{{stone.certificate.long_value}}</label>
+        </div>
+      </div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'H&A'| translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label id="{{stone.stone_id}}HnA" *ngIf="stone.hna" class="basic-details-info">{{stone.hna.long_value}}</label>
+        </div>
+      </div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Shade'| translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label id="{{stone.stone_id}}Shade" *ngIf="stone.shade" class="basic-details-info">{{stone.shade.long_value}}</label>
+        </div>
+      </div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Luster'| translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label id="{{stone.stone_id}}Luster" *ngIf="stone.luster" class="basic-details-info">{{stone.luster.long_value}}</label>
+        </div>
+      </div>
+    </div>
+    <div class="ui-g-12 ">
+      <div class="ui-g-12 text-bold paddl0">{{'Make Details'| translate}}</div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Cut'| translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label id="{{stone.stone_id}}Cut" *ngIf="stone.cut" class="basic-details-info">{{stone.cut.long_value}}</label>
+        </div>
+      </div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Polish'| translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label id="{{stone.stone_id}}Polish" *ngIf="stone.polish" class="basic-details-info">{{stone.polish.long_value}}</label>
+        </div>
+      </div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Symmetry'| translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label id="{{stone.stone_id}}Symmetry" *ngIf="stone.symmetry" class="basic-details-info">{{stone.symmetry.long_value}}</label>
+        </div>
+      </div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddr0 paddl0 basic-details-heading">{{'Fluorescence'| translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label id="{{stone.stone_id}}Flour" *ngIf="stone.fluor" class="basic-details-info">{{stone.fluor.long_value}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-12 ">
+      <div class="ui-g-12 text-bold paddl0">{{'Inclusions'| translate}}</div>
+      <div class="ui-g-12 ui-g-nopad">
+        <div class="ui-g ui-g-12 paddl0 paddb0 paddt0">
+          <div class="ui-g-1 ui-g-nopad"></div>
+          <div class="ui-g-2 text-center text-bold margin-class width20" *ngFor="let stone of stoneData">
+            <div class="ui-g-6 ui-g-nopad basic-details-heading" id="{{stone.stone_id}}TableHeading">{{'Table' | translate}}</div>
+            <div class="ui-g-6 ui-g-nopad basic-details-heading" id="{{stone.stone_id}}SideHeading">{{'Side' | translate}}</div>
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 paddl0 paddb0 paddt0">
+          <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Black'| translate}}</div>
+          <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+            <div class="ui-g-6 ui-g-nopad basic-details-info" id="{{stone.stone_id}}TableBlack" *ngIf="stone.table_black">{{stone.table_black.long_value}}</div>
+            <div class="ui-g-6 ui-g-nopad basic-details-info" id="{{stone.stone_id}}SideBlack" *ngIf="stone.side_black">{{stone.side_black.long_value}}</div>
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 paddl0 paddb0 paddt0">
+          <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Spot'| translate}}</div>
+          <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+            <div class="ui-g-6 ui-g-nopad basic-details-info" id="{{stone.stone_id}}TableSPot" *ngIf="stone.table_spot">{{stone.table_spot.long_value}}</div>
+            <div class="ui-g-6 ui-g-nopad basic-details-info" id="{{stone.stone_id}}SideSpot" *ngIf="stone.side_spot">{{stone.side_spot.long_value}}</div>
+
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 paddl0 paddb0 paddt0">
+          <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'White'| translate}}</div>
+          <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+            <div class="ui-g-6 ui-g-nopad  basic-details-info" id="{{stone.stone_id}}TableWhite" *ngIf="stone.table_white">{{stone.table_white.long_value}}</div>
+            <div class="ui-g-6 ui-g-nopad basic-details-info" id="{{stone.stone_id}}SideWhite" *ngIf="stone.side_white">{{stone.side_white.long_value}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui-g-12 ui-g-nopad">
+        <div class="ui-g ui-g-12">
+          <div class="ui-g-1 ui-g-nopad"></div>
+          <div class="ui-g-2 text-center text-bold margin-class width20" *ngFor="let stone of stoneData">
+            <div class="ui-g-6 ui-g-nopad basic-details-heading" id="{{stone.stone_id}}ExtraHeading">{{'Extra facet' | translate}}</div>
+            <div class="ui-g-6 ui-g-nopad basic-details-heading" id="{{stone.stone_id}}OpenHeading">{{'Open Inclusion' | translate}}</div>
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 paddl0 paddb0 paddt0">
+          <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Table'| translate}}</div>
+          <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+            <div class="ui-g-6 ui-g-nopad basic-details-info" id="{{stone.stone_id}}TableTable" *ngIf="stone.table_extra_facet">{{stone.table_extra_facet.long_value}}</div>
+            <div class="ui-g-6 ui-g-nopad basic-details-info" id="{{stone.stone_id}}OpenTable" *ngIf="stone.table_open">{{stone.table_open.long_value}}</div>
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 paddl0 paddb0 paddt0">
+          <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Crown'| translate}}</div>
+          <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+            <div class="ui-g-6 ui-g-nopad basic-details-info" id="{{stone.stone_id}}ExtraCrown" *ngIf="stone.crown_extra_facet">{{stone.crown_extra_facet.long_value}}</div>
+            <div class="ui-g-6 ui-g-nopad basic-details-info" id="{{stone.stone_id}}OpenCrown" *ngIf="stone.crown_open">{{stone.crown_open.long_value}}</div>
+
+          </div>
+        </div>
+        <div class="ui-g ui-g-12 paddl0 paddb0 paddt0">
+          <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Pavilion'| translate}}</div>
+          <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+            <div class="ui-g-6 ui-g-nopad basic-details-info" id="{{stone.stone_id}}PavilionExtra" *ngIf="stone.pav_extra_facet">{{stone.pav_extra_facet.long_value}}</div>
+            <div class="ui-g-6 ui-g-nopad basic-details-info" id="{{stone.stone_id}}PavilionOpen" *ngIf="stone.pav_open">{{stone.pav_open.long_value}}</div>
+          </div>
+        </div>
+
+        <div class="ui-g ui-g-12 paddl0 paddb0 paddt0">
+          <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Girdle'| translate}}</div>
+          <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+            <div class="ui-g-6 basic-details-info" id="{{stone.stone_id}}GirdleExtra"></div>
+            <div class="ui-g-6 ui-g-nopad basic-details-info" id="{{stone.stone_id}}GirdleOpen" *ngIf="stone.girdle_open">{{stone.girdle_open.long_value}}</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ui-g-12 ">
+      <div class="ui-g-12 text-bold paddl0">{{'Comments' | translate}}</div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddl0 paddr0 basic-details-heading">SGS {{'Comments' | translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <div class="comment-stone-data" id="{{stone.stone_id}}SGSComments" *ngIf="stone.sgs" title="{{stone.sgs.toString()}}">
+            {{stone.sgs.toString()}}
+          </div>
+        </div>
+      </div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Key To Symbol'}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <div class="comment-stone-data" id="{{stone.stone_id}}KTSComments" *ngIf="stone.kts" title="  {{stone.kts.toString()}}">
+            {{stone.kts.toString()}}
+          </div>
+        </div>
+      </div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddl0 paddr0 basic-details-heading">{{'Lab Comments' | translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <div class="comment-stone-data" id="{{stone.stone_id}}LabComments" *ngIf="stone.lab_comment" title="{{stone.lab_comment}}">
+            {{stone.lab_comment}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui-g-12 ">
+      <div class="ui-g-12 text-bold paddl0">{{'Parameters Details'| translate}}</div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddr0 paddl0 basic-details-heading">{{'Measurement'| translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label class="basic-details-info" id="{{stone.stone_id}}Measurement" *ngIf="stone.length">{{stone.length}}-{{stone.width}}*{{stone.height}}</label>
+        </div>
+      </div>
+
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddr0 paddl0 basic-details-heading">{{'Total Depth'| translate}}(%)</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label class="basic-details-info" id="{{stone.stone_id}}Measurement" *ngIf="stone.total_depth_percent">{{stone.total_depth_percent}}</label>
+        </div>
+      </div>
+
+
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddr0 paddl0 basic-details-heading">{{'Table'| translate}}(%)</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label class="basic-details-info" id="{{stone.stone_id}}TablePercentage">{{stone.table_percent}}</label>
+        </div>
+      </div>
+
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddr0 paddl0 basic-details-heading">{{'D/R'| translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label class="basic-details-info" id="{{stone.stone_id}}Ratio">{{stone.ratio}}</label>
+        </div>
+      </div>
+
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddr0 paddl0 basic-details-heading">{{'Length'| translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label class="basic-details-info" id="{{stone.stone_id}}Length">{{stone.length}}</label>
+        </div>
+      </div>
+
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddr0 paddl0 basic-details-heading">{{'Width'| translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label class="basic-details-info" id="{{stone.stone_id}}Width">{{stone.width}}</label>
+        </div>
+      </div>
+
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddr0 paddl0 basic-details-heading">{{'Girdle'| translate}} %</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label class="basic-details-info" id="{{stone.stone_id}}GirdlePercent">{{stone.girdle_percent}}</label>
+        </div>
+      </div>
+
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddr0 paddl0 basic-details-heading">{{'Girdle'| translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label class="basic-details-info" id="{{stone.stone_id}}Girdle" *ngIf="stone.girdle">{{stone.girdle.short_value}}</label>
+          <label class="basic-details-info" id="{{stone.stone_id}}Tgirdle" *ngIf="stone.tgirdle">-{{stone.tgirdle.short_value}}</label>
+        </div>
+      </div>
+
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddr0 paddl0 basic-details-heading">{{'Lower'|translate}} {{'Half'|translate}}(%)</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label class="basic-details-info" id="{{stone.stone_id}}LowerHalf" *ngIf="stone.lower_half">{{stone.lower_half}}</label>
+        </div>
+      </div>
+
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddr0 paddl0 basic-details-heading">S.{{'Length' | translate}}(%)</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label class="basic-details-info" id="{{stone.stone_id}}Slenth" *ngIf="stone.star_length">{{stone.star_length}}</label>
+        </div>
+      </div>
+
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddr0 paddl0 basic-details-heading">{{'Pavilion'|translate}} {{'Angle'|translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label class="basic-details-info" id="{{stone.stone_id}}PavAngle" *ngIf="stone.pav_angle">{{stone.pav_angle}}</label>
+        </div>
+      </div>
+
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddr0 paddl0 basic-details-heading">{{'Pavilion'|translate}} {{'Height'|translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label class="basic-details-info" id="{{stone.stone_id}}PavHeight" *ngIf="stone.pav_height">{{stone.pav_height}}</label>
+        </div>
+      </div>
+
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddr0 paddl0 basic-details-heading">{{'Crown'|translate}} {{'Angle'|translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label class="basic-details-info" id="{{stone.stone_id}}CrownAngle" *ngIf="stone.crown_angle">{{stone.crown_angle}}</label>
+        </div>
+      </div>
+
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddr0 paddl0 basic-details-heading">{{'Crown'|translate}} {{'Height'|translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label class="basic-details-info" id="{{stone.stone_id}}CrownHeight" *ngIf="stone.crown_height">{{stone.crown_height}}</label>
+        </div>
+      </div>
+
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 paddr0 paddl0 basic-details-heading">{{'Culet'| translate}}</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label class="basic-details-info" id="{{stone.stone_id}}Culet" *ngIf="stone.culet">{{stone.culet.long_value}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-12">
+      <div class="ui-g-12 text-bold paddl0">{{'Price'| translate}}</div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 ui-g-nopad basic-details-heading">SRK $/ct.</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label class="basic-details-info" id="{{stone.stone_id}}PriceInfo" *ngIf="stone.price_srk">${{stone.price_srk | number : '1.2-2' }}</label>
+        </div>
+      </div>
+    </div>
+    <div class="ui-g ui-g-12 ui-g-nopad">
+      <div class="ui-g-1 ui-g-nopad basic-details-heading">Off%</div>
+      <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+        <label class="basic-details-info" id="{{stone.stone_id}}RapOff" *ngIf="stone.rap_off">{{stone.rap_off }}</label>
+      </div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <div class="ui-g-1 ui-g-nopad  basic-details-heading">O.Rap</div>
+        <div class="ui-g-2 text-center margin-class width20" *ngFor="let stone of stoneData">
+          <label class="basic-details-info" id="{{stone.stone_id}}ORap" *ngIf="stone.price_rap">${{stone.price_rap | number : '1.2-2'}}</label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<thm-multimedia-popup #themeMultimediaPopUp [displayMultimediaPopup]="toggleMultimediaPopup" [popUpMultimediaInfo]="stoneMultimediaInfo"
+  (closePopup)="toggleCloseMultimediaPopUp($event)"></thm-multimedia-popup>
+<thm-ddc-overlay #thmDdcOverlay [visibleDdcOverlay]="ddcOverlayVisible" [stoneList]="ddcStones" [previousDdcHour]="definedDDCHour"
+  (toggleDdcOverlay)="toggleDdcOverlay($event)"></thm-ddc-overlay>
+<thm-confirm-overlay [visibleConfirmOverlay]="confirmOverlayVisible" (toggleConfirmOverlay)="toggleConfirmOverlay($event)"
+  [stoneList]="selectedStones"></thm-confirm-overlay>
+<thm-addnote-overlay #thmAddnoteOverlay [visibleAddnoteOverlay]="addnoteOverlayVisible" [visibleShownoteOverlay]="commentsOverlayVisible"
+  [stoneIdList]="selectedStones" [CommentListForStone]="allNotesForStone" (toggleAddNoteOverlay)="toggleAddNoteOverlay($event)"></thm-addnote-overlay>
+<thm-request-overlay [visibleOverlay]="requestPopupVisible" [apiUrl]="apiLink" [stoneList]="selectedStones" (toggleOverlay)="toggleOverlay($event)"></thm-request-overlay>
+<thm-bid-to-buy-overlay [visibleBTBOverlay]="btbOverlayVisible" [stoneList]="btbSelectedStones" (toggleBTBOverlay)="toggleBTBOverlay($event)"
+  [BTBdataLoaded]="isBTBDataLoaded" [BTBClosed]="isBTBClosed"></thm-bid-to-buy-overlay>

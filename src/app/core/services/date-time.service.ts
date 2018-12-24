@@ -6,6 +6,8 @@ import { ApplicationDataService } from './application-data.service';
 import { MessageService } from './message.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { MessageCodes, MessageCodesComparator } from '../enums/message-codes.enum';
+import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
 
 declare var moment: any;
 
@@ -68,28 +70,29 @@ export class DateTimeService {
       });
   }
 
-  fetchCurrentTime() {
+  fetchCurrentTime(): Observable<any> {
     return this.http.get(
       this.applicationData.getEnvironment().AuditApi + '/exposed/IST/datetime/' +
       this.applicationData.getEnvironment().AuditApiVersion)
-      .subscribe((response) => {
-        const responseData = JSON.parse(JSON.stringify(response));
-        if (MessageCodesComparator.AreEqual(responseData.code, MessageCodes.SUCCESSFULLY_GENERATED_IST_TIME_200)) {
-          const currentTime = responseData;
-          const hour = currentTime.data.hour;
-          const minute = currentTime.data.minute;
-          const date = currentTime.data.date;
-          const month = currentTime.data.month;
-          const year = currentTime.data.year;
-          this.currentDate = `${date}-${month}-${year}`;
-          this.currentISTtime = `${hour}:${minute}`;
-        }
-        if (!responseData.error_status && responseData.data) {
-          return responseData.data;
-        }
-      }, err => { 
-        return this.errorHandler.handleError('UtilService:fetchCurrentTime', err); 
-      });
+      .pipe(
+        map((response) => {
+          const responseData = JSON.parse(JSON.stringify(response));
+          if (MessageCodesComparator.AreEqual(responseData.code, MessageCodes.SUCCESSFULLY_GENERATED_IST_TIME_200)) {
+            const currentTime = responseData;
+            const hour = currentTime.data.hour;
+            const minute = currentTime.data.minute;
+            const date = currentTime.data.date;
+            const month = currentTime.data.month;
+            const year = currentTime.data.year;
+            this.currentDate = `${date}-${month}-${year}`;
+            this.currentISTtime = `${hour}:${minute}`;
+          }
+          if (!responseData.error_status && responseData.data) {
+            return responseData.data;
+          }
+        }),
+        catchError( err => this.errorHandler.handleError('UtilService:fetchCurrentTime', err))
+      );
   }
 
   setIndianTime(time) {

@@ -411,7 +411,7 @@ export class SearchService {
     this.selectedSearchData = [];
   }
 
-  addTagsToStones(tags, stoneId) {
+  addTagsToStones(tags, stoneId): Observable<any> {
     let jsonBody = {};
     jsonBody['tags'] = tags;
     jsonBody = JSON.stringify(jsonBody);
@@ -457,7 +457,7 @@ export class SearchService {
     return flag;
   }
 
-  getNewUploadedStones() {
+  getNewUploadedStones(): Observable<any> {
     return this.http.get(this.applicationDataService.getEnvironment().SearchApi + '/search/stone/upload24hours/' +
       this.applicationDataService.getEnvironment().SearchApiVersion).pipe(
       map((responseData) => {
@@ -543,7 +543,7 @@ export class SearchService {
     return flag;
   }
 
-  fetchSearchFootnote(object, searchFor, searchString, code) {
+  fetchSearchFootnote(object, searchFor, searchString, code): Observable<any> {
     if (object.hasOwnProperty('values') && object.values) {
       if (SearchTypeComparator.AreEqual(searchString, SearchType.GENERAL_SEARCH)
         || SearchTypeComparator.AreEqual(searchString, SearchType.TWIN_DIAMOND_SEARCH)) {
@@ -568,9 +568,7 @@ export class SearchService {
         this.applicationDataService.getEnvironment().SearchApiVersion + '/' + searchFor + '?filter=' + JSON.stringify(object);
     }
     return this.http.get(url).pipe(
-      map((res) => {
-        return res;
-      }),
+      map(res => res),
       catchError(err => this.errorHandler.handleError('SearchService:fetchSearchFootnote', err))
     );
   }
@@ -633,7 +631,7 @@ export class SearchService {
     return searchParamObj;
   }
 
-  deleteSavedSearch(savedSearchIds) {
+  deleteSavedSearch(savedSearchIds): Observable<any> {
     const deleteObj = {
       saved_search_ids: [savedSearchIds]
     };
@@ -643,14 +641,12 @@ export class SearchService {
     return this.http.delete(this.applicationDataService.getEnvironment().SearchApi + '/saved/search/' +
       this.applicationDataService.getEnvironment().SearchApiVersion + '/' + this.authService.getLoginName(), httpOptions
       ).pipe(
-        map((res) => {
-          return res;
-        }),
+        map(res => res),
         catchError(err => this.errorHandler.handleError('SearchService:deleteSavedSearch', err))
       );
   }
 
-  editSavedSearch(savedSearchData, isRenamed) {
+  editSavedSearch(savedSearchData, isRenamed): Observable<any> {
     let apiLink;
     if (isRenamed) {
       apiLink = this.applicationDataService.getEnvironment().SearchApi + '/saved/search/edit/' +
@@ -661,9 +657,7 @@ export class SearchService {
         this.applicationDataService.getEnvironment().SearchApiVersion + '/' + this.authService.getLoginName();
     }
     return this.http.put(apiLink, JSON.stringify(savedSearchData)).pipe(
-      map((res) => {
-        return res;
-      }),
+      map(res => res),
       catchError(err => this.errorHandler.handleError('SearchService:editSavedSearch', err))
     );
   }
@@ -689,7 +683,7 @@ export class SearchService {
     return array;
   }
 
-  getSearchInPage(searchValues, searchType, event_id) {
+  getSearchInPage(searchValues, searchType, event_id): Observable<any> {
     let type, apiLink, searchAuditType;
     switch (searchType) {
       case 'TWIN_DIAMOND_SEARCH': type = 'std';
@@ -749,7 +743,7 @@ export class SearchService {
     );
   }
 
-  fetchRecommendedStones(cardParam) {
+  fetchRecommendedStones(cardParam): Observable<any> {
     return this.http.get(this.applicationDataService.getEnvironment().StoneManagementApi + '/stonemgt/' + this.authService.getLoginName() +
       '/recommendation/stone/' + this.applicationDataService.getEnvironment().SearchApiVersion +
       '?recommendation_type=' + cardParam).pipe(
@@ -766,7 +760,7 @@ export class SearchService {
       );
   }
 
-  removeTagsToStones(tags, stoneId) {
+  removeTagsToStones(tags, stoneId): Observable<any> {
     let jsonBody = {};
     jsonBody['tags'] = tags;
     jsonBody = JSON.stringify(jsonBody);
@@ -780,7 +774,7 @@ export class SearchService {
       );
   }
 
-  sendSavedSearchEmail(jsonObject) {
+  sendSavedSearchEmail(jsonObject): Observable<any> {
     const obj = {
       'saved_search_list': jsonObject
     };
@@ -793,7 +787,7 @@ export class SearchService {
       );
   }
 
-  operateMail(jsonObject) {
+  operateMail(jsonObject): Observable<any> {
     return this.http.post(this.applicationDataService.getEnvironment().SearchApi + '/saved/search/sentMail/' +
       this.applicationDataService.getEnvironment().SearchApiVersion, JSON.stringify(jsonObject)).pipe(
       map((res) => {
@@ -878,7 +872,7 @@ export class SearchService {
     return this.resultFromUploadedCard;
   }
 
-  getBtbVersionList() {
+  getBtbVersionList(): Observable<any> {
     return this.http.get(this.applicationDataService.getEnvironment().B2BApi + '/btob/' +
       this.authService.getLoginName() + '/permission/getBTBVersion/' +
       this.applicationDataService.getEnvironment().SearchApiVersion).pipe(

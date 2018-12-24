@@ -1,0 +1,143 @@
+{
+  "data": {
+    "shape": [{
+        "label": "ROUND",
+        "value": 1,
+        "class": "icon-Shape-Round"
+      },
+      {
+        "label": "CUSHION",
+        "value": 10,
+        "class": "icon-Shape-CushionHori"
+      },
+      {
+        "label": "CU-B",
+        "value": 11,
+        "class": "icon-Shape-CushionHori"
+      },
+      {
+        "label": "CU-P",
+        "value": 19,
+        "class": "icon-Shape-CushionHori"
+      },
+      {
+        "label": "PRINCESS",
+        "value": 2,
+        "class": "icon-Shape-Princess"
+      },
+      {
+        "label": "EMERALD",
+        "value": 6,
+        "class": "icon-Shape-Emerald"
+      },
+      {
+        "label": "SQ EMERALD",
+        "value": 12,
+        "class": "icon-Shape-SQEmerald"
+      },
+      {
+        "label": "PEAR",
+        "value": 5,
+        "class": "icon-Shape-Pear"
+      },
+      {
+        "label": "OVAL",
+        "value": 4,
+        "class": "icon-Shape-Oval"
+      },
+      {
+        "label": "MARQUISE",
+        "value": 3,
+        "class": "icon-Shape-Marquise"
+      },
+      {
+        "label": "HEART",
+        "value": 8,
+        "class": "icon-Shape-Heart"
+      },
+      {
+        "label": "L RADIANT",
+        "value": 9,
+        "class": "icon-Shape-LRadiant"
+      },
+      {
+        "label": "BAGUETTE",
+        "value": 13,
+        "class": "icon-Shape-Baguett"
+      },
+      {
+        "label": "SQ RADIANT",
+        "value": 14,
+        "class": "icon-Shape-SQRadiant"
+      },
+      {
+        "label": "OTHER",
+        "value": 16,
+        "class": "icon-Shape-Mix"
+      }
+    ],
+    "tags": [
+      "Popular",
+      "Trending",
+      "Exclusive",
+      "Preferred Parameter",
+      "Upgraded Color",
+      "Upgraded Clarity",
+      "Upgraded Fluorescence",
+      "Eye Clean"
+    ],
+    "parameters": [{
+        "label": "Diameter",
+        "key": "#diameter"
+      },
+      {
+        "label": "Ratio",
+        "key": "#ratio"
+      },
+      {
+        "label": "Total Depth",
+        "key": "#total_depth_percent"
+      },
+      {
+        "label": "Table",
+        "key": "#table"
+      },
+      {
+        "label": "Length",
+        "key": "#length"
+      },
+      {
+        "label": "Width",
+        "key": "#width"
+      },
+      {
+        "label": "Girdle %",
+        "key": "#girdle_percent"
+      },
+      {
+        "label": "Pavilion Angle",
+        "key": "#pav_angle"
+      },
+      {
+        "label": "Pavilion Height",
+        "key": "#pav_height"
+      },
+      {
+        "label": "Crown Angle",
+        "key": "#crown_angle"
+      },
+      {
+        "label": "Crown Height",
+        "key": "#crown_height"
+      },
+      {
+        "label": "Star Length",
+        "key": "#star_length"
+      },
+      {
+        "label": "Lower Half",
+        "key": "#lower_half"
+      }
+    ]
+  }
+}

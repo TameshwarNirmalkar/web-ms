@@ -1,0 +1,8 @@
+<div id="searchFieldid" class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 page-search-field">
+  <form id="pageSearchFieldId" (ngSubmit)="onSubmit(searchForm.value)" autocomplete="off" [formGroup]="searchForm">
+    <input id="pageSearchInputId" class="twin-search" #searchField type="search" formControlName="search_value" placeholder={{placeHolderText}}
+      (focus)="onFocus()" [(ngModel)]="globalStoneId">
+    <span id="pageSearchIconId" class="grid-icon-top icon-search" pTooltip={{searchName}} tooltipPosition="left" tooltipEvent="hover"
+      (click)="pageSearch(searchField.value)"></span>
+  </form>
+</div>

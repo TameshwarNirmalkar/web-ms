@@ -1,0 +1,136 @@
+<p-dialog #btbPopup id="ddcOverlayId" appendTo="body" [(visible)]="visibleBTBOverlay" (onHide)="closeBtbOverlay()" positionTop="190"
+  modal="modal" width="600" height="auto" responsive="true">
+  <p-header>
+    <span>{{'BID_TO_BUY_THE_STONE'| translate}}</span>
+    <span *ngIf="stoneList && BTBdataLoaded && !BTBClosed" class="btb-time">
+      <span pTooltip="{{'Bid End Time' | translate}}" tooltipPosition="bottom" tooltipEvent="hover">B.E.T. (IST): </span>
+      <span>{{stoneList.btb_enddatetime | customDate : 'dateWithMonth'}} {{stoneList.btb_enddatetime | customDate : 'timeAMPM'}}</span>
+    </span>
+  </p-header>
+  <div id="confirmationLoadingId" class="ui-g ui-g-12 confirm-message-container" *ngIf="!BTBdataLoaded && !BTBClosed">
+    <div class="ui-g ui-g-12 btb-loading-content">
+      <label class="ui-g-12 ui-g-nopad ">{{'BTB_POPUP_LOADING' | translate}}</label>
+    </div>
+  </div>
+
+  <div id="confirmationLoadingId" class="ui-g ui-g-12 confirm-message-container" *ngIf="BTBClosed && BTBdataLoaded">
+    <div class="ui-g ui-g-12 btb-loading-content">
+      <label class="ui-g-12 ui-g-nopad ">{{'BTB_CLOSED' | translate}}</label>
+    </div>
+  </div>
+  <div *ngIf="stoneList && BTBdataLoaded && !BTBClosed">
+    <div class="ui-g-12 borderb">
+      <div class="ui-g-4 borderr">
+        <div class="ui-g-4 ui-g-nopad thm-b2b-stone-circle">
+          <span class="icon-img" [ngClass]="{'icon-Shape-Round':stoneList.shape.id === 1,'icon-Shape-CushionHori':stoneList.shape.id ===10,'icon-Shape-Princess':stoneList.shape.id ===2,'icon-Shape-Emerald':stoneList.shape.id ===6,'icon-Shape-SQEmerald':stoneList.shape.id ==='12','icon-Shape-Pear':stoneList.shape.id ==='5','icon-Shape-Oval':stoneList.shape.id ==='4','icon-Shape-Marquise':stoneList.shape.id ==='3','icon-Shape-Heart':stoneList.shape.id ==='8','icon-Shape-LRadiant':stoneList.shape.id ==='9','icon-Shape-SQRadiant':stoneList.shape.id ==='14','icon-Shape-Mix':stoneList.shape.id ==='16'}"
+            title="{{stoneList.shape.long_value}}"></span>
+        </div>
+        <!--stone image-->
+        <div class="ui-g-8 ui-g-nopad">
+          <span class="thm-b2b-stone-large">{{stoneList.carat}}CRT</span>
+          <br>
+          <span *ngIf="stoneList.shape" class="thm-b2b-stone-small">{{stoneList.shape.short_value}}</span>
+          <br>
+        </div>
+      </div>
+      <div class="ui-g-4 borderr">
+        <span class="thm-b2b-stone-large"> {{stoneList.stone_id}} </span>
+        <br>
+        <span class="thm-b2b-stone-small"> ${{stoneList.price_rap | number: '1.2-2'}} O. Rap</span>
+        <br>
+      </div>
+      <div class="ui-g-4">
+        <span class="thm-b2b-stone-large">{{stoneList.price_srk | number: '1.2-2'}} $/Ct</span>
+        <br>
+        <span class="thm-b2b-stone-small">{{stoneList.rap_off}} Off %</span>
+      </div>
+    </div>
+    <div class="ui-g-12 borderb">
+      <div class="ui-g-6">
+        <div class="ui-g-12">
+          <div class="ui-g-6 paddb0 paddt0 text-right thm-b2b-stonelist-text">Clarity:</div>
+          <div *ngIf="stoneList.clarity" class="ui-g-6 paddb0 paddt0  thm-b2b-stonelist-value">{{stoneList.clarity.short_value}}</div>
+        </div>
+        <div class="ui-g-12">
+          <div class="ui-g-6 paddb0 paddt0 text-right thm-b2b-stonelist-text">Color:</div>
+          <div *ngIf="stoneList.color" class="ui-g-6 paddb0 paddt0  thm-b2b-stonelist-value">{{stoneList.color.short_value}}</div>
+        </div>
+        <div class="ui-g-12">
+          <div class="ui-g-6 paddb0 paddt0 text-right thm-b2b-stonelist-text">Certification:</div>
+          <div *ngIf="stoneList.certificate" class="ui-g-6 paddb0 paddt0  thm-b2b-stonelist-value">{{stoneList.certificate.short_value}}</div>
+        </div>
+      </div>
+      <div class="ui-g-6">
+        <div class="ui-g-12">
+          <div class="ui-g-6 paddb0 paddt0 text-right thm-b2b-stonelist-text">Cut:</div>
+          <div *ngIf="stoneList.cut" class="ui-g-6 paddb0 paddt0  thm-b2b-stonelist-value">{{stoneList.cut.long_value}}</div>
+        </div>
+        <div class="ui-g-12">
+          <div class="ui-g-6 paddb0 paddt0 text-right thm-b2b-stonelist-text">Polish:</div>
+          <div *ngIf="stoneList.polish" class="ui-g-6 paddb0 paddt0  thm-b2b-stonelist-value">{{stoneList.polish.long_value}}</div>
+        </div>
+        <div class="ui-g-12">
+          <div class="ui-g-6 paddb0 paddt0 text-right thm-b2b-stonelist-text">Symmetry:</div>
+          <div *ngIf="stoneList.symmetry" class="ui-g-6 paddb0 paddt0  thm-b2b-stonelist-value">{{stoneList.symmetry.long_value}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="ui-g-12 paddt0 paddb0">
+      <div class="ui-g-4">
+        <div class="ui-g-12 thm-stonelist-bid-rate">Bid $/ct.</div>
+        <div class="ui-g-12">
+          <input type="text" id="{{stoneList.stone_id}}" #price value="{{stoneList.bid_rate | number:'1.2-2'}}" (blur)="priceEntry(stoneList,price.value)"
+            (input)="onPriceInput(stoneList, price)" (keydown)="onPriceKeyDown($event)" (keypress)="isNumber($event)" [ngClass]="{'finalSaveOffer': stoneList.final_submit === 1, 'autoSaveOffer': stoneList.final_submit === 0}"
+            dirValidateNumberDigit>
+        </div>
+      </div>
+      <div class="ui-g-4">
+        <div class="ui-g-12 thm-stonelist-bid-rate">Bid Off % </div>
+        <div class="ui-g-12">
+          <input *ngIf="stoneList.bid_percentage===undefined" value="{{stoneList.offer_per_disc}}" readonly/>
+          <span *ngIf="!stoneList.offer_per_disc && stoneList.bid_percentage!==undefined">
+            <input [ngClass]="{'finalSaveOffer': stoneList.final_submit === 1, 'autoSaveOffer': stoneList.final_submit === 0}" value="{{stoneList.bid_percentage}}"
+              readonly/>
+          </span>
+          <span *ngIf="stoneList.offer_per_disc && stoneList.bid_percentage!==undefined">
+            <input [ngClass]="{'finalSaveOffer': stoneList.final_submit === 1, 'autoSaveOffer': stoneList.final_submit === 0}" value="{{stoneList.offer_per_disc}}"
+              readonly/>
+          </span>
+        </div>
+      </div>
+      <div class="ui-g-4">
+        <div class="ui-g-12 thm-stonelist-bid-rate">Diff</div>
+        <div class="ui-g-12">
+          <input *ngIf="stoneList.difference===undefined&&(stoneList.offer_per_disc_diff || stoneList.offer_per_disc_diff===undefined)"
+            value="{{stoneList.offer_per_disc_diff}}" readonly />
+          <span *ngIf="!stoneList.offer_per_disc_diff && stoneList.difference!==undefined" id="{{stoneList.stone_id}}">
+            <input [ngClass]="stoneList.final_submit === 1 && stoneList.final_submit!==undefined ? 'finalSaveOffer': 'autoSaveOffer'"
+              value="{{stoneList.difference}}" readonly />
+          </span>
+          <span *ngIf="stoneList.offer_per_disc_diff && stoneList.difference!==undefined" id="{{stoneList.stone_id}}">
+            <input [ngClass]="stoneList.final_submit === 1 && stoneList.final_submit!==undefined ? 'finalSaveOffer': 'autoSaveOffer'"
+              value="{{stoneList.offer_per_disc_diff}}" readonly>
+          </span>
+
+        </div>
+      </div>
+    </div>
+    <div class="ui-g-12 paddt0 paddb0">
+      <div class="ui-g-6">
+        <button class="custom-btnBorder" (click)="clearBtbPriceInfo()" [disabled]="isB2bRequested">Clear</button>
+      </div>
+      <div class="ui-g-4">
+        <button (click)="saveBtbPrice(false)" [ngClass]="stoneList.final_submit === null || stoneList.final_submit === 0 || stoneList.final_submit === undefined ? 'custom-btnBorder fr btndisplay': 'custom-btnBorder fr btndisplaynone'"
+          [disabled]="isB2bRequested">Save & Close</button>
+        <button [dirStoreAudit]="'BTB REMOVE'" (click)="DeleteSavedOffer()" [ngClass]="stoneList.final_submit === 1 ? 'custom-btnBorder fr btndisplay': 'custom-btnBorder fr btndisplaynone'"
+          [disabled]="isB2bRequested">Delete</button>
+      </div>
+      <div class="ui-g-2">
+        <button [dirStoreAudit]="'BTB SUBMIT'" (click)="saveBtbPrice(true)" class="custom-btnPrimary" [disabled]="isB2bRequested">Submit</button>
+      </div>
+    </div>
+    <div id="loaderId" class="loader-apperance">
+      <i *ngIf="isB2bRequested" class="fa fa-spinner fa-pulse load-icon" aria-hidden="true"></i>
+    </div>
+  </div>
+</p-dialog>

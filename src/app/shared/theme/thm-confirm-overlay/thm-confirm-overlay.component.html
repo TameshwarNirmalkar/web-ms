@@ -1,0 +1,115 @@
+<p-dialog appendTo="body" header="{{'Stones Order Detail'| translate}}" [(visible)]="visibleConfirmOverlay" (onHide)="closeConfirmOverlay()"
+  modal="modal" width="600" responsive="true" positionTop="190" [draggable]="true">
+  <div id="confirmationLoadingId" class="ui-g ui-g-12 confirm-message-container" *ngIf="!orderDetailFetched && !reOrderRequestEnabled">
+    <div class="ui-g ui-g-12 confirm-loading-content">
+      <label class="ui-g-12 ui-g-nopad ">{{'Confirmation_Loading_Msg' | translate}}</label>
+    </div>
+  </div>
+
+  <div id="reOrderRequestId" class="ui-g ui-g-12 confirm-message-container" *ngIf="reOrderRequestEnabled && response.stoneListNotApproved != undefined">
+    <div class="ui-g ui-g-12 confirm-reorder-content">
+      <label class="ui-g-12 ui-g-nopad ">{{'Confirmation_ReOrder_Msg' | translate:response}}</label>
+    </div>
+  </div>
+
+  <div id="confirmationOrderDetailPanelId" class="ui-g ui-g-12" *ngIf="orderDetailFetched">
+    <div class="ui-g ui-g-12" *ngIf="response.totalPCs">
+      <label class="ui-g-6 ui-g-nopad">{{'Total Stones' | translate}}</label>
+      <label class="ui-g-6 ui-g-nopad">{{response.totalPCs}}</label>
+    </div>
+    <div class="ui-g ui-g-12" *ngIf="response.totalCarat">
+      <label class="ui-g-6 ui-g-nopad">{{'Total Carat' | translate}}</label>
+      <label class="ui-g-6 ui-g-nopad">{{response.totalCarat}}</label>
+    </div>
+    <div class="ui-g ui-g-12 offer-auto-saved" *ngIf="notGIAStones.length > 0">
+      <label class="ui-g-6 ui-g-nopad">{{'Other than GIA stones' | translate}}</label>
+      <label class="ui-g-6 ui-g-nopad">{{notGIAStones.length}} ({{notGIAStones}})</label>
+    </div>
+    <div class="ui-g ui-g-12" *ngIf="response.totalAmount">
+      <label class="ui-g-6 ui-g-nopad">{{'Total Amount' | translate}}</label>
+      <label class="ui-g-6 ui-g-nopad">{{response.totalAmount | currency:'USD':true:'1.2-2'}}</label>
+    </div>
+    <ng-template [dirCheckPermission]="'weekly_volume_discount'">
+      <div class="ui-g ui-g-12" *ngIf="response.weeklyVolumeDiscount">
+        <label class="ui-g-6 ui-g-nopad">{{'Weekly Volume Discount' | translate}}</label>
+        <label class="ui-g-6 ui-g-nopad">{{response.weeklyVolumeDiscount| currency:'USD':true:'1.2-2'}}</label>
+      </div>
+    </ng-template>
+    <ng-template [dirCheckPermission]="'blind_discount'">
+      <div class="ui-g ui-g-12" *ngIf="response.SRKOnlineDiscount">
+        <label class="ui-g-6 ui-g-nopad">{{'SRK Online Discount' | translate}}</label>
+        <label class="ui-g-6 ui-g-nopad">{{response.SRKOnlineDiscount | currency:'USD':true:'1.2-2'}}</label>
+      </div>
+    </ng-template>
+    <ng-template [dirCheckPermission]="'terms_discount'">
+      <div class="ui-g ui-g-12" *ngIf="response.termDiscount">
+        <label class="ui-g-6 ui-g-nopad">{{'Term Discount' | translate}}</label>
+        <label class="ui-g-6 ui-g-nopad">{{response.termDiscount | currency:'USD':true:'1.2-2'}}</label>
+      </div>
+    </ng-template>
+    <ng-template [dirCheckPermission]="'co_op_discount'">
+      <div class="ui-g ui-g-12" *ngIf="response.companyDiscount">
+        <label class="ui-g-6 ui-g-nopad">{{'Company Discount' | translate}}</label>
+        <label class="ui-g-6 ui-g-nopad">{{response.companyDiscount | currency:'USD':true:'1.2-2'}}</label>
+      </div>
+    </ng-template>
+    <ng-template [dirCheckPermission]="'event_discount'">
+      <div class="ui-g ui-g-12" *ngIf="response.companyEventDiscount">
+        <label class="ui-g-6 ui-g-nopad">{{'Company Event Discount' | translate}}</label>
+        <label class="ui-g-6 ui-g-nopad">{{response.companyEventDiscount | currency:'USD':true:'1.2-2'}}</label>
+      </div>
+    </ng-template>
+    <div class="ui-g ui-g-12" *ngIf="response.payableAmount && viewFinalPayableAndFinalOff">
+      <label class="ui-g-6 ui-g-nopad">{{'Payable Amount' | translate}}</label>
+      <label class="ui-g-6 ui-g-nopad">{{response.payableAmount | currency:'USD':true:'1.2-2'}}</label>
+    </div>
+    <div class="ui-g ui-g-12" *ngIf="conversionRate && conversionRate !== 0">
+      <label class="ui-g-6 ui-g-nopad">{{'Conversion Rate' | translate}}</label>
+      <label class="ui-g-6 ui-g-nopad">{{conversionRate | currency:'INR':true:'1.2-2'}}</label>
+    </div>
+    <div class="ui-g ui-g-12" *ngIf="response.payableAmount">
+      <label class="ui-g-6 ui-g-nopad">{{'Remark' | translate}}</label>
+      <textarea class="ui-g-6 ui-g-nopad" rows="2" cols="50" placeholder="{{'ADD_COMMENT_HERE' | translate}}"
+        [(ngModel)]="remark"></textarea>
+    </div>
+    <div class="ui-g ui-g-12 confirmation-error-container" *ngIf="orderDetailFetched && response.stoneListNotApproved != undefined && response.stoneListNotApproved != ''">
+      <label class="ui-g-12 ui-g-nopad confirmation-info">{{'ConfirmOrderInfoMessage' | translate:response}}</label>
+    </div>
+  </div>
+  <p-footer>
+    <div>
+      <div class="ui-g-6">
+        <div class="color-lagend-panel " *ngIf="orderDetailFetched && response.stoneListNotApproved != undefined && response.stoneListNotApproved != ''">
+          <div class="box-color-lagend">
+            <span class="colorLagend_BTOB"></span>
+            <label>{{'Bid To Buy' | translate}}</label>
+          </div>
+          <div class="box-color-lagend ">
+            <span class="colorLagend_BusinessProcess"></span>
+            <label>{{'Under Business Process' | translate}}</label>
+          </div>
+          <div class="box-color-lagend">
+            <span class="colorLagend_RecentlyUploded"></span>
+            <label>{{'Recently Uploaded' | translate}}</label>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="ui-g-6 ui-g-nopad">
+
+
+        <button id="closeConfirmBtnId" class="custom-btnBorder marl0" *ngIf="orderDetailFetched || reOrderRequestEnabled"
+          type="button" (click)="closeConfirmOverlay()" [disabled]="isStoneConfirmed">{{'Cancel' |translate}}</button>
+        <button id="reorderSummaryBtnId" class="custom-btnBorder marl0" *ngIf="reOrderRequestEnabled" type="button"
+          (click)="reOrderSummary()">{{'Reorder Summary' |translate}}</button>
+        <button id="confirmDiamondsBtnId" class="custom-btnPrimary marl0" *ngIf="orderDetailFetched && response.totalPCs"
+          type="button" (click)="confirmNow()" [disabled]="isStoneConfirmed">
+          <i *ngIf="isStoneConfirmed" class="fa fa-spinner fa-pulse load-icon loader-align" aria-hidden="true"></i>{{'Confirm
+          Order'| translate}}
+        </button>
+      </div>
+
+    </div>
+  </p-footer>
+</p-dialog>

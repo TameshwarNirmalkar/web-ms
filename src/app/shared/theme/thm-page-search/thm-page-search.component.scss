@@ -1,0 +1,63 @@
+thm-page-search input {
+  outline: none;
+}
+
+thm-page-search input[type=search] {
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: content-box;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+thm-page-search input::-webkit-search-cancel-button,
+thm-page-search input::-webkit-search-decoration {
+  display: none;
+}
+
+thm-page-search input[type=search] {
+  background: #ffffff url("../../../../assets/icons/search.svg") no-repeat 9px center !important;
+  padding: 9px 10px 9px 32px;
+  width: 187px;
+  -webkit-border-radius: 10em;
+  -moz-border-radius: 10em;
+  border-radius: 10em;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+thm-page-search input[type=search]:focus {
+  width: 200px;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 0 5px #9faab8;
+  -moz-box-shadow: 0 0 5px #9faab8;
+  box-shadow: 0 0 5px #9faab8;
+}
+
+thm-page-search input:-moz-placeholder {
+  text-align: center;
+}
+
+thm-page-search input::-webkit-input-placeholder {
+  text-align: center;
+}
+
+.page-search-field {
+  width: 230px;
+  padding: 0;
+}
+
+.twin-search {
+  border-radius: 27px;
+  width: 200px;
+}
+
+.twin-seach-button {
+  padding: 0px;
+  vertical-align: middle
+}
+
+.grid-icon-top {
+  padding-left: 3px;
+  cursor: pointer;
+}

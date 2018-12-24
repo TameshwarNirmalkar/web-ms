@@ -1,0 +1,249 @@
+[
+   
+    {
+        "name": "Date",
+        "value": "basket_date",
+        "order": 1
+    },
+    {
+        "name": "Time",
+        "value": "basket_time",
+        "order": 2
+    },
+    {
+        "name": "Notes",
+        "value": "basket_note",
+        "order": 3
+    },
+    {
+        "name": "View Request",
+        "value": "view_request_note",
+        "order": 4
+    },
+     {
+        "name": "EOC",
+        "value": "dayp_eligible_offer_count",
+        "order": 5
+    },
+    {
+        "name": "Cert.",
+        "value": "Certificate",
+        "order": 6
+    },
+    {
+        "name": "Shape",
+        "value": "Shape",
+        "order": 7
+    },
+    {
+        "name": "Clarity",
+        "value": "Clarity",
+        "order": 8
+    },
+    {
+        "name": "Colour",
+        "value": "Colour",
+        "order": 9
+    },
+    {
+        "name": "Carat",
+        "value": "Carat",
+        "order": 10
+    },
+    {
+        "name": "$/Carat",
+        "value": "DollarCT",
+        "order": 11
+    },
+    {
+        "name": "Diff%",
+        "value": "basket_diff",
+        "order": 12
+    },
+    {
+        "name": "DAYP.$/Ct.Diff",
+        "value": "dayp_diff_per",
+        "order": 13
+    },
+    {
+        "name": "B2B.$/Ct.Diff",
+        "value": "btb_diff_per",
+        "order": 14
+    },
+    {
+        "name": "Off %",
+        "value": "Off",
+        "order": 15
+    },
+    {
+        "name": "Amount",
+        "value": "Amount",
+        "order": 16
+    },
+    {
+        "name": "DAYP.Off.Amt",
+        "value": "dayp_offer_amount",
+        "order": 17
+    },
+    {
+        "name": "B2B.Off.Amt",
+        "value": "btb_offer_amount",
+        "order": 18
+    },
+    {
+        "name": "Cut",
+        "value": "cut",
+        "order": 19
+    },
+    {
+        "name": "Polish",
+        "value": "polish",
+        "order": 20
+    },
+    {
+        "name": "Symmetry",
+        "value": "symmetry",
+        "order": 21
+    },
+    {
+        "name": "Fluorescence",
+        "value": "fluorescence",
+        "order": 22
+    },
+    {
+        "name": "Measurement",
+        "value": "Measurement",
+        "order": 23
+    },
+    {
+        "name": "D/R",
+        "value": "DR",
+        "order": 24
+    },
+    {
+        "name": "Table",
+        "value": "Tab",
+        "order": 25
+    },
+    {
+        "name": "TD",
+        "value": "Td",
+        "order": 26
+    },
+    {
+        "name": "Shade",
+        "value": "shade",
+        "order": 27
+    },
+    {
+        "name": "Luster",
+        "value": "luster",
+        "order": 28
+    },
+    {
+        "name": "TW",
+        "value": "table_white",
+        "order": 29
+    },
+    {
+        "name": "SW",
+        "value": "side_white",
+        "order": 30
+    },
+    {
+        "name": "TB",
+        "value": "table_black",
+        "order": 31
+    },
+    {
+        "name": "SB",
+        "value": "side_black",
+        "order": 32
+    },
+    {
+        "name": "SGS",
+        "value": "SGS",
+        "order": 33
+    },
+    {
+        "name": "TS",
+        "value": "table_spot",
+        "order": 34
+    },
+    {
+        "name": "SS",
+        "value": "side_spot",
+        "order": 35
+    },
+    {
+        "name": "TO",
+        "value": "table_open",
+        "order": 36
+    },
+    {
+        "name": "CO",
+        "value": "crown_open",
+        "order": 37
+    },
+    {
+        "name": "PO",
+        "value": "pav_open",
+        "order": 38
+    },
+    {
+        "name": "Girdle Open",
+        "value": "girdle_open",
+        "order": 39
+    },
+    {
+        "name": "TEF",
+        "value": "table_EF",
+        "order": 40
+    },
+    {
+        "name": "CEF",
+        "value": "crown_EF",
+        "order": 41
+    },
+    {
+        "name": "PEF",
+        "value": "pav_EF",
+        "order": 42
+    },
+    {
+        "name": "KTS",
+        "value": "Key_To_Symbol",
+        "order": 43
+    },
+    {
+        "name": "Lab Comments",
+        "value": "Lab_Comments",
+        "order": 44
+    },
+    {
+        "name": "Girdle %",
+        "value": "GirdlePer",
+        "order": 45
+    },
+    {
+        "name": "H&A",
+        "value": "HandA",
+        "order": 46
+    },
+    {
+        "name": "Cert_No",
+        "value": "Certificate_No",
+        "order": 47
+    },
+    {
+        "name": "Rap $/ct.",
+        "value": "Rap_Dollar_CT",
+        "order": 48
+    },
+    {
+        "name": "Eligible",
+        "value": "Eligible",
+        "order": 49
+    }
+    
+]

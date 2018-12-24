@@ -1,0 +1,25 @@
+/* Utils */
+.clearfix:after {
+  content: " ";
+  display: block;
+  clear: both;
+}
+
+*[hidden] {
+  display: none;
+}
+
+.separator {
+  margin-top: 10px;
+  overflow: hidden;
+
+  &:after {
+    content: '';
+    display: block;
+    margin: -25px auto 0;
+    width: 100%;
+    height: 15px;
+    border-radius: 125px / 12px;
+    box-shadow: 0 0 8px black;
+  }
+}

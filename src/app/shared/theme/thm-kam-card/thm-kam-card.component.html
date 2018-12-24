@@ -1,0 +1,44 @@
+<div id="kamDetailsInfoId" class="ui-g-12 paddl0" *ngIf="kamDetailsInfo">
+  <div id="customerCareNullImageConatiner" class="ui-g-3">
+    <span *ngIf="!kamDetailsInfo.userProfileImage" id="customerCareNullImageId" class="contact-circle login-icon  icon-profile-place"></span>
+    <img *ngIf="kamDetailsInfo.userProfileImage" id="customerCareImageId" class="contact-circle" [src]="kamDetailsInfo.userProfileImage | safeUrl">
+  </div>
+  <div id="contactBoxId" class="ui-g-9 contact-box">
+    <div id="customerCareProfileContainer" class="ui-g-12 ui-g-nopad">
+      <div id="customerCareNameId" class="contact-text">
+        <label id="nameAdminId" [ngClass]="{'card-content-skeleton skeleton': !kamDetailsInfo.userDisplayName}">{{kamDetailsInfo.userDisplayName | translate}}</label>
+        <div id="customerCareTitleId" class="sub-context-contact" [ngClass]="{'card-content-skeleton skeleton': !kamDetailsInfo.userDisplayName}">
+          <label id="adminRoleID" *ngIf="kamDetailsInfo.userDisplayName">{{'Key Account Manager' | translate}}</label>
+        </div>
+        <div id="onlineId" class="sub-context-online" *ngIf="kamDetailsInfo.userStatus === 'Online'">
+          <span id="onlineStatusId" class="status-icon icon-status online" pTooltip="Online" tooltipPosition="bottom" tooltipEvent="hover"></span>{{kamDetailsInfo.userStatus | translate}}
+        </div>
+        <div id="offlineId" class="sub-context-offline" *ngIf="kamDetailsInfo.userStatus === 'Offline'">
+          <span id="offlineStatusId" class="status-icon icon-status offline" pTooltip="Offline" tooltipPosition="bottom" tooltipEvent="hover"></span>{{kamDetailsInfo.userStatus | translate}}
+        </div>
+        <div id="nullId" class="sub-context-null" *ngIf="kamDetailsInfo.userStatus === null">
+          <span id="nullStatusId" [style.padding.px]="12"></span>
+        </div>
+      </div>
+    </div>
+
+    <div id="contactBottomContainer" class="ui-g-12 ui-g-nopad">
+      <div id="noContactId" *ngIf="!kamDetailsInfo.userDisplayName" class="ui-g-12" [ngClass]="{'card-footer-skeleton skeleton': !kamDetailsInfo.userDisplayName}">
+      </div>
+      <div id="hasContactId" *ngIf="kamDetailsInfo.userDisplayName" class="ui-g-12">
+        <a [dirStoreAudit]="'EMAIL LIST'" href="mailto:{{kamDetailsInfo.primaryEmailId}}" id="mailId" class="contact-icons">
+        <span id="mail" class="profile-icon icon-email" pTooltip="{{'MAIL_KAM_TEXT'|translate}}" tooltipPosition="bottom" tooltipEvent="hover"></span>
+      </a>
+        <a href="tel:{{kamDetailsInfo.mobileNo}}" id="phoneId" class="contact-icons">
+        <span id="mail" class="profile-icon icon-call" pTooltip="{{'CALL_TEXT'|translate}}" tooltipPosition="bottom" tooltipEvent="hover"></span>
+      </a>
+        <a id="messageId" class="contact-icons">
+        <span id="mail" class="profile-icon icon-chat" pTooltip="{{'CHAT_TEXT'|translate}}" tooltipPosition="bottom" tooltipEvent="hover"></span>
+      </a>
+        <a id="skypeId" class="contact-icons">
+        <span id="mail" class="profile-icon icon-daller-circle" pTooltip="Coming soon" tooltipPosition="bottom" tooltipEvent="hover"></span>
+      </a>
+      </div>
+    </div>
+  </div>
+</div>

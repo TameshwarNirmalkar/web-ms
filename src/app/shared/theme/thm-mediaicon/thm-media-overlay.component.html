@@ -1,0 +1,40 @@
+<p-overlayPanel id="mediaIconOverlay" #multimediaOverlay styleClass="overlay-icon">
+  <!-- <div [class.triangle-left-top]="arrowTop" [class.triangle-left-bottom]="!arrowTop" ></div> -->
+  <div class="hover-icon-css" *ngIf="stoneObj?.image_url">
+    <a [dirStoneMultimediaDetail]="{stoneid:stoneObj,showMediaType:'Image'}" (click)="onWindowScroll()">
+      <!-- <span id="{{stoneObj.stone_id}}ViewId" class="dtl-icon icon-image" pTooltip="GIF View" tooltipPosition="right" tooltipEvent="hover"></span> -->
+      <span id="{{stoneObj.stone_id}}ViewId" class="dtl-icon icon-image"><span class="dtl-icon-text">HD IMAGE</span></span>
+    </a>
+  </div>
+
+  <div class="hover-icon-css" *ngIf="stoneObj?.movie_url">
+    <a [dirStoneMultimediaDetail]="{stoneid:stoneObj,showMediaType:'Video'}" (click)="onWindowScroll()">
+      <!-- <span id="{{stoneObj.stone_id}}ViewId" class="dtl-icon icon-hd-video-movie" pTooltip="HD Movie" tooltipPosition="right" tooltipEvent="hover"></span> -->
+      <span id="{{stoneObj.stone_id}}ViewId" class="dtl-icon icon-hd-video-movie"><span class="dtl-icon-text">HD Movie</span></span>
+    </a>
+  </div>
+  <div class="hover-icon-css" *ngIf="stoneObj?.hna_url">
+    <a [dirStoneMultimediaDetail]="{stoneid:stoneObj,showMediaType:'HA'}" (click)="onWindowScroll()">
+      <!-- <span id="{{stoneObj.stone_id}}ViewId" class="dtl-icon icon-hna" pTooltip="H&A Diamond" tooltipPosition="right" tooltipEvent="hover"></span> -->
+      <span id="{{stoneObj.stone_id}}ViewId" class="dtl-icon icon-hna" ><span class="dtl-icon-text">H&A Diamond</span></span>
+    </a>
+  </div>
+  <div class="hover-icon-css" *ngIf="stoneObj?.cert_url">
+    <a [dirStoneMultimediaDetail]="{stoneid:stoneObj,showMediaType:'PDF'}" (click)="onWindowScroll()">
+      <!-- <span id="{{stoneObj.stone_id}}ViewId" class="dtl-icon icon-certificate" pTooltip="Certificate" tooltipPosition="right" tooltipEvent="hover"></span> -->
+      <span id="{{stoneObj.stone_id}}ViewId" class="dtl-icon icon-certificate"><span class="dtl-icon-text">Certificate</span></span>
+    </a>
+  </div>
+  <div class="hover-icon-css" *ngIf="stoneObj?.plot_url">
+    <a [dirStoneMultimediaDetail]="{stoneid:stoneObj,showMediaType:'Plotting'}" (click)="onWindowScroll()">
+      <!-- <span id="{{stoneObj.stone_id}}ViewId" class="dtl-icon icon-stone-big" pTooltip="Plotting" tooltipPosition="right" tooltipEvent="hover"></span> -->
+      <span id="{{stoneObj.stone_id}}ViewId" class="dtl-icon icon-stone-big"><span class="dtl-icon-text">Plotting</span></span>
+    </a>
+  </div>
+  <div class="hover-icon-css" *ngIf="stoneObj?.digiplot_url">
+    <a [dirStoneMultimediaDetail]="{stoneid:stoneObj,showMediaType:'Digiplott'}" (click)="onWindowScroll()">
+      <!-- <span id="{{stoneObj.stone_id}}ViewId" class="dtl-icon icon-g" pTooltip="Digiplot" tooltipPosition="right" tooltipEvent="hover"></span> -->
+      <span id="{{stoneObj.stone_id}}ViewId" class="dtl-icon icon-g" ><span class="dtl-icon-text">Digiplot</span></span>
+    </a>
+  </div>
+</p-overlayPanel>

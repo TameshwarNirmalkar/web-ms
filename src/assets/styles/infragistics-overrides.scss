@@ -1,0 +1,365 @@
+
+/* This is needed for enabling user to copy text. */
+td {
+
+  // -webkit-user-select: text !important;
+  // user-select: text !important;
+
+}
+
+.ui-iggrid .ui-iggrid-tablebody td {
+
+  text-align: center;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-right-color: #bbbbbb;
+  border-bottom-color: #bbbbbb;
+
+}
+
+.ui-iggrid th:first-child {
+
+  background: #ffffff;
+
+}
+
+/* Maintain Row borders when selected */
+
+.ui-iggrid td.ui-state-active, .ui-iggrid .ui-ig-altrecord td.ui-state-active, .ui-iggrid th.ui-iggrid-rowselector-class.ui-state-active, .ui-iggrid .ui-ig-altrecord th.ui-iggrid-rowselector-class.ui-state-active, .ui-iggrid tbody .ui-iggrid-mergedcell.ui-state-active, .ui-iggrid tbody .ui-ig-altrecord .ui-iggrid-mergedcell.ui-state-active, .ui-iggrid tbody .ui-iggrid-mergedcellstop.ui-state-active, .ui-iggrid tbody .ui-ig-altrecord .ui-iggrid-mergedcellstop.ui-state-active {
+
+   border-color: #bbbbbb;
+
+}
+
+.ui-iggrid tbody > tr > th.ui-iggrid-rowselector-class {
+
+  border-right: 1px solid #bbbbbb !important;
+
+}
+
+.ui-iggrid table td{
+
+  font-size: 12px;
+  text-align: center;
+
+}
+
+.ui-iggrid-sortableheader .ui-iggrid-headertext {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.ui-iggrid td.ui-state-active, .ui-iggrid .ui-ig-altrecord td.ui-state-active, .ui-iggrid th.ui-iggrid-rowselector-class.ui-state-active, .ui-iggrid .ui-ig-altrecord th.ui-iggrid-rowselector-class.ui-state-active, .ui-iggrid tbody .ui-iggrid-mergedcell.ui-state-active, .ui-iggrid tbody .ui-ig-altrecord .ui-iggrid-mergedcell.ui-state-active, .ui-iggrid tbody .ui-iggrid-mergedcellstop.ui-state-active, .ui-iggrid tbody .ui-ig-altrecord .ui-iggrid-mergedcellstop.ui-state-active{
+
+  background: #d9edf7;
+
+}
+
+.ui-iggrid .ui-iggrid-table.ui-iggrid-unfixed-table-left>tbody>tr>td:first-child, .ui-iggrid-fixedcontainer-right .ui-iggrid-table>tbody>tr>td:last-child {
+
+  border-left-width: 1px !important; ;
+
+}
+
+/* Remove left-right padding on cells */
+
+.ui-iggrid .ui-iggrid-header, .ui-iggrid table tbody td, .ui-iggrid table th {
+
+  padding: 4px 0;
+
+}
+.ui-iggrid table tbody td{
+  padding: 0.1px !important;
+}
+
+.ui-iggrid table tbody td{
+  padding: 0.1px !important;
+}
+
+
+.ui-iggrid tr.ui-ig-altrecord {
+  background-color: #ffffff;
+}
+
+/* Checkboxes */
+
+.ui-iggrid-rowselector-class .ui-igcheckbox-normal, .ui-iggrid-rowselector-header .ui-igcheckbox-normal {
+
+  float: left;
+
+}
+
+.ui-igcheckbox-normal.ui-state-default, .ui-igcheckbox-small.ui-state-default, .ui-igcombo-checkbox.ui-state-default{
+
+  border: 1px solid #bbbbbb !important;
+
+}
+
+.ui-state-default.ui-corner-all.ui-igcheckbox-normal {
+  margin-left: 11px;
+}
+
+.ui-icon.ui-icon-triangle-1-e {
+  display: none;
+}
+
+
+/*On Hover Styles*/
+
+.ui-iggrid td.ui-state-hover, .ui-iggrid .ui-ig-altrecord td.ui-state-hover {
+
+  border-right: 1px solid;
+  border-color: #bbbbbb;
+
+}
+
+
+.ui-iggrid .ui-ig-altrecord.ui-state-focus {
+  background: #ffffff;
+  color: #373a3c;
+}
+
+.ui-iggrid tr.ui-ig-altrecord.ui-state-focus td, .ui-iggrid tr.ui-ig-altrecord.ui-state-focus th, .ui-iggrid tr.ui-state-focus td, .ui-iggrid tr.ui-state-focus th {
+  border-top: 1px solid #bbbbbb !important;
+  border-bottom: 1px solid #bbbbbb !important
+}
+
+.ui-iggrid tr.ui-state-focus {
+  color: #373a3c;
+}
+
+.ui-iggrid .ui-iggrid-table.ui-iggrid-unfixed-table-left > tbody > tr > td:first-child {
+  text-align: center;
+  padding-left: 3px;
+  text-overflow: unset;
+}
+
+.ui-iggrid th, .ui-iggrid th.ui-widget-header.ui-state-default {
+  text-align: center;
+  border-right-color: #bbbbbb;
+}
+
+.ui-menu {
+  width: 100%;
+  padding: 0;
+}
+
+
+/* For scroll for the grid to try and resolve issue on Mac */
+
+::-webkit-scrollbar {
+  width:8px;
+}
+::-webkit-scrollbar-track {
+  -webkit-border-radius:5px;
+  border-radius:5px;
+  background:rgba(0,0,0,0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius:5px;
+  border-radius:5px;
+  background:rgba(0,0,0,0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background:rgba(0,0,0,0.4);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background:rgba(0,0,0,0.05);
+}
+
+/* END issues with scrolling to mac */
+
+
+/* Dialog For Column Chooser */
+
+.ui-dialog.ui-widget .ui-dialog-content {
+  overflow: hidden !important;
+}
+
+/* End Dialog for column chooser*/
+
+.ui-iggrid > table tr:first-child td {
+  border-top-color: #bbbbbb !important;
+}
+
+.ui-iggrid-fixedcontainer-left {
+
+  border-right: 1px solid #bbbbbb !important;
+}
+
+.ui-iggrid th.ui-iggrid-rowselector-class:first-child {
+  border-left: 1px solid #bbbbbb;
+  border-bottom-color: #bbbbbb;
+}
+
+.ui-iggrid tbody td {
+  border-bottom-color: #bbbbbb;
+}
+
+.ui-iggrid th .ui-iggrid-indicatorcontainer a{
+  display: none;
+}
+
+.ui-iggrid-indicatorcontainer{
+  max-width: 16px;
+  width: 16px;
+  min-width: 16px;
+}
+
+.ui-iggrid-headercell-featureenabled.ui-draggable .ui-iggrid-headertext{
+  width: 100% !important;
+}
+
+.ui-iggrid-fixedcontainer-left .ui-iggrid-table>tbody>tr>td:last-child{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: unset;
+  text-align: left;
+}
+
+.ui-igcheckbox-normal-on{
+
+  margin-left: 0;
+  margin-top: 0;
+
+}
+
+/*
+.ui-iggrid-fixedcontainer-left  table  td.ui-iggrid-selectedcell.ui-state-active, .ui-iggrid-fixedcontainer-right table td.ui-iggrid-selectedcell.ui-state-active {
+
+  border-left-color: transparent;
+  border-right-color: transparent;
+
+}
+*/
+
+.ui-iggrid-fixedcontainer-left  table  td {
+
+  border-right-color: #dddddd;
+  border-left-color: #dddddd;
+
+}
+
+.ui-widget .ui-widget {
+
+  font-size: 12px;
+
+}
+
+.ui-widget a {
+
+  color: #373a3c;
+
+}
+
+/* START Sorting for grid */
+
+/*.ui-iggrid-indicatorcontainer {
+
+  display: none;
+
+}*/
+
+
+.ui-iggrid-headercell-featureenabled.ui-iggrid-colheaderasc .ui-iggrid-headertext, .ui-iggrid-headercell-featureenabled.ui-iggrid-colheaderdesc .ui-iggrid-headertext {
+
+  width: calc(100% - 16px) !important;
+
+}
+
+.ui-iggrid-colheaderasc > .ui-iggrid-indicatorcontainer, .ui-iggrid-colheaderdesc > .ui-iggrid-indicatorcontainer {
+
+  display: inline;
+
+}
+
+/* END Sorting for grid */
+
+.sgs-comment-span {
+
+  width: 100%;
+
+}
+.ui-chkbox-box{
+  background: #fff;
+}
+
+.ui-growl-message-success{
+  background-color: #4CAE4C
+}
+.ui-growl-message-error{
+  background-color: #D43F3A
+
+}
+.ui-growl-message-info{
+  background-color: #1F89CE
+}
+
+
+
+
+/* START Hide Delete Row Button*/
+
+.ui-iggrid-deletebutton.ui-state-default.ui-corner-all {
+
+  display: none !important;
+
+}
+
+/* END Hide Delete Row Button*/
+.dayp-data-input-container {
+
+  padding: 3px;
+
+}
+
+.dayp-grid-cell-input {
+
+  display: block;
+  width: 100%;
+  padding: 3px 0;
+  text-align: center;
+
+}
+
+.no-margin {
+
+  margin: 0;
+
+}
+
+.dayp-grid-cell-percentage-inputs-container{
+
+  width: 100%;
+
+}
+
+.dayp-grid-cell-percentage-inputs-container select{
+
+  width: 33%;
+  margin-right: 1%;
+  display: inline-block;
+
+}
+
+.dayp-grid-cell-percentage-inputs-container input{
+
+  width: 65%;
+  display: inline-block;
+
+}
+
+/* END DAYP Page Cell Styles */
+
+
+.ui-iggrid-layout-helper > tbody > tr:first-child > td th {
+
+  border-bottom: 1px solid #bbbbbb;
+
+}

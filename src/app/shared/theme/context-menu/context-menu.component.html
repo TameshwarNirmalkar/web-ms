@@ -1,0 +1,13 @@
+<div class="custom-context-menu-overlay" (contextmenu)="hideCustomContextMenu()" (click)="hideCustomContextMenu()">
+
+  <div #menuElement (contextmenu)="handleContextMenu($event)" class="custom-context-menu-container" [style.left.px]="posX" [style.top.px]="posY">
+
+    <ul>
+
+      <li *ngFor="let option of optionsList" (click)="handleOptionClick(option)"> <i class="{{option.iconClass}}"></i> {{option.label}}</li>
+
+    </ul>
+
+  </div>
+
+</div>

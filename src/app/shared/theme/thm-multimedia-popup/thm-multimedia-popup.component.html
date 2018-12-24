@@ -1,0 +1,46 @@
+<div class="ui-g-12" *ngIf="popUpMultimediaInfo">
+  <p-dialog id="multimediaBox" appendTo="body" header="Stone Id: {{popUpMultimediaInfo.stone_id}}" [showHeader]="true" [closeOnEscape]="true"
+    [dismissableMask]="true" [(visible)]="displayMultimediaPopup" modal="modal" width="750" [responsive]="true"
+    (onHide)="togglePopup()">
+    <div id="multimediaBoxId" class="ui-g-12 multimedia">
+      <div id="isImageUrlId" class="ui-g-12 box-multi" *ngIf="popUpMultimediaInfo.image_url && imagePopUpShow">
+        <img id="multimediaImagePopUpId" class="src-image-display" [src]="popUpMultimediaInfo.image_url | safeUrl" (error)="updateImage($event)">
+      </div>
+      <div id="isHaUrlId" class="ui-g-12 box-multi" *ngIf="popUpMultimediaInfo.hna_url && haPopUpShow">
+        <img id="haImagePopUpId" class="src-image-display" [src]="popUpMultimediaInfo.hna_url| safeUrl" (error)="updateImage($event)">
+      </div>
+      <div id="isVideoUrlId" class="ui-g-12 box-multi holds-the-iframe" *ngIf="popUpMultimediaInfo.movie_url && videoPopUpShow">
+        <iframe class="iframe-display" [src]="popUpMultimediaInfo.movie_url+'&h=1500&btn=0' | safeUrl" id="iframeMoviePopUp" width="100%"
+          scrolling="no" frameborder="0"></iframe>
+      </div>
+
+      <div id="isDigiPlotUrlId" class="ui-g-12 box-multi holds-the-iframe" *ngIf="popUpMultimediaInfo.digiplot_url && digiplotPopUpShow">
+        <iframe class="iframe-display-digiplot" [src]="popUpMultimediaInfo.digiplot_url | safeUrl" id="iframeDigiPlotPopUp" width="100%" scrolling="no"
+          frameborder="0"></iframe>
+      </div>
+
+      <div id="isPdfUrlId" class="ui-g-12 box-multi holds-the-iframe" *ngIf="popUpMultimediaInfo.cert_url && pdfPopUpShow">
+        <iframe class="iframe-display" id="iframecert" [src]="popUpMultimediaInfo.cert_url | safeUrl" width="100%" scrolling="no" frameborder="0"
+          valign="top"></iframe>
+      </div>
+      <div id="isPlotUrlId" class="ui-g-12 box-multi" *ngIf="popUpMultimediaInfo.plot_url && plotPopUpShow">
+        <img id="multimediaPlotPopUpId" class="src-image-display" [src]="popUpMultimediaInfo.plot_url | safeUrl" (error)="updateImage($event)">
+      </div>
+    </div>
+    <div id="buttonBarId" class="ui-g-12 button-bar">
+      <a [dirStoreAudit]="'IMAGE VIEW'" *ngIf="popUpMultimediaInfo.image_url" id="imageButtonId" class="dtl-icon icon-image" [class.dtl-icon-active]="imagePopUpShow"
+        (click)="changePopUpMultimedia(true,false,false,false,false,false ,popUpMultimediaInfo)" pTooltip="Diamond View" tooltipPosition="bottom" tooltipEvent="hover"></a>
+      <a [dirStoreAudit]="'HD VIEW'" *ngIf="popUpMultimediaInfo.movie_url" id="videoButtonId" class="dtl-icon icon-hd-video-movie" [class.dtl-icon-active]="videoPopUpShow"
+        (click)="changePopUpMultimedia(false,true,false,false,false,false,popUpMultimediaInfo)" pTooltip="HD Movie" tooltipPosition="bottom" tooltipEvent="hover"></a>
+
+      <a [dirStoreAudit]="'HD VIEW'" *ngIf="popUpMultimediaInfo.digiplot_url" id="digiPlotButtonId" (click)="changePopUpMultimedia(false,false,false,false,false,true,popUpMultimediaInfo)"
+        [class.dtl-icon-active]="digiplotPopUpShow" class="dtl-icon icon-g" pTooltip="Digi Plotting" tooltipPosition="bottom" tooltipEvent="hover"></a>
+
+      <a [dirStoreAudit]="'HA VIEW'" *ngIf="popUpMultimediaInfo.hna_url" id="habuttonId" class="dtl-icon icon-hna" [class.dtl-icon-active]="haPopUpShow" (click)="changePopUpMultimedia(false,false,true,false,false,false,popUpMultimediaInfo)" pTooltip="H&A Diamond" tooltipPosition="bottom" tooltipEvent="hover"></a>
+      <a [dirStoreAudit]="'CERT VIEW'" *ngIf="popUpMultimediaInfo.cert_url" id="pdfbuttonId" class="dtl-icon icon-certificate" [class.dtl-icon-active]="pdfPopUpShow"
+        (click)="changePopUpMultimedia(false,false,false,true,false,false,popUpMultimediaInfo)" pTooltip="Certificate" tooltipPosition="bottom" tooltipEvent="hover"></a>
+      <a [dirStoreAudit]="'PLOT VIEW'" *ngIf="popUpMultimediaInfo.plot_url" id="plotButtonId" class="dtl-icon icon-stone-big" [class.dtl-icon-active]="plotPopUpShow"
+        (click)="changePopUpMultimedia(false,false,false,false,true,false,popUpMultimediaInfo)" pTooltip="Plotting" tooltipPosition="bottom" tooltipEvent="hover"></a>
+    </div>
+  </p-dialog>
+</div>

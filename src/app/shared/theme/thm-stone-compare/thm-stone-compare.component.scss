@@ -1,0 +1,32 @@
+.multimedia-image {  width: 100%;  max-width: 180px;}
+.ha-inclusion-box {  width: auto;  height: 170px;}
+.multimedia-image {  width: 100%;  max-width: 180px;}
+.multimedia-box {  height: 180px; padding: 0px;}
+.multimedia-image-ploat {  width: 100%;  max-width: 320px;margin-top: 20px;}
+// .margin-class{margin:0px 10px; border: 1px solid black; width: 20%; padding: 0px;word-wrap: break-word;}
+.stone-compare-box{height: 90vh;overflow: scroll;}
+
+.compare-stone-card{ margin-bottom: 5px; margin-left: 10px}
+// .compare-stone-card{margin-right: 20px; width: 23%; margin-bottom: 10px;}
+.compare-page-icon{ width: 25px ; height: 40px}
+.note-label{font-size: 12px; text-align: center; display: block; width: 100%; line-height: 1.4em}
+.basic-details-heading{ font-weight: bold;}
+.stone-shape-value{ max-width: 95px ; text-overflow: ellipsis;  overflow: hidden; white-space: nowrap;}
+.comment-stone-data{
+    /* border: 1px solid black; */
+    width: 100%;
+    padding: 0px;
+    word-wrap: break-word;}
+.width20{ width: 21% ; margin-left: 10px}
+.stone-color{ max-width: 20%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    height: 20px;}
+
+#stoneCompareMainContainerId{
+  display: block;
+}
+.count-view-width{
+    width: 22px;
+}
