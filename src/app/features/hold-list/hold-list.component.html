@@ -1,0 +1,41 @@
+<div dirScrollTop>
+  <div class="ui-g-12 ui-g-nopad sms-page-container">
+    <div class="ui-g-10 ui-g-nopad hold-page-title" id="heading">
+      {{"MY_HOLD_LIST"|translate}}
+    </div>
+  </div>
+  <div class="ui-g-12 ui-g-nopad baksetList">
+    <div>
+      <dx-tab-panel #holdPanel [dataSource]="tabName" [selectedIndex]="currentTabSelected" (onItemRendered)="changeActiveTab($event)"
+        [loop]="false" [animationEnabled]="false" [swipeEnabled]="false">
+        <div *dxTemplate="let item of 'title'">
+          <span id="{{item.basketTab}}" *ngIf="item.basketTab">{{item.basketTab |translate}}</span>
+          <span id="{{item.stoneName}}" *ngIf="item.stoneName">{{item.stoneName}}
+          		<span class="icon-close circle-close-icon" (click)="removeDetailedPacketTab(item.stoneName)"></span>
+          </span>
+          <div *ngIf="item.pairId">
+            <span id="{{item.pairId}}pairId">Twin Stone Detail- {{item.pairId}}
+          <span id="removeIcon" class="icon-close circle-close-icon" (click)="removeDetailedPacketTab(item.pairId)"></span>
+            </span>
+          </div>
+
+        </div>
+
+        <div *dxTemplate="let content of 'item'">
+          <div id="{{content.basketTab}}view" class="tabpanel-item sms-page-container" *ngIf="content.basketTab">
+            <app-hold-list-details></app-hold-list-details>
+          </div>
+
+          <div id="{{content.stoneName}}view" class="tabpanel-item sms-page-container" *ngIf="content.stoneName">
+            <thm-stone-details [stoneDetails]="content.stoneInfo"></thm-stone-details>
+          </div>
+          <div id="{{content.pairId}}Id" class="tabpanel-item sms-page-container" *ngIf="content.pairId">
+            <thm-twin-stone-detail [twinStones]="content.twinStones"></thm-twin-stone-detail>
+          </div>
+
+        </div>
+      </dx-tab-panel>
+    </div>
+
+  </div>
+</div>

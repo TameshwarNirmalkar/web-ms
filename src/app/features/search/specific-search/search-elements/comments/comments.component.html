@@ -1,0 +1,43 @@
+<div id="COMMENTS_ID" class="ui-grid ui-grid-responsive ui-grid-pad component-cards no-box-padding">
+  <div id="commentHeadingContainer" class="ui-g-12 ui-g-nopad">
+    <div id="commentLabelBox" class="ui-g-1 custom-padding">
+      <label id="commentLabel" class="component-cards-heading">{{'Comments' | translate}}</label>
+    </div>
+    <div id="commentComponentContainer" class="ui-g-11 ui-g-nopad">
+      <div id="commentKtsBox" class="ui-g-6 ui-g-nopad">
+        <div id="ktsLabelBox" class="ui-g-4 custom-padding auto-width"><label id="ktsLabel" class="comments-heading">{{'Key To Symbol (KTS)' |translate}}</label></div>
+        <div class="ui-g-4 dropdown-center" id="LikeKTSContainer">
+          <p-multiSelect styleClass="comments-component-dropdown" (onChange)='KTSlike()' id="ktsLikeMultiselect" [options]="ktsOptionList"
+            [(ngModel)]="KTSlikeValues">
+          </p-multiSelect>
+          <span id="ktsLikeBtn" [ngClass]="{'icon-thumsup-fill': isLikeKTS,'icon-thumsup-line':!isLikeKTS}" class="like-icon" (click)="isLikeKTS = !isLikeKTS"
+            pTooltip="{{(isLikeKTS?'LIKE_FILTERED_TEXT':'LIKE_TEXT')|translate}}" tooltipPosition="bottom" tooltipEvent="hover"></span>
+        </div>
+        <div class="ui-g-4 dropdown-center" id="DislikeKTSContainer">
+          <p-multiSelect styleClass="comments-component-dropdown" (onChange)='KTSdislike()' id="ktsDislikeMultiselect" [options]="ktsOptionList"
+            [(ngModel)]="KTSdislikeValues">
+          </p-multiSelect>
+          <span id="ktsDlikeBtn" [ngClass]="{'icon-thumsdown-fill': isDislikeKTS,'icon-thumsdown-line':!isDislikeKTS}" class="like-icon"
+            (click)="isDislikeKTS = !isDislikeKTS" pTooltip="{{(isDislikeKTS?'DISLIKE_FILTERED_TEXT':'DISLIKE_TEXT')|translate}}" tooltipPosition="bottom" tooltipEvent="hover"></span>
+        </div>
+      </div>
+      <div id="commentSgsBox" class="ui-g-6 ui-g-nopad">
+        <div id="sgsLabelBox" class="ui-g-4 ui-g-nopad auto-width"><label id="sgsLabel" class="comments-heading">{{'SRK Grading System (SGS)' |translate}}</label></div>
+        <div class="ui-g-4 dropdown-center" id="LikeSGSContainer">
+          <p-multiSelect styleClass="comments-component-dropdown" (onChange)='SGSlike()' id="sgsLikeMultiselect" [options]="sgsOptionList"
+            [(ngModel)]="SGSlikeValues">
+          </p-multiSelect>
+          <span id="sgsLikeBtn" [ngClass]="{'icon-thumsup-fill': isLikeSGS,'icon-thumsup-line':!isLikeSGS}" class="like-icon" (click)="isLikeSGS = !isLikeSGS"
+             pTooltip="{{(isLikeSGS?'LIKE_FILTERED_TEXT':'LIKE_TEXT')|translate}}" tooltipPosition="bottom" tooltipEvent="hover"></span>
+        </div>
+        <div class="ui-g-4 dropdown-center" id="DislikeSGSContainer">
+          <p-multiSelect styleClass="comments-component-dropdown" (onChange)='SGSdislike()' id="sgsDislikeMultiselect" [options]="sgsOptionList"
+            [(ngModel)]="SGSdislikeValues">
+          </p-multiSelect>
+          <span id="sgsDlikeBtn" [ngClass]="{'icon-thumsdown-fill': isDislikeSGS,'icon-thumsdown-line':!isDislikeSGS}" class="like-icon"
+            (click)="isDislikeSGS = !isDislikeSGS;" pTooltip="{{(isDislikeSGS?'DISLIKE_FILTERED_TEXT':'DISLIKE_TEXT')|translate}}" tooltipPosition="bottom" tooltipEvent="hover"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

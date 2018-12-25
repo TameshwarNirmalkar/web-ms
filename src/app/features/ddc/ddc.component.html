@@ -1,0 +1,73 @@
+<p-confirmDialog acceptIcon='' rejectIcon='' width="425"></p-confirmDialog>
+<div dirScrollTop id="ddcPageContainer">
+
+  <!-- Packets -->
+  <div *ngIf="ddcStoneList && ddcStoneList.length>0">
+    <div class="ui-g-12 ui-g-nopad show-packet-panel" id="packetBox">
+      <app-create-packet [visiblePacketOverlay]="visiblePacketPopup" [stone]="stoneForPacket" [showSelectedPacket]="showSelectedPacket"
+        (togglePacketIcon)="togglePacketIcon($event)" (togglePacketOverlay)="togglePacketOverlay($event)" (updatePacketIcon)="updatePacketIcon($event)"></app-create-packet>
+    </div>
+
+    <div class="packet-btn-box" id="packetTabResultId">
+      <button [dirStoreAudit]="'SHOW PACKET'" id="ddcShowPacketBtnID" *ngIf="showPacktBtn" class="custom-btnPrimary show-button"
+        type="button" (click)="showPacket()">{{'Show Packet' |translate}}</button>
+      <ng-template [dirCheckPermission]="'create_packet_btn'">
+        <button [dirStoreAudit]="'CREATE PACKET'" id="ddcCreatePacketBtnID" class="custom-btnPrimary creat-button" type="button"
+          (click)="createPacket()">{{'Create Packet' |translate}}</button>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- DDC tabs -->
+  <div id="fixedDdcEmptyPanel" class="fixed-panel-class"></div>
+  <div class="ui-g-12 ui-g-nopad" id="fixedDdcTabs">
+
+    <div #ddcPanel class="container">
+      <div class="scroller scroller-left" (click)="scrollTabPanelLeft()"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
+      <div class="scroller scroller-right" (click)="scrollTabPanelRight()"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+      <div class="wrapper-search-tab">
+        <ul class="nav nav-tabs list" id="myTab">
+          <li id="ddcMenubar" *ngFor="let tab of tabName" (click)="getSelectedTabName(tab)" [ngClass]="{'active-filter': (tab.ddcTab === currentTabSelected || tab.stoneName === currentTabSelected || tab.pairId === currentTabSelected),
+                'blink_me':lastCreatedTab && (tab.stoneName || tab.pairId) &&(tab.stoneName === lastCreatedTab || tab.pairId === lastCreatedTab)}">
+            <a *ngIf="tab.ddcTab">
+                        <span> 
+                          <label class="search-font-box" id="{{tab.ddcTab}}ddcTabId">{{tab.ddcTab}}  </label> 
+                        </span>
+                    </a>
+            <a *ngIf="tab.stoneName" id="{{tab.stoneName}}NameLink">
+                      <span id="{{tab.stoneName}}NameId" class="search-font-box">{{tab.stoneName}} </span>
+                      <span id="removeIcon" class="icon-close circle-close-icon" (click)="removeDetailedPacketTab(tab.stoneName)"></span>                  
+                    </a>
+            <a *ngIf="tab.pairId" id="{{tab.pairId}}NameLink">
+                      <span id="{{tab.pairId}}NameLink" class="search-font-box">{{tab.pairId}}</span> 
+                      <span id="removeIcon" class="icon-close circle-close-icon" (click)="removeDetailedPacketTab(tab.pairId)"></span>
+                    </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="tab-content">
+      <div id="tabRowId" class="tabpanel-item">
+        <div *ngFor="let data of tabName">
+          <div class="tabpanel-item sms-page-container" *ngIf="data.ddcTab && currentTabSelected === data.ddcTab">
+            <div *ngIf="ddcStoneList && ddcStoneList.length>0;else showMessage">
+              <app-ddc-stones-detail [ddcStones]="ddcStoneList" [visiblePacketIcon]="visiblePacketIcon" (displayStoneDetails)="addTab($event)"
+                (stoneToAddPakcet)="stoneFromSelectedStone($event)" (removeDDCStone)="updateDDCStone($event)"></app-ddc-stones-detail>
+            </div>
+            <ng-template #showMessage>
+              <div class="ui-g-12 sms-page-container coming-soon">
+                {{ message | translate}}
+              </div>
+            </ng-template>
+          </div>
+          <div id="stonedetailssearch" class="tabpanel-item struck-details-page sms-page-container" *ngIf="data.stoneName && currentTabSelected === data.stoneName">
+            <thm-stone-details [stoneDetails]="data.stoneInfo"></thm-stone-details>
+          </div>
+          <div class="tabpanel-item  struck-details-page sms-page-container" *ngIf="data.pairId && currentTabSelected === data.pairId">
+            <thm-twin-stone-detail [twinStones]="data.twinStones"></thm-twin-stone-detail>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

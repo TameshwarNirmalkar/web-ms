@@ -1,0 +1,55 @@
+app-search-range-select .ui-selectbutton .ui-button.ui-state-default,
+app-search-range-select .ui-togglebutton.ui-button.ui-state-default {
+  margin-left: 5px;
+  height: 26px;
+  width: 46px;
+  vertical-align: middle;
+  font-size: 11px;
+
+}
+
+#COLOUR_ID app-search-range-select  .ui-selectbutton .ui-button.ui-state-default{
+  margin-top: 1px;
+  height: 26px;
+  width: 40px;
+}
+
+app-search-range-select .ui-button-text-only .ui-button-text {
+  padding: 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  word-wrap: break-word;
+  display: -webkit-inline-box;
+  vertical-align: middle;
+  font-size: 11px;
+  word-break: inherit;
+  padding-top: 1px;
+  margin-left: 0px ;
+}
+
+.checkbox-container {
+  margin-top: 1px;
+}
+
+app-search-range-select .ui-chkbox .ui-chkbox-box{
+  width: 1em;
+  height: 1em;
+}
+
+app-search-range-select .ui-selectbutton .ui-button.ui-state-active,
+app-search-range-select .ui-togglebutton.ui-button.ui-state-active {
+  font-size: 12px;
+  /*font-weight: bold;*/
+  text-align: center;
+  border: 1px solid #ccc;
+}
+app-search-range-select .ui-widget-header .ui-button, .ui-widget-content .ui-button, .ui-button{font-size:13px; padding: 1px 1px;}
+
+.all-box{width: auto;}
+
+#selectAllCheckbox .ui-selectbutton .ui-button.ui-state-default{
+  width: 45px !important;
+}

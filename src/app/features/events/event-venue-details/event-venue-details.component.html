@@ -1,0 +1,158 @@
+<div class="fade" dirScrollTop>
+  <div class="ui-g-8 ui-md-12 ui-lg-8 paddl0 paddt0">
+    <div class="ui-g">
+      <div class="ui-g-12 event-cards">
+        <div class="ui-g-1">
+          <img src="/assets/img/srk-logo.png" class="event-compnay-logo">
+        </div>
+        <div class="ui-g-11 event-info text-bold event-header-name" *ngIf="eventInfo">
+          AT {{eventInfo.event_name}}
+        </div>
+        <div class="ui-g-12 paddb0 paddt0">
+          <div class="ui-g-12 ui-g-nopad">
+            <div class="ui-g-7 paddb0 paddt20">
+              <div class="ui-g-12 text-center event-timer" *ngIf="!isEventClosed">
+                <div class="ui-g-3 paddl0 paddr0">
+                  <label>{{"Days" |translate}}</label>
+                  <br>
+                  <label>
+                    <b>{{eventDays}}</b>
+                  </label>
+                </div>
+                <div class="ui-g-3 paddl0 paddr0">
+                  <label>{{"Hours" |translate}}</label>
+                  <br>
+                  <label>
+                    <b>{{eventHour}}</b>
+                  </label>
+                </div>
+                <div class="ui-g-3 paddl0 paddr0">
+                  <label>{{"Minutes" |translate}}</label>
+                  <br>
+                  <label>
+                    <b>{{eventMinute}} </b>
+                  </label>
+                </div>
+                <div class="ui-g-3 paddl0 paddr0">
+                  <label>{{"Seconds" |translate}}</label>
+                  <br>
+                  <label>
+                    <b>{{eventSeconds}} </b>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="ui-g-5 paddb0 paddt0" *ngIf="eventInfo">
+
+              <img *ngIf="eventInfo.file_path" [ngClass]="{'card-floor-skeleton':eventInfo === null }" class="floor-image" [src]="eventInfo.file_path | safeUrl">
+
+              <div class="ui-g-12 ui-g-nopad">
+                <!-- <div class="ui-g-6">
+                Get Direction
+              </div> -->
+
+              </div>
+            </div>
+          </div>
+          <div class="ui-g-12 paddl0">
+            <div class="ui-g-4 borderr paddt0 paddl0" *ngIf="eventInfo">
+              <label class="event-date event-name text-bold">{{eventInfo.event_start_date | customDate : 'dateWithMonth'}} - {{eventInfo.event_end_date | customDate : 'dateWithMonth'}}</label>
+              <br>
+              <label class="event-date event-name">{{eventInfo.event_venue| titlecase}}</label>
+            </div>
+            <div class="ui-g-3 event-name booth-number paddt0 text-bold paddr0" *ngIf="eventInfo">
+              <label>{{'BOOTH_NO' | translate}}: {{eventInfo.booth_number}}</label>
+              <br>
+              <a (click)="openWebsiteNewTab(eventInfo.website)" target="_blank" class="event-date">{{eventInfo.website}}</a>
+            </div>
+            <div class="ui-g-4 paddt0" *ngIf="eventInfo">
+              <a *ngIf="eventInfo.file_path" id="downloadFloorPlan" href="{{eventInfo.file_path}}" target="_blank" download class="download-link">{{'DOWNLOAD_PLAN' | translate}}</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="ui-g-6 paddl0" *ngIf="!hideHighlights">
+      <div class="ui-g-12 event-cards highlight-cards">
+        <div class="ui-g-12 event-info text-bold">{{'EVENT_HIGHLIGHTS' | translate}}</div>
+        <div class="ui-g-12 paddt0" *ngIf="eventHighlights; else noHighlights">
+          <div class="ui-g-6 ui-g-nopad" *ngIf="eventHighlights.no_of_stones_in_show >= 0">
+            <div class="ui-g-2 highlights-icon">
+              <span class="icon icon-Shape-Round event-highlight-icons padd0"></span>
+            </div>
+            <div class="ui-g-10">
+              <label class="counts-number-event">{{eventHighlights.no_of_stones_in_show}}</label>
+              <br>
+              <label class="counts-info-event">{{'STONES_IN_SHOW' | translate}}</label>
+            </div>
+          </div>
+
+          <div class="ui-g-6 ui-g-nopad" *ngIf="eventHighlights.available_slots >= 0">
+            <div class="ui-g-2  highlights-icon">
+              <span class="login-icon icon-calendar event-highlight-icons"></span>
+            </div>
+            <div class="ui-g-10">
+              <label class="counts-number-event">{{eventHighlights.available_slots}}</label>
+              <br>
+              <label class="counts-info-event">{{'SLOT_AVAILABLE'| translate}}</label>
+            </div>
+          </div>
+          <div class="ui-g-7 ui-g-nopad" *ngIf="eventHighlights.visitors_confirmed >= 0">
+            <div class="ui-g-2 highlights-icon">
+              <span class="login-icon icon-user event-highlight-icons"></span>
+            </div>
+            <div class="ui-g-10">
+              <label class="counts-number-event">{{eventHighlights.visitors_confirmed}}</label>
+              <br>
+              <label class="counts-info-event">{{'VISITORS_CONFIRMED' | translate}}</label>
+            </div>
+          </div>
+        </div>
+        <ng-template #noHighlights>
+          <div class="ui-g-12 text-center no-images-message">
+            {{highlightMessage | translate}}
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="ui-g-6 paddr0 paddl0">
+      <div class="ui-g-12 ui-g-nopad contact-container">
+        <thm-kam-card [kamDetailsInfo]="eventKamDetails"></thm-kam-card>
+      </div>
+    </div>
+    <div class="ui-g-12 event-cards" *ngIf="isImageFetched">
+      <div id="headerTextId" class="ui-g-6 event-info text-bold paddto paddb0">
+        {{'EVENT_PHOTOS' | translate}}
+      </div>
+      <div id="headerButtonId" class="ui-g-6 paddt0 paddb0" align="right" *ngIf="imageList.length > 0">
+        <button id="viewAllId" pbutton class="custom-btnBorder view-event-button" (click)="showImageOverlay()">{{'View All' | translate}}</button>
+      </div>
+      <div class="ui-g-12" *ngIf="imageList.length > 0 && isImageFetched">
+        <div id="imageCardContainer" class="dashboard-carousel-outer ui-g-12 ui-g-nopad" *ngIf="imageList.length > 0">
+          <owl-carousel id="eventCardsOwl" [items]="imageList" [options]="{dots: false,responsive:{'0':{ items:1}, '600':{ items:2}, '1000':{items:4}}}"
+            #owlElement [carouselClasses]="['owl-theme', 'row', 'sliding']">
+            <div id="cardData{{image.source}}Id" class=" ui-g-12 paddl0 paddt0 item carousel-item" *ngFor="let image of imageList;let i = index">
+              <img id="{{image.source}}" [src]="image.source | safeUrl">
+            </div>
+          </owl-carousel>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui-g-4 ui-md-12 ui-lg-4 paddr0 event-cards paddb0">
+    <div id="bookAppointmentHeading" class="ui-g-10 book-appointment-title">{{'BOOK_APPOINTMENT' | translate}}</div>
+    <app-book-appointment #bookAppointment [eventCode]="eventId" [enable]="true"></app-book-appointment>
+  </div>
+</div>
+<p-dialog header="{{'EVENT_PHOTOS' |translate}}" appendTo="body" [(visible)]="visibleImageOverlay" modal="modal" [closable]="true"
+  (onHide)="closeImageOverlay()" width="700" height="600">
+  <owl-carousel id="eventImagesOwl" [items]="imageList" [options]="{dots: true,responsive:{'0':{ items:1}, '600':{ items:1}, '1000':{items:1}}}"
+    #owlElement [carouselClasses]="['owl-theme', 'row', 'sliding']">
+    <div id="cardData{{image.source}}Id" class=" ui-g-12 paddl0 item carousel-item" *ngFor="let image of imageList;let i = index">
+      <a id="{{image.source}}ImageId">
+        <img id="{{image.source}}Image" class="event-open-images" [src]="image.source | safeUrl">
+      </a>
+    </div>
+  </owl-carousel>
+</p-dialog>

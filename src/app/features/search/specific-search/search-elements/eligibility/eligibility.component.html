@@ -1,0 +1,22 @@
+<div id="ELIGIBILITY_ID" class="ui-grid ui-grid-responsive ui-grid-pad component-cards">
+  <div id="eligibilityHeadingContainer" class="ui-g-12 ui-g-nopad">
+    <div id="eligibilityLabelBox" class="ui-g-1 custom-padding">
+      <label id="eligibilityLabel" class="component-cards-heading">{{'Eligibility' | translate}}</label>
+    </div>
+    <div id="eligibilityComponentContainer" class="ui-g-11 custom-padding">
+      <div class="ui-g-2 ui-md-4 ui-lg-2 ui-g-nopad">
+        <p-checkbox id="eligibilityForeverMark" name="eligibilityGroup" value="forever_marked" label="Forever Mark Eligiblity" [(ngModel)]="selectedValues"
+          (onChange)="saveEligibilityValues()">
+        </p-checkbox>
+      </div>
+      <div class="ui-g-2 ui-md-4 ui-lg-2 ui-g-nopad">
+        <p-checkbox id="eligibilityCanadaMark" name="eligibilityGroup" value="canada_marked" label="Canada Mark Eligiblity" [(ngModel)]="selectedValues"
+          (onChange)="saveEligibilityValues()">
+        </p-checkbox>
+      </div>
+    </div>
+    <div id="eligibilityFilterBox" class='ui-g-12 ui-g-nopad' *ngIf='filterConfig' align="right">
+      <button id="eligibilityFilterBtn" pButton type="button" (click)="this.filter.emit(result)" label="Apply"></button>
+    </div>
+  </div>
+</div>

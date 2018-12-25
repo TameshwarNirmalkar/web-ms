@@ -43,31 +43,35 @@ export class DateTimeService {
     return days;
   }
 
-  getHolidayAndSpecialEvent() {
+  getHolidayAndSpecialEvent(): Observable<any> {
     const year = new Date().getFullYear()
     return this.http.get(this.applicationData.getEnvironment().ApplicationApi
       + '/configMaster/clientConfig/' + this.applicationData.getOrgName() + '/geteventsAndHolidays/'
       + this.applicationData.getEnvironment().ApplicationPreviousVersion + '/'
-      + year).subscribe((res) => {
-        const srkHolidayAndEvents = JSON.parse(JSON.stringify(res));
-        srkHolidayAndEvents.forEach(element => {
-          if (element.srk_holiday) {
-            if (!element['srk_holiday'].error_status && 
-              MessageCodesComparator.AreEqual(element['srk_holiday'].code, MessageCodes.CS_WD_HF_200)) {
-              this.srkHoliday = element['srk_holiday']['data'];
+      + year)
+      .pipe(
+        map((res) => {
+          const srkHolidayAndEvents = JSON.parse(JSON.stringify(res));
+          srkHolidayAndEvents.forEach(element => {
+            if (element.srk_holiday) {
+              if (!element['srk_holiday'].error_status && 
+                MessageCodesComparator.AreEqual(element['srk_holiday'].code, MessageCodes.CS_WD_HF_200)) {
+                this.srkHoliday = element['srk_holiday']['data'];
+              }
             }
-          }
-          if (element.special_events) {
-            if (!element['special_events'].error_status && 
-              MessageCodesComparator.AreEqual(element['special_events'].code, MessageCodes.CS_WD_EF_200)) {
-              this.specialEvent = element['special_events']['data'];
+            if (element.special_events) {
+              if (!element['special_events'].error_status && 
+                MessageCodesComparator.AreEqual(element['special_events'].code, MessageCodes.CS_WD_EF_200)) {
+                this.specialEvent = element['special_events']['data'];
+              }
             }
-          }
-        });
-        return res;
-      }, err => {
-        return this.errorHandler.handleError('DateTimeService:getHolidayAndSpecialEvent', err);
-      });
+          });
+          return res;
+        }),
+        catchError(err => {
+          return this.errorHandler.handleError('DateTimeService:getHolidayAndSpecialEvent', err);
+        })
+      );
   }
 
   fetchCurrentTime(): Observable<any> {

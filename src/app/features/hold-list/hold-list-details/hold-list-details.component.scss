@@ -1,0 +1,56 @@
+#holdListContainer{
+	height: 700px;
+  width: 100%;
+}
+.colorLagend_BTOB{ margin-top: 5px;}
+#ddcGridContainer{  height: 700px;}
+.ddc-container {  padding: 16px 29px 0px;}
+.ddc-main-title{font-size: 24px;}
+.grid-container{padding: 0px;margin-top:10px;border-radius:4px;display:block; }
+
+
+.lbl-ddc-value-large{  font-size: 16px;  padding: 3px 5px;  text-align: left;  margin: 0 2px;}
+.lbl-ddc-value-small {  font-size: 12px;  padding: 3px 5px;  text-align: left;  margin: 0 2px;}
+.lbl-ddc-value-large-active{font-size: 16px;  padding: 3px 5px;  text-align: left;  margin: 0 2px;  font-weight: bold;}
+.lbl-ddc-value-small-active{ font-size: 12px;  padding: 3px 5px;  text-align: left;  margin: 0 2px;}
+
+.last-content {  margin-right: 50px;  min-width: 160px;  max-width: 160px;}
+
+.info-panel{ display: table;    width: 100%;    padding: 9px 0px 9px 0px; }
+.search-container{position: absolute;z-index: 9}
+.dx-toolbar .dx-toolbar-after {  position: absolute;   z-index: 9;}
+
+.custom-btnBorder,.custom-btnPrimary {  margin: 5px;}
+
+.color-lagend-panel{  position: absolute;   z-index: 1;}
+.colorLagend_RecentlyUploded span {  width: 10px;  height: 16px;}
+.colorLagend_BTOB span {  width: 10px;  height: 16px;}
+.colorLagend_BusinessProcess span {  width: 10px;  height: 16px;}
+.colorLagend_NewArrival span {  width: 10px;  height: 16px;}
+.box-color-lagend {  max-width: 250px;  float: left;}
+.box-color-lagend label{    padding-top: 6px;    padding-right: 10px;    display: inline-block;}
+.icons{padding:0px 10px }
+.color-lagend-container {
+    float: right;
+    text-align: right;
+    margin-top: 0px;
+    margin-right: -78px;
+}
+.status-box {float:left;  display: inline-block;  margin-right: 5px;  border-radius: 2px;  font-size: 12px;  line-height: 1;  text-align: center; }
+.notAvailable-status-box {  width: 65px;  padding: 5px; }
+.remainedTime-status-box {  width: 70px;  padding: 5px; }
+.confirmed-status-box {  width: 70px;  height: 16px;}
+.color-indicator-panel{float: right; margin-left: 7px; margin-top: 5px;}
+.loading-data{ font-size: large; text-align: center;}
+#ddcGridContainer .dx-datagrid-content .dx-datagrid-table .dx-row > th{vertical-align:top; }
+.basket-skeleton {
+  display: inline-block;
+  background-color: #f6f6f6;
+  height: 20px;
+  width: 50%;
+  border-radius: 50px;
+}
+.borderl{float: right;}
+.no-data{font-size: 25px; text-align: center;}
+.position-top{top:100px; padding-left: 350px;}
+.position-hold-top{top: 85px;position: relative;z-index: 99;}

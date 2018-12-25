@@ -1,0 +1,17 @@
+<dx-tab-panel  [dataSource]="profileInfoTabs" [loop]="false" [animationEnabled]="false" [swipeEnabled]="false"  >
+  <div id="titleBar" *dxTemplate="let item of 'title'">
+    <span id="{{item.tabName}}Id" class="smalltab">
+      {{item.tabName | translate}}
+    </span>
+  </div>
+  <div id="tabContainerId" *dxTemplate="let data of 'item'" class="sms-page-container">
+    <div id="tabRowId" class="tabpanel-item">
+      <div id="{{data.tabName}}ContainerId" class="ui-g-12  container-height100   grid-container" *ngIf="data.tabName ==='Change Password'">
+        <app-change-password></app-change-password>
+      </div>
+      <div id="{{data.tabName}}ContainerId" class="ui-g-12 container-height100   grid-container" *ngIf="data.tabName ==='My Account Details'">
+        <app-account-detail></app-account-detail>
+      </div>
+    </div>
+  </div>
+</dx-tab-panel>

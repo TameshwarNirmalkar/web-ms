@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { ErrorHandlerService } from './error-handler.service';
 import { ApplicationDataService } from './application-data.service';
 import { LoggerService } from './logger.service';
@@ -42,21 +42,22 @@ export class UserProfileService {
     private authService: AuthService
   ) { }
 
-  getKAMDetails() {
+  getKAMDetails(): Observable<any> {
     const body = JSON.stringify({});
     return this.http.post(this.applicationDataService.getEnvironment().DashboardApi +
       '/dashboard/card/kamDetail/' + this.applicationDataService.getEnvironment().DashboardVersion, body)
-      .subscribe((response) => {
-        const responseData = response;
-        if (!responseData['error_status'] && responseData['data']) {
-          this.kamDetails = responseData['data'].kamDetail;
-          return responseData['data'].kamDetail;
-        } else {
-          return {};
-        }
-      }, err => { 
-        return this.errorHandler.handleError('KAM Details', err); 
-      });
+      .pipe(
+        map((response) => {
+          const responseData = response;
+          if (!responseData['error_status'] && responseData['data']) {
+            this.kamDetails = responseData['data'].kamDetail;
+            return responseData['data'].kamDetail;
+          } else {
+            return {};
+          }
+        }),
+        catchError(err => this.errorHandler.handleError('KAM Details', err))
+      );
   }
 
   importKAMDetails() {
@@ -88,7 +89,7 @@ export class UserProfileService {
     ];
   }
 
-  getMenuCountList() {
+  getMenuCountList(): Observable<any> {
     return this.http.post(this.applicationDataService.getEnvironment().DashboardApi
       + '/dashboard/card/navigationCount/' + this.applicationDataService.getEnvironment().DashboardVersion, {});
   }
@@ -402,7 +403,7 @@ export class UserProfileService {
     }
   }
 
-  updateProfileSettingsList(body) {
+  updateProfileSettingsList(body): Observable<any> {
     return this.http.post(this.applicationDataService.getEnvironment().ApplicationApi + '/clientConfig/1/save/'
       + this.applicationDataService.getEnvironment().ApplicationVersion, JSON.stringify(body)).pipe(
       map((res) => {
@@ -414,7 +415,7 @@ export class UserProfileService {
     );
   }
 
-  getAccountDetails() {
+  getAccountDetails(): Observable<any> {
     return this.http.get(this.applicationDataService.getEnvironment().AuthenticationApi + '/auth/profile/'
       + this.authService.getLoginName() + '/getBusinessDetails/'
       + this.applicationDataService.getEnvironment().AuthenticationVersion).pipe(
@@ -425,7 +426,7 @@ export class UserProfileService {
     );
   }
 
-  callResetPassword(data) {
+  callResetPassword(data): Observable<any> {
     const resetJson = {};
     resetJson['old_password'] = data.old_password;
     resetJson['new_password'] = data.new_password;
@@ -443,7 +444,7 @@ export class UserProfileService {
   }
 
 
-  getUserProfileLanguage() {
+  getUserProfileLanguage(): Observable<any> {
     return this.http.get(this.applicationDataService.getEnvironment().ApplicationApi + '/clientConfig/'
       + this.authService.getLoginName() + '/getConfiguration/'
       + this.applicationDataService.getEnvironment().ApplicationVersion + '/language_filters').pipe(
@@ -633,16 +634,14 @@ export class UserProfileService {
     return array;
   }
 
-  updateConfirmationHistoryDays(days) {
+  updateConfirmationHistoryDays(days): Observable<any> {
     const config = {
       conf_hist_days: days
     };
     return this.http.post(this.applicationDataService.getEnvironment().StoneManagementApi + '/stonemgt/'
       + this.authService.getLoginName() + '/stone/confirmDays/update/'
       + this.applicationDataService.getEnvironment().StoneManagementApiVersion, JSON.stringify(config)).pipe(
-      map((res) => {
-        return res;
-      }),
+      map(res => res),
       catchError(err => this.errorHandler.handleError('UserProfileService:updateConfirmationHistoryDays', err)
       )
     );
@@ -656,8 +655,9 @@ export class UserProfileService {
     return this.isBtbVersionAvailable;
   }
 
-  fetchTermsAndCondition() {
-    const url = `${this.applicationDataService.getEnvironment().AuthenticationApi}/auth/login/termAndConditions/show/v2is_profile_page=true`;
+  fetchTermsAndCondition(): Observable<any> {
+    const url = `${this.applicationDataService.getEnvironment().AuthenticationApi}/auth/login/termAndConditions/
+    show/v2is_profile_page=true`;
     return this.http.get(url);
   }
 }

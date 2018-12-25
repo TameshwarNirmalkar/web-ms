@@ -1,0 +1,22 @@
+<div dirScrollTop class="ui-g-12 ui-g-nopad ">
+  <dx-tab-panel [dataSource]="profileTabs" [loop]="false" [animationEnabled]="false" [swipeEnabled]="false" class="main-page-container">
+    <div id="titleBar" *dxTemplate="let item of 'title'">
+      <span id="{{item.tabName}}Id">
+        {{item.tabName | translate}}
+      </span>
+    </div>
+    <div id="tabContainerId" *dxTemplate="let data of 'item'">
+      <div id="tabRowId" class="tabpanel-item">
+        <div id="{{data.tabName}}ContainerId" class="ui-g-12 ui-g-nopad  container-height100" *ngIf="data.tabName ==='Profile'">
+          <app-profile-info></app-profile-info>
+        </div>
+        <div id="{{data.tabName}}ContainerId" class="ui-g-12 ui-g-nopad  container-height100" *ngIf="data.tabName ==='Profile Settings'">
+          <app-profile-setting (notificationMessage)="notifyProfileChange($event)"></app-profile-setting>
+        </div>
+        <!-- <div id="{{data.tabName}}ContainerId" class="ui-g-12 ui-g-nopad  container-height100" *ngIf="data.tabName ==='Terms & Conditions'">
+          <app-terms-and-condition></app-terms-and-condition>
+        </div> -->
+      </div>
+    </div>
+  </dx-tab-panel>
+</div>

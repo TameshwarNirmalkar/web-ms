@@ -1,0 +1,41 @@
+.event-compnay-logo {height: 50px;width: 70px;}
+.contact-container {border-radius: 4px;}
+.floor-image {width: 100%}
+.card-floor-skeleton {
+  background: #f6f6f6;
+  height: 160px;
+  width: 200px;
+  background: -webkit-linear-gradient(left, #f6f6f6 30%, #fffdfd 80%, #f5f3f3 100%) repeat;
+  -webkit-background-size: 50% 100%;
+  -webkit-animation-name: moving-gradient;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes skeleton-moving-gradient {
+  0% {
+    background-position: left bottom;
+  }
+
+  100% {
+    background-position: right bottom;
+  }
+}
+
+.event-cards{ border-radius: 4px;}
+.event-info{ font-size: 16px;}
+.event-date{ font-size:14px;}
+.view-event-button{ margin: 0px;}
+.counts-number-event{ font-weight: bold ; font-size: 16px;}
+.counts-info-event{ font-size: 14px;}
+.download-link{ cursor: pointer; text-decoration: underline; font-size: 14px;}
+.highlight-cards{height: 160px;}
+.no-images-message{padding: 20px;}
+.book-appointment-title {font-size: 16px;font-weight: bold}
+.event-open-images{max-height: 500px;max-width: 660px;}
+.booth-number{ font-size: 14px;}
+.event-highlight-icons{ font-size: 20px}
+.highlights-icon{padding: 10px 0px 0px 0px;}
+.event-header-name{ font-size: 25px;padding: 21px 25px;}
+.event-timer{padding: 40px 0px;}

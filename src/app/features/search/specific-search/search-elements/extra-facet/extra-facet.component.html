@@ -1,0 +1,31 @@
+<div id="EXTRA_FACET_ID" class="ui-grid ui-grid-responsive ui-grid-pad component-cards">
+  <div id="extraFacetHeaderBox" class="ui-g-12 ui-g-nopad">
+    <div id="extraFacetLabelBox" class="ui-g-11 custom-padding">
+      <label id="extraFacetLabel" class="component-cards-heading">{{'Extra Facet' | translate}}</label>
+    </div>
+  </div>
+  <div id="extraFacetComponentBox" class="ui-g-12 ui-g-nopad">
+    <div id="tableHeading" class="ui-g-4 param-padding">
+      <div id="tableCell" class="ui-g-2 ui-g-nopad table-header-data auto-width">{{'Table' | translate}}</div>
+      <div id="tableSelectionCell" class="ui-g-10 ui-g-nopad">
+        <p-selectButton id="tableMultiselect" [options]="tableOptions" [(ngModel)]="selectedTableValues" multiple="multiple" (onChange)="saveValues('table_extra_facet',selectedTableValues)">
+        </p-selectButton>
+      </div>
+    </div>
+    <div id="crownHeading" class="ui-g-4 param-padding">
+      <div id="crownCell" class="ui-g-2 ui-g-nopad table-header-data auto-width">{{'Crown' | translate}}</div>
+      <div id="crownSelectionCell" class="ui-g-10 ui-g-nopad">
+        <p-selectButton id="crownMultiselect" [options]="crownOptions" [(ngModel)]="selectedCrownValues" multiple="multiple" (onChange)="saveValues('crown_extra_facet',selectedCrownValues)">
+        </p-selectButton>
+      </div>
+    </div>
+    <div id="pavHeading" class="ui-g-4 param-padding">
+      <div id="pavCell" class="ui-g-2 ui-g-nopad table-header-data auto-width">{{'Pavilion' | translate}}</div>
+      <div id="pavSelectionCell" class="ui-g-10 ui-g-nopad">
+        <p-selectButton id="pavMultiselect" [options]="pavilionOptions" [(ngModel)]="selectedPavilionValues" multiple="multiple"
+          (onChange)="saveValues('pav_extra_facet',selectedPavilionValues)">
+        </p-selectButton>
+      </div>
+    </div>
+  </div>
+</div>

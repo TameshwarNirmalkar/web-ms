@@ -1,0 +1,5 @@
+<div dirScrollTop class="ui-g-12 ui-md-12 paddl0 sms-page-tabs" id="searchTabs" *ngIf="displaySearchPage">
+  <dx-tabs class="search-tab" #searchTab [dataSource]="searchTabs" [selectedIndex]="currentTabSelected" (onItemClick)="handleSearchTabs($event.itemIndex)">
+  </dx-tabs>
+</div>
+<router-outlet></router-outlet>

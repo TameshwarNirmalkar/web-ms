@@ -1,0 +1,364 @@
+<div class="ui-g-12">
+  <div class="ui-g-12 raw-box-container" *ngIf="weekDetailsObject">
+    <dx-popover target="#downloadSearch_{{weekDetailsObject.weekNo}}" position="bottom" [width]="141" [(visible)]="downloadPopOverVisible">
+      <div *dxTemplate="let data of 'content'">
+        <p-listbox [options]="downloadOptions" [(ngModel)]="selectedDownloadType" [style]="{'max-height':'250px'  , 'max-width':'100%'}"
+          (onChange)="downloadResult(weekDetailsObject.stoneList)">
+          <ng-template let-opt pTemplate="item">
+            <div class="ui-helper-clearfix">
+              <span style="font-size:14px;margin:15px 10px 0 0">{{opt.label}}</span>
+            </div>
+          </ng-template>
+        </p-listbox>
+      </div>
+    </dx-popover>
+    <div class="ui-g-12">
+      <b>
+        <label>{{weekDetailsObject.label}}</label>
+      </b>
+    </div>
+    <ng-template [dirCheckPermission]="'weekly_volume_discount'">
+      <div class="ui-g-8 confirm-panel-separator paddl0">
+
+        <div class="ui-g-2">
+          <label class="panel-maintext">WVD</label>
+        </div>
+        <div class="ui-g-3 paddl0">
+          <label class="lbl-confirmation-value-large" [ngClass]="{'confirmation-skeleton skeleton': responseReceived}">{{weekDetailsObject.wvd.eligible_savings
+            | currency:'USD':true:'1.2-2'}}</label>
+          <br />
+          <label class="lbl-confirmation-value-small">{{"Eligible" | translate}}</label>
+        </div>
+        <div class="ui-g-3">
+          <label class="lbl-confirmation-value-large" [ngClass]="{'confirmation-skeleton skeleton': responseReceived}">{{weekDetailsObject.wvd.pending_savings
+            | currency:'USD':true:'1.2-2'}}</label>
+          <br />
+          <label class="lbl-confirmation-value-small">{{"PENDING" | translate}}</label>
+        </div>
+        <div class="ui-g-3 paddl0">
+          <label class="lbl-confirmation-value-large" [ngClass]="{'confirmation-skeleton skeleton': responseReceived}">{{weekDetailsObject.wvd.given_savings
+            | currency:'USD':true:'1.2-2'}}</label>
+          <br />
+          <label class="lbl-confirmation-value-small">{{"GIVEN" | translate}}</label>
+        </div>
+        <div class="ui-g-1">
+          <!-- <span id="iconinfo" class="weeklydisc-icon icon-info" pTooltip="Coming soon" tooltipPosition="bottom" tooltipEvent="hover"></span> -->
+        </div>
+      </div>
+    </ng-template>
+    <div class="ui-g-4 download-invoice-box">
+      <div class="ui-g-2">
+        <a>
+          <span [dirStoreAudit]="'EMAIL LIST'" id="mail" class="grid-icon-top icon-email" (click)="sendExcelMail()"
+            pTooltip="{{'MAIL_ME_TEXT'|translate}}" tooltipPosition="bottom" tooltipEvent="hover"> </span>
+        </a>
+      </div>
+      <div class="ui-g-2">
+        <a>
+          <span id="downloadSearch_{{weekDetailsObject.weekNo}}" class="grid-icon-top icon-download" (click)="showDownloadOptions()"
+            pTooltip="{{'DOWNLOAD_TEXT' |translate}}" tooltipPosition="bottom" tooltipEvent="hover">
+          </span>
+        </a>
+      </div>
+      <!-- <div class="ui-g-8"><button class="custom-btnBorder" (click)="generateInvoiceClicked()">{{'Generate Invoice' | translate}}</button></div> -->
+      <div class="ui-g-8 ui-g-nopad">
+        <button class="custom-btnBorder generate-button" pTooltip="Coming soon" tooltipPosition="bottom" tooltipEvent="hover">{{'Generate
+          Invoice' | translate}}</button>
+      </div>
+
+    </div>
+    <div class="ui-g-11"></div>
+    <div class="ui-g-1 ui-g-nopad text-right position-top color-scroll-icon confirmation-box">
+      <button id="{{weekDetailsObject.weekNo}}SelectLeftId" class="icon-Next-Round disable-font grid-icon-top scroll-button"
+        pTooltip="{{'LEFT_SCROLL_TEXT' |translate}}" tooltipPosition="top" tooltipEvent="hover" (mousedown)="scrollTableInInterval('left', weekDetailsObject.weekNo)"
+        (mouseup)="stopScrolling()" (click)="scrollTable('left', weekDetailsObject.weekNo)"></button>
+      <button id="{{weekDetailsObject.weekNo}}SelectRightId" class="icon-Previous-Round disable-font grid-icon-top scroll-button"
+        pTooltip="{{'RIGHT_SCROLL_TEXT' |translate}}" tooltipPosition="top" tooltipEvent="hover" (mousedown)="scrollTableInInterval('right', weekDetailsObject.weekNo)"
+        (mouseup)="stopScrolling()" (click)="scrollTable('right', weekDetailsObject.weekNo)"></button>
+    </div>
+  </div>
+  <div class="ui-g-12 ui-g-nopad">
+    <dx-data-grid #myConfirmationpGridContainer id="myConfirmationpGridContainer" [dataSource]="weekDetailsObject.stoneList"
+      [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true" [showColumnLines]="false"
+      [showRowLines]="true" [showBorders]="true" [rowAlternationEnabled]="false" (onCellPrepared)="onCellPrepared($event)">
+      <dxo-search-panel [visible]="true" [width]="240" placeholder="{{'Search'|translate}}"></dxo-search-panel>
+      <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+      <dxo-load-panel indicatorSrc="./assets/img/srk-loading-logo.gif" text=""></dxo-load-panel>
+      <dxo-scrolling mode="virtual" showScrollbar="always" useNative="false"></dxo-scrolling>
+      <dxi-column caption="" [allowHiding]="false" [width]="30" dataType="string" [allowReordering]="false"
+        [allowFiltering]="false" [fixed]="true" [allowHeaderFiltering]="false" [allowResizing]="false" cellTemplate="checkboxTemplate"
+        headerCellTemplate="selectAllCheckboxTemplate" alignment="center"></dxi-column>
+      <div *dxTemplate="let data of 'selectAllCheckboxTemplate'">
+        <p-checkbox name="confirmationBox" label="" id="{{weekDetailsObject.weekNo}}Container" binary="true" (onChange)="isAllCheckboxSelected()"
+          [(ngModel)]="isAllSelected" [style.padding.px]="4"></p-checkbox>
+      </div>
+      <div *dxTemplate="let data of 'checkboxTemplate'">
+        <p-checkbox name="confirmationBoxCheckbox" label="" id="{{weekDetailsObject.weekNo}}{{data.data.stone_id}}CheckboxContainer"
+          (onChange)="stoneSelected()" [(ngModel)]="selectedStones" value={{data.data.stone_id}} [style.padding.px]="4"></p-checkbox>
+      </div>
+
+      <dxi-column dataType="string" alignment="center" [width]="30" [allowFiltering]="true" [allowHeaderFiltering]="true"
+        cellTemplate="stoneIconTemplate" alignment="center"></dxi-column>
+      <div *dxTemplate="let data of 'MediaIconTemplate'">
+        <span class="grid-icon icon-media"></span>
+      </div>
+
+      <dxi-column dataField="date" dataType="string" alignment="center" caption="Date" cellTemplate="DateTemplate"
+        [width]="90" [allowFiltering]="true" [visible]="selectedColumnList.Date.entity_value" [allowSorting]="true"
+        [allowHeaderFiltering]="true" alignment="center"></dxi-column>
+
+      <dxi-column dataField="date" dataType="string" alignment="center" caption="Time" cellTemplate="TimeTemplate"
+        [width]="80" [allowFiltering]="true" [visible]="selectedColumnList.Time.entity_value" [allowSorting]="true"
+        [allowHeaderFiltering]="true" alignment="center"></dxi-column>
+
+      <dxi-column dataField="order_id" dataType="string" alignment="center" caption="Order Id" [width]="80"
+        [allowFiltering]="true" [allowSorting]="true" [visible]="selectedColumnList.orderId.entity_value"
+        [allowHeaderFiltering]="true" alignment="center"></dxi-column>
+
+      <dxi-column dataField="confirm_type" dataType="string" alignment="center" caption="Type" [width]="70"
+        [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" alignment="center" [visible]="selectedColumnList.Type.entity_value"></dxi-column>
+
+      <dxi-column dataField="order_status" dataType="string" alignment="center" caption="Status" [width]="110"
+        [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" alignment="center" [visible]="selectedColumnList.Status.entity_value"></dxi-column>
+
+      <dxi-column dataField="stone_id" dataType="string" alignment="center" caption="Stone Id" [width]="95"
+        [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" cellTemplate="stoneIdTemplet"
+        alignment="center"></dxi-column>
+
+      <dxi-column caption="Cert." [width]="70" dataField="certificate.short_value" [allowFiltering]="true" dataType="string"
+        [visible]="selectedColumnList.Certificate.entity_value" alignment="center"></dxi-column>
+      <dxi-column dataField="shape.short_value" dataType="string" alignment="center" caption="Shape" [width]="50"
+        [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" alignment="center"></dxi-column>
+      <dxi-column dataField="carat" dataType="string" alignment="center" caption="Carat" [width]="50" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" alignment="center" [visible]="selectedColumnList.Carat.entity_value"></dxi-column>
+      <dxi-column dataField="clarity.short_value" dataType="string" alignment="center" caption="Clarity" [width]="50"
+        [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" alignment="center" [visible]="selectedColumnList.Clarity.entity_value"></dxi-column>
+      <dxi-column dataField="color.short_value" dataType="string" alignment="center" caption="Color" [width]="50"
+        [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" alignment="center" [visible]="selectedColumnList.Colour.entity_value"></dxi-column>
+      <dxi-column dataType="string" dataField="original$ct" alignment="center" caption="Original $/ct." [width]="100"
+        [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" cellTemplate="original_$ct"
+        alignment="center" [visible]="selectedColumnList.Original_DollarCT.entity_value"></dxi-column>
+      <dxi-column dataType="string" dataField="original_off_perct" alignment="center" caption="Original Off %" [width]="100"
+        [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" cellTemplate="original_Off_Perct"
+        alignment="center" [visible]="selectedColumnList.Original_Off.entity_value"></dxi-column>
+      <dxi-column caption="Amount" [width]="80" [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true"
+        cellTemplate="amount" dataField="amount" dataType="number" alignment="center" [visible]="selectedColumnList.Amount.entity_value"></dxi-column>
+      <ng-template [dirCheckPermission]="'blind_discount'">
+        <dxi-column dataType="string" dataField="blind_discount" alignment="center" caption="Blind %" [width]="70"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" cellTemplate="blind_discount"
+          alignment="center" [visible]="selectedColumnList.Blind_Percent.entity_value"></dxi-column>
+      </ng-template>
+      <ng-template [dirCheckPermission]="'terms_discount'">
+        <dxi-column dataType="string" alignment="center" caption="Terms %" [width]="70" [allowFiltering]="true"
+          [visible]="is_terms_per_active" [allowSorting]="true" [allowHeaderFiltering]="true" cellTemplate="terms_discount"
+          alignment="center"></dxi-column>
+      </ng-template>
+      <ng-template [dirCheckPermission]="'weekly_volume_discount'">
+        <dxi-column dataType="string" dataField="weekly_volume_discount" alignment="center" caption="WVD %" [width]="70"
+          [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" cellTemplate="wvd_discount"
+          alignment="center" [visible]="selectedColumnList.WVD.entity_value"></dxi-column>
+      </ng-template>
+      <ng-template [dirCheckPermission]="'co_op_discount'">
+        <dxi-column dataType="string" alignment="center" caption="CO-OP %" [width]="70" [allowFiltering]="true"
+          [allowSorting]="true" [allowHeaderFiltering]="true" cellTemplate="coOp_discount" alignment="center" [visible]="is_comm_per_active"></dxi-column>
+      </ng-template>
+      <ng-template [dirCheckPermission]="'event_discount'">
+        <dxi-column dataType="string" alignment="center" caption="Event %" [width]="70" [allowFiltering]="true"
+          [visible]="is_company_event_active" [allowSorting]="true" [allowHeaderFiltering]="true" cellTemplate="event_discount"
+          alignment="center"></dxi-column>
+      </ng-template>
+      <dxi-column dataType="string" *ngIf="viewFinalPayableAndFinalOff" dataField="final$ct" alignment="center" caption="Final $/ct."
+        [width]="90" [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" cellTemplate="final_$ct"
+        alignment="center" [visible]="selectedColumnList.Final_Dollar_Per_Carat.entity_value"></dxi-column>
+      <dxi-column dataType="string" *ngIf="viewFinalPayableAndFinalOff" dataField="final_off_per_ct" alignment="center"
+        caption="Final Off %" [width]="80" [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true"
+        cellTemplate="final_off_perct" alignment="center" [visible]="selectedColumnList.Final_Off_Percent.entity_value"></dxi-column>
+      <dxi-column dataType="string" *ngIf="viewFinalPayableAndFinalOff" dataField="final_amount" alignment="center"
+        caption="Final Payable Amount" [width]="150" [allowFiltering]="true" [allowSorting]="true"
+        [allowHeaderFiltering]="true" cellTemplate="final_amount" alignment="center" [visible]="selectedColumnList.Final_Payable_Amount.entity_value"></dxi-column>
+
+      <dxi-column caption="Cut" dataField="cut.short_value" dataType="string" [width]="50" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.cut.entity_value" alignment="center">
+      </dxi-column>
+      <dxi-column caption="Pol" dataField="polish.short_value" dataType="string" [width]="50" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.polish.entity_value"
+        alignment="center">
+      </dxi-column>
+      <dxi-column caption="Sym" dataField="symmetry.short_value" dataType="string" [width]="50" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.symmetry.entity_value"
+        alignment="center">
+      </dxi-column>
+      <dxi-column caption="Fluor" dataField="fluor.short_value" dataType="string" [width]="50" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.fluorescence.entity_value"
+        alignment="center">
+      </dxi-column>
+
+      <dxi-column caption="Measurement" dataField="measurement" dataType="string" [width]="140" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [allowReordering]="true" alignment="center" [visible]="selectedColumnList.Measurement.entity_value"></dxi-column>
+      <dxi-column caption="TAB" dataField="table_percent" dataType="string" [width]="60" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [allowReordering]="true" alignment="center" [visible]="selectedColumnList.Tab.entity_value"></dxi-column>
+      <dxi-column caption="D/R" dataField="ratio" dataType="string" [width]="60" [allowFiltering]="true" [allowSorting]="true"
+        [allowHeaderFiltering]="true" [allowReordering]="true" alignment="center" [visible]="selectedColumnList.DR.entity_value"></dxi-column>
+      <dxi-column caption="TD" dataField="total_depth_percent" dataType="string" [width]="60" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [allowReordering]="true" alignment="center" [visible]="selectedColumnList.Td.entity_value"></dxi-column>
+
+      <dxi-column caption="Shd" dataField="shade.short_value" dataType="string" [width]="50" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.shade.entity_value" alignment="center"></dxi-column>
+      <dxi-column caption="Lust" dataField="luster.short_value" dataType="string" [width]="50" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.luster.entity_value"
+        alignment="center"></dxi-column>
+
+      <dxi-column caption="TW" dataField="table_white.short_value" dataType="string" [width]="50" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.table_white.entity_value"
+        alignment="center"></dxi-column>
+      <dxi-column caption="SW" dataField="side_white.short_value" dataType="string" [width]="50" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.side_white.entity_value"
+        alignment="center"></dxi-column>
+
+      <dxi-column caption="TB" dataField="table_black.short_value" dataType="string" [width]="50" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.table_black.entity_value"
+        alignment="center"></dxi-column>
+      <dxi-column caption="SB" dataField="side_black.short_value" dataType="string" [width]="50" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.side_black.entity_value"
+        alignment="center"></dxi-column>
+
+      <dxi-column caption="SGS Comment" dataField="sgs" dataType="string" [width]="380" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" cellTemplate="SgsTemplate" alignment="left" [visible]="selectedColumnList.SGS.entity_value"></dxi-column>
+
+      <dxi-column caption="TS" dataField="table_spot.short_value" dataType="string" [width]="50" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.table_spot.entity_value"
+        alignment="center"></dxi-column>
+      <dxi-column caption="SS" dataField="side_spot.short_value" dataType="string" [width]="50" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.side_spot.entity_value"
+        alignment="center"></dxi-column>
+
+      <dxi-column caption="TO" dataField="table_open.short_value" dataType="string" [width]="50" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.table_open.entity_value"
+        alignment="center"></dxi-column>
+      <dxi-column caption="CO" dataField="crown_open.short_value" dataType="string" [width]="50" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.crown_open.entity_value"
+        alignment="center"></dxi-column>
+      <dxi-column caption="PO" dataField="pav_open.short_value" dataType="string" [width]="50" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.pav_open.entity_value"
+        alignment="center"></dxi-column>
+      <dxi-column caption="GO" dataField="girdle_open.short_value" dataType="string" [width]="50" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.girdle_open.entity_value"
+        alignment="center"></dxi-column>
+
+      <dxi-column caption="T EF" dataField="table_extra_facet.short_value" dataType="string" [width]="50"
+        [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.table_EF.entity_value"
+        alignment="center"></dxi-column>
+      <dxi-column caption="C EF" dataField="crown_extra_facet.short_value" dataType="string" [width]="50"
+        [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.crown_EF.entity_value"
+        alignment="center"></dxi-column>
+      <dxi-column caption="P EF" dataField="pav_extra_facet.short_value" dataType="string" [width]="50"
+        [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.pav_EF.entity_value"
+        alignment="center"></dxi-column>
+
+      <dxi-column caption="Key To Symbol" dataType="string" dataField="kts" [width]="350" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" alignment="left" [visible]="selectedColumnList.Key_To_Symbol.entity_value"></dxi-column>
+      <dxi-column caption="Lab Comments" dataType="string" dataField="lab_com ment" [width]="150" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" alignment="left" [visible]="selectedColumnList.Lab_Comments.entity_value"></dxi-column>
+      <dxi-column caption="Girdle %" dataType="string" dataField="girdle_percent" [width]="70" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" alignment="center" [visible]="selectedColumnList.GirdlePer.entity_value"></dxi-column>
+      <dxi-column caption="H&A" dataType="string" dataField="hna.short_value" [width]="70" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.HandA.entity_value" alignment="center"></dxi-column>
+      <dxi-column caption="CertNo" dataType="string" dataField="certificate_no" [width]="100" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.Certificate_No.entity_value"
+        alignment="center"></dxi-column>
+      <dxi-column caption="Rap $/ct." dataType="string" dataField="price_rap" [width]="70" [allowFiltering]="true"
+        [allowSorting]="true" [allowHeaderFiltering]="true" [visible]="selectedColumnList.Rap_Dollar_CT.entity_value"
+        alignment="center"></dxi-column>
+      <dxi-column caption="Eligible" dataType="string" [width]="100" [allowFiltering]="true" [allowSorting]="true"
+        [allowHeaderFiltering]="true" [visible]="selectedColumnList.Eligible.entity_value" cellTemplate="eligibility"
+        alignment="center"></dxi-column>
+      <dxi-column caption="Conv. Rt." dataType="string" [width]="100" [allowFiltering]="true" [allowSorting]="true"
+        [allowHeaderFiltering]="true" [visible]="is_conversion_rate" dataField="conversion_rate" alignment="center"></dxi-column>
+      <div *dxTemplate="let data of 'amount'">
+        {{data.data.amount | number:'1.2-2'}}
+      </div>
+      <div *dxTemplate="let data of 'eligibility'">
+        <span *ngIf="data.data.canada_marked === true">
+          {{'canada_marked'}}
+        </span>
+        <span *ngIf="data.data.forever_marked === true">
+          {{'forever_marked'}}
+        </span>
+        <span *ngIf="data.data.canada_marked === true && data.data.forever_marked === true">
+          {{'canada_marked , forever_marked'}}
+        </span>
+      </div>
+      <div *dxTemplate="let data of 'stoneIdTemplet'">
+        <a (click)="addStoneDetailTab(data.data)">{{data.data.stone_id}}</a>
+      </div>
+
+      <div *dxTemplate="let data of 'stoneIconTemplate'">
+        <a (click)="showStoneMediaIconsPanel(data.data,$event,thmMediaIcon)">
+          <span id="{{data.data.stone_id}}ViewId" class="grid-icon icon-media"></span>
+        </a>
+      </div>
+
+      <div *dxTemplate="let data of 'SgsTemplate'">
+        <span>{{data.data.sgs.toString()}}</span>
+      </div>
+      <div *dxTemplate="let data of 'DateTemplate'">
+        <span>{{data.data.date | customDate:'dateWithMonth'}}</span>
+      </div>
+      <div *dxTemplate="let data of 'TimeTemplate'">
+        <span>{{data.data.date | customDate:'timeAMPM'}}</span>
+      </div>
+      <div *dxTemplate="let data of 'original_$ct'">
+        <span>{{data.data.original$ct | number:'1.2-2'}}</span>
+      </div>
+      <div *dxTemplate="let data of 'final_$ct'">
+        <span *ngIf="selectedStones.indexOf(data.data.stone_id) > -1; else originalFinalct">
+          <b>{{(data.data.newFinal$ct ? data.data.newFinal$ct: data.data.final$ct) | number:'1.2-2'}}</b>
+        </span>
+        <ng-template #originalFinalct>
+          {{data.data.final$ct | number:'1.2-2'}}
+        </ng-template>
+      </div>
+      <div *dxTemplate="let data of 'final_amount'">
+        <span *ngIf="selectedStones.indexOf(data.data.stone_id) > -1; else originalFinalAmt">
+          <b>{{(data.data.newFinalPayableAmt ? data.data.newFinalPayableAmt: data.data.final_amount) | number:'1.2-2'}}</b>
+        </span>
+        <ng-template #originalFinalAmt>
+          {{data.data.final_amount | number:'1.2-2'}}
+        </ng-template>
+      </div>
+      <div *dxTemplate="let data of 'original_Off_Perct'">
+        <span>{{data.data.original_off_perct | number:'1.2-2'}}</span>
+      </div>
+      <div *dxTemplate="let data of 'blind_discount'">
+        <span>{{data.data.blind_discount | number:'1.2-2'}}</span>
+      </div>
+      <div *dxTemplate="let data of 'terms_discount'">
+        <span>{{data.data.terms_discount | number:'1.2-2'}}</span>
+      </div>
+      <div *dxTemplate="let data of 'wvd_discount'">
+        <span *ngIf="selectedStones.indexOf(data.data.stone_id) > -1; else originalWvd">
+          <b>{{(data.data.newWeeklyVolumeDiscount ? data.data.newWeeklyVolumeDiscount:
+            data.data.weekly_volume_discount) | number:'1.4-4'}}</b>
+        </span>
+        <ng-template #originalWvd>
+          {{data.data.weekly_volume_discount | number:'1.4-4'}}
+        </ng-template>
+      </div>
+      <div *dxTemplate="let data of 'event_discount'">
+        <span>{{data.data.event_discount | number:'1.2-2'}}</span>
+      </div>
+      <div *dxTemplate="let data of 'coOp_discount'">
+        <span>{{data.data.co_op_discount | number:'1.2-2'}}</span>
+      </div>
+      <div *dxTemplate="let data of 'final_off_perct'">
+        <span *ngIf="selectedStones.indexOf(data.data.stone_id) > -1; else originalFinalOffPer">
+          <b>{{(data.data.newFinalOffPerct ? data.data.newFinalOffPerct: data.data.final_off_per_ct) | number:'1.2-2'}}</b>
+        </span>
+        <ng-template #originalFinalOffPer>
+          {{data.data.final_off_per_ct | number:'1.2-2'}}
+        </ng-template>
+      </div>
+    </dx-data-grid>
+  </div>
+</div>
+<thm-mediaicon #thmMediaIcon></thm-mediaicon>

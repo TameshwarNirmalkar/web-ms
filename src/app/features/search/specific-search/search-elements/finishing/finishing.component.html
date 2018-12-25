@@ -1,0 +1,33 @@
+<div id="FINISHING_ID" class="ui-grid ui-grid-responsive ui-grid-pad component-cards">
+  <div id="finishingHeaderBox" class="ui-g-1 ui-g-nopad">
+    <div id="finishingLabelBox" class="ui-g-12 custom-padding">
+      <label id="finishingLabel" class="ui-g-12 ui-g-nopad component-cards-heading">{{'Finishing' | translate}}</label>
+    </div>
+  </div>
+  <div id="finishingMiddleContainer" class="ui-g-9 ui-g-nopad">
+    <div id="finishingCutBox" class="ui-g-4 ui-g-nopad finishing-component-cutbox">
+      <div id="cutLabelBox" class="ui-g-1 ui-g-nopad finishing-componet-heading"><label id="cutLabel" class="middle-container-heading">{{'Cut' | translate}}</label></div>
+      <div id="cutComponentBox" class="ui-g-11 ui-g-nopad finishing-componet-selectvalue">
+        <p-selectButton id="cutMultiselect" [options]="cutValueOptions" [(ngModel)]="selectedCutValues" multiple="multiple" (onChange)="saveValues('cut',selectedCutValues)"></p-selectButton>
+      </div>
+    </div>
+    <div id="finishingPolishBox" class="ui-g-4 ui-g-nopad finishing-component-cutbox">
+      <div id="polishLabelBox" class="ui-g-1 ui-g-nopad finishing-componet-heading"><label id="polishLabel" class="middle-container-heading">{{'Polish' | translate}}</label></div>
+      <div id="polishComponentBox" class="ui-g-11 ui-g-nopad finishing-componet-selectvalue">
+        <p-selectButton id="polishMultiselect" [options]="polishValueOptions" [(ngModel)]="selectedPolishValues" multiple="m<ultiple"
+          (onChange)="saveValues('polish',selectedPolishValues)"></p-selectButton>
+      </div>
+    </div>
+    <div id="finishingSymmetryBox" class="ui-g-4 ui-g-nopad finishing-component-cutbox">
+      <div id="symmetryLabelBox" class="ui-g-1 ui-g-nopad finishing-componet-heading"><label id="symmetryLabel" class="middle-container-heading">{{'Symmetry' | translate}}</label></div>
+      <div id="symmetryComponentBox" class="ui-g-11 ui-g-nopad finishing-componet-selectvalue">
+        <p-selectButton id="symmetryMultiselect" [options]="symmetryValueOptions" [(ngModel)]="selectedSymmetryValues" multiple="multiple"
+          (onChange)="saveValues('symmetry',selectedSymmetryValues)"></p-selectButton>
+      </div>
+    </div>
+  </div>
+  <div id="finishingActionBtnBox" class="ui-g-2 ui-g-nopad"></div>
+  <div id="finishingFilterBox" class='ui-g-12 ui-g-nopad' *ngIf='filterConfig' align="right">
+    <button id="finishingFilterByn" pButton type="button" (click)="this.filter.emit(result)" label="Apply"></button>
+  </div>
+</div>

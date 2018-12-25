@@ -1,0 +1,38 @@
+form {width: 100%;padding: 0;}
+.registration-heading {font-size: 30px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: normal;padding-left: 20px;}
+.registration-subheading {font-size: 16px;font-weight: bold;font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: normal;}
+.group {position: relative;margin-bottom: 15px;}
+input {font-size: 14px;line-height:16px; padding: 10px 10px 11px;-webkit-appearance: none; width: 90%;  border: none;  border-radius: 2px;margin-left:0px; }
+.input-border{border: 1px solid }
+.ui-corner-all {width: 90%;margin-left:0px;}
+input #numberId {width: 90%;margin-left:0px;}
+/* Button */
+.custom-btnPrimary {  position: relative;  display: inline-block;  padding: 12px 24px;  margin: 0.3em 0 1em;   vertical-align: middle;  outline: 0;    -webkit-font-smoothing: antialiased;  text-align: center;  cursor: pointer;  -webkit-transition: all 0.15s ease;  transition: all 0.15s ease;  outline: 0;  font-weight: bold;}
+.ui-g-1,.ui-g-10,.ui-g-11,.ui-g-12,.ui-g-2,.ui-g-3,.ui-g-4,.ui-g-5,.ui-g-6,.ui-g-7,.ui-g-8,.ui-g-9 {  padding: 0.5em 0;}
+.form-group > div {  margin-top: 20px;}
+.error {  color: red;  font-size: 11px;}
+/*File Upload Control*/
+input[type="file"] {  width: auto;  margin-top: 5px;cursor: pointer;}
+.inputfile-2 {  display: none;}
+.inputfile-2 + label {  border: 1px solid ;  padding: 10px;cursor: pointer;}
+.uploadright {  float: right;  margin-right: 14%;font-weight: bold;}
+.agree-text{  font-size: 14px;  font-weight: bold;  font-style: normal;  font-stretch: normal;  line-height: normal;  letter-spacing: normal; clear: both;  width: 100%;}
+ .proof-text {  font-size: 14px;  }
+app-registration {  width: 100%;}
+.main-container {  overflow-y: auto;  margin-left: 20px;}
+.mesagetext{font-size: 15px;}
+.login-title{ font-size: 40px; padding: 0px; font-weight: normal; line-height: normal;margin:0px; }
+.zip-input{ padding: 0;}
+.bold{font-weight: bold;}
+
+
+.center-align {
+  text-align: center;
+}
+
+
+@media(max-width: 768px) {
+  .login-title {
+    font-size: 30px;
+  }
+}

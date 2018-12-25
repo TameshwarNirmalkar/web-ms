@@ -1,0 +1,111 @@
+<div dirScrollTop>
+  <div class="ui-g ui-g-12 sms-page-container">
+    <div class="ui-g-3 event-name ui-g-nopad">
+      {{eventName | titlecase}}
+    </div>
+    <div class="ui-g-4 page-search-padding" id="pageInSearchBoxID" *ngIf="showPageSearch && !isEventSearch">
+      <ng-template [dirCheckPermission]="'page_search_btn'">
+        <thm-page-search [searchType]="'EVENT_SEARCH'" [eventCode]="eventCode" (pageSearchResult)="getPageSearchResult($event)"></thm-page-search>
+      </ng-template>
+    </div>
+    <div class="ui-g-5 text-right ui-g-nopad" *ngIf="showButtonBars && showPageSearch && !isEventSearch; else showOtherTemp">
+      <button [dirStoreAudit]="'SHOW PACKET'" id="vrShowPacketBtnID" *ngIf="showPacktBtn" class="custom-btnPrimary show-button mart0 marb0"
+        type="button" (click)="showPacket()">{{'Show Packet' |translate}}</button>
+      <ng-template [dirCheckPermission]="'create_packet_btn'">
+        <button [dirStoreAudit]="'CREATE PACKET'" id="vrCreatePacketBtnID" class="custom-btnPrimary creat-button mart0 marb0" type="button"
+          (click)="createPacket()">{{'Create Packet' |translate}}</button>
+      </ng-template>
+      <button [dirStoreAudit]="'BOOK APPOINTMENT'" id="showStockAppointmentId" class="custom-btnPrimary book-appointment mart0 marb0"
+        (click)="toggleAppointmentOverlay()">{{'BOOK_APPOINTMENT' | translate}}</button>
+    </div>
+    <ng-template #showOtherTemp>
+      <div class="ui-g-9 text-right ui-g-nopad" *ngIf="showButtonBars">
+        <button [dirStoreAudit]="'SHOW PACKET'" id="vrShowPacketBtnID" *ngIf="showPacktBtn" class="custom-btnPrimary show-button mart0 marb0"
+          type="button" (click)="showPacket()">{{'Show Packet' |translate}}</button>
+        <ng-template [dirCheckPermission]="'create_packet_btn'">
+          <button [dirStoreAudit]="'CREATE PACKET'" id="vrCreatePacketBtnID" class="custom-btnPrimary creat-button mart0 marb0" type="button"
+            (click)="createPacket()">{{'Create Packet' |translate}}</button>
+        </ng-template>
+        <button [dirStoreAudit]="'BOOK APPOINTMENT'" id="showStockAppointmentId" class="custom-btnPrimary book-appointment mart0 marb0"
+          (click)="toggleAppointmentOverlay()">{{'BOOK_APPOINTMENT' | translate}}</button>
+      </div>
+    </ng-template>
+  </div>
+  <div *ngIf="showButtonBars">
+    <app-create-packet [visiblePacketOverlay]="visiblePacketPopup" [stone]="stoneForPacket" [showSelectedPacket]="showSelectedPacket"
+      (togglePacketIcon)="togglePacketIcon($event)" (togglePacketOverlay)="togglePacketOverlay($event)" (updatePacketIcon)="updatePacketIcon($event)"></app-create-packet>
+  </div>
+</div>
+
+<p-dialog appendTo="body" header="{{'BOOK_APPOINTMENT' | translate}}" [(visible)]="showAppointmentOverlay" modal="modal"
+  responsive="true" width="800" (onHide)="resetBookAppointment()">
+  <app-book-appointment #bookAppointment [enable]="showAppointmentOverlay" [eventCode]="eventCode" (closeAppointmentPopup)="closeAppointmentOveraly($event)"></app-book-appointment>
+</p-dialog>
+
+<div class="ui-g-12 ui-g-nopad">
+  <div #eventTabPanel class="container">
+    <div class="scroller scroller-left" (click)="scrollTabPanelLeft()">
+      <i class="fa fa-chevron-left" aria-hidden="true"></i>
+    </div>
+    <div class="scroller scroller-right" (click)="scrollTabPanelRight()">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+    </div>
+    <div class="wrapper-search-tab">
+      <ul class="nav nav-tabs list" id="myTab">
+        <li id="eventsMenubar" *ngFor="let item of eventPageTabs" (click)="getTabIndex(item)" [ngClass]="{'active-filter-menu': (item.name === currentTabSelected || item.stoneName === currentTabSelected || item.pairId === currentTabSelected),
+              'blink_me':lastCreatedTab && (item.stoneName || item.pairId) &&(item.stoneName === lastCreatedTab || item.pairId === lastCreatedTab)}">
+          <span id="{{item.name}}Heading" class="search-font-box">{{item.name | translate | titlecase}}</span>
+          <div class="detail-tab-size" *ngIf="item.stoneName">
+            <span id="{{item.stoneName}}Id" class="search-font-box">{{item.stoneName}}
+              <span class="icon-close circle-close-icon" (click)="removeDetailedPacketTab(item.stoneName)"></span>
+            </span>
+          </div>
+          <div *ngIf="item.pairId">
+            <span id="{{item.pairId}}pairId" class="search-font-box">{{item.pairId}}
+              <span id="removeIcon" class="icon-close circle-close-icon" (click)="removeDetailedPacketTab(item.pairId)"></span>
+            </span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="tab-content">
+    <div id="tabRowId" class="tabpanel-item">
+      <div *ngFor="let data of eventPageTabs">
+        <div id="{{data.name}}Container" class="tabpanel-item">
+          <div id="{{data.name}}{{data.id}}Container" class="ui-g-12 ui-g-nopad" *ngIf="data.id === 0 && currentTabSelected === data.name">
+            <app-my-selection-stock [eventCode]="eventCode" [visiblePacketIcon]="visiblePacketIcon" (appointmentPacket)="stoneFromSelectedStone($event)"></app-my-selection-stock>
+          </div>
+          <div id="{{data.name}}{{data.id}}Container" class="ui-g-12 ui-g-nopad sms-page-container" *ngIf="data.id === 1 && currentTabSelected === data.name">
+            <app-event-venue-details #eventVenueDetails [eventId]="eventCode"></app-event-venue-details>
+          </div>
+          <div id="{{data.name}}{{data.id}}Container" class="ui-g-12 ui-g-nopad" *ngIf="data.id === 2 && currentTabSelected === data.name">
+            <div *ngIf="!isEventSearch; else showEventTable" class="ui-g-12 ui-g-nopad">
+              <app-specific-search [searchBtnLabel]="'Event Search'" [searchType]="'EVENT_SEARCH'" [modifiySearchData]="searchFilterConfig"
+                [searchFiltersValue]="searchFiltersValue" [eventCode]="eventCode" (returnSearchConfig)="getEventSearchResult($event)"
+                [showCancelBtn]="isResultModified" (cancelSearch)="cancelModifySearch($event,allStockStones)" (resetSearchEvent)="resetSearchConfig($event)"></app-specific-search>
+            </div>
+            <ng-template #showEventTable>
+              <div class="ui-g-12 ui-g-nopad">
+                <app-show-all-stock [eventCode]="eventCode" [isPageSearch]="isPageSearch" [stockStones]="allStockStones" (modifyResult)="modifySearch($event)"
+                  [visiblePacketIcon]="visiblePacketIcon" (appointmentPacket)="stoneFromSelectedStone($event)"></app-show-all-stock>
+              </div>
+            </ng-template>
+          </div>
+          <div id="{{data.name}}{{data.id}}Container" class="ui-g-12 ui-g-nopad" *ngIf="data.id === 3 && currentTabSelected === data.name">
+            <app-my-appointment [eventId]="eventCode" [visiblePacketIcon]="visiblePacketIcon" (appointmentPacket)="stoneFromSelectedStone($event)"></app-my-appointment>
+          </div>
+          <div id="{{data.name}}{{data.id}}Container" class="ui-g-12 ui-g-nopad" *ngIf="data.id === 4 && currentTabSelected === data.name">
+            <app-recommended-stock [eventCode]="eventCode"></app-recommended-stock>
+          </div>
+          <div id="{{data.stoneName}}Id" class="tabpanel-item sms-page-container" *ngIf="data.stoneName && currentTabSelected === data.stoneName">
+            <thm-stone-details [stoneDetails]="data.stoneInfo"></thm-stone-details>
+          </div>
+          <div id="{{data.pairId}}Id" class="tabpanel-item sms-page-container" *ngIf="data.pairId && currentTabSelected === data.pairId">
+            <thm-twin-stone-detail [twinStones]="data.twinStones"></thm-twin-stone-detail>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

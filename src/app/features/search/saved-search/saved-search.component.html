@@ -1,0 +1,122 @@
+<div dirScrollTop id="mainSearchSaveId" class="ui-g-12 ui-g-nopad">
+  <div id="noSearchId" class="ui-g-12 no-saved-search" *ngIf="!loadSavedSearchData && savedSearchData.length === 0">
+    {{'NO_SAVED_SEARCH' |translate}}.
+  </div>
+  <div id="loadSearchId" class="ui-g-12 no-saved-search" *ngIf="loadSavedSearchData">
+    {{'Loading..' |translate}}.
+  </div>
+  <div id="searchContainer" class="sms-page-container" *ngIf="savedSearchData.length > 0 && !isEditSavedSearch">
+    <div class="mail-icon-box text-right">
+      <!-- <i class="fa fa-spinner fa-pulse mail-spinner" aria-hidden="true" *ngIf="sendEmailStatus"></i> -->
+      <button id="sendEmailButton" class="custom-btnBorder mail-button-width" (click)="sendSavedSearchMail()">
+        <i *ngIf="sendEmailStatus" class="fa fa-spinner fa-pulse loader-align" aria-hidden="true"></i>{{'Mail me now' |translate}}
+      </button>
+      <button id="activateEmailButton" class="custom-btnBorder activate-mail-button-width" (click)="operateMail(true)">{{'Activate Mail' |translate}}</button>
+      <button id="deactivateEmailButton" class="custom-btnBorder deactivate-mail-button-width" (click)="operateMail(false)">{{'Deactivate Mail' |translate}}</button>
+    </div>
+    <div class="scroll-container">
+      <div id="searchDataid" class="ui-g-12 search-data ui-g-nopad" *ngFor="let data of savedSearchData">
+
+        <div class="ui-g-5 top-padding">
+          <div id="{{data.saved_search_name}}Container" class="ui-g-6 ui-md-12 ui-lg-6 ui-g-nopad">
+
+            <div id="" class="ui-g-8 ui-g-nopad">
+              <div class="ui-g-2">
+                <p-checkbox name="savedSearches" label="" id="{{data._id}}SavedSearches" value="{{data._id}}" [(ngModel)]="selectedEmailSavedSearch"></p-checkbox>
+              </div>
+              <div class="ui-g-10">
+                <label *ngIf="!data.isEditable" id="{{data.saved_search_name}}Id" class="main-text" (click)="editSavedSearchData(data)" pTooltip="Edit saved search"
+                  tooltipPosition="bottom">{{data.saved_search_name}}</label>
+                <input *ngIf="data.isEditable" type="text" class="save-search-name-input" placeholder="Enter save search name" [(ngModel)]="data.editedSavedSearchName"
+                  autofocus="data.isEditable">
+              </div>
+            </div>
+            <div id="savedSearchNameEditContainer" class="ui-g-4 edit-icons">
+              <i *ngIf="!data.isEditable && !data.isRequested" class="fa fa-pencil" aria-hidden="true" (click)="editSaveSearchName(data._id)"
+                pTooltip="Edit name" tooltipPosition="bottom" tooltipEvent="hover"></i>
+              <i *ngIf="data.isEditable && !data.isRequested" class="fa fa-check" aria-hidden="true" (click)="renameSaveSearchName(data._id)"></i>
+              <i *ngIf="data.isEditable && !data.isRequested" class="fa fa-close" aria-hidden="true" (click)="cancelEditName(data._id)"></i>
+              <i *ngIf="data.isRequested" class="fa fa-spinner fa-pulse load-icon" aria-hidden="true"></i>
+            </div>
+          </div>
+
+          <div id="{{data.created_on}}Container" class="ui-g-6 ui-md-12 ui-lg-6 ui-g-nopad">
+            <label id="{{data.created_on}}Id" class="date">
+              {{data.created_on | customDate:'timeAMPM'}}, {{data.created_on | customDate:'dateWithMonth'}} {{data.created_on | customDate:'year'}}
+            </label>
+          </div>
+        </div>
+
+        <div class="ui-g-6">
+          <!-- <div class="ui-g-2 ui-md-2 ui-lg-2"></div> -->
+          <div id="{{data.created_on}}Container" class="ui-g-3 ui-md-3 ui-lg-3 saved-search-btn-box">
+            <div id="{{data.created_on}}BoxId" class="stone-box box-content saved-search-btn">
+              <a id="{{data.created_on}}TotalStone" [dirStoreAudit]="'SAVE SEARCH NORMAL'" *ngIf="data._id;else searchByName" (click)="getSavedStoneDetails(data._id, data.criteria,'all',data.count_details.count)">{{data.count_details.comparison_symbol}}{{data.count_details.total_count}}</a>
+              <ng-template #searchByName>
+                <a id="{{data.created_on}}TotalStone" [dirStoreAudit]="'SAVE SEARCH NORMAL'" (click)="getSavedStoneDetails(data.saved_search_name, data.criteria,'all',data.count_details.count)">{{data.count_details.comparison_symbol}}{{data.count_details.total_count}}</a>
+              </ng-template>
+            </div>
+            <div id="{{data.created_on}}TextId" class="stones-bottom-content">
+              {{'Stones' | translate}}
+            </div>
+          </div>
+          <div id="{{data.created_on}}Container" class="ui-g-3 ui-md-3 ui-lg-3 saved-search-btn-box">
+            <div id="{{data.created_on}}BoxId" class="new-box box-content saved-search-btn">
+              <a id="{{data.created_on}}NewStone" [dirStoreAudit]="'SAVE SEARCH NEW ARRIVAL'" *ngIf="data._id;else searchByNewName" (click)="getSavedStoneDetails(data._id,data.criteria,'new',data.count_details.newArrival)">{{data.count_details.newArrival}}</a>
+              <ng-template #searchByNewName>
+                <a [dirStoreAudit]="'SAVE SEARCH NEW ARRIVAL'" id="{{data.created_on}}NewStone" (click)="getSavedStoneDetails(data.saved_search_name,data.criteria,'new',data.count_details.newArrival)">{{data.count_details.newArrival}}</a>
+              </ng-template>
+            </div>
+            <div id="{{data.created_on}}TextId" class="new-bottom-content">
+              {{'New' | translate}}
+              <span class="new-arrival-label-legend"></span>
+            </div>
+          </div>
+          <div id="{{data.created_on}}Container" *ngIf="isBtbAvailable" class="ui-g-3 ui-md-3 ui-lg-3 saved-search-btn-box">
+            <div id="{{data.created_on}}BoxId" class="new-box box-content saved-search-btn">
+              <a id="{{data.created_on}}btbStone" [dirStoreAudit]="'SAVE SEARCH B2B'" *ngIf="data._id;else searchByBtbName" (click)="getSavedStoneDetails(data._id,data.criteria,'b2b',data.count_details.b2b)">{{data.count_details.b2b}}</a>
+              <ng-template #searchByBtbName>
+                <a [dirStoreAudit]="'SAVE SEARCH B2B'" id="{{data.created_on}}NewStone" (click)="getSavedStoneDetails(data.saved_search_name,data.criteria,'b2b',data.count_details.b2b)">{{data.count_details.b2b}}</a>
+              </ng-template>
+            </div>
+            <div id="{{data.created_on}}TextId" class="new-bottom-content">
+              {{'B2B' | translate}}
+              <span class="b2b-label-legend"></span>
+            </div>
+          </div>
+          <div id="{{data.created_on}}Container" *ngIf="isDaypActive" class="ui-g-3 ui-md-3 ui-lg-3 saved-search-btn-box">
+            <div id="{{data.created_on}}BoxId" class="new-box box-content saved-search-btn">
+              <a [dirStoreAudit]="'SAVE SEARCH DAYP'" id="{{data.created_on}}daypStone" *ngIf="data._id; else searchByDaypName" (click)="getSavedStoneDetails(data._id,data.criteria,'dayp',data.count_details.dayp)">{{data.count_details.dayp}}</a>
+              <ng-template #searchByDaypName>
+                <a [dirStoreAudit]="'SAVE SEARCH DAYP'" id="{{data.created_on}}NewStone" (click)="getSavedStoneDetails(data.saved_search_name,data.criteria,'dayp',data.count_details.dayp)">{{data.count_details.dayp}}</a>
+              </ng-template>
+            </div>
+            <div id="{{data.created_on}}TextId" class="new-bottom-content">
+              {{'DAYP' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="ui-g-1 icon-top-padding" align="middle">
+          <span *ngIf="data.is_active_mail" class="icon-email active-mail-icon" pTooltip="Activated Mail" tooltipPosition="bottom"
+            tooltipEvent="hover"></span>
+          <span *ngIf="!data.is_active_mail" class="icon-email grid-icon-top color-icon-gray" pTooltip="Deactivated Mail" tooltipEvent="hover"
+            tooltipPosition="bottom"></span>
+
+          <a [dirStoreAudit]="'DELETE SAVE SEARCH'" id="{{data.created_on}}RemoveButtonId" class="remove-search-item-button fa fa-trash-o fa-2x"
+            (click)="deleteSavedSearchData(data)" pTooltip="Delete" tooltipPosition="bottom" tooltipEvent="hover"></a>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="ui-g">
+      <div class="ui-g-6 ui-lg-6"></div>
+      <div class="ui-g-6 ui-md-12 ui-lg-6" align="right">
+        <span id="bottomTextId" class="bottom-saved-text"></span>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isEditSavedSearch">
+    <app-specific-search [searchType]="'SAVED_SEARCH'" [searchFiltersValue]="searchFiltersValue" [modifiySearchData]="searchCriteria"
+      (editSearch)="editSavedSearch($event)" (cancelSearch)="cancelModifySearch()" [showCancelBtn]="isEditSavedSearch"></app-specific-search>
+  </div>
+</div>

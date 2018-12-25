@@ -1,0 +1,21 @@
+<div id="PRICE_ID" class="ui-grid ui-grid-responsive ui-grid-pad component-cards">
+  <div id="priceHeaderBox" class="ui-g-12 ui-g-nopad">
+    <div id="priceLabelBox" class="ui-g-1 custom-padding">
+      <label id="priceLabel" class="component-cards-heading">{{'Price' | translate}}</label>
+    </div>
+  <div id="priceComponentBox" class="ui-g-11 ui-g-nopad">
+    <div id="priceDiscountBox" class="ui-g-5 ui-g-nopad price-component-container">
+      <div id="discountLabelBox" class="ui-g-3 custom-padding auto-width"><label id="discountLabel" class="price-heading">Discount in %</label></div>
+      <div id="discountFromBox" class="ui-g-9 custom-padding"><input class="price-component-field" id="discountFromValue" type="text" pInputText [(ngModel)]="discountFrom" placeholder="From"
+          dirValidateNumberDigit (change)="saveDiscount()" />&nbsp;<input class="price-component-field" id="discountToValue" type="text" pInputText [(ngModel)]="discountTo" placeholder="To"
+          (change)="saveDiscount()" dirValidateNumberDigit /></div>
+    </div>
+    <div id="priceUsdBox" class="ui-g-5 ui-g-nopad price-component-container">
+      <div id="usdLabelBox" class="ui-g-2 ui-g-nopad auto-width"><label id="usdLabel" class="price-heading">$/ct.</label></div>
+      <div id="usdFromBox" class="ui-g-10 ui-g-nopad"><input class="price-component-field" id="usdFromValue" type="text" pInputText [(ngModel)]="usdFrom" placeholder="From"
+          dirValidateNumberDigit (change)="saveUsd()" />&nbsp;<input class="price-component-field" id="usdToValue" type="text" pInputText [(ngModel)]="usdTo" placeholder="To" (change)="saveUsd()"
+          dirValidateNumberDigit /></div>
+    </div>
+  </div>
+</div>
+</div>

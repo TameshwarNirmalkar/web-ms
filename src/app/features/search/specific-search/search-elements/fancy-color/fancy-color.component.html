@@ -1,0 +1,18 @@
+<div id="FANCY_COLOR_ID" class="ui-grid ui-grid-responsive ui-grid-pad component-cards">
+  <div id="fancyColorHeaderBox" class="ui-g-1 custom-padding">
+    <label id="facnyColorLabel" class="component-cards-heading">{{'Fancy Color' |translate}}</label>
+  </div>
+  <div id="fancyColorSelectBox" class='ui-g-3 custom-padding'>
+    <p-multiSelect id="fancyColorSelectId" defaultLabel="Color" (onChange)='saveFancyColorValues()' styleClass="fancy-color-component-dropdown"
+      [options]='fancyColorOptions' [(ngModel)]='selectedFancyColorValues'></p-multiSelect>
+  </div>
+  <div id="fancyColorSelectBox" class='ui-g-3 custom-padding'>
+    <p-multiSelect id="intensityColorSelectId" defaultLabel="Intensity" (onChange)='saveFancyColorValues()' styleClass="fancy-color-component-dropdown"
+      [options]='intensityColorOptions' [(ngModel)]='selectedIntensityColorValues'></p-multiSelect>
+  </div>
+  <div id="fancyColorSelectBox" class='ui-g-3 custom-padding'>
+    <p-multiSelect id="overtoneColorSelectId" defaultLabel="Overtone" (onChange)='saveFancyColorValues()' styleClass="fancy-color-component-dropdown"
+      [options]='overtoneColorOptions' [(ngModel)]='selectedOvertoneColorValues'></p-multiSelect>
+  </div>
+  <div class="clearfix"></div>
+</div>

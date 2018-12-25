@@ -1,0 +1,43 @@
+app-search-luster .actionButton {
+  background: #ffffff;
+  border: 1px solid #c0c0c0;
+  cursor: pointer;
+  height: 30px;
+  width: 80px;
+  font-size: 12px;
+}
+app-search-luster .middle-container-heading {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+app-search-luster .ui-togglebutton.ui-button.ui-state-default,
+app-search-luster .ui-selectbutton .ui-button.ui-state-default {
+  margin-left: 5px;
+  width: 110px;
+  font-size: 12px;
+}
+
+app-search-luster .ui-selectbutton .ui-button.ui-state-active {
+  border: 1px solid #ccc;
+}
+
+app-search-luster .ui-button-text-only .ui-button-text {
+  font-size: 12px;
+  /*padding: 0px !important;*/
+}
+
+@media (max-width:1024px) {
+  app-search-luster .middle-container {
+    width: 100%;
+  }
+  .finishing-componet-heading {
+    width: 15%;
+  }
+  .finishing-componet-selectvalue {
+    width: 85%;
+  }
+  .finishing-component-cutbox {
+    padding: 0px;
+  }
+}

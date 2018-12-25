@@ -136,6 +136,9 @@ export class NotifyService {
   private notifyToLogout = new Subject<any>();
   notifyToLogoutObservable$ = this.notifyToLogout.asObservable();
 
+  private addNewNotesForIggrid = new Subject<any>();
+  addNewNotesForIggridObservable$ = this.addNewNotesForIggrid.asObservable();
+
   constructor() { }
 
 

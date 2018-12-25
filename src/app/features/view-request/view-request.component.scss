@@ -1,0 +1,40 @@
+.page-title  { font-size: 24px; font-weight: normal; line-height: normal; }
+.container-height100{overflow: auto;}
+.head{font-size: 16px;}
+
+/*Comman For All View Request Page*/
+.error{padding: 0px 0px 0px 35px;}
+.lbl-viewrequest-value-large{font-size: 14px;padding:3px 5px;text-align:left; margin:0px 2px;}
+.lbl-viewrequest-value-small{font-size: 12px;padding:3px 5px;text-align:left; margin:0px 2px;}
+.lbl-viewrequest-value-comments{font-size: 12px;padding:3px 5px;text-align:left; margin:0px 2px;width: 100%;  white-space: nowrap;  overflow: hidden;  text-overflow: ellipsis;    line-height: 20px;}
+.lbl-viewrequest-value-stones{font-size: 14px;padding:3px 5px;text-align:left; margin:0px 2px;font-weight: bold;}
+.icon-btn-add{  height: 24px;margin:10px ;}
+.icon-label {font-size: 14px;}
+
+.raw-box-container{border:1px solid; margin:10px 0px 0px 0px;border-radius: 4px;}
+.icon-btn-links{   font-size: 14px; margin-top: 15px; text-align: center; display: block;}
+.text-align-center{text-align: center;}
+.image-comment{background-color:red;height: 30px;}
+.button-right{text-align: right;}
+input { font-size: 14px; padding: 10px 10px 10px 5px; -webkit-appearance: none; width: 98%;   border: 1px solid ; border-radius: 4px; }
+.no-view-request{text-align: center;font-size: 25px;}
+.color-right{float:right;}
+.add-icon {
+  font-size: 24px;
+  margin-top: 6px;
+  display: table;
+  cursor: pointer;
+}
+.action-button-bar{text-align: right;}
+.view-request-tabpanel{padding:0px;}
+.position-top{position: relative; top: 55px; z-index: 1000;}
+
+.packet-btn-box {
+    text-align: right;
+    width: 280px;
+    float: right;
+    position: absolute;
+    top: 64px !important;
+    right: 10px !important;
+    z-index: 900;
+}

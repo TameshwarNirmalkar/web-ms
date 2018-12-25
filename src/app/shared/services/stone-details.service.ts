@@ -657,4 +657,50 @@ export class StoneDetailsService {
     }
     return { left: left, top: top };
   }
+  
+  findStoneObjUsingStoneIds(array, stoneList) {
+    const stoneArray = [];
+    stoneList.forEach(stone => {
+      const obj = _.findWhere(array, { 'stone_id': stone });
+      if (obj) {
+        stoneArray.push(obj);
+      }
+    });
+    return stoneArray;
+  }
+
+  findAndUpdateStoneCommentFromList(originalList, updatedList) {
+    updatedList.forEach(stone => {
+      const stoneObj = _.findWhere(originalList, { 'stone_id': stone.stone_id });
+      if (stoneObj) {
+        const index = _.indexOf(originalList, stoneObj);
+        if (index > -1) {
+          originalList[index] = stone;
+        }
+      }
+    });
+    return originalList;
+  }
+
+  updateNotesForSelectedPanel(selectedList, originalList) {
+    originalList.forEach(entry => {
+      selectedList.forEach(stone => {
+        if (entry.stone_id === stone.stone_id) {
+          if (entry.notes) {
+            stone['notes'] = entry['notes'];
+          } else {
+            delete stone['notes'];
+          }
+          stone['haveNote'] = entry['haveNote'];
+          stone['displayNote'] = entry['displayNote'] || '';
+          if (entry.totalNotes) {
+            stone['totalNotes'] = entry['totalNotes'];
+          } else {
+            delete stone['totalNotes'];
+          }
+        }
+      });
+    });
+    return JSON.parse(JSON.stringify(selectedList));
+  }
 }

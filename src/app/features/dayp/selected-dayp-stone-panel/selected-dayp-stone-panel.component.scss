@@ -1,0 +1,22 @@
+#selectedDaypStoneContainer {
+  height: 300px;
+  width: 100%;
+  overflow: auto;  
+}
+.grid-container{ margin-top: 0px; margin-bottom: 10px;}
+.detail-box{ min-width: 78px;}
+.dayp-data-price-container{ width: 65px; float: left; }
+.dayp-data-input{width: 100px;  }
+.dayp-data-price{max-width: 65px;  overflow: hidden; white-space: nowrap; text-overflow: ellipsis}
+.lbl-selected-stone-value-large {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 3px 5px;
+    text-align: left;
+}
+.divider{ width: 10px}
+.marl4{ margin-left: 4px;}
+.left-value{margin-left: -3px;}
+.color-lagend-container-selected-component {
+    margin-right: -3px;
+}

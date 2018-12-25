@@ -1,0 +1,13 @@
+<div id="rangeSelectContainer" class="ui-g-12 ui-g-nopad" *ngIf="valueSet">
+  <div id="selectAllBox" class="ui-g-12 ui-g-nopad checkbox-container">
+    <div class="ui-g-1 all-box ui-g-nopad">
+      <p-selectButton id="selectAllCheckbox" [style.width.px]="45" [options]="selectAllOption" [(ngModel)]="selectAllFlag" multiple="multiple" (onChange)="selectAll()">
+      </p-selectButton>
+    </div>
+    <div class="ui-g-11 ui-g-nopad">
+      <p-selectButton id="rangeSelectBtn" [options]="optionsValue" [(ngModel)]="selectedValue" multiple="multiple" (onChange)="selectSearchValues()"
+        (mousedown)="initDrag($event)" (mouseup)="finishDrag($event)" (mouseover)="dragged($event)">
+      </p-selectButton>
+    </div>
+  </div>
+</div>

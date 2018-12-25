@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <title>SRK - Pure Light</title>
+  <base href="/">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="format-detection" content="telephone=no">
+  <link rel="icon" href="../assets/img/fav.ico">
+
+</head>
+
+<body>
+
+<app-login-app>
+  <div id="loading-splash" class="splash-screen" style="display: none">
+    <div class="splash-container">
+      <div class="logo"></div>
+      <div class="load-bar">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+  </div>
+</app-login-app>
+
+<!-- Browser Not Supported Modal -->
+<div class="landing-page-overlay" id="landingPageOverlay" style="display: none">
+  <div class="landing-page-overlay-content">
+    <h3>We dont support this browser</h3>
+    <p>It is advised to use latest browser for good user experience and your content security.</p>
+    <p>Try latest
+      <a href="https://www.google.com/chrome/browser/desktop/index.html" target="_blank" style="font-weight:bold">Chrome</a>
+      or
+      <a href="https://support.microsoft.com/en-in/help/17621/internet-explorer-downloads" target="_blank" style="font-weight:bold">Internet Explorer</a> browsers
+  </div>
+</div>
+<!-- /Browser Not Supported Modal -->
+
+<script type="text/javascript">
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    });
+  }
+
+  function getBrowerInfo() {
+    var browserDtl = {
+      name: '',
+      version: ''
+    };
+
+    var ua = navigator.userAgent;
+    var tem;
+    var M = ua.match(/(opera|chrome|safari|firefox|msie|edge|trident(?=\/))\/?\s*(\d+)/i) || [];
+    if (/trident/i.test(M[1])) {
+      tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
+      browserDtl.name = 'IE';
+      browserDtl.version = tem[1] || '';
+      return browserDtl;
+    }
+    if (M[1] === 'Chrome') {
+      tem = ua.match(/\bOPR\/(\d+)/);
+      if (tem != null) {
+        browserDtl.name = 'Opera';
+        browserDtl.version = tem[1] || '';
+        return browserDtl;
+      }
+      tem = ua.match(/\bEdge\/(\d+)/);
+      if (tem != null) {
+        browserDtl.name = 'Edge';
+        browserDtl.version = tem[1] || '';
+        return browserDtl;
+      }
+    }
+    M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
+    if ((tem = ua.match(/version\/(\d+)/i)) != null) {
+      M.splice(1, 1, tem[1]);
+    }
+    browserDtl.name = M[0];
+    browserDtl.version = M[1];
+    return browserDtl;
+  }
+
+  var browserDtl = getBrowerInfo();
+  var browserName = browserDtl.name;
+  var browserVersion = browserDtl.version;
+  if ((browserName.toUpperCase() == 'IE' || browserName.toUpperCase() == 'MSIE') && browserVersion < 11) {
+    var appRoot = document.getElementsByTagName('app-root');
+    appRoot[0].style.display = 'block';
+    appRoot[0].style.opacity = '.7';
+    var overlay = document.getElementById('landingPageOverlay');
+    overlay.style.display = 'block';
+  }
+</script>
+
+</body>
+
+</html>

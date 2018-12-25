@@ -1,0 +1,11 @@
+<div class="ui-g-12">
+  <p-dropdown id="ruleNameList" [options]="ruleNames" [(ngModel)]="selectedRuleName"
+  (onChange)="selectRuleValue()" [style]="{'width':'150px'}">
+  </p-dropdown>
+</div>
+<br>
+<hr>
+<div class="ui-g-12" *ngIf="(selectedRuleName)">
+  <app-update-rule [inputRuleData]="selectedRule" (onUpdateRule)="update($event)">
+  </app-update-rule>
+</div>

@@ -1,0 +1,34 @@
+app-extra-facet table {
+  border-spacing: 0px;
+  padding: 0px;
+}
+
+app-extra-facet .table-header {
+border-bottom: solid 1px  #cacee1;
+text-align: center;
+// color: #00459b;
+font-size: 12px;
+font-weight: normal;
+}
+app-extra-facet .table-header-data{
+  font-size: 12px;
+  font-weight: bold;
+  color: #262a42;
+  padding-top: 6px !important;
+}
+app-extra-facet .ui-togglebutton.ui-button.ui-state-default,
+app-extra-facet .ui-selectbutton .ui-button.ui-state-default{
+margin-left: 5px;
+margin-top: 1px;
+font-size: 12px;
+}
+
+
+@media (max-width:1024px) {
+app-extra-facet .table-header{
+    width: 66% ;
+}
+}
+.param-padding{
+  padding : 0px 0px 3px 5px;
+}

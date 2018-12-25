@@ -1,0 +1,265 @@
+
+.margint20 {  margin-top: 20px;}
+#buttonMenuBar {  margin-bottom: 15px;}
+.chips {  display: inline-block;  font-size: 12px;}
+.stone-label-text {  font-weight: bold;  font-size: 16px;}
+.stone-left-box {  padding: 0;}
+.stone-mini-image { max-width: 40px;margin-top: 10px;}
+.multimedia-button {  padding: 5px;  font-size: 16px;  padding: 5px 10px;}
+.multimedia-button-active {  padding: 5px;  font-size: 16px;  padding: 5px 10px;}
+.btn-tab {  border-radius: 3px;  padding: 8px 15px;  margin: 5px;  float: left;  text-transform: uppercase;  background-color: transparent;  font-weight: bold;  outline: none;}
+.btn-tab-active {  border-radius: 3px;  padding: 8px 15px;  margin: 5px;  float: left;  text-transform: uppercase;  font-weight: bold;  outline: none;  border-radius: 100px;cursor: pointer;}
+.detail-tab-active {  border-radius: 3px;  padding: 8px 15px;  margin: 5px;  float: left;  text-transform: uppercase;  font-weight: bold;  outline: none;  border-radius: 100px;}
+
+.button-section {  float: right;}
+.multimedia-image {  width: 100%;  max-width: 260px;}
+.multimedia-image-ploat {  width: 100%;  max-width: 320px;margin-top: 20px;}
+.multimedia-box {  height: 280px;}
+.confirm-button {  border-radius: 3px;  padding: 8px 15px;  margin: 5px;  float: right;}
+.fixed {  position: fixed;  top: 80;  z-index: 9999;}
+.dropdownHeight {  height: 100px;}
+.header-box {  text-align: center;}
+.stuck {  position: fixed;  top: 300px;  z-index: 15;}
+.button-box {  text-align: center;}
+a {  cursor: pointer;}
+.ha-inclusion-box {  width: auto;  height: 170px;}
+.detail-label {  text-align: right; clear: both;}
+.detail-value {  text-align: left;}
+.tab-btn {  padding: 6px 10px;  border-radius: 3px;  margin: 3px 5px;  font-size: 12px;}
+.addtext {  font-size: 18px;  border: 0;  background-color: transparent;  vertical-align: top; cursor: pointer;}
+.chipslabel {  border: 0;}
+.ui-chips-token .ui-chips-token-label {  margin: 0;  font-size: 12px;  text-transform: uppercase;}
+.label-Head {  font-size: 16px;  font-weight: bold;padding: 15px 20px;}
+a.download-btn { font-size: 16px;}
+.tbl-inclusion {  width: 350px; border: 1px solid #ccc; }
+.tbl-inclusion td {  padding: 15px 10px;}
+.tbl-inclusion th { border-right: 1px solid #ccc;   padding: 15px 10px;}
+.tbl-inclusion td.borderr,.tbl-inclusion th.borderr { border-right: 1px solid #ccc; padding: 15px 10px;}
+.ui-button-text {    padding: .0em 1em !important; }
+.multimedia-image-full{width: 100%; padding:20px; }
+.paddt0{padding-top:0px }
+.paddb0{padding-bottom:0px }
+.details-box,.inclusions-box,.parameters-box,.stone-info-box {  margin: 0;  border-radius: 5px;  margin: 5px 0;}
+.detail-tab-active {  border-radius: 3px;  padding: 8px 15px;  margin: 5px;  float: left;  text-transform: uppercase;  font-weight: bold;  outline: none;  border-radius: 100px}
+.diamond-facet-image{width:360px}
+.diamond-facet-box{text-align: center;}
+
+
+.dtl-icon, .dtl-icon-active{font-size: 24px;
+padding: 3px 5px;}
+.dSpec, .dm_fulldetails .dm_img, .spn3, .spn9
+        {
+            display: inline-block;
+        }
+        .dSpec
+        {
+            position: relative;
+            width: 100%;
+            font-size: 14px;
+        }
+        .divWhiteStone
+        {
+            width: 500px;
+            height: 370px;
+            text-align: left;
+        }
+        .img-width
+        {
+            width: 100%;
+        }
+        .dia11
+        {
+            position: absolute;
+            top: 0px;
+            width: 500px;
+            height: 370px;
+        }
+        .lblStarlength
+        {
+            margin-left: 22%;
+            position: absolute;
+            top: 8%;
+        }
+        .lblTabelPerc
+        {
+            margin-left: 56%;
+            position: absolute;
+            top: 7%;
+        }
+        .lblCrownAngle
+        {
+            margin-left: 91%;
+            position: absolute;
+            top: 20%;
+        }
+        .dia22
+        {
+            font-size: 8px;
+            margin-top: 0px;
+            padding-left: 94%;
+            padding-top: 14%;
+            text-align: right;
+
+        }
+        .lblCrownHeight
+        {
+            margin-left: 69%;
+            position: absolute;
+            top: 18%;
+        }
+        .lblPavAngle
+        {
+            margin-left: 91%;
+            position: absolute;
+            top: 31%;
+        }
+        .dia33
+        {
+            font-size: 8px;
+            margin-top: 0px;
+            padding-left: 94%;
+            padding-top: 6%;
+        }
+        .lblDepthPer
+        {
+            margin-left: 61%;
+            position: absolute;
+            top: 32%;
+        }
+        .lblPavHeight
+        {
+            margin-left: 70%;
+            position: absolute;
+            top: 40%;
+        }
+        .lblPavPer
+        {
+            margin-left: 33%;
+            position: absolute;
+            top: 63%;
+        }
+        .lblCuletDesc
+        {
+            margin-left: 64%;
+            position: absolute;
+            top: 73%;
+        }
+        .dia44
+        {
+            margin-left: 10%;
+            position: absolute;
+            top: 20%;
+            width: 60px;
+        }
+        @media screen and (max-width: 500px)
+        {
+            .diamond_details
+            {
+                width: 100%;
+                overflow: hidden;
+            }
+            .dSpec
+            {
+                font-size: 12px;
+            }
+            .divWhiteStone
+            {
+                width: 300px;
+                height: 370px;
+                text-align: left;
+            }
+            .img-width
+            {
+                width: 100%;
+            }
+            .dia11
+            {
+                position: absolute;
+                top: 0px;
+                width: 500px;
+                height: 370px;
+            }
+            .lblStarlength
+            {
+                margin-left: 14%;
+                position: absolute;
+                top: 4%;
+            }
+            .lblTabelPerc
+            {
+                margin-left: 32%;
+                position: absolute;
+                top: 4%;
+            }
+            .lblCrownAngle
+            {
+                margin-left: 54%;
+                position: absolute;
+                top: 11%;
+            }
+            .dia22
+            {
+                font-size: 8px;
+                margin-top: 0px;
+                padding-left: 57%;
+                padding-top: 8%;
+                text-align: right;
+            }
+            .lblCrownHeight
+            {
+                margin-left: 41%;
+                position: absolute;
+                top: 11%;
+            }
+            .lblPavAngle
+            {
+                margin-left: 54%;
+                position: absolute;
+                top: 65px;
+            }
+            .dia33
+            {
+                font-size: 8px;
+                margin-top: 0px;
+                padding-left: 57%;
+                padding-top: 2%;
+            }
+            .lblDepthPer
+            {
+                margin-left: 36%;
+                position: absolute;
+                top: 18%;
+            }
+            .lblPavHeight
+            {
+                margin-left: 40%;
+                position: absolute;
+                top: 84px;
+            }
+            .lblPavPer
+            {
+                margin-left: 20%;
+                position: absolute;
+                top: 132px;
+            }
+            .lblCuletDesc
+            {
+                margin-left: 37%;
+                position: absolute;
+                top: 152px;
+            }
+            .dia44
+            {
+                margin-left: 4%;
+                position: absolute;
+                top: 40px;
+                width: 60px;
+            }
+        }
+      #dropdownTagsId .ui-dropdown-panel .ui-dropdown-list {
+    padding: .4em;
+    border: 0 none;
+    max-height: 50px !important;
+}
+
+.add-tag-label{padding-left: 8px; cursor: pointer;}

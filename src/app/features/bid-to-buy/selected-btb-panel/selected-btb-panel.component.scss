@@ -1,0 +1,24 @@
+#allSelectedStoneContainer{height: 300px;  width: 100%;}
+.selected-stone-panel-container{max-height: 450px;}
+.raw-box-container{border-radius: 4px;}
+.position-top{position: relative; top: 55px; z-index: 1000; margin-right: -25px;}
+.color-lagend-container-selected{
+    position: relative;
+    top: 56px;
+    float: right;
+}
+.box-color-lagend-selected{
+    max-width: 250px;
+    float: left;
+    font-size: 12px;
+    cursor: pointer;
+    position: relative;
+    top: -33px;
+    margin: 2px;
+}
+.grid-container-selected{
+    padding: 0;
+    margin-top: -30px;
+    border-radius: 4px;
+    display: block;
+}

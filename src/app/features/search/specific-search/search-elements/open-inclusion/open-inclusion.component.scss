@@ -1,0 +1,30 @@
+app-open-inclusion table {
+  border-spacing: 0px;
+  padding: 0px;
+}
+
+app-open-inclusion .table-header {
+border-bottom: solid 1px  #cacee1;
+text-align: center;
+// color: #00459b;
+font-size: 12px;
+font-weight: normal;
+}
+app-open-inclusion .table-header-data{
+  font-size: 12px;
+  font-weight: bold;
+  color: #262a42;
+  padding-top: 4px;
+}
+app-open-inclusion .ui-togglebutton.ui-button.ui-state-default,
+app-open-inclusion .ui-selectbutton .ui-button.ui-state-default{
+margin-left: 5px;
+font-size: 12px;
+}
+
+@media (max-width:1024px) {
+app-open-inclusion .table-header{
+    width: 66% ;
+}
+}
+app-open-inclusion .param-padding{padding: 0px 0px 3px 5px}  

@@ -1,0 +1,28 @@
+.box {  border-radius: 5px;  padding: 5px;  display: table; width: 100%;}
+.box-iconbox {  float: right;}
+.box-icon {  width: 25px;  height: 25px;  margin: 0 3px;  float: left;  padding: 0 3px 3px;  text-align: center;  border: 0px;  vertical-align: middle;}
+.empty-list{font-size: x-large; text-align: center; padding: 10px;}
+.packet-skeleton {
+  display: inline-block;
+  background-color: #f6f6f6;
+  height: 20px;
+  width: 80%;
+  border-radius: 50px;
+}
+
+.packet-small-skeleton {
+  display: inline-block;
+  background-color: #f6f6f6;
+  height: 10px;
+  width: 90px;
+  border-radius: 50px;
+}
+
+.packet-close-skeleton{
+    background: #f6f6f6;
+    height: 20px;
+    border-radius: 50px;
+    width: 20px;
+}
+input { font-size: 14px; line-height: 16px; padding:2px 5px; -webkit-appearance: none; width: 70%; border: none; border-radius: 0; }
+.fa-size{font-size: 1.5em;}

@@ -1,0 +1,42 @@
+.confirm-panel-separator {
+  border-right: 2px solid #e0e0e0;
+}
+
+#myConfirmationpGridContainer {
+  max-height: 454px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+
+.icons-mailbox {
+  width: 20px;
+  height: 20px;
+  padding-top: 7px;
+}
+
+.icons-download {
+  width: 20px;
+  height: 20px;
+  padding-top: 7px;
+}
+
+.custom-btnBorder {
+  margin: 0px;
+}
+
+.confirmation-skeleton {
+  display: inline-block;
+  background-color: #f6f6f6;
+  height: 15px;
+  width: 120px;
+  border-radius: 50px;
+}
+.lbl-confirmation-value-large{font-size: 14px;padding:3px 0px;text-align:left; margin:0px 2px;}
+.lbl-confirmation-value-small{font-size: 12px;padding:3px 5px;text-align:left; margin:0px 2px;}
+.raw-box-container{border:1px solid; margin:10px 0px 0px 0px;padding:18px;border-radius: 4px;}
+.no-view-request{text-align: center;font-size: 25px;}
+
+#myConfirmationDetailsPanel {
+  overflow-y: auto;
+}

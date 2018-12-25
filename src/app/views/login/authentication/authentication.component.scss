@@ -1,0 +1,32 @@
+form {  width: 100%;}
+.loginForm-content { margin:auto; float: none}
+.login-title  { font-size: 40px; padding-left: 15px; font-weight: normal; line-height: normal; }
+input { font-size: 14px;line-height: 16px; padding: 10px 10px 10px 5px; -webkit-appearance: none; width: 100%; margin-left: 15px; border: none; border-radius: 0; }
+.icon-label {font-size: 20px;}
+.error{padding: 0px 0px 0px 15px;color: red;}
+.custom-btnPrimary { width: 100%;margin-left: 15px;}
+.forgot-pwd {cursor: pointer;font-size: 14px; margin-left: 15px;}
+.registrt-now {cursor: pointer; font-size: 14px;}
+.form-group > div {margin-top: 20px;}
+.captcha {height: 100px;margin-left: 15px;}
+a {cursor: pointer;}
+.rc-anchor-light {border: 0 !important;}
+.loginfooter {width:100%; margin-left:15px; margin-top:40px;text-align: center;}
+.loginfooter a {  cursor: pointer;text-decoration: underline;}
+.login-icon{font-size: 20px; padding:10px}
+.login-other-actions{    display: flex; justify-content: space-between;}
+
+@media(max-width: 768px){
+.loginfooter {  margin-top:0px; font-size: 12px}
+.login-title{ font-size: 30px;}
+.forgot-pwd, .registrt-now {font-size: 12px;width: 50%;}
+.login-icon { font-size: 15px}
+.registrt-now {margin-left:15px; }
+}
+div#registerNowId{width: 50%;margin:auto 0px;text-align:right;padding-right: 15px; }
+div#forgotPwdId{width: 50%;margin:auto 0px;text-align:left;padding-left: 15px;}
+
+.download-area {position: absolute; bottom: 0;}
+.close-icon,.app-download-icon{cursor: pointer;}
+.close-icon{position: absolute; top:15px; right: 15px;font-size: 20px;}
+.device-image{ width: 100%}

@@ -132,7 +132,7 @@ import { EditorModule } from 'primeng/editor';
 import { SharingModule } from '../sharing.module';
 import { ThmFilterPopoverComponent } from './thm-filter-popover/thm-filter-popover.component';
 import {ContextMenuComponent} from './context-menu/context-menu.component';
-import { ThmInfraGridComponent } from 'app/shared/theme/thm-infra-grid/thm-infra-grid.component';
+import { ThmInfraGridComponent } from '../../shared/theme/thm-infra-grid/thm-infra-grid.component';
 
 const NG_MODULES = [
   SharedModule,
@@ -174,13 +174,16 @@ const NG_MODULES = [
   TableModule
 ];
 
-const THM_COMPONENTS = [ThmHeaderComponent, ThmCardComponent,
+const THM_COMPONENTS = [
+  ThmHeaderComponent, ThmCardComponent,
   ThmMenuComponent, ThmDatePickerComponent, ThmTooltipComponent,
   ThmRequestOverlayComponent, ThmConfirmOverlayComponent, ThmPacketPanelComponent, ThmDdcOverlayComponent,
   ThmBidToBuyOverlayComponent, ThmMultimediaPopupComponent, ThmAddnoteOverlayComponent, ThmStoneDetailsComponent,
   ThmSelectedStonePanelComponent, ThmTimeoutComponent, ThmStoneCompareComponent, ThmTwinStoneDetailComponent,
   ThmEventCardComponent, ThmKamCardComponent, ThmPageSearchComponent, ThmDownloadProgressBarComponent, ThmFilterPopoverComponent,
-  SerenawaySurveyComponent, ThmMediaIcon, ThemeMediaIcon, ContextMenuComponent, ThmCommonMediaComponent, ThmSelectedGridComponent, ThmInfraGridComponent ];
+  SerenawaySurveyComponent, ThmMediaIcon, ThemeMediaIcon, ContextMenuComponent, ThmCommonMediaComponent,
+  ThmSelectedGridComponent, ThmInfraGridComponent
+];
 
 const DEVEXTREME_COMPONENTS = [DxDataGridModule,
   DxCircularGaugeModule, DxTooltipModule, DxTemplateModule, DxTabPanelModule,

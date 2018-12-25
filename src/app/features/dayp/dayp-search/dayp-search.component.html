@@ -1,0 +1,517 @@
+<div class="sms-page-container" *ngIf="daypSearchData && daypSearchData.diamondTable.length>0;else loadData">
+  <div *ngIf="daypSearchData.selectedStoneTable">
+
+    <app-selected-dayp-stone-panel #selectedDaypStonesPanel [selectedTab]="2" [daypStatus]="daypStatus" [selectedStoneArray]="daypSearchData"
+      (toggleTableDisplay)="toggleSelectedDaypPanel($event)" [visiblePacketIcon]="visiblePacketIcon" (updateStones)="updateDaypStones($event)"
+      (updateComments)="updateStoneComments($event)" [stonesActedOn]="stonesActedOn" (offerOnStoneUpdated)="offerOnSelectedStoneUpdated($event)"></app-selected-dayp-stone-panel>
+
+  </div>
+  <div class="ui-g-12 ui-g-nopad" [hidden]="daypSearchData.toggleTableDisplay" style="position: relative">
+    <div class="ui-g-12 color-lagend-panel ">
+      <div class="color-lagend-container">
+        <div class="color-lagend">
+          <div (click)="setColorLegendFilterValue($event, 'bidToBuy')" [ngClass]="{'border-active-highlight':colorLegendFilterValue.indexOf('bidToBuy') > -1}" class="box-color-lagend">
+            <span class="colorLagend_BTOB"></span>
+            <label>{{'Bid To Buy'|translate}}</label>
+          </div>
+          <div (click)="setColorLegendFilterValue($event, 'underBusinessProcess')" [ngClass]="{'border-active-highlight':colorLegendFilterValue.indexOf('underBusinessProcess') > -1}" class="box-color-lagend ">
+            <span class="colorLagend_BusinessProcess"></span>
+            <label>{{'Under Business Process'|translate}}</label>
+          </div>
+          <div (click)="setColorLegendFilterValue($event, 'newArrival')" [ngClass]="{'border-active-highlight':colorLegendFilterValue.indexOf('newArrival') > -1}" class="box-color-lagend">
+            <span class="colorLagend_NewArrival"></span>
+            <label>{{'New Arrival'|translate}}</label>
+          </div>
+          <div (click)="setColorLegendFilterValue($event, 'recentlyUploaded')" [ngClass]="{'border-active-highlight':colorLegendFilterValue.indexOf('recentlyUploaded') > -1}" class="box-color-lagend">
+            <span class="colorLagend_RecentlyUploded"></span>
+            <label>{{'Recently Uploaded'|translate}}</label>
+          </div>
+        </div>
+        <div class="color-lagend-icon">
+          <!--<a class="">
+            <span id="filterOnDAYPSearch" class="icon-stack filter-icon" (click)="showFilterOptions()" pTooltip="{{'RESET_FILTER_TEXT'|translate}}"
+              tooltipPosition="bottom" tooltipEvent="hover">
+              <i class="fa fa-sliders filter-size" aria-hidden="true"></i>
+            </span>
+          </a>-->
+          <a>
+            <span id="daypSearchResultDownload" class="grid-icon-top icon-download" [dirStoreAudit]="'EMAIL LIST'"
+              (click)="showDowaloadOptions()" pTooltip="{{'DOWNLOAD_TEXT' |translate}}" tooltipPosition="bottom"
+              tooltipEvent="hover"> </span>
+          </a>
+          <!--<a><span
+						class="grid-icon-top icon-email" id="mail"
+						(click)="sendExcelMail(daypSearchData)" pTooltip="{{'MAIL_ME_TEXT'|translate}}" tooltipPosition="bottom" tooltipEvent="hover"></span></a>          -->
+          <a *ngIf="!isPageSearch;else showNewSearch">
+            <span id="filter" class="grid-icon-top icon-filter marl6 modify-search-icon" (click)="modifySearch()" pTooltip="{{'Modify Search' |translate}}"
+              tooltipPosition="bottom" tooltipEvent="hover">
+            </span>
+          </a>
+          <ng-template #showNewSearch>
+            <a>
+              <span id="filter" class="grid-icon-top icon-search marl6" (click)="newSearch()"> </span>
+            </a>
+          </ng-template>
+          <button id="selectedSearchLeftId" class="icon-Next-Round grid-icon-top scroll-button" (mousedown)="scrollTableInInterval('left')"
+            (mouseup)="stopScrolling()" (click)="scrollTable('left')" pTooltip="{{'LEFT_SCROLL_TEXT' |translate}}"
+            tooltipPosition="top" tooltipEvent="hover"></button>
+          <button id="selectedSearchRightId" class="icon-Previous-Round grid-icon-top scroll-button" (mousedown)="scrollTableInInterval('right')"
+            (mouseup)="stopScrolling()" (click)="scrollTable('right')" pTooltip="{{'RIGHT_SCROLL_TEXT' |translate}}"
+            tooltipPosition="top" tooltipEvent="hover"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-12 ui-g-nopad grid-container fade" *ngIf="selectedColumnList && daypSearchData.diamondTable">
+
+      <!--<dx-data-grid #daypSearchResultContainer id="daypSearchResultContainer" [dataSource]=daypSearchData.diamondTable [allowColumnResizing]="true"
+        [columnAutoWidth]="true" [showColumnLines]="true" [showRowLines]="true" [allowColumnReordering]="true" [showBorders]="true"
+        [rowAlternationEnabled]="false" (onCellPrepared)="onCellPrepared($event)" [cacheEnabled]="false" [focusStateEnabled]="true"
+        [height]="daypHeight" (onContentReady)="onContentLoad($event)">
+
+        <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+        <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+        <dxo-header-filter [visible]="filterFlag"></dxo-header-filter>
+        <dxo-scrolling mode="virtual" showScrollbar="always" useNative="false"></dxo-scrolling>
+        &lt;!&ndash;<dxo-filter-row [visible]="true" [applyFilter]="auto"></dxo-filter-row>&ndash;&gt;
+        &lt;!&ndash; <dxo-load-panel [enabled]="true"></dxo-load-panel> &ndash;&gt;
+        <dxo-search-panel [visible]="true" placeholder="{{'Search'|translate}}"></dxo-search-panel>
+        <dxi-column caption="" [allowHiding]="false" [width]="30" dataType="string" [fixed]="true" [allowReordering]="false"
+          [allowFiltering]="false" [allowHeaderFiltering]="false" [allowResizing]="false" cellTemplate="checkboxTemplate"
+          headerCellTemplate="selectAllCheckboxTemplate" alignment="center"></dxi-column>
+
+        <div *dxTemplate="let data of 'selectAllCheckboxTemplate'">
+          <p-checkbox name="allSelectedParentTable" label="" id="SelectALlId" binary="true" (onChange)="selectAllStones()"
+            [(ngModel)]="daypSearchData.isAllResultSelected" *ngIf="filterDataSource.length === 0"></p-checkbox>
+          <p-checkbox name="allSelectedFilterTable" label="" id="SelectFilterId" binary="true" (onChange)="selectFilterStones()"
+            [(ngModel)]="isFilterAllSelected" *ngIf="filterDataSource.length > 0"></p-checkbox>
+        </div>
+
+        <div *dxTemplate="let data of 'checkboxTemplate'">
+          <p-checkbox id="{{data.data.stone_id}}_{{daypSearchData.name}}Id" name="searchTable" label="" value="{{data.data.stone_id}}"
+            (onChange)="selectMultipleStone(data.data.stone_id)" [(ngModel)]="daypSearchData.selectedStoneButton"></p-checkbox>
+        </div>
+
+
+        <dxi-column [allowHiding]="false" width="{{isColumnExpanded ? 275 : 130}}" dataType="string" [fixed]="true"
+          [allowReordering]="false" [allowFiltering]="false" [allowSorting]="false" [allowHeaderFiltering]="false"
+          [allowResizing]="false" cellTemplate="StoneIDTemplate" headerCellTemplate="stoneDetailsHeaderTemplate"
+          alignment="left"></dxi-column>
+        <div *dxTemplate="let data of 'stoneDetailsHeaderTemplate'">
+          <label class="fl">Diamond Details</label>
+          <div *ngIf="!isColumnExpanded" id="NavigationRight" class="custom-button" (click)="scrollColumn()" pTooltip="{{'EXPAND_DETAILS_TEXT' |translate}}"
+            tooltipPosition="bottom" tooltipEvent="hover">></div>
+          <div *ngIf="isColumnExpanded" id="NavigationLeft" class="custom-button" (click)="scrollColumn()" pTooltip="{{'COLLAPSE_DETAILS_TEXT' |translate}}"
+            tooltipPosition="bottom" tooltipEvent="hover">
+            <</div> </div> <div *dxTemplate="let data of 'StoneIDTemplate'">
+              <span id="{{data.data.stone_id}}{{daypSearchData.name}}NotAvailableIconBox" *ngIf="(data.data.stone_state === 6 || data.data.stone_state === 0 || (data.data.stone_state === 3 && data.data.reason_code !== 1)); else showPacketIcons"></span>
+              <ng-template #showPacketIcons>
+                <span class="grid-icon-container" *ngIf="visiblePacketIcon">
+                  <a [dirStoreAudit]="'ADD TO PACKET'" *ngIf="data.data.packet_count>0; else notInPacket">
+                    <span id="{{data.data.stone_id}}{{daypSearchData.name}}PktId" class="grid-icon icon-packet-added text-green"
+                      (click)="stoneToOperateInPacket(data.data)" pTooltip="{{'Select Packet'|translate}}"
+                      tooltipPosition="bottom" tooltipEvent="hover"></span>
+                  </a>
+                  <ng-template #notInPacket>
+                    <a [dirStoreAudit]="'ADD TO PACKET'">
+                      <span id="{{data.data.stone_id}}{{daypSearchData.name}}PktId" class="grid-icon icon-packet-add"
+                        (click)="stoneToOperateInPacket(data.data)" pTooltip="{{'Select Packet'|translate}}"
+                        tooltipPosition="bottom" tooltipEvent="hover"></span>
+                    </a>
+                  </ng-template>
+                </span>
+              </ng-template>
+              <span class="grid-icon-container">
+                <a (click)="showStoneMediaIconsPanel(data.data,$event,thmMediaIcon)">
+                  <span id="{{data.data.stone_id}}{{daypSearchData.name}}ViewId" class="grid-icon icon-media"></span>
+                </a>
+              </span>
+              <span class="grid-icon-container-stoneid">
+                <a [dirStoreAudit]="'STONE DETAIL VIEW'" id="{{data.data.stone_id}}{{daypSearchData.name}}StoneId"
+                  (click)="addStoneInfoTab(data.data)">{{data.data.stone_id}}</a>
+              </span>
+              <span class="grid-icon-container" *ngIf="data.data.isTwin && isIconVisible">
+                <a [dirStoreAudit]="'STD DETAIL VIEW'" [dirCustomEventAccessHandler]="'twin_diamond_detail_view'"
+                  (customEvent)="addTwinStoneInfoTab(data.data.std_grp_no)" id="{{data.data.stone_id}}{{daypSearchData.name}}STDId">
+                  <span pTooltip="{{'TWIN_DIAMOND_DETAIL_TEXT' |translate}}" tooltipPosition="bottom" tooltipEvent="hover"
+                    class=" icon-Twin-Shape-Round "></span>
+                </a>
+              </span>
+              <span class="grid-icon-container mart0" *ngIf="(data.data.totalViewed > -1  && !(data.data.totalViewed === 0 && data.data.totalViewedByUser === 0)) && isIconVisible ">
+                <div class="icon-with-text">
+                  <span id="{{data.data.stone_id}}{{daypSearchData.name}}TotViewId" class="grid-icon icon-online-view">
+                  </span>
+                  <br>
+                  <label>
+                    <span pTooltip="{{'OTHERS_VIEW_TEXT'|translate}}" tooltipPosition="bottom" tooltipEvent="hover"
+                      style="margin-right: -5px;">{{data.data.totalViewed}}</span>
+                    <span *ngIf="data.data.totalViewedByUser > -1 && isIconVisible" pTooltip="{{'MY_VIEW_TEXT'|translate}}"
+                      tooltipPosition="bottom" tooltipEvent="hover">/{{data.data.totalViewedByUser}}</span>
+                  </label>
+                </div>
+              </span>
+              <span class="grid-icon-container mart0" *ngIf="data.data.totalViewRequest && isIconVisible">
+                <div class="icon-with-text">
+                  <span id="{{data.data.stone_id}}{{daypSearchData.name}}ViewReqId" class="grid-icon icon-my-view"
+                    pTooltip="{{(data.data.viewRequestStatus=== 2?'ALREADY_VIEWED_TEXT':'VIEW_REQUEST_TEXT') |translate}}"
+                    tooltipPosition="bottom" tooltipEvent="hover" [ngClass]="{'text-red': data.data.viewRequestStatus=== 2}">
+                  </span>
+                  <br>
+                  <label *ngIf="data.data.totalViewRequest > 1">{{data.data.totalViewRequest}}</label>
+                </div>
+              </span>
+              <span class="grid-icon-container" *ngIf="data.data.isRecommended && isIconVisible">
+                <span id="{{data.data.stone_id}}{{daypSearchData.name}}RecommendedId" pTooltip="{{'Recommended Stone'|translate}}"
+                  tooltipPosition="bottom" tooltipEvent="hover" class="grid-icon srk-recommend"></span>
+              </span>
+              <span class="grid-icon-container" *ngIf="data.data.isOnHold && isIconVisible">
+                <span id="{{data.data.stone_id}}{{daypSearchData.name}}holdId" class="grid-icon icon-hold-list-option-2"></span>
+
+              </span>
+              <span class="grid-icon-container" *ngIf="data.data.isBasket && isIconVisible">
+                <span id="{{data.data.stone_id}}{{daypSearchData.name}}CartId" class="grid-icon icon-cart" pTooltip="{{(data.data.basketStatus==='<'?'BASKET_PRICE_REVISED_TEXT':'BASKET_TEXT') |translate}}"
+                  tooltipPosition="bottom" tooltipEvent="hover" [ngClass]="{ 'text-red': data.data.basketStatus==='<'}"></span>
+              </span>
+              <span id="{{data.data.stone_id}}{{daypSearchData.name}}NotAvailableIconBox" *ngIf="(data.data.stone_state === 6 || data.data.stone_state === 0 || (data.data.stone_state === 3 && data.data.reason_code !== 1)); else showIcons"></span>
+              <ng-template #showIcons>
+                <span class="grid-icon-container" *ngIf="data.data.b2b_state === 1 && isIconVisible">
+                  <a (click)="openBTB(data.data)">
+                    <span id="{{data.data.stone_id}}{{daypSearchData.name}}B2BId" class="grid-icon icon-b2b" pTooltip="{{(data.data.isBtbUpdated === 1?'BID_SAVED':(data.data.isBtbUpdated === 2?'FINAL_SUBMITTED':'B2B_ACTIVE'))|translate}}"
+                      tooltipPosition="bottom" tooltipEvent="hover" [ngClass]="{'text-red': data.data.isBtbUpdated === 1, 'text-green': data.data.isBtbUpdated === 2}">
+                    </span>
+                  </a>
+                </span>
+                <ng-template [dirCheckPermission]="'ddc_btn'">
+                  <span class="grid-icon-container" *ngIf="data.data.business_process && isIconVisible">
+                    <a (click)="updateDDC(data.data)">
+                      <span pTooltip="{{(data.data.ddcStatus==='ACTIVE'?'DDC_ACTIVE':(data.data.ddcStatus==='INACTIVE'?'DDC_INACTIVE':'DDC_PUT')) |translate}}"
+                        tooltipPosition="bottom" tooltipEvent="hover" id="{{data.data.stone_id}}{{daypSearchData.name}}DDCId"
+                        class="grid-icon icon-ddc" [ngClass]="{'text-green': data.data.ddcStatus==='ACTIVE' , 'text-red': data.data.ddcStatus==='INACTIVE'}">
+                      </span>
+                    </a>
+                  </span>
+                </ng-template>
+              </ng-template>
+              <span class="grid-icon-container" *ngIf="data.data.showHoldIcon && isIconVisible">
+                <span *ngIf="data.data.showHoldIcon" id="{{data.data.stone_id}}showHoldIcon" pTooltip="{{'HOLD_ICON_DETAIL_TEXT'|translate}}"
+                  tooltipPosition="bottom" class="grid-icon icon-hold-list-option-2"></span>
+              </span>
+              <span class="grid-icon-container mart0" *ngIf="data.data.haveNote && isIconVisible">
+                <a>
+                  <span id="{{data.data.stone_id}}notes" pTooltip="{{'NOTE'|translate}}" tooltipPosition="bottom"
+                    tooltipEvent="hover" class="grid-icon icon-note" (click)="showAllCommentsForStone(data.data.notes)"></span>
+                  <br>
+                  <span *ngIf="data.data.haveNote" id="{{data.data.stone_id}}notesCount" class="note" (click)="showAllCommentsForStone(data.data.notes)">{{data.data.totalNotes}}
+                  </span>
+                </a>
+              </span>
+              <span class="grid-icon-container" *ngIf="data.data.countryCode && isIconVisible">
+                <img id="{{data.data.stone_id}}Flag" class="stone-flag-icon" [src]=data.data.countryCode pTooltip={{data.data.tooltipMessage}}
+                  tooltipPosition="bottom" tooltipEvent="hover">
+              </span>
+              <span *ngIf="data.data.color_legends" class="color-right color-legend-box" [ngClass]="{'show-packet-legend': visiblePacketIcon}">
+                <div id="{{data.data.stone_id}}{{daypSearchData.name}}ColorId" class="color-indicator-panel" *ngFor="let color of data.data.color_legends">
+                  <div id="{{data.data.stone_id}}{{daypSearchData.name}}{{color}}Id" class="colorLagend_GRID" [ngClass]="{'color-legend-width-height':  isColumnExpanded === false, 'color-legend-height-width':  isColumnExpanded === true}"
+                    [style.background-color]="color | safeStyle"></div>
+                </div>
+              </span>
+          </div>
+          &lt;!&ndash; dayp offer count &ndash;&gt;
+          <dxi-column *ngIf="daypStatus" dataType="number" [width]="colWidth.eoc" [allowFiltering]="true" dataField="daypOfferCount"
+            [allowSorting]="true" headerCellTemplate="offersHeaderTemplate" [visibleIndex]="selectedColumnList.dayp_eligible_offer_count.order"
+            [allowHeaderFiltering]="true" [visible]="selectedColumnList.dayp_eligible_offer_count.entity_value"
+            alignment="center" cellTemplate="daypOfferCountTemplate">
+          </dxi-column>
+
+          <div *dxTemplate="let data of 'daypOfferCountTemplate'">
+            <span *ngIf="data?.data?.daypOfferCount!==null">{{data.data.daypOfferCount}}</span>
+          </div>
+          <div *dxTemplate="let data of 'offersHeaderTemplate'">
+            <label class="fl" pTooltip="{{'OFFERS_DETAIL_TEXT'|translate}}" tooltipPosition="bottom" tooltipEvent="hover">EOC</label>
+          </div>
+
+
+          &lt;!&ndash; WHEN ACTUAL DAYP IS ON &ndash;&gt;
+          <dxi-column *ngIf="daypStatus" caption="$/ct." dataField="price_srk" dataType="number" [width]="colWidth.offer_price" cellTemplate="OfferPriceTemplate"
+            [allowFiltering]="true" [allowSorting]="true" [visibleIndex]="selectedColumnList.DollarCT.order" [allowHeaderFiltering]="true"
+            alignment="center">
+
+            <dxo-header-filter [dataSource]="priceHeaderFilter"></dxo-header-filter>
+          </dxi-column>
+
+          <div *dxTemplate="let data of 'OfferPriceTemplate'">
+            <div *ngIf="data.data.final_submit;else autoSaveStones">
+              <label>{{data.data.price_srk | number:'1.2-2'}}</label>
+              <br>
+              <label class="offer-final-saved">{{data.data.dayp_rate | number:'1.2-2'}}
+              </label>
+            </div>
+            <ng-template #autoSaveStones>
+              <label>{{data.data.price_srk | number:'1.2-2'}}</label>
+              <span class="dayp-data-input" *ngIf="offerColumnList.dollar_ct.entity_value ; else showOfferPriceOnly">
+                <br>
+                <input type="text" placeholder="Offer $/ct." pInputText class="price-input tab{{data.rowIndex}} text-center"
+                  id={{data.data.stone_id}} OfferPrice #price value="{{data.data.dayp_rate | number:'1.2-2'}}" (input)="onPriceInput(data.data, price)"
+                  (keydown)="onPriceKeyDown($event)" (blur)="addOfferPriceForStone(data.data,price.value)" [ngClass]="data.data.final_submit ? 'offer-final-saved': 'offer-auto-saved'"
+                  dirValidateNumberDigit>
+              </span>
+              <ng-template #showOfferPriceOnly>
+                <br>
+                <label *ngIf="data.data.dayp_rate" [ngClass]="data.data.final_submit ? 'offer-final-saved': 'offer-auto-saved'">{{data.data.dayp_rate
+                  | number:'1.2-2'}}</label>
+              </ng-template>
+            </ng-template>
+          </div>
+
+          <dxi-column *ngIf="daypStatus" headerCellTemplate="offerDifferencePercentageHeaderTemplate" dataField="difference"
+            dataType="number" [width]="colWidth.diff_per" cellTemplate="DifferencePercentageTemplate" [visible]="selectedColumnList.dayp_diff_per.entity_value"
+            [visibleIndex]="selectedColumnList.dayp_diff_per.order" [allowFiltering]="true" [allowSorting]="true"
+            [allowHeaderFiltering]="true" alignment="center">
+            <dxo-header-filter [dataSource]="diffHeaderFilter"></dxo-header-filter>
+          </dxi-column>
+          <div *dxTemplate="let data of 'offerDifferencePercentageHeaderTemplate'">
+            <label pTooltip="{{'OFFER_DIFF_PER_TEXT'|translate}}" tooltipPosition="bottom" tooltipEvent="hover">Diff%</label>
+          </div>
+
+          <div *dxTemplate=" let data of 'DifferencePercentageTemplate'">
+            <label *ngIf="data.data.difference != null" pTooltip="{{data.data.difference * -1 <= 7 && data.data.difference != null?'This is an Eligible offer.':'This is an Ineligible offer.'}}"
+              tooltipPosition="bottom" tooltipEvent="hover" [ngClass]="data.data.difference * -1 <= 7 && data.data.difference != null? 'borderGreen': 'borderRed'">{{data.data.difference}}</label>
+          </div>
+
+          <dxi-column *ngIf="daypStatus" caption="Off%" dataField="rap_off" dataType="number" [width]="colWidth.offer_per"
+            cellTemplate="OfferPercentageTemplate" [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true"
+            [visibleIndex]="selectedColumnList.Off.order" alignment="center">
+            <dxo-header-filter [dataSource]="offperHeaderFilter"></dxo-header-filter>
+          </dxi-column>
+
+          <div *dxTemplate=" let data of 'OfferPercentageTemplate'">
+            <div *ngIf="data.data.final_submit;else autoSaveStones">
+              <label>{{data.data.rap_off}}</label>
+              <br>
+              <label *ngIf="data.data.offerSign && data.data.offerSign ==='minus'" class="offer-final-saved">-</label>
+              <label class="offer-final-saved">{{data.data.dayp_per}}</label>
+            </div>
+            <ng-template #autoSaveStones>
+              <div *ngIf="offerColumnList.off_percentage.entity_value;else showOfferPercentageOnly">
+                <label>{{data.data.rap_off}}</label>
+                <br>
+                <select id="{{data.data.stone_id}}{{daypSearchData.name}}Sign" *ngIf="(data.data.rap_off.toString().indexOf('+')) > (-1) && !data.data.final_submit"
+                  [(ngModel)]="data.data.offerSign" (change)="onSingchange(data.data.offerSign,data.data.stone_id)">
+                  <option *ngFor="let sign of offerSignOptions" [value]="sign.value">{{sign.notation}}</option>
+                </select>
+                <input type="text" placeholder="Offer%" pInputText class="price-input tab{{data.rowIndex}} text-center price-input-offer"
+                  id={{data.data.stone_id}} OfferPer *ngIf="!data.data.final_submit" #price value="{{data.data.dayp_per}}"
+                  (input)="onPriceInput(data.data, price)" (keydown)="onPriceKeyDown($event)" (blur)="addOfferPercentageForStone(data.data,price.value,data.data.offerSign)"
+                  [ngClass]="data.data.final_submit ? 'offer-final-saved': 'offer-auto-saved'" dirValidateNumberDigit>
+              </div>
+              <ng-template #showOfferPercentageOnly>
+                <label>{{data.data.rap_off}}</label>
+                <br>
+                <label *ngIf="data.data.dayp_per !== null" [ngClass]="data.data.final_submit ? 'offer-final-saved': 'offer-auto-saved'">{{data.data.dayp_per}}</label>
+              </ng-template>
+            </ng-template>
+          </div>
+
+          <dxi-column caption="Amount" [width]="colWidth.amount" [allowFiltering]="true" [visibleIndex]="selectedColumnList.Amount.order"
+            [allowSorting]="true" [allowHeaderFiltering]="true" cellTemplate="amount" dataField="amount" dataType="number"
+            [visible]="selectedColumnList.Amount.entity_value" alignment="center">
+            <dxo-header-filter [dataSource]="amountHeaderFilter"></dxo-header-filter>
+          </dxi-column>
+          <div *dxTemplate="let data of 'amount'">
+            {{data.data.amount | number:'1.2-2'}}
+          </div>
+          <dxi-column caption="Cert." [width]="allColumnWidth.cert" dataField="certificate.short_value" [visible]="selectedColumnList.Certificate.entity_value"
+            [visibleIndex]="selectedColumnList.Certificate.order" cellTemplate="viewCertificate" [allowFiltering]="true"
+            dataType="string" [allowHeaderFiltering]="true" alignment="center">
+          </dxi-column>
+          <div *dxTemplate="let data of 'viewCertificate'" class="CertIcon">
+            <a class="view-cert" tooltipPosition="bottom" tooltipEvent="hover" [dirStoneMultimediaDetail]="{stoneid:data.data,showMediaType:'PDF'}">{{data.data.certificate.short_value}}</a>
+          </div>
+          <dxi-column caption="Shape" dataField="shape.short_value" dataType="string" [width]="colWidth.shape"
+            [allowFiltering]="true" [allowSorting]="true" [visibleIndex]="selectedColumnList.Shape.order"
+            [allowHeaderFiltering]="true" alignment="center"></dxi-column>
+          <dxi-column caption="Clarity" dataField="clarity.short_value" dataType="string" [width]="colWidth.clarity"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.Clarity.order"
+            [visible]="selectedColumnList.Clarity.entity_value" alignment="center">
+          </dxi-column>
+          <dxi-column caption="Color" dataField="color.short_value" dataType="string" [width]="colWidth.color"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.Colour.order"
+            [visible]="selectedColumnList.Colour.entity_value" alignment="center"></dxi-column>
+          <dxi-column caption="Carat" dataField="carat" dataType="number" [width]="colWidth.carat" [allowFiltering]="true"
+            [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.Carat.order"
+            [visible]="selectedColumnList.Carat.entity_value" alignment="center">
+            <dxo-header-filter [dataSource]="caratHeaderFilter"></dxo-header-filter>
+          </dxi-column>
+
+          <dxi-column caption="Cut" dataField="cut.short_value" dataType="string" [width]="colWidth.cut"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.cut.order"
+            [visible]="selectedColumnList.cut.entity_value" alignment="center">
+          </dxi-column>
+          <dxi-column caption="Pol" dataField="polish.short_value" dataType="string" [width]="colWidth.pol"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.polish.order"
+            [visible]="selectedColumnList.polish.entity_value" alignment="center">
+          </dxi-column>
+          <dxi-column caption="Sym" dataField="symmetry.short_value" dataType="string" [width]="colWidth.sym"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.symmetry.order"
+            [visible]="selectedColumnList.symmetry.entity_value" alignment="center">
+          </dxi-column>
+          <dxi-column caption="Fluor" dataField="fluor.short_value" dataType="string" [width]="colWidth.flour"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.fluorescence.order"
+            [visible]="selectedColumnList.fluorescence.entity_value" alignment="center">
+          </dxi-column>
+
+          <dxi-column caption="Measurement" dataField="measurement" dataType="string" [width]="colWidth.measurement"
+            [allowFiltering]="false" [allowSorting]="true" [allowHeaderFiltering]="false" [allowReordering]="true"
+            [visibleIndex]="selectedColumnList.Measurement.order" [visible]="selectedColumnList.Measurement.entity_value"
+            alignment="center"></dxi-column>
+          <dxi-column caption="D/R" dataField="ratio" dataType="string" [width]="colWidth.dr" [allowFiltering]="true"
+            [allowSorting]="true" [allowHeaderFiltering]="true" [allowReordering]="true" [visibleIndex]="selectedColumnList.DR.order"
+            [visible]="selectedColumnList.DR.entity_value" alignment="center"></dxi-column>
+          <dxi-column caption="TAB" dataField="table_percent" dataType="number" [width]="colWidth.tab" [allowFiltering]="true"
+            [allowSorting]="true" [allowHeaderFiltering]="true" [allowReordering]="true" [visibleIndex]="selectedColumnList.Tab.order"
+            [visible]="selectedColumnList.Tab.entity_value" alignment="center">
+          </dxi-column>
+          <dxi-column caption="TD" dataField="total_depth_percent" dataType="number" [width]="colWidth.td"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [allowReordering]="true"
+            [visibleIndex]="selectedColumnList.Td.order" [visible]="selectedColumnList.Td.entity_value" alignment="center">
+          </dxi-column>
+
+          <dxi-column caption="Shd" dataField="shade.short_value" dataType="string" [width]="colWidth.shd"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.shade.order"
+            [visible]="selectedColumnList.shade.entity_value" alignment="center"></dxi-column>
+          <dxi-column caption="Lust" dataField="luster.short_value" dataType="string" [width]="colWidth.lus"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.luster.order"
+            [visible]="selectedColumnList.luster.entity_value" alignment="center"></dxi-column>
+
+          <dxi-column caption="TW" dataField="table_white.short_value" dataType="string" [width]="colWidth.tw"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.table_white.order"
+            [visible]="selectedColumnList.table_white.entity_value" alignment="center"></dxi-column>
+          <dxi-column caption="SW" dataField="side_white.short_value" dataType="string" [width]="colWidth.sw"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.side_white.order"
+            [visible]="selectedColumnList.side_white.entity_value" alignment="center"></dxi-column>
+
+
+          <dxi-column caption="TB" dataField="table_black.short_value" dataType="string" [width]="colWidth.tb"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.table_black.order"
+            [visible]="selectedColumnList.table_black.entity_value" alignment="center"></dxi-column>
+          <dxi-column caption="SB" dataField="side_black.short_value" dataType="string" [width]="colWidth.sb"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.side_black.order"
+            [visible]="selectedColumnList.side_black.entity_value" alignment="center"></dxi-column>
+
+          <dxi-column caption="SGS Comment" dataType="string" dataField="sgs" [width]="colWidth.sgs" [allowFiltering]="true"
+            [allowSorting]="true" [allowHeaderFiltering]="true" cellTemplate="SgsTemplate" [visibleIndex]="selectedColumnList.SGS.order"
+            [visible]="selectedColumnList.SGS.entity_value" alignment="left"></dxi-column>
+
+          <dxi-column caption="TS" dataField="table_spot.short_value" dataType="string" [width]="colWidth.ts"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.table_spot.order"
+            [visible]="selectedColumnList.table_spot.entity_value" alignment="center"></dxi-column>
+          <dxi-column caption="SS" dataField="side_spot.short_value" dataType="string" [width]="colWidth.ss"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.side_spot.order"
+            [visible]="selectedColumnList.side_spot.entity_value" alignment="center"></dxi-column>
+
+          <dxi-column caption="TO" dataField="table_open.short_value" dataType="string" [width]="colWidth.to"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.table_open.order"
+            [visible]="selectedColumnList.table_open.entity_value" alignment="center"></dxi-column>
+          <dxi-column caption="CO" dataField="crown_open.short_value" dataType="string" [width]="colWidth.co"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.crown_open.order"
+            [visible]="selectedColumnList.crown_open.entity_value" alignment="center"></dxi-column>
+          <dxi-column caption="PO" dataField="pav_open.short_value" dataType="string" [width]="colWidth.po"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.pav_open.order"
+            [visible]="selectedColumnList.pav_open.entity_value" alignment="center"></dxi-column>
+          <dxi-column caption="GO" dataField="girdle_open.short_value" dataType="string" [width]="colWidth.go"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.girdle_open.order"
+            [visible]="selectedColumnList.girdle_open.entity_value" alignment="center"></dxi-column>
+          <dxi-column caption="T EF" dataField="table_extra_facet.short_value" dataType="string" [width]="colWidth.tef"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.table_EF.order"
+            [visible]="selectedColumnList.table_EF.entity_value" alignment="center"></dxi-column>
+          <dxi-column caption="C EF" dataField="crown_extra_facet.short_value" dataType="string" [width]="colWidth.cef"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.crown_EF.order"
+            [visible]="selectedColumnList.crown_EF.entity_value" alignment="center"></dxi-column>
+          <dxi-column caption="P EF" dataField="pav_extra_facet.short_value" dataType="string" [width]="colWidth.pef"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.pav_EF.order"
+            [visible]="selectedColumnList.pav_EF.entity_value" alignment="center"></dxi-column>
+
+          <dxi-column caption="Key To Symbol" dataType="string" dataField="kts" [width]="colWidth.kts" [allowFiltering]="true"
+            [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.Key_To_Symbol.order"
+            [visible]="selectedColumnList.Key_To_Symbol.entity_value" alignment="left"></dxi-column>
+
+          <dxi-column caption="Lab Comments" dataType="string" dataField="lab_comment" [width]="colWidth.lab"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.Lab_Comments.order"
+            [visible]="selectedColumnList.Lab_Comments.entity_value" alignment="left"></dxi-column>
+
+          <dxi-column caption="Girdle %" dataType="number" dataField="girdle_percent" [width]="colWidth.girdle"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.GirdlePer.order"
+            [visible]="selectedColumnList.GirdlePer.entity_value" alignment="center">
+          </dxi-column>
+          <dxi-column caption="H&A" dataType="string" dataField="hna.long_value" [width]="colWidth.ha" [allowFiltering]="true"
+            [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.HandA.order"
+            [visible]="selectedColumnList.HandA.entity_value" alignment="center"></dxi-column>
+          <dxi-column caption="CertNo" dataType="string" dataField="certificate_no" [width]="colWidth.certNo"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.Certificate_No.order"
+            [visible]="selectedColumnList.Certificate_No.entity_value" alignment="center"></dxi-column>
+          <dxi-column caption="Rap $/ct." dataType="number" dataField="price_rap" [width]="colWidth.rap"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.Rap_Dollar_CT.order"
+            [visible]="selectedColumnList.Rap_Dollar_CT.entity_value" alignment="center">
+          </dxi-column>
+          <dxi-column caption="Eligible" dataType="string" dataField="eligibility" [width]="colWidth.eligible"
+            [allowFiltering]="true" [allowSorting]="true" [allowHeaderFiltering]="true" [visibleIndex]="selectedColumnList.Eligible.order"
+            [visible]="selectedColumnList.Eligible.entity_value" alignment="center"></dxi-column>
+
+          <div *dxTemplate="let data of 'SgsTemplate'">
+            <span>{{data.data.sgs.toString()}}</span>
+          </div>
+      </dx-data-grid>-->
+
+      <app-dayp-grid #daypGrid *ngIf="isDataFetched" [(tableData)]="daypSearchData.diamondTable" [widthInfo]="colWidth" [gridHeight]="daypHeight || 500" (stoneDetailInNewTab)="addStoneInfoTab($event)"
+                      (allRowsSelected)="selectAllStones(result, $event)" (singleRowSelected)="selectMultipleStone($event)" (twinDiamondDetailInNewTab)="addTwinStoneInfoTab($event)"
+                      (updateDDCClicked)="updateDDC($event)" [gridName]="'daypSearchGrid'" [resultObject]="daypSearchData" [selectedStoneTableIsVisible]="daypSearchData.toggleTableDisplay"
+                      (displayNotesForSingleStoneInDialog)="showAllCommentsForStone($event)" [selectedStonesArray]="daypSearchData.selectedStoneButton" (addStoneToPacket)="stoneToOperateInPacket($event)"
+                      [visiblePacketIcon]="visiblePacketIcon" [packetIconDataForGrid]="packetIconDataForGrid" [userSelectedColumns]="selectedColumnList" [currentSelectedStones]="daypSearchData.selectedStoneButton"
+                      [stonesActedOn]="stonesActedOn" (displayIconsOverlay)="stoneMediaIconPanel($event)" [tabActive]="daypSearchData.isActive"
+                     (offerPriceForStoneUpdated)="addOfferPriceForStone($event.stone, $event.price)" (offerPercentageForStoneUpdated)="addOfferPercentageForStone($event.stone, $event.price, $event.offerSign)"
+                      [offerColumnList]="offerColumnList" [colorLegendFilter]="colorLegendFilterValue" [daypStatus] = 'daypStatus' [isEditableMode] = 'false' (lastFocusedElement)="storeLastFocusedElement($event)">
+      </app-dayp-grid>
+
+
+
+      <!-- <thm-media-icon *ngIf="displayIconOverlay" [stoneObj]="iconDisplayStoneObject" (closeIconOverlay)="closeGridIconOverlay($event)"> -->
+      <!-- </thm-media-icon> -->
+      <thm-filter-popover (toggleColWidth)="toggleColWidth($event)" (toggleFilterFlag)="toggleFilterFlag($event)"
+        [filterPopOverVisible]="filterPopOverVisible" [container]="daypSearchResultContainer" [targetId]="filterId"
+        [filterOptions]="filterOptions" (toggleFilterPopOverVisible)="toggleFilterPopOverVisible($event)"></thm-filter-popover>
+    </div>
+  </div>
+
+<!-- START Menu Displayed after clicking media icon on grid -->
+<thm-media-icon *ngIf="displayIconOverlay"
+                [stoneObj]="iconDisplayStoneObject" [posX]="iconOverlayXPosition" [posY]="iconOverlayYPosition"
+                (closeIconOverlay)="closeGridIconOverlay($event)">
+</thm-media-icon>
+<!-- END Menu Displayed after clicking media icon on grid -->
+
+
+  <dx-popover target="#daypSearchResultDownload" position="bottom" [width]="141" [(visible)]="downloadPopOverVisible">
+    <div *dxTemplate="let data of 'content'">
+      <p-listbox [options]="downloadOptions" [(ngModel)]="selectedDownloadType" [style]="{'max-height':'250px'  , 'max-width':'100%'}"
+        (onChange)="downloadDaypStones(daypSearchData)">
+        <ng-template let-opt pTemplate="item">
+          <div class="ui-helper-clearfix">
+            <span style="font-size: 14px; margin: 15px 10px 0 0">{{opt.label}}</span>
+          </div>
+        </ng-template>
+      </p-listbox>
+    </div>
+  </dx-popover>
+  <thm-addnote-overlay #thmAddnoteOverlay [visibleShownoteOverlay]="commentsOverlayVisible" [stoneIdList]="daypSearchData.filteredStone"
+    [CommentListForStone]="allNotesForStone" (toggleAddNoteOverlay)="toggleAddNoteOverlay($event)"></thm-addnote-overlay>
+  <thm-multimedia-popup #themeMultimediaPopUp [displayMultimediaPopup]="toggleMultimediaPopup" [popUpMultimediaInfo]="stoneMultimediaInfo"
+    (closePopup)="toggleCloseMultimediaPopUp($event)"></thm-multimedia-popup>
+  <thm-ddc-overlay #thmDdcOverlay [visibleDdcOverlay]="ddcOverlayVisible" [stoneList]="ddcStones" [previousDdcHour]="definedDDCHour"
+    (toggleDdcOverlay)="toggleDdcOverlay($event)"></thm-ddc-overlay>
+</div>
+<ng-template #loadData>
+  <div class="ui-g-12 loading-data sms-page-container">
+    {{message|translate}}</div>
+</ng-template>
+<thm-mediaicon #thmMediaIcon></thm-mediaicon>
+

@@ -1,0 +1,254 @@
+<div dirScrollTop id="dashboardId" class="sms-page-container">
+  <div id="dashboardHeadingId" class="dashboard-heading">{{'Dashboard' | translate}}</div>
+
+  <div id="carouselId" class="ui-g carousel-container" *ngIf="lazzyCardList.length > 0 || cardList.length > 0">
+    <div id="carouselContainer" class="ui-g-12">
+
+      <div id="loadingCardContainer" class="dashboard-carousel-outer ui-g-12 ui-g-nopad" *ngIf="lazzyCardList && !cardList">
+        <owl-carousel id="loadingDashboardCardsOwl" [items]="lazzyCardList" [options]="{dots: true,responsive:{'0':{ items:1}, '600':{ items:2}, '1000':{items:4}}}"
+          #owlElement [carouselClasses]="['owl-theme', 'row']">
+          <div id="loadingCardId" class="item carousel-item" *ngFor="let cardData of lazzyCardList;let i = index">
+            <thm-card [cardData]="cardData"></thm-card>
+          </div>
+        </owl-carousel>
+      </div>
+
+      <div id="dataCardContainer" class="fade dashboard-carousel-outer ui-g-12 ui-g-nopad" *ngIf="cardList">
+        <owl-carousel id="dashboardCardsOwl" [items]="cardList" [options]="{dots: true,responsive:{'0':{ items:1}, '600':{ items:2}, '1000':{items:4}}}"
+          #owlElement [carouselClasses]="['owl-theme', 'row']">
+          <div id="cardData{{cardData.cardId}}Id" class="item carousel-item" *ngFor="let cardData of cardList;let i = index">
+            <thm-card [cardData]="cardData" (redirectLink)="navigateToPage($event)"></thm-card>
+          </div>
+        </owl-carousel>
+      </div>
+    </div>
+  </div>
+
+  <div id="secondRowContainer" class="ui-g ui-g-nopad">
+    <div id="firstColumnContainer" class="ui-g-12 ui-md-12 ui-lg-8 ui-g-nopad">
+      <div id="daypCardContainerId" class="ui-g fade dayp-event-container" *ngIf="isDaypActive">
+        <div class="ui-g-12 paddl0 paddt0" *ngIf="daypEventDetails">
+          <div id="daypCardContainer" class="ui-g-12 paddb0 day-event-card-box">
+            <div class="ui-g-12 ui-g-nopad title">
+              <h2>{{daypEventDetails.event_name}}</h2>
+              <p>{{'DO NOT MISS THE OPPORTUNITY, JUST GRAB IT'|translate}}</p>
+            </div>
+            <div class="ui-g-12 ui-g-nopad">
+              <div class="main_titile" style="width: 20%;float: left;"> &nbsp;</div>
+              <div class="main_titile" style="width: 20%;float: left;">
+                <div class="date">
+                  <h5>{{'Start Date'|translate}}</h5>
+                  <h3>{{daypEventDetails?.start_date | date:"dd"}}</h3>
+                  <h4>{{daypEventDetails?.start_date | date:"MMMM"}}</h4>
+                  <h4>{{daypTime?.start_time}} {{daypTime?.start_date.toUpperCase().indexOf('AM') > -1 ? 'AM ' : 'PM
+                    '}}</h4>
+                  <h4>IST</h4>
+                </div>
+              </div>
+              <div class="main_titile" style="width: 20%;float: left;">
+                <div class="logo">
+                  <img src="/assets/img/dayp_logo.png">
+                </div>
+              </div>
+              <div class="main_titile" style="width: 20%;float: left;">
+                <div class="date">
+                  <h5>{{'End Date'|translate}}</h5>
+                  <h3>{{daypEventDetails?.end_date | date:"dd"}}</h3>
+                  <h4>{{daypEventDetails?.end_date | date:"MMMM"}}</h4>
+                  <h4>{{daypTime?.end_time}} {{daypTime?.end_date.toUpperCase().indexOf('AM') > -1 ? 'AM ' : 'PM '}}</h4>
+                  <h4>IST</h4>
+                </div>
+              </div>
+              <div class="main_titile" style="width: 20%;float: left;"> &nbsp;</div>
+            </div>
+            <div class="ui-g-12 ui-g-nopad">
+              <div class="logo_footer f-left">
+                <img src="/assets/img/logo2.png" class="left">
+              </div>
+              <div class="footer_content f-center">
+                <p>Want to try ?</p>
+                <h1 (click)="navigateToDayp()" class="click-me">Click Here</h1>
+              </div>
+              <div class="logo_footer f-right">
+                <img src="/assets/img/logo2.png" class="right">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="ui-g event-box-dashboard" *ngIf="eventDetails.length > 0">
+        <div class="ui-g-12 paddl0 paddr0 paddt0" *ngFor="let event of eventDetails">
+          <thm-event-card [eventInfo]="event" (navigateTo)="navigateToPage($event)"></thm-event-card>
+        </div>
+      </div>
+
+      <div id="firstRowContainer" class="ui-g" [dragula]='"first-bag"' *ngIf="isWvdAllowedToDisplay">
+
+        <div id="weeklyDiscountCard" class="ui-g-12 ui-md-6 ui-lg-6 fade paddl0 paddt0">
+          <div id="cardWrapper" class="graph-box tp-wrapper">
+            <div id="flipContainer" class="tp-box">
+              <div id="cardFront" class="tp-box__side  bring-top">
+
+                <div id="frontCardFirstContainer" class="ui-g-12">
+                  <label id="frontCardHeading" class="card-front-heading">{{'Weekly Discount' | translate}}</label>
+                  <br>
+                  <label id="noWeekDate" class="week-date-label" [ngClass]="{'card-date-skeleton': !weeklyVolumeData}"></label>
+                  <label id="weekDate" class="week-date-label" *ngIf="weeklyVolumeData">{{
+                    weeklyVolumeData.week_start_date | date :'dd MMM'}} - {{ weeklyVolumeData.week_end_date | date :'dd
+                    MMM'}} </label>
+                </div>
+
+                <div id="frontCardMiddleContainer" class="ui-g-12 ui-g-nopad" align="middle">
+                  <dx-circular-gauge id="gaugeChart" [value]="weeklyVolumeDiscount">
+                    <dxo-value-indicator id="gaugeChartIndicator" type="triangleNeedle" color="#8FBC8F">
+                    </dxo-value-indicator>
+                    <dxo-geometry id="gaugeChartGeometry" [startAngle]="170" [endAngle]="10">
+                    </dxo-geometry>
+                    <dxo-scale id="gaugeChartScale" [startValue]="0" [endValue]="2" [tickInterval]="0.2">
+                      <dxo-label id="gaugeChartLabel" [customizeText]="customizeText"></dxo-label>
+                    </dxo-scale>
+                  </dx-circular-gauge>
+                </div>
+
+                <div id="frontCardLastContainer" class="ui-g-12 ui-g-nopad">
+                  <div id="savingsDataContainer" class="ui-g-12 ui-g-nopad text-center" align="middle">
+                    <label id="savingsLabel" class="savings-label">{{'Current eligible weekly volume discount is'
+                      |translate}}
+                      <br>
+                      <b>{{weeklyVolumeDiscount | number:'1.4-4'}} %</b>
+                      {{'and current savings are' |translate}}
+                      <b>{{weeklyTotalSavings | currency:'USD':true}}</b>
+                    </label>
+                  </div>
+                  <!-- <div id="flipButtonContainer" class="ui-g-12 ui-g-nopad" align="right">
+                    <a id="flipButton"  (click)="showWWDetail()" aria-hidden="true">  <span  id="iconinfo" class="weeklydisc-icon icon-info"></span></a>
+                    </div> -->
+                </div>
+
+              </div>
+
+              <div id="cardBack" class="ui-g-12 tp-box__side">
+                <div id="cardBackTableContainer" class="ui-g-12">
+                  <p-dataTable [value]="wdCalculationData" scrollable="true" scrollHeight="180px">
+                    <p-header>
+                      <div id="calculationCardHeadingId" align="left">
+                        {{'Calculation' | translate}}
+                        <img id="closeButton" src="../assets/img/delete.png" (click)="hideWWDetail()" class="close_card">
+                      </div>
+                    </p-header>
+                    <p-column field="stoneid" header="{{'Stone ID' | translate}}"></p-column>
+                    <p-column field="percentage" header="{{'Percentage' |translate}}"></p-column>
+                  </p-dataTable>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div id="advertisementContainer" class="ui-g-12 ui-md-6 ui-lg-6 paddl0 paddt0">
+          <div id='dashboardVideo' *ngIf='loadVideo'>
+            <thm-common-media [commonMediaFile]="commonMediaFile"></thm-common-media>
+          </div>
+        </div>
+
+      </div>
+      <div id="recentConfiramtionId" class="ui-g-12 ui-md-12 ui-lg-12 ui-g-nopad fade recent-confirmation-container">
+        <div id="recentConfirmationContainer" class="ui-g-12 paddl0 paddt0">
+          <div id="recentConfirmationDataId" class="ui-g-12 ui-g-nopad recent-confirmation-box">
+            <div id="confiramtionHeaderConatiner" class="ui-g-12 ui-g-nopad heading">
+              <div id="headerTextId" class="ui-g-6 card-front-heading">
+                {{'Recent Confirmations' | translate}}
+              </div>
+              <div id="headerButtonId" class="ui-g-6 " align="right" *ngIf="recentConfirmationData.length > 0">
+                <button id="confirmationsViewAllId" pbutton class="custom-btnBorder" (click)="navigateToConfirmation()">{{'View
+                  All' | translate}}</button>
+              </div>
+              <div id="menuItemId" class="ui-g-12 ui-g-nopad column-header">
+                <div id="dateHeaderID" class="ui-g-3 column-text column-first">
+                  {{'Date' |translate}}
+                </div>
+                <div id="orderHeaderId" class="ui-g-2 column-text">
+                  {{'Order ID' |translate}}
+                </div>
+                <div id="stoneHeaderId" class="ui-g-2 column-text">
+                  {{'Stone Count' | translate}}
+                </div>
+                <div id="valueHeaderId" class="ui-g-1 column-text">
+                  {{'Value' | translate}}
+                </div>
+                <div id="statusHeaderId" class="ui-g-4 column-text column-last">
+                  {{'Status' | translate}}
+                </div>
+              </div>
+              <div id="noColumnDataId" *ngIf="!loadingConfirmationData && recentConfirmationData.length === 0" class="ui-g-12 ui-g-nopad no-column-data-border">
+                <div id="noContentId" class="ui-g-12 column-data-text column-first-column">
+                  {{'No record found.' | translate}}
+                </div>
+              </div>
+              <div id="loadColumnDataId" *ngIf="loadingConfirmationData" class="ui-g-12 ui-g-nopad no-column-data-border">
+                <div id="noContentId" class="ui-g-12 column-data-text column-first-column">
+                  {{'Loading..' | translate}}
+                </div>
+              </div>
+              <div id="columnDataId" *ngFor="let columnData of recentConfirmationData | slice:0:5; let i=index" class="ui-g-12 ui-g-nopad column-data-border">
+                <div id="{{columnData.date_formate | date: 'dd MMM, yyyy'}}DateId" class="ui-g-3 column-data-text column-first-column">
+                  {{columnData.date_formate | customDate:'dateWithMonth'}} {{columnData.date_formate |
+                  customDate:'year'}}
+                </div>
+                <div id="{{columnData.order_id}}OrderId" class="ui-g-2 column-data-text">
+                  {{columnData.order_id}}
+                </div>
+                <div id="{{columnData.order_id}}CountId" class="ui-g-2 column-data-text">
+                  {{columnData.stone_count}}
+                </div>
+                <div id="{{columnData.order_id}}PriceId" class="ui-g-1 column-data-text">
+                  {{columnData.final_price | currency:'USD':true}}
+                </div>
+                <div id="{{columnData.order_id}}Container" class="ui-g-4 column-data-text column-last">
+                  <div id="{{columnData.order_id}}OrderStatusId" class="ui-g-7 ui-g-nopad">{{columnData.order_status |
+                    translate}}</div>
+                  <div id="{{columnData.order_id}}HoverButtonsID" class="ui-g-5 icons-pack">
+                    <div id="{{columnData.order_id}}PrinterId" class="ui-g-6 ui-g-nopad">
+                      <a [dirStoreAudit]="'PRINT'" id="{{columnData.order_id}}EnevelopeIconId" class="envelope-icon">
+                        <span id="{{columnData.order_id}}IconHoverPrinter" class="icon-hover confirmations-icon icon-printer"
+                          pTooltip="Coming soon" tooltipPosition="bottom" tooltipEvent="hover"></span>
+                      </a>
+                    </div>
+                    <div id="{{columnData.order_id}}EnvelopeId" class="ui-g-6 ui-g-nopad">
+                      <a [dirStoreAudit]="'EMAIL LIST'" id="{{columnData.order_id}}PrinterIconId" class="printer-icon">
+                        <span id="{{columnData.order_id}}IconHoverEnvelope" class="icon-hover confirmations-icon icon-email"
+                          pTooltip="Coming soon" tooltipPosition="bottom" tooltipEvent="hover"></span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="secondContainer" class="ui-g-12 ui-md-12 ui-lg-4 ui-g-nopad" [dragula]='"third-bag"' [dragulaModel]='secondColumnList'>
+      <div id="secondColumnCotainer" class="paddt0 paddl0 paddr0 ui-g-12 ui-md-12 ui-lg-12" [ngClass]="{'paddb0': list.name === 'movie-box' && isExclusiveStoneMovieActive === false}"
+        *ngFor="let list of secondColumnList">
+        <div id="movieContainer" class="ui-g-12 movie-card-box custom-movie" *ngIf="list.name=='movie-box' && isExclusiveStoneMovieActive">
+          <app-exclusive-stone-movie-card (navigateSearch)="navigateSearchResult($event)" [fetchStoneDetails]="fetchStoneDetails"
+            [stoneID]="stoneID"></app-exclusive-stone-movie-card>
+        </div>
+        <div id='dashboardVideo' *ngIf="loadVideo && list.name=='adv-box'">
+          <thm-common-media [commonMediaFile]="commonMediaFile"></thm-common-media>
+        </div>
+        <div id="searchContainer" class="fade ui-g-12 search-box fade" *ngIf="list.name=='search-box'">
+          <app-saved-searches-table (navigateSearch)="navigateSearchResult($event)" (navigateToResult)="navigateToPage($event)"
+            [isDaypActive]="isDaypActive"></app-saved-searches-table>
+        </div>
+        <div id="contactContainer" class="ui-g ui-g-nopad contact-container fade" *ngIf="isKamDetailsAvailable && list.name=='contact-box'">
+          <thm-kam-card [kamDetailsInfo]="kamDetails"></thm-kam-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

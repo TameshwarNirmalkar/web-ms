@@ -1,0 +1,15 @@
+<div id="DATE_ID" class="ui-grid ui-grid-responsive ui-grid-pad component-cards">
+  <div id="dateHeaderBox" class="ui-g-1 custom-padding">
+    <label id="dateLabel" class="component-cards-heading">{{'Date'|translate}}</label>
+  </div>
+  <div id="stoneFromDateId" class='ui-g-2 custom-padding'>
+    <thm-date-picker [placeholder]="'From'" [isInline]="false" [hideTimePicker]="true" [maxDate]="todayDate" [disableWeekDays]="false" [disableDates]="false"
+      [showHighlightedDates]="false" [(ngModel)]="fromDate" (dateChange)="submitDate()" [showCancelButton]=true [page]="'Search'"></thm-date-picker>
+  </div>
+
+  <div id="stoneToDateId" class='ui-g-2 ui-g-nopad'>
+    <thm-date-picker  [placeholder]="'To'" [isInline]="false" [hideTimePicker]="true" [maxDate]="todayDate" [disableWeekDays]="false" [disableDates]="false"
+      [showHighlightedDates]="false" [(ngModel)]="toDate" (dateChange)="submitDate()" [showCancelButton]=true [page]="'Search'"></thm-date-picker>
+  </div>
+  <div class="clearfix"></div>
+</div>

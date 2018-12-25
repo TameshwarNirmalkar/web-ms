@@ -1,0 +1,26 @@
+app-search-comments .comments-heading{
+  font-size: 12px;
+  font-weight: bold;
+  color: #262a42;
+}
+app-search-comments .like-icon {
+  height: 20px;
+  width: 20px;
+  padding-bottom: 9px ;
+}
+
+app-search-comments .ui-multiselect.ui-widget.ui-state-default.ui-corner-all{
+  width: 60% ;
+  height: auto;
+  }
+app-search-comments .ui-multiselect .ui-multiselect-trigger .fa{
+  margin-top: 0.8em;
+}
+
+@media (max-width:1024px) {
+  .comments-component-container {
+    width: 50% ;
+}
+}
+.like-icon{font-size: 20px;cursor: pointer;}
+.dropdown-center{padding: 2px 0px}

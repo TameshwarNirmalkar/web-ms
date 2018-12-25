@@ -1,0 +1,41 @@
+.status-box {  display: inline-block;  margin-right: 5px;  border-radius: 2px;  font-size: 12px;  line-height: 1;  text-align: center; }
+.notAvailable-status-box {  width: 65px;  padding: 5px; }
+.past-request-container{max-height: 300px; width:100%; overflow: auto;}
+#viewCommentsBox{max-height: 350px; overflow: auto;}
+.colorLagend_BTOB{ margin-top: 0px;}
+.past_reqhead {
+    display: block;
+    padding: 5px 10px;
+    background-color: #e2e2e2;
+    border-left: 5px solid #000000;
+    position: absolute;
+    width: 100%;
+    z-index: 9;
+    cursor: pointer;
+}
+.prtwo{
+    top: 0px;
+}
+.prthree{
+    top: 0px;
+}
+.martop0{
+    margin-top: 0px;
+}
+.hide
+{
+    display: none;
+}
+.hidden
+{
+    visibility: hidden;
+}
+.loader{
+    margin-top: 10%;
+}
+.margin-top-none {
+    margin-top: 0;
+}
+.active-toggle {
+    font-weight: bold;
+}

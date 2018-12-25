@@ -1,0 +1,21 @@
+form {  width: 100%;}
+.otpField {text-align: left;}
+.otpForm-content {margin:auto; float: none}
+.otp-title {font-size: 40px;  font-weight: normal;  line-height: normal;  text-align: left;}
+.otp-text {  text-align: left;}
+.group {margin-bottom: 20px;  margin-top: 30px;}
+input { font-size: 14px;line-height:16px; padding: 10px 10px 10px 5px; -webkit-appearance: none; margin-left: 0px; border: none; border-radius: 0;width: 90%;}
+.icon-label {  color: #4a89dc;  margin-right: 10px;}
+.custom-btnPrimary {  width: 90%; margin-left:0px }
+.form-group > div {  margin-top: 20px;}
+.resend {  font-size: 14px;  font-weight: normal;  font-style: normal;  font-stretch: normal;  line-height: normal;  letter-spacing: normal;  text-align: left;   line-height: 24px;}
+
+
+@media(max-width: 768px) {
+  .otp-title {
+    font-size: 30px;
+  }
+  .resend {
+    font-size: 12px;
+  }
+}

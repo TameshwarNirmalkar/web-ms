@@ -1,0 +1,38 @@
+<div class="" *ngIf="packetCreated">
+  <div id="packetRectangle_{{packetCreated.packet_id}}" class="ui-g-12 ui-g-nopad packet-box" [class.packet-box-selected]="togglePanel && packetCreated.data.stone_details.length>0">
+    <div id="packetLeftContainer" class="ui-g-10 ui-g-nopad border-right">
+      <div id="packetNameContainer" class="ui-g-6 ui-g-nopad">
+        <div id="packetname" class="ui-g-7 ui-g-nopad">
+          <label *ngIf="!isEditable" id="packetHeadingLabel" class="packet-heading-label" title="{{packetCreated.packet_name}}">{{packetCreated.packet_name}}</label>
+          <input *ngIf="isEditable" type="text" class="input-packet" placeholder="Enter name" [(ngModel)]="editedPacketName" autofocus="isEditable">
+        </div>
+        <div id="packetediticon" class="ui-g-5 ui-g-nopad packet-icon-box">
+          <i [class.packet-box-selected]="togglePanel && packetCreated.data.stone_details.length>0" *ngIf="!isEditable && !isRequested" class="fa fa-pencil packet-link" aria-hidden="true" (click)="updatePacketName(packetCreated.packet_name)"></i>
+          <i [class.packet-box-selected]="togglePanel && packetCreated.data.stone_details.length>0" *ngIf="isEditable && !isRequested" class="fa fa-check packet-link" aria-hidden="true" (click)="renamePacketName(editedPacketName,packetCreated)"></i>
+          <i [class.packet-box-selected]="togglePanel && packetCreated.data.stone_details.length>0" *ngIf="isEditable && !isRequested" class="fa fa-close packet-link" aria-hidden="true" (click)="cancelRename(packetCreated)"></i>
+
+          <i *ngIf="isRequested" class="fa fa-spinner fa-pulse load-icon" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div id="packetStoneContainer" class="ui-g-2" align="middle" (click)="selectPacket(packetCreated.packet_id,toggle)">
+        <a id="packetStoneLink" class="packet-link bold" *ngIf="packetCreated.data.stone_details">
+          <label id="packetStoneCountLabel">({{packetCreated.data.stone_details.length}})</label>
+        </a>
+      </div>
+      <div id="packetAmountContainer" class="ui-g-4" align="middle" *ngIf="packetCreated.data.display_data">
+        <label id="packetAmountLabel" class="packet-link" *ngIf="packetCreated.data.display_data.avg_rate">
+          {{packetCreated.data.display_data.final_payable | currency:'USD':true}}</label>
+      </div>
+    </div>
+    <div id="packetRightContainer" class="ui-g-2 ui-g-nopad  text-right" align="middle">
+      <div id="packetRemoveIcon" class="packet-link close-icon">
+        <span [class.packet-box-selected]="togglePanel && packetCreated.data.stone_details.length>0" class="icon-close" (click)="deletePacket(packetCreated)"></span>
+      </div>
+      <div id="packetMini" class="  packet-link close-icon">
+        <i [class.packet-box-selected]="togglePanel && packetCreated.data.stone_details.length>0"
+            pTooltip="{{'HIDE_TEXT'|translate}}" tooltipPosition="bottom" tooltipEvent="hover"
+          class="fa fa-minus" aria-hidden="true" (click)="closePacket(packetCreated)"></i>
+      </div>
+    </div>
+  </div>
+</div>

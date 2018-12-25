@@ -1,0 +1,177 @@
+<form novalidate [formGroup]="registerForm" (ngSubmit)="submitRegisterForm(registerForm)" *ngIf="!isRegistered; else registeredSuccessfully">
+  <h2 id="registrationHeadingId" class="registration-heading">{{'Registration'|translate}}</h2>
+  <div id="registrationContainer" class="main-container">
+    <div id="businessReviewId" class="group">
+      <span class="error">*</span>
+      <label id="reviewHeadingLabel" class="registration-subheading">{{'Business Review' |translate}}</label>
+    </div>
+    <div id="companyNameBox" class="group">
+      <input autocomplete="off" id="companyNameId" placeholder="{{'Company'|translate}} {{'Name'|translate}}" pInputText type="text" formControlName="company_name" (blur)="validateCompanyName(regCompanyName)" [(ngModel)]="regCompanyName" class="input-border">
+      <span class="highlight"></span>
+      <div id="companyNameError" class="error" *ngIf="(registerForm.get('company_name').hasError('required') || registerForm.get('company_name').hasError('whitespace')) && registerForm.get('company_name').touched">
+        {{'Company' |translate}} {{'Name' |translate}} {{'is required' |translate}}
+      </div>
+      <div id="companyNameUniqueError" class="error" *ngIf="notUniqueCompanyName && registerForm.get('company_name').touched && registerForm.get('company_name').valid">
+        {{'COMPANY_ALREADY_EXISTS' |translate}}
+      </div>
+    </div>
+    <div id="companyPersonBox" class="group">
+      <input autocomplete="off" id="contactPersonId" placeholder="{{'Contact Person'|translate}}" pInputText type="text" formControlName="contact_person" class="input-border"><span class="highlight"></span>
+      <div id="companyPersonError" class="error" *ngIf="(registerForm.get('contact_person').hasError('required') || registerForm.get('contact_person').hasError('whitespace')) && registerForm.get('contact_person').touched">
+        {{'Contact Person' |translate}} {{'name' |translate}} {{'is required' |translate}}
+      </div>
+    </div>
+    <div id="companyEmailBox" class="group">
+      <input autocomplete="off" id="emailId" placeholder="{{'Email ID'|translate}}" type="email" formControlName="email_id" (blur)="validateEmail(regCompanyEmail)" [(ngModel)]="regCompanyEmail" class="input-border"><span class="highlight"></span>
+      <div id="companyEmailError" class="error" *ngIf="registerForm.get('email_id').hasError('required') && registerForm.get('email_id').touched">
+        {{'Email is required' |translate}}
+      </div>
+      <div id="companyEmailExistError" class="error" *ngIf="emailExist && registerForm.get('email_id').touched && registerForm.get('email_id').valid">
+        {{'EmailExist' |translate}}
+      </div>
+      <div id="invalidCompanyEmailError" class="error" *ngIf="isInvalidEmail(regCompanyEmail) && registerForm.get('email_id').touched && registerForm.get('email_id').valid">
+        {{'Invalid Email' |translate}}
+      </div>
+    </div>
+    <div id="loginNameBox" class="group">
+      <input autocomplete="off" id="loginNameID" placeholder="{{'Login Name'|translate}}" type="text" formControlName="login_name" (blur)="validateLoginName(regLoginName)" [(ngModel)]="regLoginName" class="input-border"><span class="highlight"></span>
+      <div id="LoginNameError" class="error" *ngIf="registerForm.get('login_name').hasError('required') && registerForm.get('login_name').touched">
+        {{'Login Name is required' |translate}}
+      </div>
+      <div id="LoginNameExistError" class="error" *ngIf="loginNameExist && registerForm.get('login_name').touched && registerForm.get('login_name').valid">
+        {{'UserNameExist' |translate}}
+      </div>
+    </div>
+    <div id="companyNumberBox" class="group">
+      <input autocomplete="off" id="numberId" placeholder="{{'Mobile Number'|translate}}" maxlength="16" type="text" formControlName="contact_number" (keypress)="isNumber($event)" class="input-border"><span class="highlight"></span>
+      <div id="companyNumberLengthError" class="error" *ngIf="registerForm.get('contact_number').hasError('minlength') && registerForm.get('contact_number').touched">
+        {{'CONTACT_NO_LENGTH_ERROR' |translate}}
+      </div>
+      <div id="companyNumberErro" class="error" *ngIf="registerForm.get('contact_number').hasError('required') && registerForm.get('contact_number').touched">
+        {{'Please input phone number' |translate}}
+      </div>
+    </div>
+    <br>
+    <div id="companyAddressBox" class="group">
+      <label id="companyAddressHeadingBox" class="registration-subheading"><span class="error">* </span> {{'Company' |translate}} {{'Address' |translate}}</label>
+    </div>
+    <div id="companyAddressId" class="ui-g">
+      <div id="companyContryBox" class="ui-g-6">
+        <p-dropdown [options]="country" [style]="{'width':'91%'}" formControlName="country" placeholder="{{'Country'|translate}}" class="drop-border" (onChange)="onCountryChange()" [(ngModel)]="selectedCountryCode" filter="filter" [disabled]="country.length < 1"></p-dropdown>
+        <div id="companyAddressError" class="error" *ngIf="registerForm.get('country').hasError('required') && registerForm.get('country').dirty">
+          {{'Please select' |translate}} {{'Company'| translate}} {{ 'Country' |translate}}
+        </div>
+      </div>
+      <div id="companyStateBox" class="ui-g-6">
+        <p-dropdown [options]="state" [style]="{'width':'91%'}" formControlName="state" placeholder="{{'State'|translate}}" class="drop-border" (onChange)="onStateChange()" [(ngModel)]="selectedStateCode" filter="filter" [disabled]="state.length < 1"></p-dropdown>
+        <div id="companyStateErrorBox" class="error" *ngIf="registerForm.get('state').hasError('required') && registerForm.get('state').dirty">
+          {{'Please select' |translate}} {{'Company'| translate}} {{ 'State' |translate}}
+        </div>
+      </div>
+      <div id="companyCityBox" class="ui-g-6">
+        <p-dropdown [options]="city" [style]="{'width':'91%'}" formControlName="city" placeholder="{{'City'|translate}}" class="drop-border" (onChange)="onCityChange()" [(ngModel)]="selectedCityCode" filter="filter" [disabled]="city.length < 1"></p-dropdown>
+        <div id="companyZipErrorBox" class="error" *ngIf="registerForm.get('city').hasError('required') && registerForm.get('city').dirty">
+          {{'Please select' |translate}} {{'Company'| translate}} {{ 'City' |translate}}
+        </div>
+      </div>
+      <div id="companyZipBox" class="ui-g-6">
+        <p-dropdown [options]="zip" [style]="{'width':'91%'}" formControlName="zip_code" placeholder="{{'Zip'|translate}}" class="drop-border" [(ngModel)]="selectedZipcode" filter="filter" [disabled]="zip.length < 1" *ngIf="isZipCodeAvailable; else showZipCodeTextBox"></p-dropdown>
+        <ng-template #showZipCodeTextBox>
+          <div class="ui-g-10 ui-g-nopad zip-input">
+            <input autocomplete="off" id="zipId" placeholder="{{'Zip'|translate}}" pInputText type="text" formControlName="zip_code" class="input-border">
+          </div><br><br>
+          <div id="companyZipError" class="error" *ngIf="registerForm.get('zip_code').hasError('required') && registerForm.get('zip_code').touched">
+            {{ 'Zip' |translate}} {{'is required' |translate}}
+          </div>
+        </ng-template>
+      </div>
+      <div id="companyStreetBox" class="ui-g-12">
+        <input autocomplete="off" id="streetNameId" placeholder="{{'Street'|translate}}" pInputText type="text" formControlName="street" class="input-border"><span class="highlight"></span>
+        <div id="companySteetBoxError" class="error" *ngIf="registerForm.get('street').hasError('required') && registerForm.get('street').touched">
+          {{'Street' |translate}} {{'Name'| translate}} {{ 'is required' |translate}}
+        </div>
+      </div>
+    </div>
+    <br>
+    <div id="thirdPartyBox" class="group">
+      <label id="thirdPartyBoxHeading" class="registration-subheading">{{'Third Party Reference' |translate}}</label>
+    </div>
+    <div id="thirdPartyNameBox" class="group">
+      <input autocomplete="off" id="thirdPartyNameId" placeholder="{{'Name'|translate}}" pInputText type="text" formControlName="third_party_name" class="input-border"><span class="highlight"></span>
+    </div>
+    <div id="thirdPartyEmail" class="group">
+      <input autocomplete="off" id="thirdPartyEmailId" placeholder="{{'Email ID'|translate}}" type="email" [(ngModel)]="thirdPartyEmail" formControlName="third_party_email_id" class="input-border"><span class="highlight"></span>
+      <div id="invalidCompanyEmailError" class="error" *ngIf="isInvalidEmail(thirdPartyEmail) && registerForm.get('third_party_email_id').touched && registerForm.get('third_party_email_id').valid">
+        {{'Invalid Email' |translate}}
+      </div>
+    </div>
+    <div id="thirdPartyCountryBox" class="ui-g">
+      <div id="thirdPartyCountry" class="ui-g-6">
+        <p-dropdown [options]="country" [style]="{'width':'91%'}" placeholder="{{'Country'|translate}}" class="drop-border" formControlName="third_party_country" (onChange)="onReferenceCountryChanged()" filter="filter" [(ngModel)]="referenceCountryCode" [disabled]="country.length < 1"></p-dropdown>
+      </div>
+      <div id="thirdPartyState" class="ui-g-6">
+        <p-dropdown [options]="referenceState" [style]="{'width':'91%'}" placeholder="{{'State' |translate}}" class="drop-border" formControlName="third_party_state" (onChange)="onReferenceStateChange()" filter="filter" [(ngModel)]="referenceStateCode" [disabled]="referenceState.length < 1"></p-dropdown>
+      </div>
+      <div id="thirdPartyCity" class="ui-g-6">
+        <p-dropdown [options]="referenceCity" [style]="{'width':'91%'}" placeholder="{{'City'|translate}}" class="drop-border" formControlName="third_party_city" (onChange)="onReferenceCityChange()" filter="filter" [(ngModel)]="referenceCityCode" [disabled]="referenceCity.length < 1"></p-dropdown>
+      </div>
+      <div id="thirdPartyZip" class="ui-g-6">
+        <p-dropdown [options]="referenceZip" [style]="{'width':'91%'}" placeholder="{{'Zip'|translate}}" class="drop-border" formControlName="third_party_zip_code" [(ngModel)]="referenceZipcode" filter="filter" [disabled]="referenceZip.length < 1" *ngIf="isReferenceZipCodeAvailable; else showReferenceZipCodeTextBox"></p-dropdown>
+        <ng-template #showReferenceZipCodeTextBox>
+          <div class="ui-g-10 ui-g-nopad zip-input">
+            <input autocomplete="off" id="zipId" placeholder="{{'Zip'|translate}}" pInputText type="text" formControlName="third_party_zip_code" class="input-border">
+          </div>
+        </ng-template>
+      </div>
+      <div id="thirdPartyStreet" class="ui-g-12">
+        <input autocomplete="off" id="thirdPartyStreetName" placeholder="{{'Street'|translate}}" pInputText type="text" formControlName="third_party_street" class="input-border"><span class="highlight"></span>
+      </div>
+    </div>
+    <div id="photoIdentityProofBox" class="ui-g group">
+      <div id="proofId" class="ui-g-8 proof-text"><span class="error">* </span><span class="bold">{{'Photo Identity Proof' |translate}}</span><br><span> (Driving Licence, Passport, etc.)</span></div>
+      <div id="proofUploadId" class="ui-g-4 proof-upload">
+        <input autocomplete="off" type="file" name="file-2[]" id="file-2" class="inputfile inputfile-2 input-border" data-multiple-caption="{count} files selected" (change)="onFileChange($event)" accept=".pdf,.jpeg,.png,.jpg" />
+        <label for="file-2" class="uploadright"><span>{{'Upload' |translate}}</span></label>
+      </div>
+      <div class="fileLength" *ngIf="fileLength > 0 && !fileSizeError">{{"You have selected : "+selectedFileName}}</div>
+      <div id="fileExtentionError" class="error" *ngIf="fileExtError">
+        {{'Invalid file extention. only [jpg, pdf, png] allowed' |translate}}
+      </div>
+      <div id="fileSizeError" class="error" *ngIf="fileSizeError">
+        {{'File size should not be larger than 2 MB' |translate}}
+      </div>
+    </div>
+
+    <div id="agreeBox" class="ui-g group">
+      <div id="agreeTextId" class="ui-g-3 agree-text">{{'Do You Agree' |translate}}?</div>
+      <div id="proofUploadId" class="ui-g-9 ui-g-nopad proof-upload">
+        <div class="ui-g-12">
+          <p-checkbox name="agreeList" value="1" label="{{'I have Read & Agree to the SRK Terms and Conditions' |translate}}" formControlName="agree" binary="true"></p-checkbox>
+        </div>
+        <div class="ui-g-12">
+          <p-checkbox name="newsLetter" value="1" label="{{'Require News Letters / Promotional Letters / Stock Update' |translate}}" formControlName="recieve_notification" binary="true"></p-checkbox>
+        </div>
+      </div>
+    </div>
+    <div id="errorMessageRegistrationId" class="ui-g-12 error" *ngIf="errorMessage">
+      {{errorMessage | translate}}
+    </div>
+    <button [dirStoreAudit]="'REGISTER'" class="custom-btnPrimary" [icon]="registerBtnIcon" id="registerId" type="submit" pButton
+    [disabled]="!registerForm.valid || !fileLength || notUniqueCompanyName || emailExist || loginNameExist || fileExtError || registerBtnIcon != 'none'"
+    label="{{'Submit'|translate}}">
+  </button>
+  </div>
+</form>
+<ng-template #registeredSuccessfully class="container-height100">
+<div class="center-align">
+<div class="ui-g-12">
+    <h2 id="registerMessageHead" class="login-title">{{'REGISTRATION_SUCCESS' | translate}}</h2>
+  </div>
+  <div class="ui-g-12">
+        <label class="mesagetext">{{successRegisterMessage | translate}}</label>
+</div>
+    <div class="ui-g-12 loginfooter">
+    Click <a (click)="redirectTologin()" class="link"> here </a> to continue.
+  </div>
+</div>
+</ng-template>

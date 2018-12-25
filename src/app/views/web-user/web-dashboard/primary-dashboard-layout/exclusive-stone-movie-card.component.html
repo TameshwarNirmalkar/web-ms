@@ -1,0 +1,34 @@
+<div id="cardFront" class="bring-top">
+    <div class="video-loading-overlay">
+        <div class="stone-no">
+            <div class="w3-content w3-display-container" *ngIf="fetchStoneDetails.length > 0">
+                <div [dirStoreAudit]="'DASHBOARD EXCLUSIVE STONE'">
+                    <iframe autoplay="" class="stone-video" [src]="fetchStoneDetails[slideIndex-1].movie_url + '&h=400&btn=0' | safeUrl"
+                        scrolling="no" frameborder="0" valign="top">
+                    </iframe>
+                </div>
+                <!-- <div class="stone-movie" (click)="showExclusiveStoneDetail()">
+                </div> -->
+                <div class="stone-information stone-detail">
+                    <span class="details">Stone id:<span class="bold"> {{fetchStoneDetails[slideIndex-1].stone_id}}</span></span>
+                    <span class="details"> Shape:<span class="bold"> {{fetchStoneDetails[slideIndex-1].shape}} </span></span>
+                    <span class="details"> Carat:<span class="bold"> {{fetchStoneDetails[slideIndex-1].carat}} </span></span>
+                    <span class="details"> Color:<span class="bold"  *ngIf="fetchStoneDetails[slideIndex-1]?.fullname"
+                            pTooltip="{{fetchStoneDetails[slideIndex-1]?.fullname}}" tooltipPosition="bottom"
+                            tooltipEvent="hover"> {{fetchStoneDetails[slideIndex-1].color}} </span></span>
+                    <span class="details"> Clarity:<span class="bold"> {{fetchStoneDetails[slideIndex-1].clarity}}</span></span>
+                </div>
+                <div *ngIf="fetchStoneDetails.length > 1">
+                    <button class="w3-button w3-black w3-display-left" (click)="videoReverseNavigation(slideIndex)">&#10094;</button>
+                    <button class="w3-button w3-black w3-display-right" (click)="videoForwardNavigation(slideIndex)">&#10095;</button>
+                </div>
+                <div class="vid-tit">
+                    <button id="searchViewAllId" pbutton class="custom-btnBorder view-button fr" (click)="showExclusiveStoneDetail()">
+                        {{'View All' | translate}}
+                    </button>
+                    <span class="card-front-heading block">{{'EXCLUSIVE_STONE' | translate}} <span *ngIf="fetchStoneDetails.length > 1">[{{slideIndex}}/{{fetchStoneDetails.length}}]</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

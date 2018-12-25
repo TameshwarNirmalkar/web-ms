@@ -1,0 +1,112 @@
+<p-confirmDialog acceptLabel={{acceptLabel}} rejectLabel={{rejectLabel}} acceptIcon='' rejectIcon='' width="425"></p-confirmDialog>
+<div dirScrollTop>
+  <div class="ui-g ui-g-12 sms-page-container sms-page-container-new">
+    <div class="ui-g-4 title-name ui-g-nopad-font btb-page-title">
+      <span>{{'Bid To Buy' | translate}}</span>
+      <span class="timer-value text-bold text-green" *ngIf="isBtbAvailable === 1">({{'ACTIVE' | translate}})</span>
+      <span class="timer-value text-bold text-red" *ngIf="isBtbAvailable === 2">({{'CLOSED' | translate}})</span>
+    </div>
+    <div class="ui-g-4" id="pageInSearchBoxID" *ngIf="!isBtbTable && showPageSearch; else showOtherTemp">
+      <ng-template [dirCheckPermission]="'page_search_btn'">
+        <thm-page-search [searchType]="'B2B_SEARCH'" [clearGolableSearch]="isClearStoneID" [eventCode]="eventCode" (pageSearchResult)="getPageSearchResult($event)"></thm-page-search>
+      </ng-template>
+    </div>
+    <ng-template #showOtherTemp>
+      <div class="ui-g-4 page-search-temp-b2b" id="pageInSearchBoxID" style="height:46px">
+      </div>
+    </ng-template>
+    <!-- <div class="ui-g-4 time text-right ui-g-nopad" *ngIf="isBTBActive && btbTimeRemained; else btbClosed">
+      <span class="timer-value">{{btbTimeRemained.start_date}} (
+        <span class="b2b-main-time">{{btbTimeRemained.start_time}}</span>) - </span>
+      <span class="timer-value">{{btbTimeRemained.end_date}} (
+        <span class="b2b-main-time">{{btbTimeRemained.end_time}}</span>)
+      </span>
+    </div>
+    <ng-template #btbClosed>
+      <div class="ui-g-12 time text-right ui-g-nopad text-red text-bold"  *ngIf="btbMessage">({{btbMessage | translate}})</div>
+    </ng-template> -->
+
+  </div>
+  <!-- Packets -->
+  <div class="ui-g-12 ui-g-nopad" id="packetBox">
+    <app-create-packet [visiblePacketOverlay]="visiblePacketPopup" [stone]="stoneForPacket" [showSelectedPacket]="showSelectedPacket"
+      (togglePacketIcon)="togglePacketIcon($event)" (togglePacketOverlay)="togglePacketOverlay($event)" (updatePacketIcon)="updatePacketIcon($event)"></app-create-packet>
+  </div>
+  <div class="packet-btn-box" id="packetTabResultId">
+    <button [dirStoreAudit]="'SHOW PACKET'" id="vrShowPacketBtnID" *ngIf="showPacktBtn && !nonEditable" class="custom-btnPrimary show-button"
+      type="button" (click)="showPacket()">{{'Show Packet' |translate}}</button>
+    <ng-template [dirCheckPermission]="'create_packet_btn'">
+      <button [dirStoreAudit]="'CREATE PACKET'" id="vrCreatePacketBtnID" *ngIf="!nonEditable" class="custom-btnPrimary creat-button"
+        type="button" (click)="createPacket()">{{'Create Packet' |translate}}</button>
+    </ng-template>
+  </div>
+  <!-- Packets -->
+</div>
+<div id="fixedPanel" class="fixed-panel-class"></div>
+<div class="ui-g-12 ui-g-nopad" id="fixedBtbPanel">
+  <div #btbPanel class="container">
+    <div class="scroller scroller-left" (click)="scrollTabPanelLeft()">
+      <i class="fa fa-chevron-left" aria-hidden="true"></i>
+    </div>
+    <div class="scroller scroller-right" (click)="scrollTabPanelRight()">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+    </div>
+    <div class="wrapper-search-tab">
+      <ul class="nav nav-tabs list" id="myTab">
+        <li id="btbMenubar" *ngFor="let item of btbTabs" (click)="getSelectedTabName(item)" [ngClass]="{'active-filter-menu': (item.name === currentTabSelected || item.stoneName === currentTabSelected || item.pairId === currentTabSelected),
+            'blink_me':lastCreatedTab && (item.stoneName || item.pairId) &&(item.stoneName === lastCreatedTab || item.pairId === lastCreatedTab)}">
+          <span id="{{item.name}}Heading" class="search-font-box">{{item.name | translate}}
+            <label *ngIf="item.name ==='BTB_DIAMOND_LIST' && !isBtbTable; else showCount"></label>
+            <ng-template #showCount>
+              <label *ngIf="item.count >= 0">({{item.count}})</label>
+            </ng-template>
+          </span>
+          <div class="detail-tab-size" *ngIf="item.stoneName">
+            <span id="{{item.stoneName}}Id" class="search-font-box">{{item.stoneName}}
+              <span class="icon-close circle-close-icon" (click)="removeDetailedPacketTab(item.stoneName)"></span>
+            </span>
+          </div>
+          <div *ngIf="item.pairId" class="detail-tab-size">
+            <span id="{{item.pairId}}pairId" class="search-font-box">{{item.pairId}}
+              <span class="icon-close circle-close-icon" (click)="removeDetailedPacketTab(item.pairId)"></span>
+            </span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="tab-content">
+    <div id="tabRowId" class="tabpanel-item">
+      <div *ngFor="let data of btbTabs">
+        <div id="{{data.name}}Container" class="tabpanel-item">
+          <div id="{{data.name}}{{data.id}}Container" class="ui-g-12 ui-g-nopad" *ngIf="data.id === 0 && currentTabSelected === data.name">
+            <div *ngIf="!isBtbTable; else showBTBTable" class="ui-g-12 ui-g-nopad" [ngClass]="{'disable-cursor-event':isBtbAvailable === 2}">
+              <app-specific-search [searchBtnLabel]="'B2B Search'" [searchType]="'B2B_SEARCH'" [modifiySearchData]="searchFilterConfig"
+                [searchFiltersValue]="searchFiltersValue" (returnSearchConfig)="getBtbSearchResult($event)" [showCancelBtn]="isResultModified"
+                (cancelSearch)="cancelModifySearch($event,daypSearchStones)" (resetSearchEvent)="resetSearchConfig($event)"></app-specific-search>
+            </div>
+            <ng-template #showBTBTable>
+              <app-btb-all-stones #btbAllStonesComponent [isPageSearch]="isPageSearch" [visiblePacketIcon]="visiblePacketIcon" (btbPacket)="stoneFromSelectedStone($event)"
+                (modifyResult)="modifySearch($event)" [packetStoneArray]="packetStoneArray" [btbAllStones]="btbSearchStones"></app-btb-all-stones>
+            </ng-template>
+          </div>
+          <div id="{{data.name}}{{data.id}}Container" class="ui-g-12 ui-g-nopad" *ngIf="data.id === 1 && currentTabSelected === data.name">
+            <app-btb-basket [packetStoneArray]="packetStoneArray" [visiblePacketIcon]="visiblePacketIcon" (btbPacket)="stoneFromSelectedStone($event)"></app-btb-basket>
+          </div>
+          <div id="{{data.name}}{{data.id}}Container" class="ui-g-12 ui-g-nopad" *ngIf="data.id === 2 && currentTabSelected === data.name">
+            <app-btb-submission [packetStoneArray]="packetStoneArray" [visiblePacketIcon]="visiblePacketIcon" (btbPacket)="stoneFromSelectedStone($event)"></app-btb-submission>
+          </div>
+          <div id="{{data.name}}{{data.id}}Container" class="ui-g-12 ui-g-nopad" *ngIf="data.id === 3 && currentTabSelected === data.name">
+            <app-btb-result [packetStoneArray]="packetStoneArray" [visiblePacketIcon]="visiblePacketIcon" (btbPacket)="stoneFromSelectedStone($event)"></app-btb-result>
+          </div>
+          <div id="stonedetailssearch" class="tabpanel-item struck-details-page sms-page-container" *ngIf="data.stoneName && currentTabSelected === data.stoneName">
+            <thm-stone-details [stoneDetails]="data.stoneInfo"></thm-stone-details>
+          </div>
+          <div id="{{data.pairId}}Id" class="tabpanel-item sms-page-container struck-details-page" *ngIf="data.pairId && currentTabSelected === data.pairId">
+            <thm-twin-stone-detail [twinStones]="data.twinStones"></thm-twin-stone-detail>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

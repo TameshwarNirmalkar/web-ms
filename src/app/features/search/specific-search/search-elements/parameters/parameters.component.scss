@@ -1,0 +1,30 @@
+app-search-parameters .ui-inputtext
+{
+width: 80px;
+padding: 5px;
+}
+.parameter-heading{
+  font-size: 12px;
+  font-weight: bold;
+  color: #262a42;
+}
+app-search-parameters .search-column-multiselect > .ui-multiselect-label-container{
+  width: 300px;
+}
+app-search-parameters .ui-multiselect.ui-widget.ui-state-default.ui-corner-all{
+  width: 135px;
+  height: auto;
+}
+
+app-search-parameters .ui-multiselect .ui-multiselect-label{ padding: 7px;}
+@media (max-width:1024px) {
+.parameters-components-element {
+    width: 50% ;
+}
+app-search-parameters .ui-multiselect.ui-widget.ui-state-default.ui-corner-all{
+  width: 100px;
+}
+
+}
+.param-padding{padding-top: 8px;}
+.param-value-padding{padding: 3px;}

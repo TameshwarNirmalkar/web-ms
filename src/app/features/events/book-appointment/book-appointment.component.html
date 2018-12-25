@@ -1,0 +1,77 @@
+<div id="bookAppointmentContainer" class="book-appointment-contianer">
+  <div class="ui-g-12" *ngIf="isSlotsFetched; else showErrorMessage">
+    <div id="dayBoxId" class="ui-g-12 ui-g-nopad" *ngIf="dateSlots.length > 0">
+      <div id="dayHeadingId" class="ui-g-10 sub-title-bookappointment paddl0 paddt0">
+        {{'SELECT_DAY' | translate}}
+      </div>
+      <div class="ui-g-2 ui-g-nopad text-right">
+        <i class="fa fa-spinner fa-pulse" aria-hidden="true" *ngIf="showLoadingSymbol"></i>
+      </div>
+      <div id="dayListId" class="ui-g-12 paddl0 paddr0 paddt0">
+        <div class="ui-g-12 ui-g-nopad">
+          <div class="middle">
+            <label *ngFor="let date of dateSlots">
+              <input type="radio" name="radio" id={{date.value}} (change)="getAvailableDaySlots(date.value)"
+               [checked]="selectedDate === date.value" [disabled]="date.slots === 0" />
+              <div class="front-end box" [ngClass]="{'disabled-radio-buttons':date.slots === 0}">
+              <span class="text-class">{{date.label | customDate:'weekDay'}}, {{date.label | customDate:'dateWithMonth'}} </span>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="slotBox" class="ui-g-12 ui-g-nopad" *ngIf="daySlots.length > 0">
+      <div id="listDaySlotHeadingId" class="ui-g-12 sub-title-bookappointment paddl0 paddb0">
+        {{'SELECT_SLOT' | translate}}
+      </div>
+      <div id="listDaySlot" class="ui-g-12 ui-g-nopad">
+        <div class="ui-g-12 paddl0 paddr0 paddt0">
+          <div class="middle">
+            <label *ngFor="let day of daySlots">
+              <input type="radio" id={{day.value}} name="day" (change)="getAvailableTimeSlots(day.value)"
+               [checked]="selectedDay === day.value" [disabled]="day.slots === 0"  />
+              <div class="front-end box" [ngClass]="{'disabled-radio-buttons':day.slots === 0}">
+              <span class="text-class">{{uppercaseFirstLetter(day.label)}} </span>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="timeSlotBox" class="ui-g-12 ui-g-nopad" *ngIf="timeSlots.length > 0">
+      <div id="listTimeSlotId" class="ui-g-12 paddl0">
+        <select [size]="timeSlots.length" class="select-list" [(ngModel)]="selectedTimeSlotId">
+        <option *ngFor="let time of timeSlots" [disabled]="time.slots === 0" [value]="time.id">
+          {{time.labelFrom | customDate: 'timeAMPM'}}-{{time.labelTo | customDate: 'timeAMPM'}}  <label class="text-bold" *ngIf="time.slots === 0">( Not Available )</label>
+        </option>
+      </select>
+      </div>
+    </div>
+    <div id="commentBox" class="ui-g-12 ui-g-nopad" *ngIf="selectedTimeSlotId">
+      <textarea class="save-search-button" rows="4" cols="50" placeholder="{{'SPECIAL_COMMENT' | translate}}" [(ngModel)]="slotAddedComment"></textarea>
+    </div>
+    <div class="ui-g-12 text-center loading-data" *ngIf="slotMessage">
+      {{slotMessage | translate}}
+    </div>
+    <div id="submitButtonBoxId" class="ui-g-12 ui-g-nopad" *ngIf="isUpdateAppointment; else showBookAppointment">
+      <button id="bookAppointmentSubmitId" class="custom-btnPrimary-Disable custom-btnPrimary" *ngIf="!selectedDate || !selectedDay || !selectedTimeSlotId; else showActiveButton">{{'UPDATE_APPOINTMENT'| translate}}</button>
+      <ng-template #showActiveButton>
+        <button id="bookAppointmentSubmitId" class="custom-btnPrimary" [disabled]="showLoadingSymbol" (click)="updateAppointment()">{{'UPDATE_APPOINTMENT'| translate}}</button>
+      </ng-template>
+    </div>
+    <ng-template #showBookAppointment>
+      <div id="updateButtonBoxId" class="ui-g-12 ui-g-nopad">
+        <button [dirStoreAudit]="'BOOK APPOINTMENT'" id="bookAppointmentSubmitId" class="custom-btnPrimary-Disable custom-btnPrimary" *ngIf="!selectedDate || !selectedDay || !selectedTimeSlotId; else showActiveButton">{{'BOOK_APPOINTMENT' | translate}}</button>
+        <ng-template #showActiveButton>
+          <button [dirStoreAudit]="'BOOK APPOINTMENT'" id="bookAppointmentSubmitId" class="custom-btnPrimary" [disabled]="showLoadingSymbol" (click)="bookAppointment()">{{'BOOK_APPOINTMENT' | translate}}</button>
+        </ng-template>
+      </div>
+    </ng-template>
+  </div>
+  <ng-template #showErrorMessage>
+    <div class="ui-g-12 text-center loading-data">
+      {{slotMessage | translate}}
+    </div>
+  </ng-template>
+</div>

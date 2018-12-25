@@ -1,0 +1,65 @@
+<div id="userPacketContainerBoxID" class="ui-g-12 ui-g-nopad sms-page-container" *ngIf="packetList && packetList.length>0">
+  <div id="userPacketContainerID" class="ui-g-3 ui-md-4 ui-g-nopad" *ngFor="let packet of packetList">
+    <div id="createPacketContainerID" class="create-packet-container">
+      <app-user-packet id="appUserPacketComponentID" [packetCreated]="packet" [togglePanel]="packet.data.isSelected" (showPanel)="displayPacketStoneTable($event)"
+        (hide)="hidePacket($event)" (rename)="renamePacket($event)" (delete)="deletePacket($event)">
+      </app-user-packet>
+    </div>
+  </div>
+</div>
+
+<div id="userPacketDetailPanelContainerID" *ngIf="displayPacket">
+  <div id="userPacketDetailPanelID" class="ui-g-12 paddl0 paddr0 paddt0" *ngIf="displayPacket.data.isSelected && displayPacket.data.stone_details.length > 0">
+    <thm-packet-panel id="themePacketPanelID" #thmPacketPanel [packet]="displayPacket" [panelData]="displayPacket.data.display_data"
+      [showTable]="false" [packetConfiguration]="packetConfig" (saveStone)="addStoneToPacket($event)" (removeStone)="removeStoneFromPacket($event)">
+    </thm-packet-panel>
+  </div>
+</div>
+
+<!-- create packet -->
+<p-dialog id="PacketToShowPopupID" appendTo="body" header="{{'Create Packet'|translate}}" modal="modal" [draggable]="false"
+  [(visible)]="visibleCreatePacketPopup" width="450" responsive="true">
+  <div id="showPopupMainContainerID">
+    <input id="showPopupInputBoxID" type="text" pInputText [(ngModel)]="inputPacketName" placeholder="{{'Enter packet name'|translate}}"
+      class="packet-input" />
+  </div>
+  <p-footer id="showPopupFooterID">
+    <div id="showPopupFooterContainerID" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <button id="createPacketBtnID" type="button" (click)="createPacket()" class="custom-btnPrimary">{{'OK'|translate}}</button>
+      <button id="canclePacketBtnID" type="button" (click)="visibleCreatePacketPopup=false" class="custom-btnBorder">{{'Cancel'|translate}}</button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+<!-- show packet -->
+<p-dialog id="PacketToSelectPopupID" appendTo="body" header="{{'Select packet to show'|translate}}" modal="modal" [draggable]="false"
+  [(visible)]="visibleShowPacketPopup" width="450" responsive="true">
+  <div id="selectPacketPopupMainContainerID" *ngFor="let packet of definedPackets">
+    <p-checkbox id=selectPacketCheckbox_{{packet.packet_id}} name="packetGroup" value="{{packet.packet_id}}" label="{{packet.packet_name}}"
+      [(ngModel)]="selectedPacketToShow"></p-checkbox>
+  </div>
+  <p-footer id="selectPacketPopupFooterID">
+    <div id="selectPacketPopupFooterContainerID" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <button id="showPacketsBtnID" type="button" (click)="showPackets()" class="custom-btnPrimary">{{'OK'|translate}}</button>
+      <button id="cancleShowPacketsBtnID" type="button" (click)="visibleShowPacketPopup=false" class="custom-btnBorder">{{'Cancel'|translate}}</button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+<!-- select packet to add/remove stones -->
+<p-dialog id="PacketForStonePopupID" appendTo="body" header="{{'Select packet'|translate }}" modal="modal" [draggable]="false"
+  [(visible)]="visiblePacketListPopup" width="450" responsive="true" (onHide)="closePacketPopup($event)">
+  <div class="stoneid-box">
+    <label>{{'Stone ID'|translate}}: {{ selectedStoneLabel }}</label>
+  </div>
+  <div id="PacketForStonePopupContainerID" *ngFor="let packet of packetList">
+    <p-checkbox id=packetStoneCheckbox_{{packet.packet_id}} name="packetGroup" value="{{packet.packet_id}}" label="{{packet.packet_name}}"
+      [(ngModel)]="selectedPacketName"></p-checkbox>
+  </div>
+  <p-footer id="PacketForStonePopupFooterID">
+    <div id="PacketForStonePopupFooterContainerID">
+      <button id="savePacketBtnID" type="button" (click)="saveStoneToPacket()" class="custom-btnPrimary">{{'OK'|translate}}</button>
+      <button id="cancleSavePacketBtnID" type="button" (click)="canclePacket()" class="custom-btnBorder">{{'Cancel'|translate}}</button>
+    </div>
+  </p-footer>
+</p-dialog>

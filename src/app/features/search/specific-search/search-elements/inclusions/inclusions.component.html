@@ -1,0 +1,56 @@
+<div id="INCLUSIONS_ID" class="ui-grid ui-grid-responsive ui-grid-pad component-cards">
+  <div id="inclusionHeaderBox" class="ui-g-12 ui-g-nopad">
+    <div id="inclusionLabelBox" class="ui-g-12 custom-padding">
+      <label id="inclusionLabel" class="component-cards-heading">{{'Inclusions' | translate}}</label>
+    </div>
+  </div>
+  <div id="inclusionComponentBox" class="ui-g-12 ui-g-nopad">
+    <table id="inclusionTable">
+      <tr id="inclusionHeadingRow" class="ui-g-12 ui-g-nopad">
+        <th class="ui-g-1"></th>
+        <th id="tableHeading" class="ui-g-5 table-header heading paddt0">{{'Table' | translate}}</th>
+        <th class="ui-g-1"></th>
+        <th id="sideHeading" class="ui-g-5 table-header heading paddt0">{{'Side' | translate}}</th>
+      </tr>
+      <tr id="inclusionBlackHeading" class="ui-g-12 ui-g-nopad">
+        <td class="ui-g-1 table-header-data">{{'Black' | translate}}</td>
+        <td id="tableBlackSelectBox" class="ui-g-5 ui-g-nopad">
+          <p-selectButton id="tableBlackMultiselect" [options]="tableBlackOptions" [(ngModel)]="selectedTableBlack" multiple="multiple"
+            (onChange)="saveTable('table_black',selectedTableBlack)">
+          </p-selectButton>
+        </td>
+        <td class="ui-g-1"></td>
+        <td id="sideBlackSelectBox" class="ui-g-5 ui-g-nopad">
+          <p-selectButton id="sideBlackMultiselect" [options]="sideBlackOptions" [(ngModel)]="selectedSideBlack" multiple="multiple"
+            (onChange)="saveTable('side_black',selectedSideBlack)">
+          </p-selectButton>
+        </td>
+      </tr>
+      <tr id="inclusionSpotHeading" class="ui-g-12 ui-g-nopad">
+        <td class="ui-g-1 table-header-data">{{'Spot' | translate}}</td>
+        <td id="tableSpotSelectBox" class="ui-g-5 ui-g-nopad">
+          <p-selectButton id="tableSpotMultiselect" [options]="tableSpotOptions" [(ngModel)]="selectedTableSpot" multiple="multiple"
+            (onChange)="saveTable('table_spot',selectedTableSpot)">
+          </p-selectButton>
+        </td>
+        <td class="ui-g-1"></td>
+        <td id="sideSpotSelectBox" class="ui-g-5 ui-g-nopad">
+          <p-selectButton id="sideSpotMultiselect" [options]="sideSpotOptions" [(ngModel)]="selectedSideSpot" multiple="multiple" (onChange)="saveTable('side_spot',selectedSideSpot)">
+          </p-selectButton>
+        </td>
+      </tr>
+      <tr id="inclusionWhiteHeading" class="ui-g-12 ui-g-nopad">
+        <td id="tableWhiteHeading" class="ui-g-1 table-header-data">{{'White' | translate}}</td>
+        <td id="tableWhiteSelectBox" class="ui-g-5 custom-padding">
+          <p-multiSelect id="tableWhiteMultiselect" [options]="tableWhiteOptions" [(ngModel)]="selectedTableWhite" (onChange)="saveTable('table_white',selectedTableWhite)">
+          </p-multiSelect>
+        </td>
+        <td class="ui-g-1"></td>
+        <td id="sideWhiteSelectBox" class="ui-g-5 custom-padding">
+          <p-multiSelect id="tableWhiteMultiselect" [options]="sideWhiteOptions" [(ngModel)]="selectedSideWhite" (onChange)="saveTable('side_white',selectedSideWhite)">
+          </p-multiSelect>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -19,7 +19,7 @@ import { Subscription } from 'rxjs/Subscription';
 import * as _ from 'underscore';
 import { EventDetailsService } from '@srk/core';
 import { UtilService } from '../../services/util.service';
-import { ViewRequestService } from 'app/shared/services/view-request.service';
+import { ViewRequestService } from '../../../shared/services/view-request.service';
 import { ThmSelectedGridComponent } from './thm-selected-infra-grid/thm-selected-infra-grid.component';
 
 declare var $: any;

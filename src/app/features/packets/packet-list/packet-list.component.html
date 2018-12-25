@@ -1,0 +1,57 @@
+<div id="pasketListPageContainerID" class="sms-page-container" *ngIf="packets">
+  <div id="pasketListContainerID" *ngFor="let packet of packets">
+    <div id="packet_{{packet.packet_id}}GridContainerID" class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12 paddl0 paddt20">
+      <div id="packet_{{packet.packet_id}}BoxID" class=" box">
+        <div id="packet_{{packet.packet_id}}FirstBoxID" class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+          <div id="pasketListFirstBoxMainContainerID" class="ui-g-10 ui-lg-10 ui-md-10 ui-sm-12 text-left text-bold">
+            <div class="ui-g-12 ui-g-nopad" id="pasket_{{packet.packet_id}}ContainerID">
+              <a id="packet_{{packet.packet_name}}ID" *ngIf="!packet.isEditable" [ngClass]="{'packet-skeleton skeleton': packet.packet_name == null}"
+                class="packet-heading-label" (click)="addPacketInfoTab(packet.packet_name,packet.packet_id)">
+                {{packet?.packet_name}}
+              </a>
+              <input id="packet_{{packet.packet_id}}InputID" *ngIf="packet.isEditable" type="text" class="input-packet" placeholder="Enter name"
+                [(ngModel)]="editedPacketName" autofocus="packet.isEditable">
+                
+              <i id="packet_{{packet.packet_id}}EditBtnID" *ngIf="!packet.isEditable && packet.packet_name != null && !isRequested" class="fa fa-pencil cursor-pointer packet-link edit-icon"
+                aria-hidden="true" (click)="editPacketName(packet.packet_id)" pTooltip="Edit Name" tooltipPosition="bottom" tooltipEvent="hover"></i>
+              <i id="packet_{{packet.packet_id}}RenameBtnID" *ngIf="packet.isEditable && !isRequested" class="fa fa-check cursor-pointer packet-link"
+                aria-hidden="true" (click)="renamePacketName(editedPacketName,packet)"></i>
+              <i id="packet_{{packet.packet_id}}CancleRenameBtnID" *ngIf="packet.isEditable && !isRequested" class="fa fa-close cursor-pointer packet-link"
+                aria-hidden="true" (click)="cancelRename(packet)"></i>
+
+              <i id="packet_{{packet.packet_id}}LoaderBtnID" *ngIf="isRequested && packet.isEditable" class="fa fa-spinner fa-pulse load-icon"
+                aria-hidden="true"></i>
+            </div>
+          </div>
+          <div id="packet_{{packet.packet_id}}FirstBoxsubContainerID" class="ui-g-2 ui-lg-2 ui-md-2 ui-sm-12 text-right">
+            <div class="box-iconbox" id="packetList_{{packet.packet_id}}IconContainerID">
+              <div class="box-icon" [ngClass]="{'packet-close-skeleton':packet.packet_name == null}" id="packetList_{{packet.packet_id}}IconBoxID">
+                <a id="packetList_{{packet.packet_id}}CloseIconID" *ngIf="packet.packet_name != null" class="remove-search-item-button fa fa-trash-o fa-size"
+                  (click)="remove.emit(packet.packet_id)" pTooltip="Delete" tooltipPosition="bottom" tooltipEvent="hover"></a>
+                <!-- <a id="packetList_{{packet.packet_id}}CloseIconID" *ngIf="packet.packet_name != null" (click)="remove.emit(packet.packet_id)" class="close-icon icon-close"> </a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="packet_{{packet.packet_id}}SecondBoxID" class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 paddt0 paddb0">
+          <div id=packet_{{packet.packet_id}}stoneCountID class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-12  text-left uppercase paddt0 paddb0">
+            {{"STONES" | translate}} - <label id=packet_{{packet.packet_id}}stoneCountTextID [ngClass]="{'packet-small-skeleton skeleton': packet.packet_name == null}">
+				          {{packet.stone_ids?.length}}</label>
+          </div>
+          <div id=packet_{{packet.packet_id}}packetCreatedBoxID class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-12 text-right  paddt0 paddb0">
+            <label id=packet_{{packet.packet_id}}packetCreatedOnLabelID [ngClass]="{'packet-small-skeleton skeleton': packet.packet_name == null}">
+				          {{packet?.created_on| date: 'dd MMM,yyyy'}}</label>
+          </div>
+          <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-12 text-left uppercase paddt0" id=packet_{{packet.packet_id}}packetPriceBoxID>
+            {{"Value" |translate}} - <label id=packet_{{packet.packet_id}}packetPricelabelID [ngClass]="{'packet-small-skeleton skeleton': packet.packet_name == null}">
+				         {{packet?.packet_price | currency:'USD':true}}</label>
+          </div>
+          <div id=packet_{{packet.packet_id}}packetCreatedByBoxID class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-12 text-right  paddt0 paddb0">
+            <label id=packet_{{packet.packet_id}}packetCreatedByLabelID [ngClass]="{'packet-small-skeleton skeleton': packet.packet_name == null}">
+				           {{packet?.created_by}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

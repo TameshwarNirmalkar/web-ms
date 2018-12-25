@@ -1,0 +1,80 @@
+<div id="businessDetailsInfoBox" class="ui-g-12  ">
+  <h3 class="profile-head">{{'Business Details' | translate}}</h3>
+  <div id="companyInfo" class="ui-g-12 ui-g-nopad ">
+    <div id="companyNameLabel" class="ui-g-3 ui-g-nopad marg10 profile-label">
+      {{'Company'|translate}} {{'Name'|translate}}:*
+    </div>
+    <div id="companyName" class="ui-g-9 ui-g-nopad marg10 profile-label ">
+      <label [ngClass]="{'account-dtl-skeleton skeleton': !userAccountInfo}">
+         {{userAccountInfo?.company_name}}</label>
+    </div>
+    <div id="emailLabel" class="ui-g-3 ui-g-nopad marg10 profile-label">
+      {{'Primary Email ID'|translate}}:*
+    </div>
+    <div id="emailId" class="ui-g-9 ui-g-nopad marg10 profile-label">
+      <label [ngClass]="{'account-dtl-skeleton skeleton': !userAccountInfo}">
+      {{userAccountInfo?.primary_email}}</label>
+    </div>
+    <div id="contactPersonLabel" class="ui-g-3 ui-g-nopad marg10 profile-label">
+      {{'Contact Person'|translate}}:
+    </div>
+    <div id="contactPersonId" class="ui-g-9 ui-g-nopad marg10 profile-label">
+      <label [ngClass]="{'account-dtl-skeleton skeleton': !userAccountInfo}">
+      {{userAccountInfo?.contact_person}}
+       </label>
+    </div>
+    <div id="contactNumberLabel" class="ui-g-3 ui-g-nopad marg10 profile-label">
+      {{'Mobile Number'|translate}}:
+    </div>
+    <div id="contactNumber" class="ui-g-9 ui-g-nopad marg10 profile-label">
+       <label [ngClass]="{'account-dtl-skeleton skeleton': !userAccountInfo}">
+      {{userAccountInfo?.contact_number}}
+       </label>
+    </div>
+    <div id="companyAddressLabel" class="ui-g-12 ui-g-nopad marg10 profile-label">
+      <b>  {{'Company'|translate}} {{'Address'|translate}}:</b>
+    </div>
+    <div id="companyAddressAdditional" class="ui-g-12 ui-g-nopad">
+      <div id="countryNameLabel" class="ui-g-3 ui-g-nopad marg10 profile-label ">
+        {{'Country'|translate}} {{'Name'|translate}}:
+      </div>
+      <div id="countryName" class="ui-g-9 ui-g-nopad marg10 profile-label">
+         <span [ngClass]="{'account-dtl-skeleton skeleton': !userAccountInfo}">
+        {{userAccountInfo?.country}}
+         </span>
+      </div>
+      <div id="stateNameLabel" class="ui-g-3 ui-g-nopad marg10 profile-label">
+        {{'State'|translate}} {{'Name'|translate}}:
+      </div>
+      <div id="stateName" class="ui-g-9 ui-g-nopad marg10 profile-label">
+         <label [ngClass]="{'account-dtl-skeleton skeleton': !userAccountInfo}">
+        {{userAccountInfo?.state}}
+         </label>
+      </div>
+      <div id="cityNameLabel" class="ui-g-3 ui-g-nopad marg10 profile-label">
+        {{'City'|translate}} {{'Name'|translate}}:
+      </div>
+      <div id="cityName" class="ui-g-9 ui-g-nopad marg10 profile-label">
+         <label [ngClass]="{'account-dtl-skeleton skeleton': !userAccountInfo}">
+        {{userAccountInfo?.city}}
+         </label>
+      </div>
+      <div id="streetNameLabel" class="ui-g-3 ui-g-nopad marg10 profile-label">
+        {{'Street'|translate}} {{'Name'|translate}}:
+      </div>
+      <div id="streetName" class="ui-g-9 ui-g-nopad marg10 profile-label">
+         <label [ngClass]="{'account-dtl-skeleton skeleton': !userAccountInfo}">
+        {{userAccountInfo?.street}}
+         </label>
+      </div>
+      <div id="zipCodeLabel" class="ui-g-3 ui-g-nopad marg10 profile-label">
+        {{'Zip'|translate}}:
+      </div>
+      <div id="zipCode" class="ui-g-9 ui-g-nopad marg10 profile-label">
+         <label [ngClass]="{'account-dtl-skeleton skeleton': !userAccountInfo}">
+        {{userAccountInfo?.zip_code}}
+         </label>
+      </div>
+    </div>
+  </div>
+</div>

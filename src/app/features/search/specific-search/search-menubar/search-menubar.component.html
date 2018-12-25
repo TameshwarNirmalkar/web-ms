@@ -1,0 +1,13 @@
+<nav id="searchMenubarNavbar">
+  <ul id="searchMenubarList">
+    <owl-carousel [items]="menuList"
+    [options]="{dots: false, nav: true, slideBy : 6 , navText:[&#x27;<&#x27;,&#x27; >&#x27;] ,responsive:{'0':{ items:1}, '600':{ items:6}, '1000':{items:10}}}"
+    #owlElement [carouselClasses]="['owl-theme', 'row', 'sliding']">
+      <li id="searchMenubar" *ngFor="let menu of menuList" class="ui-g-1 filter-components" [ngClass]="{'active-filter': menu.id == 'SHAPE_ID'}" id="{{menu.id}}_Link">
+        <a id="{{menu.name}}_link" (click)="scrollToFilter(menu.id)">
+          <span title="{{menu.name | translate}}">{{menu.name | translate}}</span>
+        </a>
+      </li>
+    </owl-carousel>
+  </ul>
+</nav>

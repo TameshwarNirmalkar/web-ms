@@ -1,0 +1,64 @@
+<div class="ui-g-12">
+  <label><strong>{{'Update Rule Configuration Form'|translate}}</strong></label>
+</div>
+<div class="ui-g-12">
+  <div class="ui-g-4">
+    <label>{{'Rule Name'|translate}}</label>
+  </div>
+  <div class="ui-g-8" *ngIf="ruleConfigValues.entity_name">
+    <input id="ruleName" pInputText type="text" value="ruleConfigValues.entity_name" readonly/>
+  </div>
+
+  <div class="ui-g-4">
+    <label>{{'Rule Description'|translate}}</label>
+  </div>
+  <div class="ui-g-8" *ngIf="ruleConfigValues.display_attributes.entity_desc">
+    <textarea id="ruleDesc" pInputTextarea value="ruleConfigValues.display_attributes.entity_desc" readonly></textarea>
+  </div>
+
+  <div class="ui-g-4">
+    <label>{{'Values'|translate}}</label>
+  </div>
+  <div class="ui-g-8">
+
+    <!-- Range values -->
+    <div *ngIf="valueType=='Range'">
+      <label>{{'Range From'|translate}}:</label>
+      <p-calendar id="valueRangeFrom" *ngIf="inputType=='Date'" [showTime]="true" dataType="string"
+      [(ngModel)]="rangeFrom"></p-calendar>
+      <input id="valueRangeFrom" *ngIf="inputType=='Number'|| inputType=='Decimal Number'"
+      pInputText type="number" name="rangeFrom" [(ngModel)]="rangeFrom" />
+      <label>{{'To'|translate}}:</label>
+      <p-calendar id="valueRangeTo" *ngIf="inputType=='Date'" [showTime]="true" dataType="string"
+      [(ngModel)]="rangeTo"></p-calendar>
+      <input id="valueRangeTo" *ngIf="inputType=='Number'|| inputType=='Decimal Number'"
+      pInputText type="number" name="rangeTo" [(ngModel)]="rangeTo" />
+    </div>
+
+    <!-- Single values -->
+    <div *ngIf="valueType=='Single Value'">
+      <div *ngIf="inputType=='Date'">
+        <p-calendar id="singleValue" *ngIf="inputType=='Date'" [showTime]="true"
+        dataType="string" [(ngModel)]="singleValue"></p-calendar>
+      </div>
+      <div *ngIf="inputType=='Text'">
+        <input id="singleValue" pInputText type="text" name="singleValue" [(ngModel)]="singleValue"/>
+      </div>
+      <div *ngIf="inputType=='Number' || inputType=='Decimal Number'">
+        <input id="singleValue" pInputText type="text" name="singleValue" [(ngModel)]="singleValue" />
+      </div>
+    </div>
+
+    <!-- Value set -->
+    <div *ngIf="valueType=='Value Set'">
+      <p-dropdown id="singleValue" *ngIf="valueSelectionType=='Single Select'"
+      [options]="valueOptions" [(ngModel)]="selectedValue"></p-dropdown>
+      <p-multiSelect id="multipleValue" *ngIf="valueSelectionType=='Multi Select'"
+      [options]="valueOptions" [(ngModel)]="selectedValue"></p-multiSelect>
+      <br>
+    </div>
+
+  </div>
+  <button id="updateRuleButton" pButton label="{{'Update Rule'|translate}}" (click)="updateRuleClick()"></button>
+
+</div>

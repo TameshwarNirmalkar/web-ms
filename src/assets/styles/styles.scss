@@ -1,10 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "../sass/layout/layout.scss";
-@import "../icons/font-awesome-4.7.0/css/font-awesome.min.css";
+// @import "../icons/font-awesome-4.7.0/css/font-awesome.min.css";
 @import "Solitire-Icon.css";
 @import "./infragistics-overrides.scss";
-@import "primeNg-overrides/primeNg-overrides.scss";
+// @import "primeNg-overrides/primeNg-overrides.scss";
 @import "dev-extreme-overrides/dev-extreme-overrides.scss";
 
 .icon-profile-place {
@@ -650,7 +650,7 @@ input {
   float: right;
   margin-top: 15px;
   margin-right: 35px;
- 
+
 }
 
 .color-lagend-icon a{
@@ -781,7 +781,7 @@ input {
 
 .grid-icon-top {
   font-size: 20px;
-  text-align: center; 
+  text-align: center;
 }
 
 .icon-with-text label {
@@ -2194,6 +2194,6 @@ body {
   font-size: 24px;
 }
 
-.bid-event-duration-display{ 
+.bid-event-duration-display{
   font-size: 11px;
 }

@@ -1,0 +1,242 @@
+<div id="profileMenuID" class="ui-g-12 sms-page-container">
+  <nav id="searchMenubarNavbar" class="marg10">
+    <ul id="searchMenubarList">
+      <owl-carousel [items]="menuList" [options]="{dots: false, nav: true, slideBy : 6 , navText:[&#x27;<&#x27;,&#x27; >&#x27;] ,responsive:{'0':{ items:1}, '600':{ items:6}, '1000':{items:10}}}"
+        #owlElement [carouselClasses]="['owl-theme', 'row', 'sliding']">
+        <li id="profileSettingMenubar" *ngFor="let menu of menuList" class="ui-g-1 filter-components" [ngClass]="{'active-filter': menu.id == 'manageLangId'}"
+          id="{{menu.id}}_Link" pTooltip="{{menu.name | translate}}" tooltipPosition="bottom" tooltipEvent="hover">
+          <a id="{{menu.name}}_link" (click)="scrollToFilter(menu.id)">
+            <span>{{menu.name | translate}}</span>
+          </a>
+        </li>
+      </owl-carousel>
+    </ul>
+  </nav>
+  <div class="profile-setting-container">
+    <div id="manageLangId" class="ui-g-12 raw-box-container" *ngIf="langList.length > 0">
+      <div class="ui-g-12">
+        <h3>{{'Display Language' |translate}}</h3>
+      </div>
+      <div class="ui-g-9">
+        <p-dropdown [options]="langList" [(ngModel)]="selectedLang"></p-dropdown>
+      </div>
+    </div>
+
+    <div id="manageDashboardId" class="ui-g-12 raw-box-container" *ngIf="cardList.length > 0">
+      <div class="ui-g-12">
+        <h3>{{'Dashboard'|translate}}</h3>
+      </div>
+      <div class="ui-g-2 profile-label">
+        {{'Cards to Display'|translate}}
+      </div>
+      <div class="ui-g-8">
+        <div class="ui-g-4 ui-md-6 ui-lg-4" *ngFor="let cardName of cardList">
+          <p-checkbox id="{{cardName.value}}" name="cards" value={{cardName.value}} label="{{cardName.name | translate}}"
+            [(ngModel)]="selectedCardValues"></p-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div id="manageSearchId" class="ui-g-12 raw-box-container" *ngIf="filterList.length > 0">
+      <div class="ui-g-12">
+        <h3>{{'Search Setting'|translate}}</h3>
+      </div>
+      <div class="ui-g-2">
+        <div class="ui-g-12 ui-g-nopad profile-label">
+          {{'Filters to display'|translate}}
+        </div>
+        <div class="ui-g-12 ui-g-nopad profile-label-light">
+          ({{'Choose 7 min'|translate}})
+        </div>
+      </div>
+      <div class="ui-g-8">
+        <div class="ui-g-4 ui-md-6 ui-lg-4" *ngFor="let filterName of filterList">
+          <p-checkbox id="{{filterName.value}}" name="cards" value={{filterName.value}} label="{{filterName.name | translate}}"
+            [(ngModel)]="selectedFilter"></p-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div id="manageColumnId" class="ui-g-12 raw-box-container">
+      <div class="ui-g-12">
+        <div class="ui-g-6 ui-g-nopad profile-label">
+          <h3>{{'Search Result'|translate}}</h3>
+        </div>
+        <div class="ui-g-6 ui-g-nopad profile-label">
+          <div class="color-lagend-container">
+            <div class="color-lagend">
+              <div class="box-color-lagend">
+                <input type="text" class="searchColumn" placeholder="Search Column" [(ngModel)]='globleSearch' />
+              </div>
+              <div class="box-color-lagend">
+                <span class="colorLagend_Default"></span>
+                <label>{{'Default'}}</label>
+              </div>
+              <div class="box-color-lagend">
+                <span class="colorLagend_Common"></span>
+                <label>{{'Common'}}</label>
+              </div>
+              <div class="box-color-lagend">
+                <span class="colorLagend_DAYP"></span>
+                <label>{{'DAYP'}}</label>
+              </div>
+              <div class="box-color-lagend">
+                <span class="colorLagend_BTOB"></span>
+                <label>{{'Bid To Buy'}}</label>
+              </div>
+              <div class="box-color-lagend">
+                <span class="colorLagend_Basket"></span>
+                <label>{{'Basket'}}</label>
+              </div>
+            </div>
+            <div class="refresh-button">
+              <a>
+                <span  class="grid-icon-top fa fa-refresh" (click)="initializeSrkColumnOrder()" pTooltip="Reset Column Order" tooltipPosition="bottom"
+                  tooltipEvent="hover"> </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-6 ui-g-nopad profile-label">
+          <h3>{{'Arrange Column List'|translate}}</h3>
+        </div>
+
+
+        <div class="ui-g-12 ui-g-nopad profile-label-light">
+          <div class="box-border" [dragula]='"first-bag"' [dragulaModel]='allcolumnList'>
+            <div *ngFor="let columnName of allcolumnList; let i = index" class="ui-g-2 ui-md-8 ui-lg-2 ">
+              <label class="columnlable prdrag" id="{{columnName.value}}" [ngClass]="{'box-unselect': selectedColumn.indexOf(columnName.value) == -1 , 'box-common': columnList.indexOf(columnName.value) > -1  , 'box-b2b': b2bColumnList.indexOf(columnName.value) > -1 ,
+                  'box-basket': basketColumnList.indexOf(columnName.value) > -1, 'box-default': DefaultcolumnList.indexOf(columnName.value) > -1 , 'box-dayp': daypColumnList.indexOf(columnName.value) > -1,
+                  'box-blink': ((columnName.name) | uppercase).indexOf((globleSearch)  | uppercase ) > -1 && globleSearch != '' }">{{i+1}}.{{"
+                "}}{{columnName.name |translate}}
+                <div *ngIf=" DefaultcolumnList.indexOf(columnName.value) > -1 ; else elseBlock">
+                  <p-checkbox id="{{columnName.value}}" class="dmrk" name="cards" disabled="true" value={{columnName.value}}
+                    [(ngModel)]="selectedColumn"></p-checkbox>
+                </div>
+                <ng-template #elseBlock>
+                  <p-checkbox id="{{columnName.value}}" class="dmrk" name="cards" value={{columnName.value}}
+                    [(ngModel)]="selectedColumn"></p-checkbox>
+                </ng-template>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="manageConfirmationColumnId" class="ui-g-12 raw-box-container" *ngIf="confirmationColumnList.length > 0">
+      <div class="ui-g-12">
+        <h3>{{'My Confirmation'|translate}}</h3>
+      </div>
+
+      <div class="ui-g-2">
+        <div class="ui-g-12 ui-g-nopad profile-label">
+          {{'Columns to display'|translate}}
+        </div>
+        <div class="ui-g-12 ui-g-nopad profile-label-light">
+          ({{'Choose 7 min'|translate}})
+        </div>
+      </div>
+      <div class="ui-g-8">
+        <div class="ui-g-4 ui-md-6 ui-lg-4" *ngFor="let columnName of confirmationColumnList">
+          <p-checkbox id="{{columnName.value}}" name="cards" value={{columnName.value}} label="{{columnName.name |translate}}"
+            (onChange)="checkMinimumSelection('columns', selectedConfirmationColumn)" [(ngModel)]="selectedConfirmationColumn"></p-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div id="manageAlertId" class="ui-g-12 raw-box-container" *ngIf="alertList.length > 0">
+      <div class="ui-g-12">
+        <h3>{{'Alert'|translate}}/{{'Notifications'|translate}}</h3>
+      </div>
+      <div class="ui-g-2">
+        <div class="ui-g-12 ui-g-nopad profile-label">
+          {{'Select to see'|translate}}
+        </div>
+        <div class="ui-g-12 ui-g-nopad profile-label-light">
+          {{'Select to see in alerts'|translate}}
+        </div>
+      </div>
+      <div class="ui-g-8">
+        <div class="ui-g-4 ui-md-6 ui-lg-4" *ngFor="let alertName of alertList">
+          <p-checkbox id="{{alertName.value}}" name="cards" value={{alertName.value}} label="{{alertName.name | translate}}"
+            [(ngModel)]="selectedAlert"></p-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div id="manageDaypPrefId" class="ui-g-12 raw-box-container" *ngIf="allDaypPreferenceList.length > 0">
+      <div class="ui-g-12">
+        <h3>{{'DAYP Preference'|translate}}</h3>
+      </div>
+      <div class="ui-g-2">
+        <div class="ui-g-12 ui-g-nopad profile-label">
+          {{'Select offer input'|translate}}
+        </div>
+      </div>
+      <div class="ui-g-8">
+        <div class="ui-g-4 ui-md-6 ui-lg-4" *ngFor="let perf of allDaypPreferenceList">
+          <p-radioButton id="{{perf.value}}" name="cards" value={{perf.value}} label="{{perf.name | translate}}"
+            [(ngModel)]="selectedDaypPreference"></p-radioButton>
+        </div>
+      </div>
+    </div>
+
+    <div id="manageSavedSearchPopupId" class="ui-g-12 raw-box-container" *ngIf="allSaveSearchResultPreference.length > 0">
+      <div class="ui-g-12">
+        <h3>{{'SAVE_SEARCH_RESULT_PREFERENCE_TEXT' |translate}}</h3>
+      </div>
+      <div class="ui-g-2">
+        <div class="ui-g-12 ui-g-nopad profile-label">
+          {{'SELECT_SAVE_SEARCH_RESULT_PREFERENCE_TEXT'|translate}}
+        </div>
+      </div>
+      <div class="ui-g-8">
+        <div class="ui-g-4 ui-md-6 ui-lg-4">
+          <p-checkbox id="{{allSaveSearchResultPreference[0].value}}" name="cards" value={{allSaveSearchResultPreference[1].value}} label="{{allSaveSearchResultPreference[1].name | translate}}"
+            [(ngModel)]="selectedSaveSearchResultPreference"></p-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div id="manageConfirmationDayId" class="ui-g-12 raw-box-container">
+      <div class="ui-g-12">
+        <h3>{{'Confirmation History Days' |translate}}</h3>
+      </div>
+      <div class="ui-g-2">
+        <div class="ui-g-12 ui-g-nopad profile-label">
+          {{'SELECT_ONE_CONFIRM_LIST_DAYS'|translate}}
+        </div>
+      </div>
+      <div class="ui-g-8">
+        <p-dropdown [options]="confirmationDaysOptions" [(ngModel)]="confirmedDays"></p-dropdown>
+      </div>
+    </div>
+
+    <div id="exapandedDetails" class="ui-g-12 raw-box-container">
+      <div class="ui-g-12">
+        <h3>{{'Expanded stone details' |translate}}</h3>
+      </div>
+      <div class="ui-g-2">
+        <div class="ui-g-12 ui-g-nopad profile-label">
+          {{'SELECT_EXPAND_STONE_DETAILS_TEXT'|translate}}
+        </div>
+      </div>
+      <div class="ui-g-8">
+        <div *ngFor="let expandDetailList of allSaveSearchResultPreference">
+          <p-checkbox id="{{expandDetailList.value}}" *ngIf="expandDetailList.name === 'DIAMOND_DETAIL_EXPANDED_COLUMN'" name="cards" value={{expandDetailList.value}} label="{{expandDetailList.name | translate}}"
+            [(ngModel)]="selectedSaveSearchResultPreference"></p-checkbox>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div id="buttonsBoxId" class="ui-g-12 button-box" align="right">
+    <button id="resetButtonId" (click)="initializeUserSetting()" class="custom-btnBorder width-120px">{{'Reset' |
+      translate}}</button>
+    <button [dirStoreAudit]="'UPDATE PROFILE'" class=" custom-btnPrimary width-120px" id="submitPickupId" (click)="submitProfileSetting()">{{'Save'
+      | translate}}</button>
+  </div>
+</div>

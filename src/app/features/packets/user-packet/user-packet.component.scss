@@ -1,0 +1,21 @@
+
+
+.packet-box {  border: 1px solid #e0e0e0;  border-radius: 5px !important;  background: white; font-size: 14px !important;  padding: 3px 0px;}
+.packet-box-selected {  font-size: medium;  color: white;  border-radius: 5px; background-color: #434453; }
+
+.packet-heading-label{white-space: nowrap;  overflow: hidden;  text-overflow: ellipsis; padding:4px 15px 4px 15px !important;margin-top: 5px; display:inline-block; width: 70%; cursor: pointer;}
+.input-packet{padding:5px 5px 5px 5px !important; margin: 5px; width:90%; }
+.packet-link {padding:4px 7px 4px 7px !important; margin: 5px 0px; cursor: pointer;font-size:13px;}
+.packet-label {padding:4px 15px 4px 15px !important; margin: 5px 0px;}
+.bold label{font-weight: bold; cursor: pointer;}
+.packet-icon-box{margin-top: 2px;}
+.close-icon{padding: 4px !important;  padding-right: 3px !important; height: 24px; width: 24px;float: right; text-align: center;}
+.fa-color {color: #ffffff;}
+@media only screen and (max-width: 1024px) {
+  .close-icon { padding: 4px !important; height: 16px; width: 16px; float: right; text-align: center; }
+  .close-icon img{ height: 10px; width: 10px;}
+  .packet-heading-label,  .packet-label , .packet-link{font-size:12px; }
+  .packet-link{ padding: 4px 0px 4px 7px !important;  }
+}
+.load-icon{padding: 10px;}
+

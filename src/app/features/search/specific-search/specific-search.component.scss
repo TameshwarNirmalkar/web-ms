@@ -1,0 +1,116 @@
+app-specific-search .fixed {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+}
+
+app-specific-search .search-footer {
+  position: fixed;
+  bottom: 0;
+  background: #f6f6f6;
+  z-index: 99;
+  height: 45px;
+}
+
+.stuck {
+  position: fixed;
+  top: 0;
+  z-index: 99;
+}
+
+app-specific-search .owl-theme .owl-nav {
+  position: absolute;
+  top: 0;
+  right: -50px;
+  margin-top: 0;
+}
+
+app-specific-search .owl-carousel .owl-item>li>a {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+app-specific-search .owl-theme .owl-nav [class*=owl-] {
+  font-weight: bold;
+  padding: 0px;
+  border-radius: 100%;
+  width: 24px;
+  height: 24px;
+  margin: auto;
+  margin-top: 3px;
+  margin-left: 4px;
+}
+
+app-specific-search .owl-theme .owl-nav .disabled {
+  opacity: 0.9;
+  cursor: default;
+}
+
+app-specific-search .position-absolute {
+  position: absolute !important;
+}
+
+app-specific-search .position-fixed {
+  right: 5px !important;
+  position: fixed !important;
+}
+
+app-specific-search .dynamic-search-components {
+  padding-bottom: 50px;
+  line-height: 1.3em;
+}
+
+app-specific-search .search-button {
+  float: right
+}
+
+app-specific-search #footerThirdDivision {
+  position: fixed;
+  right: 10px;
+  width: auto;
+}
+
+.search-save-align,
+.search-button-align {
+  text-align: right
+}
+
+;
+.saved-search-text {
+  width: 100%
+}
+
+.View-button {
+  margin: 12px 0px;
+}
+
+app-specific-search .carousel-panel-container {
+  padding-right: 50px;
+}
+
+.search-page-container {
+  padding: 2px 10px 10px 30px;
+}
+
+.actionButton {
+  background: #ffffff;
+  border: 1px solid #c0c0c0;
+  cursor: pointer;
+  padding: 8px 12px;
+  margin-top: 6px;
+  width: 70px;
+  font-size: 12px;
+}
+
+.foot-note-box {
+  padding: 8px 5px !important;
+}
+
+.foot-note {
+  padding: 13px 5px;
+  word-wrap: break-word;
+}
+
+.icon {
+  padding: 2px 2px;
+}

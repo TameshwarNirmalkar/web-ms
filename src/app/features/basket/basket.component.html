@@ -1,0 +1,113 @@
+<p-confirmDialog acceptIcon='' rejectIcon='' width="425" icon=confirmation-popup-icons></p-confirmDialog>
+<div dirScrollTop>
+  <!-- PACKETS -->
+  <div class="ui-g-12 ui-g-nopad show-packet-panel" id="packetBox">
+    <app-create-packet [visiblePacketOverlay]="visiblePacketPopup" [stone]="stoneForPacket" [showSelectedPacket]="showSelectedPacket"
+      (togglePacketIcon)="togglePacketIcon($event)" (togglePacketOverlay)="togglePacketOverlay($event)" (updatePacketIcon)="updatePacketIcon($event)"></app-create-packet>
+  </div>
+
+  <div class="packet-btn-box" id="packetTabResultId">
+    <button [dirStoreAudit]="'SHOW PACKET'" id="basketShowPacketBtnID" *ngIf="showPacktBtn" class="custom-btnPrimary show-button"
+      type="button" (click)="showPacket()">{{'Show Packet' |translate}}</button>
+    <ng-template [dirCheckPermission]="'create_packet_btn'">
+      <button [dirStoreAudit]="'CREATE PACKET'" id="basketCreatePacketBtnID" class="custom-btnPrimary creat-package" (click)="createPacket()">{{'Create Packet' | translate}}</button>
+    </ng-template>
+  </div>
+
+  <!-- BASKET TABS -->
+  <div id="fixedBasketPanel" class="fixed-panel-class"></div>
+  <div class="ui-g-12 ui-g-nopad" id="fixedBasketId">
+    <div #basketPanel class="container">
+      <div class="scroller scroller-left" (click)="scrollTabPanelLeft()"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
+      <div class="scroller scroller-right" (click)="scrollTabPanelRight()"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+      <div class="wrapper-search-tab">
+        <ul class="nav nav-tabs list" id="myTab">
+          <li id="basketMenubar" *ngFor="let tab of tabName" (click)="getSelectedTabName(tab)" [ngClass]="{'active-filter-menu': (tab.basketTab === currentTabSelected || tab.stoneName === currentTabSelected || tab.pairId === currentTabSelected),
+            'blink_me':lastCreatedTab && (tab.stoneName || tab.pairId) &&(tab.stoneName === lastCreatedTab || tab.pairId === lastCreatedTab)}">
+            <a *ngIf="tab.basketTab">
+                    <span>
+                      <label class="search-font-box" id="{{tab.basketTab}}basketTabId">{{tab.basketTab}}</label>
+                    </span>
+                </a>
+            <a *ngIf="tab.stoneName" id="{{tab.stoneName}}NameLink">
+                  <span id="{{tab.stoneName}}NameId" class="search-font-box">{{tab.stoneName}}</span>
+                  <span id="removeIcon" class="icon-close circle-close-icon" (click)="removeDetailedPacketTab(tab.stoneName)"></span>
+                </a>
+            <a *ngIf="tab.pairId" id="{{tab.pairId}}NameLink">
+                  <span id="{{tab.pairId}}NameLink" class="search-font-box">{{tab.pairId}}</span>
+                  <span id="removeIcon" class="icon-close circle-close-icon" (click)="removeDetailedPacketTab(tab.pairId)"></span>
+                </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="tab-content">
+      <div id="tabRowId" class="tabpanel-item">
+        <div *ngFor="let data of tabName">
+          <div class="tabpanel-item sms-page-container" *ngIf="data.basketTab && currentTabSelected === data.basketTab">
+            <div class="ui-g-12 ui-g-nopad" *ngIf="!isFailureOccured && selectionObj && selectionObj.selectedStones.length >= 0">
+              <thm-selected-stone-panel [showButtonList]="stoneButtonList" [stoneObj]="selectionObj" (updateArray)="updateBasketArray($event)"
+                (basketRemoveStone)="removeStonesFromList($event.stones)" (displayStoneDetails)="addTab($event)" [showPacket]="visiblePacketIcon"
+                (stoneToAddPakcet)="stoneFromSelectedStone($event)"  (toggleSelectedTable)="toggleSelectedTable($event)"></thm-selected-stone-panel>
+            </div>
+            <div class="height-box" [hidden]="selectedTableToggle">
+              <div id="basketPanelContainer" class="ui-g-12 grid-container" [ngClass]="{'no-container': isFailureOccured}">
+                <div class="info-panel" *ngIf="!isFailureOccured">
+                  <div id="basketDataContainer" class="ui-g-12 ui-g-nopad">
+                    <div id="basketTotalCountBox" class="ui-g-2 detail-box">
+                      <a id="basketTotalCount" class="lbl-ddc-value-large" [ngClass]="{'basket-skeleton skeleton':totalBasketObj.diamondTable === undefined, 'lbl-ddc-value-large-active': showTotalTable }"
+                        (click)="showTable(true,false,false,false)">{{totalBasketObj.diamondTable?.length}}</a>
+                      <br> <label id="basketCountLabel" class="lbl-ddc-value-small" [ngClass]="{'lbl-ddc-value-small-active': showTotalTable }">{{'Total Stones' | translate}}</label>
+                    </div>
+                    <div id="basketNACountBox" class="ui-g-2 detail-box">
+                      <a id="basketNACount" class="lbl-ddc-value-large" [ngClass]="{'basket-skeleton skeleton':notAvailableBasketObj.diamondTable === undefined, 'lbl-ddc-value-large-active': showNotAvailableTable }"
+                        (click)="showTable(false,true,false,false)">{{notAvailableBasketObj.diamondTable?.length}}</a>
+                      <br> <label id="basketNALabel" class="lbl-ddc-value-small" [ngClass]="{'lbl-ddc-value-small-active': showNotAvailableTable }">{{'Not'
+                                | translate}} {{'Available' | translate}}</label>
+                    </div>
+                    <div id="basketInactiveCountBox" class="ui-g-2 detail-box">
+                      <a id="basketInactiveCount" class="lbl-ddc-value-large" [ngClass]="{'basket-skeleton skeleton':priceRevisedObj.diamondTable === undefined, 'lbl-ddc-value-large-active': showPriceRevisedTable }"
+                        (click)="showTable(false,false,true,false)">{{priceRevisedObj.diamondTable?.length}}</a>
+                      <br> <label id="basketNALabel" class="lbl-ddc-value-small" [ngClass]="{'lbl-ddc-value-small-active': showPriceRevisedTable }">{{'PRICE_REVISED' | translate}}</label>
+                    </div>
+                    <div id="basketAvailableCountBox" class="ui-g-2 detail-box" *ngIf="isDaypActive">
+                      <a id="basketAvailableCount" class="lbl-ddc-value-large" [ngClass]="{'basket-skeleton skeleton':daypBasketObj.diamondTable === undefined, 'lbl-ddc-value-large-active': showDaypTable }"
+                        (click)="showTable(false,false,false,true)">{{daypBasketObj.diamondTable?.length}}</a>
+                      <br> <label id="basketAvailableLabel" class="lbl-ddc-value-small" [ngClass]="{'lbl-ddc-value-small-active': showDaypTable }">{{'DAYP Stones' |translate}}</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="ui-g-12 text-center" *ngIf="isFailureOccured">
+                  {{message | translate}}
+                </div>
+                <div *ngIf="totalBasketObj && totalBasketObj.diamondTable && totalBasketObj.diamondTable.length > 0">
+                  <div class="ui-g-12 ui-g-nopad" [hidden]="!showTotalTable">
+                    <app-basket-table [basketHeight]="height" [visiblePacketIcon]="visiblePacketIcon" [myStonesObj]="totalBasketObj" (stoneObject)="addAllBasketStoneObject($event)"
+                      (basketPacket)="stoneFromSelectedStone($event)" [selectedTab]="activeTab"></app-basket-table>
+                  </div>
+                  <div class="ui-g-12 ui-g-nopad" [hidden]="!showDaypTable">
+                    <app-basket-table [basketHeight]="height" [visiblePacketIcon]="visiblePacketIcon" [myStonesObj]="daypBasketObj" (stoneObject)="addDaypStoneObject($event)"
+                      (basketPacket)="stoneFromSelectedStone($event)" [selectedTab]="activeTab"></app-basket-table>
+                  </div>
+                  <div class="ui-g-12 ui-g-nopad" [hidden]="!showNotAvailableTable">
+                    <app-basket-table [basketHeight]="height" [myStonesObj]="notAvailableBasketObj" [selectedTab]="activeTab"></app-basket-table>
+                  </div>
+                  <div class="ui-g-12 ui-g-nopad" [hidden]="!showPriceRevisedTable">
+                    <app-basket-table [basketHeight]="height" [visiblePacketIcon]="visiblePacketIcon" [myStonesObj]="priceRevisedObj" (stoneObject)="addPriceStoneObject($event)"
+                      (basketPacket)="stoneFromSelectedStone($event)" [selectedTab]="activeTab"></app-basket-table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="stonedetailssearch" class="tabpanel-item struck-details-page sms-page-container" *ngIf="data.stoneName && currentTabSelected === data.stoneName">
+            <thm-stone-details [stoneDetails]="data.stoneInfo"></thm-stone-details>
+          </div>
+          <div class="tabpanel-item  struck-details-page sms-page-container" *ngIf="data.pairId && currentTabSelected === data.pairId">
+            <thm-twin-stone-detail [twinStones]="data.twinStones"></thm-twin-stone-detail>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

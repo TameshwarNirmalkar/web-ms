@@ -1,0 +1,40 @@
+<div id="PARAMETERS_ID" class="ui-grid ui-grid-responsive ui-grid-pad component-cards">
+  <div id="paramHeaderBox" class="ui-g-12 ui-g-nopad">
+    <div id="paramLabelBox" class="ui-g-12 custom-padding">
+      <label id="paramLabel" class="component-cards-heading">{{'Parameters' | translate}}</label>
+    </div>
+  </div>
+  <div id="pramomponentBox" class="ui-g-12 ui-g-nopad" *ngIf="parameterValues">
+    <div id="paramElement" class="ui-g-3 ui-g-nopad parameters-components-element" *ngFor="let param of parameterValues;let i=index">
+      <div id="elementLabelBox" class="ui-g-4 custom-padding param-padding"><label id="elementLabel_{{param.label}}" class="parameter-heading">{{param.label}}</label></div>
+      <div class="ui-g-4 param-value-padding" id="elementFromValueBox">
+        <input class="parameters-component-field" id="{{param.label}}FromValue" type="text" pInputText [(ngModel)]="param.fromValue"
+          placeholder="From" dirValidateNumberDigit (change)="saveRange(param.key,param.fromValue,param.toValue,i)" />
+      </div>
+      <div class="ui-g-4 param-value-padding" id="elementToValueBox">
+        <input class="parameters-component-field" type="text" dirValidateNumberDigit id="{{param.label}}ToValue" pInputText [(ngModel)]="param.toValue"
+          placeholder="To" (change)="saveRange(param.key,param.fromValue,param.toValue,i)" />
+      </div>
+      <!--<div class="ui-g-1" id="emptyDivision"></div>-->
+    </div>
+    <div id="girdleParamElementBox" class="ui-g-6 ui-g-nopad parameters-components-element">
+      <div id="girdleParamLabelBox" class="ui-g-2 custom-padding param-padding">
+        <label id="girdleParamLabel" class="parameter-heading">Girdle</label></div>
+      <div id="girdleParamSelectionBox" class="ui-g-3 param-value-padding">
+        <p-multiSelect defaultLabel="From" styleClass="parameters-component-dropdown" id="fromGirdleParamMultiselect" [options]="girdleOptions"
+          [(ngModel)]="fromSelectedGirdleValue" (onChange)="saveValues('girdle',fromSelectedGirdleValue)"></p-multiSelect>
+      </div>
+      <div id="girdleParamSelectionBox" class="ui-g-3 param-value-padding">
+        <p-multiSelect defaultLabel="To" styleClass="parameters-component-dropdown" id="toGirdleParamMultiselect" [options]="girdleOptions"
+          [(ngModel)]="toSelectedGirdleValue" (onChange)="saveValues('tgirdle',toSelectedGirdleValue)"></p-multiSelect>
+      </div>
+    </div>
+    <div id="culetParamElementBox" class="ui-g-3 ui-g-nopad parameters-components-element">
+      <div id="culetParamLabelBox" class="ui-g-4 custom-padding param-padding"><label id="culetParamLabel" class="parameter-heading">Culet</label></div>
+      <div id="culetParamSelectionBox" class="ui-g-8 param-value-padding">
+        <p-multiSelect styleClass="parameters-component-dropdown" id="culetParamMultiselect" [options]="culetOptions" [(ngModel)]="selectedCuletValue"
+          (onChange)="saveValues('culet',selectedCuletValue)"></p-multiSelect>
+      </div>
+    </div>
+  </div>
+</div>

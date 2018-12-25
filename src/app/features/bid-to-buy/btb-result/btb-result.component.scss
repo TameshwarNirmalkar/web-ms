@@ -1,0 +1,13 @@
+.no-view-request {
+  text-align: center;
+  font-size: 25px;
+}
+
+.stone-detail-non-clickable {
+  pointer-events: none;
+  cursor: default;
+}
+.dx-datagrid-content .dx-datagrid-table{
+  border-spacing: 0 !important;
+  border-collapse: none;
+}

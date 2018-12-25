@@ -1,0 +1,6 @@
+export * from './profile-info/account-detail/account-detail.component'
+export * from './profile-info/change-password/change-password.component'
+export * from './profile-info/profile-info.component'
+export * from './profile-setting/profile-setting.component'
+export * from './user-profile.component'
+export * from './user-profile.module'

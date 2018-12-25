@@ -14,7 +14,7 @@ declare var Waypoint: any;
 @Component({
   selector: 'thm-stone-details',
   templateUrl: './thm-stone-details.component.html',
-  styleUrls: ['./thm-stone-details.component.scss', '../../../../assets/styles/Diamond-Shape.css'],
+  styleUrls: ['./thm-stone-details.component.scss'],
 })
 export class ThmStoneDetailsComponent implements OnInit, OnChanges {
 

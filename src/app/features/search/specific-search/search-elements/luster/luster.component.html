@@ -1,0 +1,30 @@
+<div id="LUSTER_ID" class="ui-grid ui-grid-responsive ui-grid-pad component-cards">
+  <div id="lusterAndShadesHeaderBox" class="ui-g-12 ui-g-nopad">
+    <div id="lusterAndShadesLabelBox" class="ui-g-2 custom-padding">
+      <label id="lusterAndShadesLabel" class="component-cards-heading">{{'LUSTER_SHADES' | translate}}</label>
+    </div>
+    <div class="ui-g-8 text-right"></div>
+    <div class="ui-g-2 custom-padding"></div>
+  </div>
+  <div id="lusterAndShadesMiddleContainer" class="middle-container">
+    <div id="lusterBox" class="ui-g-12 ui-g-nopad finishing-component-cutbox">
+      <div id="lusterLabelBox" class="ui-g-1 finishing-componet-heading"><label id="cutLabel" class="middle-container-heading">{{'Luster' | translate}}</label></div>
+      <div id="cutComponentBox" class="ui-g-10 ui-g-nopad finishing-componet-selectvalue">
+        <p-selectButton id="lusterMultiselect" [options]="lusterOptionsValue" [(ngModel)]="lusterSelectedValue" multiple="multiple"
+          (onChange)="saveValues('luster',lusterSelectedValue)">
+        </p-selectButton>
+      </div>
+    </div>
+    <div id="shadesBox" class="ui-g-12 ui-g-nopad finishing-component-cutbox">
+      <div id="shodesLabelBox" class="ui-g-1 finishing-componet-heading"><label id="shadesLabel" class="middle-container-heading">{{'Shades' | translate}}</label></div>
+      <div id="shadesComponentBox" class="ui-g-10 ui-g-nopad finishing-componet-selectvalue">
+        <p-selectButton id="shadeMultiselect" [options]="shadeOptionsValue" [(ngModel)]="shadeSelectedValue" multiple="multiple"
+          (onChange)="saveValues('shade',shadeSelectedValue)">
+        </p-selectButton>
+      </div>
+    </div>
+  </div>
+  <div id="lusterShadesFilterBox" class='ui-g-12 ui-g-nopad' *ngIf='filterConfig' align="right">
+    <button id="lusterShadesFilterBtn" pButton type="button" (click)="this.filter.emit(result)" label="Apply"></button>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+ul {
+  -webkit-padding-start: 0 !important;
+  width: 100%;
+}
+ul li {
+  list-style: none;
+  float: left;
+  text-align: center;
+  width: auto;
+}
+.shape-box{width:70px;float: left;text-align: center;height: 60px; padding:0 15px}
+.shape-label{white-space: nowrap;  overflow: hidden;  text-overflow: ellipsis;font-size:12px; }
+
+.shape-label{width:100%;display: block;  color: #666; border-radius: 20px; padding:0px 1px;margin:3px 0px; height: 15px;}
+
+.icon{cursor: pointer}

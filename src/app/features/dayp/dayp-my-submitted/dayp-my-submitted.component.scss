@@ -1,0 +1,17 @@
+#daypMySubmittedContainer {
+  height: 750px;
+  width: 100%;
+  overflow: auto;
+}
+.grid-container{ margin-top: 0px; margin-bottom: 10px;}
+.divider{ width: 10px}
+.marl4{ margin-left: 10px}
+.dayp-data-price{max-width: 60px;  overflow: hidden; white-space: nowrap;}
+.dayp-stone-win{
+  color: green;
+  font-weight: bold;
+  font-size: 14px;
+}
+.dayp-stone-lose{
+  color: red;
+}

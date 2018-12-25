@@ -1,0 +1,22 @@
+<div id="mainBoxId" class="ui-g-12 ui-g-nopad">
+  <div class="ui-g-8  ui-lg-8 ui-md-7 ui-sm-12 ui-g-nopad">
+    <div class="div_container">
+      <video autoplay="" id="bgvid" loop>
+        <source *ngIf="loginPageVideo;else showOtherSource" [src]="loginPageVideo | safeUrl" type="video/mp4">
+        <ng-template #showOtherSource><source [src]="" type="video/mp4"></ng-template>
+      </video>
+    </div>
+  </div>
+  <div id="commonBox" class="ui-g-4  ui-lg-4 ui-md-5 ui-sm-12  container-height100 bg-white ui-g-nopad" style="background-color:#fff;z-index:999">
+    <div id="closeButtonId" class="close">
+      <a id="loadLoginPageId" (click)="loadLoginPage()">
+        <span  id="close" class="close-icon icon-close"></span>
+      </a>
+    </div>
+    <div id="commonContainerId" class="ui-g-12 ui-g-nopad">
+      <div id="containerBox">
+        <ng-template dirLogin></ng-template>
+      </div>
+    </div>
+  </div>
+</div>

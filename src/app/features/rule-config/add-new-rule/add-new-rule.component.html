@@ -1,0 +1,229 @@
+<div class="ui-g-12">
+  <label><strong>{{'Rule Configuration Form'|translate}}</strong></label>
+</div>
+
+<div class="ui-g-12">
+  <div class="ui-g-7">
+    <form (ngSubmit)="onSubmit(ruleForm.value)" novalidate [formGroup]="ruleForm">
+
+      <div class="ui-g-4">
+        <label>{{'Rule Name'|translate}}</label>
+      </div>
+      <div class="ui-g-8">
+        <input id="ruleName" pInputText type="text" formControlName="rule_name" />
+      </div>
+
+      <div class="ui-g-4">
+        <label>{{'Rule Description'|translate}}</label>
+      </div>
+      <div class="ui-g-8">
+        <textarea id="ruleDesc" pInputTextarea formControlName="rule_description"></textarea>
+      </div>
+      <div class="ui-g-4">
+        <label>{{'Input Type'|translate}}</label>
+      </div>
+      <div class="ui-g-8">
+        <p-dropdown id="ruleInputType" formControlName="input_type" [options]="inputTypeOptions"
+        [(ngModel)]="selectedInputType" (onChange)="resetInputValues()"></p-dropdown>
+      </div>
+
+      <div *ngIf='selectedInputType'>
+        <div class="ui-g-4">
+          <label>{{'Value Type'|translate}}</label>
+        </div>
+        <div class="ui-g-8">
+          <p-dropdown id="ruleValueType" formControlName="value_type"
+          [options]="valueTypeOptions | rangeFilter:selectedInputType"
+          [(ngModel)]="selectedValueType" (onChange)="resetValueTypes()">
+          </p-dropdown>
+        </div>
+
+        <div [ngSwitch]="selectedValueType">
+          <div formArrayName="values">
+
+            <div *ngSwitchCase="'Range'">
+              <div *ngFor="let v of ruleForm.controls.values.controls; let i=index">
+                <div [formGroupName]="i">
+                  <div class="ui-g-4">
+                    <label>{{'Range From'|translate}}:</label>
+                  </div>
+                  <div class="ui-g-8">
+                    <p-calendar id="valueRangeFrom" *ngIf="selectedInputType=='Date'"
+                    [showTime]="true" dataType="string" formControlName="from"></p-calendar>
+                    <input id="valueRangeFrom" *ngIf="selectedInputType=='Number'|| selectedInputType=='Decimal Number'"
+                    pInputText type="number" formControlName="from" />
+                  </div>
+                  <div class="ui-g-4">
+                    <label>{{'To'|translate}}:</label>
+                  </div>
+                  <div class="ui-g-8">
+                    <p-calendar id="valueRangeTo" *ngIf="selectedInputType=='Date'"
+                    [showTime]="true" dataType="string"  formControlName="to"></p-calendar>
+                    <input id="valueRangeTo" *ngIf="selectedInputType=='Number'|| selectedInputType=='Decimal Number'"
+                    pInputText type="number" formControlName="to" />
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div *ngSwitchCase="'Single Value'">
+              <div *ngFor="let v of ruleForm.controls.values.controls; let i=index">
+                <div [formGroupName]="i">
+                  <div class="ui-g-4">
+                    <label>{{'Single Value'|translate}}:</label>
+                  </div>
+                  <div class="ui-g-8">
+                    <p-calendar id="singleValue" *ngIf="selectedInputType=='Date'"
+                    [showTime]="true"  dataType="string" formControlName="value" ></p-calendar>
+                    <input id="singleValue" *ngIf="selectedInputType=='Text'"
+                    pInputText type="text" formControlName="value" />
+                    <input id="singleValue" *ngIf="selectedInputType=='Number' || selectedInputType=='Decimal Number'"
+                    pInputText type="number" formControlName="value" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div formArrayName="options">
+
+            <div *ngSwitchCase="'Value Set'">
+              <div class="ui-g-12 ui-g-nopad">
+                <div *ngFor="let opt of ruleForm.controls.options.controls; let i=index">
+                  <div [formGroupName]="i">
+                    <div class="ui-g-12 ui-g-nopad">
+                      <div class="ui-g-4">
+                        <label>{{'Value'|translate}} {{i + 1}}</label>
+                      </div>
+                      <div class="ui-g-5">
+                        <p-calendar id="valueSetItem{{i}}"*ngIf="selectedInputType=='Date'" [showTime]="true"
+                        dataType="string" name="set[]" formControlName="value"></p-calendar>
+                        <input id="valueSetItem{{i}}" *ngIf="selectedInputType=='Number'|| selectedInputType=='Decimal Number'"
+                        pInputText type="number" name="set[]" formControlName="value" />
+                        <input id="valueSetItem{{i}}" *ngIf="selectedInputType=='Text'" type="text" name="set[]"
+                        pInputText formControlName="value" />
+                        <span *ngIf="ruleForm.controls.options.controls.length > 1" (click)="removeValueSet(i)">
+                            <img src="../assets/img/delete.png">
+                            </span>
+                      </div>
+                      <div class="ui-g-3" *ngIf="i === (ruleForm.controls.options.controls.length-1) ">
+                        <a (click)="addValueSet()" style="cursor: default">{{'Add value'|translate}} +</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-row ui-g-12" *ngIf="selectedValueType=='Value Set'">
+        <button id="addAllButton" pButton type="button" (click)="addAllValues()" label="Add all"></button>
+      </div>
+
+      <div *ngIf="showValueSetOptions==true">
+        <div class="ui-g-4">
+          <label>Value Selection Type</label>
+        </div>
+        <div class="ui-g-8">
+          <p-dropdown id="valueSelectionType" formControlName="option_selection"
+          [options]="valueSelectionTypeOptions" [(ngModel)]="selectedValueSelectionType"></p-dropdown>
+        </div>
+      </div>
+
+      <div *ngIf="(selectedValueSelectionType) && (selectedValueType=='Value Set')">
+        <div class="ui-g-4">
+          <label>{{'Choose values'|translate}}</label>
+        </div>
+
+        <div formArrayName="values">
+          <div *ngFor="let opt of ruleForm.controls.values.controls; let i=index">
+            <div [formGroupName]="i">
+              <div class="ui-g-8">
+                <p-dropdown id="singleValue" *ngIf="selectedValueSelectionType=='Single Select'"
+                formControlName="value" [options]="valueOptions" [(ngModel)]="selectedSingleValue"></p-dropdown>
+                <p-multiSelect id="multipleValue" *ngIf="selectedValueSelectionType=='Multi Select'"
+                formControlName="value" [options]="valueOptions" [(ngModel)]="selectedMultipleValue"></p-multiSelect>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row" *ngIf="showMarginOptions()" formGroupName="margin_allowed">
+        <div class="ui-g-4">
+          <label>{{'Margin Value'|translate}}</label>
+        </div>
+        <div class="ui-g-8">
+          <input pInputText id="marginValue" type="number" formControlName="margin_value" [value]="0" /><br>
+        </div>
+        <div class="ui-g-4">
+          <label>{{'Margin Type'|translate}}</label>
+        </div>
+        <div class="ui-g-8">
+          <p-dropdown id="marginType" formControlName="margin_type" [options]="marginTypeOptions"
+          [(ngModel)]="selectedMarginType"></p-dropdown>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="ui-g-4">
+          <label>{{'Effective From'|translate}}</label>
+        </div>
+        <div class="ui-g-8">
+          <p-calendar id="ruleEffectiveFrom"  [showTime]="true" dataType="string"
+          formControlName="effective_from" ></p-calendar><br>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="ui-g-4">
+          <label>{{'Effective To'|translate}}</label>
+        </div>
+        <div class="ui-g-8">
+          <p-calendar id="ruleEffectiveTo" [showTime]="true" dataType="string"
+          formControlName="effective_to"></p-calendar><br>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="ui-g-4">
+          <label>{{'Is active'|translate}}</label>
+        </div>
+        <div class="ui-g-8">
+          <p-radioButton id="ruleIsActiveTrue" name="groupname" value="true" label="Yes"
+          formControlName="is_active"></p-radioButton>
+          <br>
+          <p-radioButton id="ruleIsActiveFalse" name="groupname" value="false" label="No"
+          formControlName="is_active"></p-radioButton>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="ui-g-4">
+          <label>{{'Is updatable'|translate}}</label>
+        </div>
+        <div class="ui-g-8">
+          <p-radioButton id="ruleIsUpdatableTrue" name="group" value="true" label="Yes"
+          formControlName="is_updatable"></p-radioButton>
+          <br>
+          <p-radioButton id="ruleIsUpdatableFalse" name="group" value="false" label="No"
+          formControlName="is_updatable"></p-radioButton>
+        </div>
+      </div>
+
+      <!-- submit button -->
+      <div class="form-row">
+        <div class="ui-g-12">
+          <button pButton id="addRuleButton" type="submit" [disabled]="!ruleForm.valid"
+          label="{{'Create Rule'|translate}}"></button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</div>

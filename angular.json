@@ -4,29 +4,38 @@
   "newProjectRoot": "projects",
   "projects": {
     "web-ms": {
-      "root": "src",
+      "root": "src/app",
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
           "styleext": "scss"
+        },
+        "metaBuildData": {
+          "envName": "my-test",
+          "containerName": "srkweb",
+          "appName": "login-web-ms"
         }
       },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "baseHref" : "/",
             "outputPath": "dist/web-ms",
-            "index": "src/index.html",
-            "main": "src/main.ts",
+            "index": "./src/app/index.html",
+            "main": "./src/main.ts",
+            "polyfills": "./src/polyfills.ts",
+            "tsConfig": "./src/tsconfig.app.json",
             "preserveSymlinks": true,
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "../assets",
+                "output": "assets"
+              }
             ],
             "styles": [
               "node_modules/primeng/resources/themes/nova-light/theme.css",
@@ -34,7 +43,9 @@
               "node_modules/bootstrap-scss/bootstrap.scss",
               "node_modules/font-awesome/scss/font-awesome.scss",
               "node_modules/animatewithsass/animate.scss",
-              "src/styles.scss"
+              "node_modules/dragula/dist/dragula.css",
+              "src/assets/styles/Diamond-Shape.css",
+              "src/assets/styles/styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -43,7 +54,15 @@
                 "node_modules/bootstrap-scss/"
               ]
             },
-            "scripts": []
+            "scripts": [
+              "node_modules/dragula/dist/dragula.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/jquery-slimscroll/jquery.slimscroll.js",
+              "node_modules/moment/min/moment.min.js",
+              "node_modules/underscore/underscore-min.js",
+              "node_modules/file-saver/dist/FileSaver.js",
+              "node_modules/quill/dist/quill.min.js"
+            ]
           },
           "configurations": {
             "production": {

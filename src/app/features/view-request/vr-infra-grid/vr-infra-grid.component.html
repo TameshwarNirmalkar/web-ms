@@ -1,0 +1,20 @@
+<div class="infragistics-grid-container" style="margin: 2.5rem auto 0 auto; position: relative;" [style.height.px]="gridHeight - 75">
+
+  <input #searchInput type="text" class="grid-search-input" placeholder="Search grid">
+
+  <!--<div *ngIf="displayGridLoadingOverlay" class="grid-loading-overlay">
+
+    <img src="/assets/Ignite UI/css/structure/images/igLoadingSmall.gif" alt="LOADING">
+
+  </div>-->
+
+  <table [id]="'grid'+gridName"></table>
+
+  <app-context-menu *ngIf="displayContextMenu"
+                    [posX]="menuXPosition"
+                    [posY]="menuYPosition"
+                    [optionsList]="contextMenuOptionsList"
+                    (optionClicked)="applyContextMenuActionToGrid($event)">
+  </app-context-menu>
+
+</div>

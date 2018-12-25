@@ -1,0 +1,81 @@
+input[type="file"] {  width: auto;  margin-top: 5px;cursor: pointer;}
+.inputfile-2 {  display: none;}
+.inputfile-2 + label {  border: 1px solid ;  padding: 7px 12px; margin-left: 0px ; cursor: pointer; border-radius: 4px;}
+.input-border{border: 1px solid }
+.uploadright {  float: right; font-weight: bold;}
+.error {  color: red;  font-size: 11px;}
+.dayp-main-title{ font-size: 24px;}
+.main-date{padding-left: 90px;}
+.dayp-main-date, .dayp-main-time {font-size: 14px;text-align: left; margin-top: 10px;display: inline-block;}
+.dayp-main-time-remain {font-size: 14px;text-align: right;padding:0px 3px;font-weight: bold; padding-right: 20px;}
+.dayp-closed{font-size: 14px;text-align: right;padding:0px 3px;font-weight: bold; padding-right: 20px;color: red;}
+.dayp-main-time-remain {
+    font-size: 14px;
+    text-align: right;
+    padding: 0px 3px;
+    font-weight: bold;
+}
+.timer-size{
+  font-size: 13px;
+}
+.dayp-inactive-message {
+  margin: 15% 5% 5% 0%;
+  font-size: 18px;
+  background-color: #afdde9;
+  color: #666;
+  padding: 50px;
+  border-radius: 10px;
+  line-height: 40px;
+}
+.show-button , .creat-button{ margin-top: 6px; margin-bottom: 0px;}
+.loader-align{padding: 2px;}
+
+.download-upload{
+  text-align: right;
+  width: 420px;
+  float: right;
+  position: absolute;
+  top: 60px;
+  right: 5px;
+  z-index: 900;
+}
+
+.create-button{margin-top: 0px;}
+
+.custom-btnPrimary-dayp {
+  background-color: #f6f6f6!important;
+  border-color: #000000 !important;
+  color: #434453 !important;
+  padding: 8px 12px;
+  margin: 12px 4px;
+  vertical-align: middle;
+  outline: 0;
+  font-size: 14px !important;
+  text-align: center;
+  cursor: pointer;
+  outline: 0;
+  border: 1px solid;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.custom-btnBorder-dayp-upload {
+  padding: 8px 12px;
+  margin: 12px 3px;
+  vertical-align: middle;
+  outline: 0;
+  font-size: 14px !important;
+  text-align: center;
+  cursor: pointer;
+  outline: 0;
+  border: 1px solid;
+  border-radius: 3px;
+}
+
+.mtb0{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.page-search-temp-dayp{
+  height: 32px;
+}

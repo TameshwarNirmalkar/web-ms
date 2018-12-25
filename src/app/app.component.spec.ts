@@ -1,31 +1,40 @@
+/* tslint:disable:no-unused-variable */
+// import {} from 'jasmine';
 import { TestBed, async } from '@angular/core/testing';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AppComponent } from './app.component';
+import { RouterTestingModule} from '@angular/router/testing';
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LoggerService } from '@srk/core';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
       ],
-    }).compileComponents();
-  }));
+      imports: [
+        HttpClientModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: (http: HttpClient) => new TranslateHttpLoader(http, 'assets/i18n', '.json'),
+            deps: [HttpClient]
+          }
+        }),
+        RouterTestingModule
+      ],
+      providers: [TranslateService, LoggerService]
+    });
+    TestBed.compileComponents();
+  });
 
-  it('should create the app', () => {
+  it('should create the app', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  });
+  }));
 
-  it(`should have as title 'web-ms'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('web-ms');
-  });
-
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to web-ms!');
-  });
 });

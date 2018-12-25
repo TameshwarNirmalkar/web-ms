@@ -1,0 +1,67 @@
+<p-confirmDialog acceptIcon='' rejectIcon='' width="425" icon=confirmation-popup-icons></p-confirmDialog>
+
+<div id="fixedBasketPanel" class="fixed-panel-class"></div>
+<div dirScrollTop id="pktContainer" class="ui-g-12 ui-g-nopad">
+  <div #packetPanel class="container">
+    <div class="scroller scroller-left" (click)="scrollTabPanelLeft()">
+      <i class="fa fa-chevron-left" aria-hidden="true"></i>
+    </div>
+    <div class="scroller scroller-right" (click)="scrollTabPanelRight()">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+    </div>
+    <div class="wrapper-search-tab">
+      <ul class="nav nav-tabs list" id="myTab">
+        <li id="packetMenubar" *ngFor="let tab of packets" (click)="handleTabViewChange(tab)" [ngClass]="{'active-filter': (tab.name === currentTabSelected || tab.packet_name === currentTabSelected || tab.stoneName === currentTabSelected || tab.pairId === currentTabSelected),
+                'blink_me':lastCreatedTab && (tab.stoneName || tab.pairId || tab.packet_name) && (tab.stoneName === lastCreatedTab || tab.pairId === lastCreatedTab || tab.packet_name === lastCreatedTab)}">
+          <a *ngIf="tab.name">
+            <span>
+              <label class="search-font-box" id="{{tab.name}}PacketTabId">{{tab.name}}</label>
+            </span>
+          </a>
+          <a *ngIf="tab.packet_name" id="{{tab.packet_name}}NameLink">
+            <span id="{{tab.packet_name}}Id" class="search-font-box">{{tab.packet_name}}</span>
+            <span class="icon-close circle-close-icon" (click)="removeDetailedPacketTab(tab.packet_name)"></span>
+          </a>
+          <a *ngIf="tab.stoneName" id="{{tab.stoneName}}NameLink">
+            <span id="{{tab.stoneName}}NameId" class="search-font-box">{{tab.stoneName}} </span>
+            <span id="removeIcon" class="icon-close circle-close-icon" (click)="removeDetailedPacketTab(tab.stoneName)"></span>
+          </a>
+          <a *ngIf="tab.pairId" id="{{tab.pairId}}NameLink">
+            <span id="{{tab.pairId}}NameLink" class="search-font-box">{{tab.pairId}}</span>
+            <span id="removeIcon" class="icon-close circle-close-icon" (click)="removeDetailedPacketTab(tab.pairId)"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="tab-content">
+    <div id="tabRowId" class="tabpanel-item">
+      <div *ngFor="let content of packets">
+        <ng-template [dirCheckPermission]=content.permissionName>
+          <div id="{{content.name}}Id" class="tabpanel-item" *ngIf="content.name && currentTabSelected === content.name">
+            <div *ngIf="content.data.length > 0;else emptyContainer">
+              <app-packet-list [packets]=content.data (packetInfoTab)="addDetailedPacketTab($event)" (remove)="removePacket($event)" (rename)="renamePacket($event)"></app-packet-list>
+            </div>
+            <ng-template #emptyContainer>
+              <div class="sms-page-container">
+                <div *ngIf="content.data.length === 0" id="emptyPacketMessage" class="ui-g-12 ui-g-nopad coming-soon">
+                  {{message | translate}}
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </ng-template>
+        <div id="{{content.packet_name}}Id" class="tabpanel-item" *ngIf="content.packet_name && currentTabSelected === content.packet_name">
+          <app-packet-details #thmPacketPanel [packet]=content [panelData]="content.data.display_data" [packetConfiguration]="packetConfig"
+            (saveStone)="addStoneToPacket($event)" (removeStone)="removeStoneFromPacket($event)"></app-packet-details>
+        </div>
+        <div id="stonedetailssearch" class="tabpanel-item struck-details-page  sms-page-container" *ngIf="content.stoneName && currentTabSelected === content.stoneName">
+          <thm-stone-details [stoneDetails]="content.stoneInfo"></thm-stone-details>
+        </div>
+        <div class="tabpanel-item sms-page-container struck-details-page" *ngIf="content.pairId && currentTabSelected === content.pairId">
+          <thm-twin-stone-detail [twinStones]="content.twinStones"></thm-twin-stone-detail>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

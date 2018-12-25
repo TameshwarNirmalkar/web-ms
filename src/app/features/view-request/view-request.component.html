@@ -1,0 +1,57 @@
+<p-confirmDialog acceptIcon='' rejectIcon='' width="425" icon=confirmation-popup-icons></p-confirmDialog>
+<div dirScrollTop>
+  <div class="ui-g-12 ui-g-nopad show-packet-panel" id="packetBox">
+    <app-create-packet [visiblePacketOverlay]="visiblePacketPopup" [stone]="stoneForPacket" [showSelectedPacket]="showSelectedPacket"
+      (togglePacketIcon)="togglePacketIcon($event)" (togglePacketOverlay)="togglePacketOverlay($event)" (updatePacketIcon)="updatePacketIcon($event)"></app-create-packet>
+  </div>
+  <div class="packet-btn-box" id="packetTabResultId">
+    <button [dirStoreAudit]="'SHOW PACKET'" id="vrShowPacketBtnID" *ngIf="showPacktBtn" class="custom-btnPrimary show-button"
+      type="button" (click)="showPacket()">{{'Show Packet' |translate}}</button>
+    <ng-template [dirCheckPermission]="'create_packet_btn'">
+      <button [dirStoreAudit]="'CREATE PACKET'" id="vrCreatePacketBtnID" *ngIf="showCreatePacketBtn" class="custom-btnPrimary creat-button"
+        type="button" (click)="createPacket()">{{'Create Packet' |translate}}</button>
+    </ng-template>
+  </div>
+
+  <div id="tabsContainer">
+    <div #viewRequestPanel class="container">
+      <div class="scroller scroller-left" (click)="scrollTabPanelLeft()">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+      </div>
+      <div class="scroller scroller-right" (click)="scrollTabPanelRight()">
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </div>
+      <div class="wrapper-search-tab">
+        <ul class="nav nav-tabs list" id="myTab">
+          <li id="viewRequestMenubar" *ngFor="let item of requestTabs" (click)="getSelectedTabName(item)" [ngClass]="{'active-filter': (item.tabName === currentTabSelected || item.stoneName === currentTabSelected || item.pairId === currentTabSelected),
+                    'blink_me':lastCreatedTab && (item.stoneName || item.pairId) && (item.stoneName === lastCreatedTab || item.pairId === lastCreatedTab),'padd0':item.tabName==='Today' && !isTodayVisit}">
+            <span id="{{item.tabName}}Id" *ngIf="item.tabName ==='Past'" class="search-font-box">
+              {{'My View Request ' | translate}}
+            </span>
+            <span *ngIf="item.stoneName" id="{{item.stoneName}}NameId" class="search-font-box">{{item.stoneName}}
+              <span class="icon-close circle-close-icon" (click)="removeDetailedPacketTab(item.stoneName)"></span>
+            </span>
+            <span *ngIf="item.pairId" id="{{item.pairId}}pairId" class="search-font-box">{{item.pairId}}
+              <span class="icon-close circle-close-icon" (click)="removeDetailedPacketTab(item.pairId)"></span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="tab-content">
+      <div id="tabRowId" class="tabpanel-item">
+        <div *ngFor="let data of requestTabs">
+          <div id="{{data.tabName}}ContainerId" class="ui-g-12 ui-g-nopad  container-height100 margb10" *ngIf="data.tabName ==='Past' && currentTabSelected === data.tabName">
+            <app-view-request-details [visiblePacketIcon]="visiblePacketIcon" (statusMessage)="getStatusMessage($event)" (viewRequestPacket)="stoneFromSelectedStone($event)"></app-view-request-details>
+          </div>
+          <div id="{{data.stoneName}}Id" class="tabpanel-item sms-page-container" *ngIf="data.stoneName && currentTabSelected === data.stoneName">
+            <thm-stone-details [stoneDetails]="data.stoneInfo"></thm-stone-details>
+          </div>
+          <div id="{{data.pairId}}Id" class="tabpanel-item sms-page-container" *ngIf="data.pairId && currentTabSelected === data.pairId">
+            <thm-twin-stone-detail [twinStones]="data.twinStones"></thm-twin-stone-detail>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

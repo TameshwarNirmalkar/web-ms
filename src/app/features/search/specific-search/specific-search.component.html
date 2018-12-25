@@ -1,0 +1,64 @@
+<div>
+
+  <div class="ui-g-12 ui-g-nopad" id="search-carousel-container">
+    <div id="searchFilterMenuBox" class="ui-g-12 ui-g-nopad sms-page-container carousel-panel-container">
+      <div id="searchFilterMenuId" class="ui-g-12 paddl0 paddt0 paddb0 search-tab">
+        <app-search-menubar [menuList]="allMenuTabs" (filterSelected)="filterSelected($event)"></app-search-menubar>
+      </div>
+    </div>
+  </div>
+
+  <div id="searchElementsBox" class="ui-g-12 ui-g-nopad dynamic-search-components search-page-container" *ngIf="searchViewComponents.length>0"
+    [ngClass]="{'struck-page': isSearchResultPage}" (scroll)="onDivScroll($event)">
+      <div id="searchElement" class="ui-g-12 ui-g-nopad" *ngFor="let searchComp of searchViewComponents">
+        <app-dynamic-search-component #searchComponent [hidden] = '!searchComp.data.isVisible' [searchComponent]="searchComp" [parentRef]="parentRef"></app-dynamic-search-component>
+      </div>
+    <div id="searchfooter" class="ui-g-12 paddl0 paddt0 search-footer">
+      <div id="footerFirstDivision" class="ui-g-4 ui-md-4 paddl0 ui-g-nopad">
+        <button class="custom-btnBorder View-button" *ngIf="!viewAllComponent && selectedFilters.length<18"
+          id="viewMoreButton" (click)="viewMore()">{{'+ View More' | translate}}</button>
+        <button class="custom-btnBorder View-button" *ngIf="viewAllComponent" id="viewLessButton" (click)="viewLess()">{{'- View Less' |translate}}</button>
+        <input id="exSelectionBtn"  type="button" value="3EX" class="actionButton" [class.selected]="exSlectionFlag"
+          (click)="selectAllExcellent()">
+        <input id="vgSelectionBtn"   type="button" value="3VG+" class="actionButton" [class.selected]="vgSelectionFlag"
+          (click)="selectAllVeryGood()">
+        <input id="noBgmBtn" type="button"  [class.selected]="noBgmFlag" value="No BGM" class="actionButton"  (click)="selectNoBgm()">
+        <!--[hidden]="visibleNoBGMBtn"  -->
+      </div>
+      <div id="footerThirdDivision" class="ui-g-8 ui-md-8 ui-g-nopad paddr0 search-button-align">
+        <label *ngIf="searchType!=='EDIT_SEARCH'" [ngClass]="{'text-green': footNoteSymbol==='Less' , 'text-red': footNoteSymbol==='More' || stoneSearchCount === 0}">{{footNoteText| translate}}</label>
+        <!-- reset search button -->
+        <button [dirStoreAudit]="'RESET'" *ngIf="searchType!=='EDIT_SEARCH'" id="searchBtn" class="custom-btnBorder custom-btn-search-margin"
+          (click)="resetSearch()">{{'Reset Search' |translate}}</button>
+        <!-- saved search button -->
+        <span *ngIf="showSaveBtn">
+          <button id="savedSearchButton" class="custom-btnBorder custom-btn-search-margin" (click)="toggleSaveSearchPopUp()" >{{'Save Search' |translate}}</button>
+        </span>
+        <button id="cancelSearchBtn" class="custom-btnBorder custom-btn-search-margin" (click)="cancelSpecificSearch()" *ngIf="showCancelBtn">{{'Cancel' |translate}}</button>
+        <button id="searchBtn" class="custom-btnPrimary-Disable custom-btnPrimary custom-btn-search-margin" *ngIf="((footNoteSymbol !== 'Less' || stoneSearchCount === 0 || isRequestMade) && (searchType !== 'SAVED_SEARCH' || searchType !== 'EDIT_SEARCH') && SearchType == undefined); else showActiveSearchButton">
+          <i  *ngIf = "isRequestMade"  class="fa fa-spinner fa-pulse loader-align" aria-hidden="true"></i> <span>{{searchBtnLabel |translate}}</span></button>
+        <!-- search button -->
+        <ng-template #showActiveSearchButton>
+          <button *ngIf="searchType !== 'SAVED_SEARCH' && SearchType == undefined" id="searchBtn" class="custom-btnPrimary custom-btn-search-margin"
+            (click)="search()">{{searchBtnLabel |translate}}</button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <p-dialog appendTo="body" [draggable]=false [resizable]=false width="350" height="auto" header="Save Search" [(visible)]="savedSearchPopup"
+    modal="modal" responsive="true">
+    <div id="saveSearchBox" class="ui-g ui-g-nopad">
+      <div id="saveSearchId" class="ui-g-12">
+        <input type="text" placeholder="{{'Enter search name' | translate}}" class="saved-search-text" id="saveSearcNameId" [(ngModel)]="savedSearchText">
+      </div>
+      <div class="ui-g-12 error" id="errorMessageId" *ngIf="errorMessage">
+        {{errorMessage | translate}}
+      </div>
+    </div>
+    <p-footer id="saveSearchButtonBottom" class="search-save-align">
+      <button id="saveSearchButton" class="custom-btnPrimary" [disabled]='!saveNewSearch' (click)="saveNewSearch(savedSearchText)">{{'Save' | translate}}
+        </button>
+        <i  *ngIf = "isSaveRequestMade"  class="fa fa-spinner fa-pulse loader-align" aria-hidden="true"></i>
+    </p-footer>
+  </p-dialog>
+</div>

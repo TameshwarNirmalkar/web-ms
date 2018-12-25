@@ -1,0 +1,15 @@
+.icon-profile-place{ color: #AFDDE9}
+.chat-bot-header-title{ color:white; font-size: 14px;}
+.icon-close{ color: white ;}
+.chat-bubble.you {background: #AFDDE9;color: #444e5a;clear: both;float: right; font-size: 12px;}
+.chat-bubble { width: auto;  border-radius: 10px;  padding: 5px 12px;  margin-bottom: 5px;  max-width:265px;}
+.chat-bubble.them{background: #e0e0e0;color: #252a41;clear: both;float: left; font-size: 12px;}
+.mesaage-container{ max-height: 250px; overflow-y: scroll;}
+.mesaage-type{ resize: none; border: none; cursor: text; outline: 0; vertical-align: middle; width: 100%; font-size: 12px;border: 1px solid #ccc;}
+.message-send-image{ width: 20px ; height: 20px; padding-right: 1px;}
+.mesaage-container::-webkit-scrollbar{ width: .5em ; height: .5em; }
+.mesaage-container::-moz-scrollbar{ width: .5em ; height: .5em; }
+.chat-bot-header-title-container{padding-top: 10px; padding-left: 5px;}
+.message-send-button{background-color: Transparent;background-repeat:no-repeat;border: none; outline: none;}
+.message-voice-button{background-color: Transparent;background-repeat:no-repeat;  border: none; outline: none;}
+.message-button-container{ padding-top: 5px;}

@@ -1,0 +1,38 @@
+<div id="OPEN_INCLUSIONS_ID" class="ui-grid ui-grid-responsive ui-grid-pad component-cards">
+  <div id="openInclusionHeaderBox" class="ui-g-12 ui-g-nopad">
+    <div id="openInclusionLabelBox" class="ui-g-11 custom-padding">
+      <label id="openInclusionLabel" class="component-cards-heading">{{'Open Inclusions' | translate}}</label>
+    </div>
+  </div>
+  <div id="openInclusionComponentBox" class="ui-g-12 ui-g-nopad">
+    <div id="tableHeading" class="ui-g-6 param-padding">
+      <div id="tableCell" class="ui-g-1 ui-g-nopad table-header-data">{{'Table' | translate}}</div>
+      <div id="tableSelectionCell" class="ui-g-11 ui-g-nopad">
+        <p-selectButton id="tableMultiselect" [options]="tableOptions" [(ngModel)]="selectedTableValues" multiple="multiple" (onChange)="saveValues('table_open',selectedTableValues)">
+        </p-selectButton>
+      </div>
+    </div>
+    <div id="crownHeading" class="ui-g-6 param-padding">
+      <div id="crownCell" class="ui-g-1 ui-g-nopad table-header-data">{{'Crown' | translate}}</div>
+      <div id="crownSelectionCell" class="ui-g-11 ui-g-nopad">
+        <p-selectButton id="crownMultiselect" [options]="crownOptions" [(ngModel)]="selectedCrownValues" multiple="multiple" (onChange)="saveValues('crown_open',selectedCrownValues)">
+        </p-selectButton>
+      </div>
+    </div>
+    <div id="pavHeading" class="ui-g-6 param-padding">
+      <div id="pavCell" class="ui-g-1 ui-g-nopad table-header-data">{{'Pavilion' | translate}}</div>
+      <div id="pavSelectionCell" class="ui-g-11 ui-g-nopad">
+        <p-selectButton id="pavMultiselect" [options]="pavilionOptions" [(ngModel)]="selectedPavilionValues" multiple="multiple"
+          (onChange)="saveValues('pav_open',selectedPavilionValues)">
+        </p-selectButton>
+      </div>
+    </div>
+    <div id="girdleHeading" class="ui-g-6 param-padding">
+      <div id="girdleCell" class="ui-g-1 ui-g-nopad table-header-data">{{'Girdle' | translate}}</div>
+      <div id="girdleSelectionCell" class="ui-g-11 ui-g-nopad">
+        <p-selectButton id="girdleMultiselect" [options]="girdleOptions" [(ngModel)]="selectedGirdleValues" multiple="multiple" (onChange)="saveValues('girdle_open',selectedGirdleValues)">
+        </p-selectButton>
+      </div>
+    </div>
+  </div>
+</div>

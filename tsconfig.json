@@ -19,9 +19,9 @@
       "dom"
     ],
     "paths": {
-      "@srk/core": ["./app/core"],
-      "@srk/shared": ["./app/shared"],
-      "@srk/features/*": ["./app/features/*"]
+      "@srk/core": ["./app/core", "../app/core"],
+      "@srk/shared": ["./app/shared", "../app/shared"],
+      "@srk/features/*": ["./app/features/*", "../app/features/*"]
     }
   }
 }

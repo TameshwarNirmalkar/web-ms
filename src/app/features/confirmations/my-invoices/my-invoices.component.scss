@@ -1,0 +1,40 @@
+.panel {
+  background: white;
+  padding: 30px;
+  margin: 30px 0;
+}
+
+.confirm-panel-separator {
+  border-right: 2px solid #e0e0e0;
+}
+
+#myinvoicepGridContainer {
+  max-height: 454px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+#myinvoiceDetailsPanel{
+  padding-right: 27px;
+}
+app-my-invoices .dx-datagrid.dx-datagrid-borders > .dx-datagrid-header-panel {
+ background-color:  #f6f6f6;
+}
+.dx-toolbar .dx-toolbar-items-container {
+ background-color:  #f6f6f6;;
+ height: 50px;
+}
+app-my-invoices .dx-texteditor{
+   background-color:  #f6f6f6;
+}
+.icons-mailbox{ width: 20px; height: 20px; padding-top: 7px;}
+.icons-download{ width: 20px; height: 20px; padding-top: 7px;}
+.custom-btnBorder{margin: 0px ;}
+.invoice-skeleton{
+    display: inline-block;
+    background-color: #f6f6f6;
+    height: 15px;
+    width: 120px;
+    border-radius: 50px;
+}
+
+.coming-soon{  text-align: center;  font-size: 25px;}

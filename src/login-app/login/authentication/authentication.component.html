@@ -1,0 +1,56 @@
+<div id="loginFormBox" class="loginForm-content ui-g ui-g-11">
+  <form [formGroup]="loginForm" (ngSubmit)="submitForm(loginForm.value)" class="ui-g-nopad">
+    <div class="ui-g ui-g-1"></div>
+    <div class="ui-g ui-g-11">
+      <h2 id="loginTitleId" class="login-title">{{'Login'|translate}}</h2>
+    </div>
+
+    <div id="userNameBoxId" class="group ui-g-12 ui-g-nopad">
+      <div class="ui-g ui-g-1">
+        <span class="login-icon icon-user"></span>
+      </div>
+      <div class="ui-g ui-g-11">
+        <input id="userNameId" class="border-bottom" placeholder="{{'Username'|translate}}" pInputText type="text" formControlName="username"
+          autocomplete="off">
+        <div id="userNameBoxError" class="error" *ngIf="(loginForm.get('username').hasError('required') || loginForm.get('username').hasError('whitespace')) && loginForm.get('username').touched">
+          {{'INPUT_USERNAME' |translate}}
+        </div>
+      </div>
+    </div>
+    <div id="passwordBox" class="group ui-g-12 ui-g-nopad">
+      <div class="ui-g ui-g-1">
+        <span class="login-icon  icon-password"></span>
+      </div>
+      <div class="ui-g ui-g-11">
+        <input id="passwordId" class="border-bottom" placeholder="{{'Password'|translate}}" type="password" formControlName="password">
+        <div id="passwordBoxError" class="error" *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">
+          {{'Please input password' |translate}}
+        </div>
+      </div>
+    </div>
+    <div id="captchaBox" class="captcha ui-g ui-g-12 ui-g-nopad" *ngIf="enableCaptcha">
+      <div class="ui-g ui-g-1"></div>
+      <div class="ui-g ui-g-11">
+        <re-captcha (captchaResponse)="handleCorrectCaptcha($event)" [site_key]="siteKey">
+        </re-captcha>
+      </div>
+    </div>
+
+    <div *ngIf="errorMsg" class="ui-g ui-g-12">
+      <div class="ui-g ui-g-1"></div>
+      <div id="errorMessageBox" class="error ui-g-11">{{errorMsg | translate}}</div>
+    </div>
+
+    <div class="ui-g ui-g-1"></div>
+    <div class="ui-g ui-g-11">
+      <button id="submitLoginId" [dirStoreAudit]="'LOGIN'" [icon]="loginBtnIcon" [disabled]="loginForm.invalid || loginBtnIcon != 'none'"
+        type="submit" pButton label="{{'Log In'|translate}}{{loginBtnIcon != 'none'?'...':''}}" class="custom-btnPrimary">
+    </button>
+    </div>
+    <div class="ui-g ui-g-1"></div>
+    <div class="ui-g ui-g-11 login-other-actions">
+      <div id="forgotPwdId" class="forgot-pwd"><a id="forgotPasswordButton" (click)="showForgotPasswordPanel()">{{'Forgot Password ?'|translate}}</a></div>
+      <div id="registerNowId" class="registrt-now"><a id="registrationBox" (click)="showRegistrationPanel()">{{'Register Now'|translate}}</a></div>
+    </div>
+  </form>
+</div>

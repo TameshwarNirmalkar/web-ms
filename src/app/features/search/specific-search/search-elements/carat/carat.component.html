@@ -1,0 +1,47 @@
+<div id="CARAT_ID" class="ui-grid ui-grid-responsive ui-grid-pad component-cards">
+  <div id="caratContainer" class="ui-g-1 custom-padding">
+    <!-- <div id="caratHeadingContainer" class="ui-g-1 custom-padding"> -->
+    <label id="caratHeading" class="component-cards-heading">{{'Carat' | translate}}</label>
+    <!-- </div> -->
+    <!-- <div id="caratTooltipContainer" class="ui-g-1" align="right">
+      <span id="caratTooltip" class="info-icon icon-info display-none"></span>
+      <app-thm-tooltip [targetID]="'caratTooltip'" [tooltipHeading]="'Carat'" [tooltipMessage]="'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'"></app-thm-tooltip>
+    </div> -->
+  </div>
+  <div id="caratComponentContainer" class="ui-g-11 ui-g-nopad">
+    <!-- <div id="caratChartContainer" class="ui-g-8 ui-sm-12 custom-padding">
+      <dx-range-selector id="range-selector" [value]="[startSelectedValue, endSelectedValue]" (onValueChanged)="onRangeValueChanged($event)">
+        <dxo-size [height]="100"></dxo-size>
+        <dxo-scale [startValue]="0.0" [endValue]="50" [tickInterval]="2" [minorTickInterval]="0.1">
+          <dxo-label [customizeText]="customizeText"></dxo-label>
+          <dxo-minor-tick [visible]="false"></dxo-minor-tick>
+        </dxo-scale>
+        <dxo-slider-marker [customizeText]="customizeText">
+          <dxo-format type="fixedPoint" [precision]="2"></dxo-format>
+        </dxo-slider-marker>
+      </dx-range-selector>
+    </div>
+    <div id="caratEmptyContainer" class="ui-g-1">
+    </div> -->
+    <!-- <div id="caratValueContainer" class="ui-g-12 ui-g-nopad ui-sm-12"> -->
+    <div id="caratValueBox" class="ui-g-3 ui-g-nopad">
+      <input id="fromValue" tabindex="1" class="caret-input fl marg-r5 marg-l5" type="text" pInputText placeholder="From" [(ngModel)]="fromValue"
+        dirValidateNumberDigit (blur)="setFromValueOnSlider()">
+      <input id="toValue" tabindex="2" class="caret-input fl marg-r5" type="text" pInputText placeholder="To" [(ngModel)]="toValue"
+        dirValidateNumberDigit (blur)="setToValueOnSlider()">
+      <span id="caratAdd" tabindex="3" class="add-icon icon-add-circle fl marg-r5" (click)="addCaratValueSet()" pTooltip="{{'CARAT_ADD_TEXT'|translate}}"
+        tooltipPosition="bottom" tooltipEvent="hover" (keypress)="addCarats($event)"></span>
+    </div>
+    <div id="caratSaveValueBox" class="ui-g-4 ui-g-nopad">
+      <ul id="chipsId" class="chipslabel" [ngClass]="{'ui-inputtext ui-state-default ui-corner-all ':true, 'empty-tags': caratValueSet.length < 1} ">
+        <li id="{{item}}Id" #token *ngFor="let item of caratValueSet; let i = index;" class="ui-chips-token tab-btn ">
+          <span class="ui-chips-token-label">{{item}}&nbsp;&nbsp;<a class="fa fa-times" (click)="removeTag(item)"></a></span>
+        </li>
+      </ul>
+    </div>
+    <!-- </div> -->
+  </div>
+  <div id="caratFilterBox" class='ui-g-12 ui-g-nopad' *ngIf='filterConfig' align="right">
+    <button id="applyFilterBtn" pButton type="button" (click)="this.filter.emit(result)" label="Apply"></button>
+  </div>
+</div>

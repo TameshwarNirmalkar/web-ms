@@ -1,0 +1,197 @@
+
+<div id="INVOICETYPE" class="ui-g ui-g-responsive ui-g-pad component-cards">
+  <div id="invoiceHeadingContainer"  class="ui-g-12 ui-g-nopad">
+    <div id="invoiceTypeLabelBox" class="ui-g-12 paddt0 paddb0">
+      <label id="invoiceTypeLabel" class="component-cards-heading">Invoice Type</label>
+    </div>
+    <div id="invoiceSelectionBox" class="ui-g-12 paddt0 paddb0" align="right">
+        <div id="invoiceComponentContainer"  align="left">
+          <div class="ui-g-6" id="invoiceOptionContainer">
+            <p-dropdown [options]="invoiceTypeList" [(ngModel)]="invoiceTypeValue" [style]="{'width':'230px'}" ></p-dropdown>
+          </div>
+        </div>
+        <label id="invoiceVerifyLabel">Verify Before you Save</label>
+        <p-inputSwitch [(ngModel)]="checked"></p-inputSwitch>   
+    </div>
+  </div>
+</div>
+
+
+<div id="SHIPPING_DETAIL" class="ui-g ui-g-responsive ui-g-pad component-cards">
+  <div id="shippingDetailHeadingContainer"  class="ui-g-12 ui-g-nopad">
+    <div id="shippingDetailLabelBox" class="ui-g-12 paddt0 paddb0">
+      <label id="shippingDetailLabel" class="component-cards-heading">Shipping Detail</label>
+    </div>
+    <div id="shippingDetailAddressBox" class="ui-g-12 paddt0 paddb0" align="right">
+        <div  align="left">
+          <div class="ui-g-6" id="shippingDetailContainer">
+            <p-radioButton name="groupname" value="Delivery" label="Delivery" [(ngModel)]="shippingType"></p-radioButton>
+            <p-radioButton name="groupname" value="Pickup" label="Pickup" [(ngModel)]="shippingType"></p-radioButton>
+            <br>
+
+            <div >
+              <div id="leftBlock">
+                <label id="invoiceTypeLabel" class="component-cards-heading">Shipment To</label><br>
+                <input type="text"  [(ngModel)]="shipmentTo"/>
+              </div >
+              
+              <div id="rightBlock">
+                <label id="invoiceTypeLabel" class="component-cards-heading">On behalf of</label><br>
+                <input type="text"  [(ngModel)]="onBehalfOf"/>
+              </div >
+            </div> 
+
+            <div >
+              <div id="leftBlock">
+                <label id="invoiceTypeLabel" class="component-cards-heading">City</label><br>
+                <input type="text"  [(ngModel)]="city"/>
+              </div >
+              
+              <div id="rightBlock">
+                <label id="invoiceTypeLabel" class="component-cards-heading">Port of Loading</label><br>
+                <input type="text"  [(ngModel)]="portOfLoading"/>
+              </div >
+            </div> 
+
+
+            <div >
+              <div id="leftBlock">
+                <label id="invoiceTypeLabel" class="component-cards-heading">State</label><br>
+                <input type="text"  [(ngModel)]="state"/>
+              </div >
+              
+              <div id="rightBlock">
+                <label id="invoiceTypeLabel" class="component-cards-heading">Port of Discharge</label><br>
+                <input type="text"  [(ngModel)]="portOfDischarge"/>
+              </div >
+            </div> 
+
+            <div >
+              <div id="leftBlock">
+                <label id="invoiceTypeLabel" class="component-cards-heading">Country</label><br>
+                <input type="text"  [(ngModel)]="country"/>
+              </div >
+              
+              <div id="rightBlock">
+                <label id="invoiceTypeLabel" class="component-cards-heading">Final Destination</label><br>
+                <input type="text" [(ngModel)]="finalDestination" />
+              </div >
+            </div> 
+
+            <div >
+              <div id="leftBlock">
+                <label id="invoiceTypeLabel" class="component-cards-heading">Zip</label><br>
+                <input type="text" [(ngModel)]="zip" />
+              </div >
+            </div>
+
+          </div>
+        </div>
+
+        <label id="shippingAddressverifyLabel">Verify Before you Save</label>
+        <p-inputSwitch [(ngModel)]="checked"></p-inputSwitch>   
+    </div>
+  </div>    
+</div>
+
+<div id="COMMUNICATION_DETAIL" class="ui-g ui-g-responsive ui-g-pad component-cards">
+  <div id="shippingDetailHeadingContainer"  class="ui-g-12 ui-g-nopad">
+    <div id="shippingDetailLabelBox" class="ui-g-12 paddt0 paddb0">
+      <label id="shippingDetailLabel" class="component-cards-heading">Communication Details</label>
+    </div>
+    <div id="shippingDetailAddressBox" class="ui-g-12 paddt0 paddb0" align="right">
+        <div  align="left">
+          <div class="ui-g-6" id="shippingDetailContainer">
+            <div >
+              <div id="leftBlock">
+                <label id="invoiceTypeLabel" class="component-cards-heading">Email</label><br>
+                <input type="text"  [(ngModel)]="email"/>
+              </div >
+              
+              <div id="rightBlock">
+                <label id="invoiceTypeLabel" class="component-cards-heading">Mobile</label><br>
+                <input type="text"  [(ngModel)]="mobileNo"/>
+              </div >
+            </div> 
+          </div>
+        </div>
+
+        <label id="shippingAddressverifyLabel">Verify Before you Save</label>
+        <p-inputSwitch [(ngModel)]="checked"></p-inputSwitch>   
+    </div>
+  </div>    
+</div>
+
+<div id="CARRIER" class="ui-g ui-g-responsive ui-g-pad component-cards">
+  <div id="shippingDetailHeadingContainer"  class="ui-g-12 ui-g-nopad">
+    <div id="shippingDetailLabelBox" class="ui-g-12 paddt0 paddb0">
+      <label id="shippingDetailLabel" class="component-cards-heading">Carrier</label>
+    </div>
+    <div id="shippingDetailAddressBox" class="ui-g-12 paddt0 paddb0" align="right">
+        <div  align="left">
+          <div class="ui-g-6" id="shippingDetailContainer">
+            <div >
+              <div id="leftBlock">
+                <label id="invoiceTypeLabel" class="component-cards-heading">Carrier</label><br>
+                <input type="text"  [(ngModel)]="carrier" />
+              </div >
+              
+              <div id="rightBlock">
+                <label id="invoiceTypeLabel" class="component-cards-heading">Mode</label><br>
+                <input type="text"  [(ngModel)]="mode"/>
+              </div >
+            </div> 
+          </div>
+        </div>
+
+        <label id="shippingAddressverifyLabel">Verify Before you Save</label>
+        <p-inputSwitch [(ngModel)]="checked"></p-inputSwitch>   
+    </div>
+  </div>    
+</div>
+
+<div id="BANK_DETAIL" class="ui-g ui-g-responsive ui-g-pad component-cards">
+  <div id="shippingDetailHeadingContainer"  class="ui-g-12 ui-g-nopad">
+    <div id="shippingDetailLabelBox" class="ui-g-12 paddt0 paddb0">
+      <label id="shippingDetailLabel" class="component-cards-heading">Bank Details</label>
+    </div>
+    <div id="shippingDetailAddressBox" class="ui-g-12 paddt0 paddb0" align="right">
+        <div  align="left">
+          <div class="ui-g-6" id="shippingDetailContainer">
+            <div >
+              <div id="leftBlock">
+                <label id="bankNameLabel" class="component-cards-heading">Bank Name</label><br>
+                <input type="text"  [(ngModel)]="bankName"/>
+              </div >
+              
+              <div id="rightBlock">
+                <label id="acc_numberLabel" class="component-cards-heading">Account Number</label><br>
+                <input type="text"  [(ngModel)]="accountNumber"/>
+              </div >
+            </div> 
+
+            <div >
+              <div id="leftBlock">
+                <label id="bankCodeLabel" class="component-cards-heading">Bank Code</label><br>
+                <input type="text"  [(ngModel)]="bankCode"/>
+              </div >
+              
+              <div id="rightBlock">
+                <label id="fieldLabel" class="component-cards-heading">Field</label><br>
+                <input type="text"  [(ngModel)]="field1"/>
+              </div >
+            </div> 
+          </div>
+        </div>
+
+        <label id="shippingAddressverifyLabel">Verify Before you Save</label>
+        <p-inputSwitch [(ngModel)]="checked"></p-inputSwitch>   
+    </div>
+  </div>    
+</div>
+
+<div align="right">
+  <button pButton type="button" (click)="previewInvoiceClick()" label="Preview Invoice" class="custom-btnBorder"></button>
+  <button pButton type="button" (click)="generateInvoiceClick()" label="Generate Invoice" class="custom-btnPrimary"></button>
+</div>
+

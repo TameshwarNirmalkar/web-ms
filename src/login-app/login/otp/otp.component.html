@@ -1,0 +1,22 @@
+<div id="otpBox" class="otpForm-content ui-g ui-g-10">
+  <form [formGroup]="otpForm" (ngSubmit)="submitOTPForm(otpForm.value)">
+    <div class="ui-g ui-g-10 otp-container">
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <h2 id="otpHeading" class="otp-title">{{'Enter OTP'|translate}}</h2>
+      </div>
+      <div id="otpText" class="otp-text ui-g ui-g-12 ui-g-nopad">{{'Did you get a sms / email OTP'|translate}}?<br> {{'Enter it below & sign in now' |translate}}</div><br>
+      <div id="otpEntryId" class="group ui-g ui-g-12 ui-g-nopad">
+        <input id="otpID" class="border-bottom" placeholder="{{'Enter OTP here'|translate}}" pInputText type="text" formControlName="otpValue"
+          autocomplete="off" (keypress)="isNumber($event)"><span class="highlight"></span><span class="bar"></span>
+      </div>
+      <div class="ui-g ui-g-12 ui-g-nopad">
+        <button class="custom-btnPrimary" [icon]="otpBtnIcon" [disabled]="otpBtnIcon != 'none'" id="submitOTP" type="submit" pButton
+          label="{{'OK'|translate}}"> </button>
+      </div>
+      <div id="misMatchId" *ngIf="otpMismatchError" class="ui-g ui-g-12 ui-g-nopad"><span style="color:red">{{otpMismatchError |translate}}</span></div><br>
+      <div id="otpresentBox" *ngIf="otpResentMsg" class="ui-g ui-g-12 ui-g-nopad"><span style="color:green">{{otpResentMsg |translate}}</span></div>
+      <div id="resendMobileId" class="ui-g ui-g-12 ui-g-nopad"><a id="resendMobileButton" class="resend" (click)="resendOTPMobile()">{{'Resend OTP MOBILE'|translate}}</a></div>
+      <div id="resendEmailId" class="ui-g ui-g-12 ui-g-nopad"><a id="resendEmailButton" class="resend" (click)="resendOTPEmail()">{{'Resend OTP EMAIL'|translate}}</a></div>
+    </div>
+  </form>
+</div>

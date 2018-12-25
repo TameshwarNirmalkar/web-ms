@@ -1,0 +1,58 @@
+
+.saved-search-container {  padding: 85px 40px 0px;}
+.stone-box {  text-align: center;  border-radius: 2px;   padding: 5px;     font-size: 14px;  margin-top: 5px;}
+.new-box {  border-radius: 2px;  text-align: center;  padding: 5px;     font-size: 14px;  margin-top: 5px;}
+.scroll-container {  overflow-y: auto;  width: 100%; border-bottom: none; border-radius: 4px;}
+.main-text {  font-size: 14px;  display: block; font-weight: bold; max-width: 200px; text-overflow: ellipsis; overflow: hidden; cursor: pointer;}
+.date {  font-size: 14px;  display: block;  padding-top:10px;  padding: 0px 20px;}
+.stones-bottom-content {  font-size: 12px;  margin: 0px 10px 0px 10px;}
+.new-bottom-content {  font-weight: bold;  font-size: 12px;  margin: 0px 10px 0px 10px;}
+.top-padding,.icon-padding {  padding-top: 30px;}
+.no-saved-search {  text-align: center;  font-size: 25px;}
+.edit-search-item-button,.remove-search-item-button {  cursor: pointer;margin-left:25px}
+.save-search-button {  width: 123px;  height: 40px;  border-radius: 2px;margin-right: 10px;}
+.save-button {  width: 110px;  height: 40px;  border-radius: 2px;  border: 0px;}
+.bottom-saved-text{  font-size: 12px;  line-height: normal;  text-align: right;  padding-right: 15px;}
+.edit-search-item-button, .remove-search-item-button{  font-size: 20px;margin-left:25px}
+.save-search-name-box{padding:0px 20px;}
+.save-search-name-input{width: 100%;}
+.edit-icons {cursor: pointer; }
+.saved-search-btn{width: 80%;   margin: 0px 10px 0px 10px;}
+.saved-search-btn-box{margin-top: 5px;}
+.icon-top-padding{padding-top: 25px; display: flex;}
+.mail-icon-box{
+    position: relative;
+    top: -50px;
+    margin-right: 46px;
+    width: 120px;
+    height: 0px;
+    float: right;
+}
+.mail-spinner{
+    font-size: 25px;
+}
+.mail-button-width{
+    width: 141px;
+    margin-top: 0px;
+    margin-left: -345px;
+    float: left;
+}
+.activate-mail-button-width{
+    width: 150px;
+    margin-top: 0px;
+    margin-left: -196px;
+    float: left;
+}
+.deactivate-mail-button-width{
+    width: 146px;
+    margin-top: 0px;
+    margin-left: -38px;
+    float: left;
+}
+.loader-align{
+    text-align: left;
+    margin-right: 10px;
+}
+.active-mail-icon{
+    font-size: 20px;
+}

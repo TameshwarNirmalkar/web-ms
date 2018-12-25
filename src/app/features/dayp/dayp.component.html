@@ -1,0 +1,142 @@
+<p-confirmDialog acceptLabel={{acceptLabel}} rejectLabel={{rejectLabel}} acceptIcon='' rejectIcon='' width="425"></p-confirmDialog>
+<div (window:resize)="resizeDaypPanel()" class="ui-g-12 ui-g-nopad sms-page-container sms-page-container-new dayp-upload-dowload-buttons-panel" dirScrollTop>
+  <div class="ui-g-4 ui-md-9 ui-lg-4">
+    <div class="dayp-main-title">
+      <span>{{'DAYP' | translate}}</span>
+      <span class="timer-value text-bold timer-size" id="remainingHoursdayp" [ngClass]="isDaypActive ? 'dayp-main-time-remain': 'dayp-closed'"
+        *ngIf="remainingDaypTime!==undefined && daypTimePeriod && daypTimePeriod.end_date">Will end by {{daypTimePeriod['end_date']}} - {{daypTimePeriod['end_time']}} {{daypTimePeriod['hoursFormat']}}IST</span>
+    </div>
+  </div>
+  <div class="ui-g-3  ui-md-3  ui-lg-3" *ngIf="isDaypActive">
+    <div id="pageInSearchBoxID" *ngIf="!isPreDaypActive && !isDaypSearch && showPageSearch; else showOtherTemp">
+      <ng-template [dirCheckPermission]="'page_search_btn'">
+        <thm-page-search [searchType]="'DAYP_SEARCH'" (pageSearchResult)="getPageSearchResult($event)"></thm-page-search>
+      </ng-template>
+    </div>
+    <ng-template #showOtherTemp>
+      <div id="pageInSearchBoxID" class="page-search-temp">
+      </div>
+    </ng-template>
+  </div>
+  <div class="ui-g-5 ui-md-12 ui-lg-5">
+    <button *ngIf="isDaypActive && showStockDownloadButton" id="daypStockDownloadBtnID" class="custom-btnPrimary-dayp show-button text-right fr mtb0"
+      type="button" (click)="downloadDaypStock()">{{'Download DAYP Stock' |translate}}</button>
+    <div *ngIf="isDaypActive && showUploadSelectionBtn">
+      <span *ngIf="!isFileUploaded;else showFileUpload" [dirStoreAudit]="'DAYP UPLOAD'">
+        <input autocomplete="off" type="file" name="file-2[]" id="file-2" class="inputfile inputfile-2 input-border" data-multiple-caption="files selected"
+          (change)="uploadDaypExcel($event)" accept=".xls,.xlsx" />
+        <label for="file-2" class="uploadright fr">
+          <i *ngIf="isExcelUploaded" class="fa fa-spinner fa-pulse loader-align" aria-hidden="true"></i>
+          <span> {{'Upload Selection' |translate}}</span>
+        </label>
+      </span>
+      <ng-template #showFileUpload>
+        <button class="custom-btnBorder-dayp-upload mtb0 fr" type="button" (click)="updateDaypExcel('update')">{{'Update' |translate}}</button>
+        <button class="custom-btnBorder-dayp-upload mtb0 fr" type="button" (click)="updateDaypExcel('overwrite')">{{'Overwrite' |translate}}</button>
+        <button class="custom-btnBorder-dayp-upload mtb0 fr" type="button" (click)="cancelDaypExcel()">{{'Cancel' |translate}}</button>
+      </ng-template>
+    </div>
+  </div>
+  <div *ngIf="fileLength > 0 && !fileSizeError && isFileUploaded" class="ui-g-12 ui-md-12  ui-lg-12 text-right">
+    <label class="fileLength">{{"You have selected : "+selectedFileName}}</label>
+    <label class="error" *ngIf="fileExtError">{{'Invalid file extention. only [xls, xlsx] allowed' |translate}}</label>
+    <label class="error" *ngIf="fileSizeError"> {{'File size is too big' |translate}}</label>
+  </div>
+</div>
+
+
+<!-- Packets -->
+<div *ngIf="isDaypActive || isPreDaypActive">
+  <div class="ui-g-12 ui-g-nopad" id="packetBox">
+    <app-create-packet [visiblePacketOverlay]="visiblePacketPopup" [stone]="stoneForPacket" [showSelectedPacket]="showSelectedPacket"
+      (togglePacketIcon)="togglePacketIcon($event)" (togglePacketOverlay)="togglePacketOverlay($event)" (updatePacketIcon)="updatePacketIcon($event)"></app-create-packet>
+  </div>
+  <div class="packet-btn-box" id="packetTabResultId">
+    <button [dirStoreAudit]="'SHOW PACKET'" id="daypShowPacketBtnID" *ngIf="showPacktBtn" class="custom-btnPrimary show-button create-button"
+      type="button" (click)="showPacket()">{{'Show Packet' |translate}}</button>
+    <ng-template [dirCheckPermission]="'create_packet_btn'">
+      <button [dirStoreAudit]="'CREATE PACKET'" id="daypCreatePacketBtnID" class="custom-btnPrimary creat-button create-button"
+        type="button" (click)="createPacket()">{{'Create Packet' |translate}}</button>
+    </ng-template>
+  </div>
+</div>
+
+
+<div id="fixedDaypPanel" class="fixed-panel-class"></div>
+
+<div class="ui-g-12 ui-g-nopad" id="daypPanel">
+  <div id="daypTabs" class="ui-g-12 ui-g-nopad" *ngIf="daypTabs && daypTabs.length > 0;else loadDaypData">
+    <div #daypPanel class="container">
+      <div class="scroller scroller-left" (click)="scrollTabPanelLeft()">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+      </div>
+      <div class="scroller scroller-right" (click)="scrollTabPanelRight()">
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </div>
+      <div class="wrapper-search-tab">
+        <ul class="nav nav-tabs list" id="myTab">
+          <li id="daypMenubar" *ngFor="let item of daypTabs" (click)="handleTabViewChange(item)" [ngClass]="{'active-filter-menu': (item.name === currentTabSelected || item.stoneName === currentTabSelected || item.pairId === currentTabSelected),
+                  'blink_me':lastCreatedTab && (item.stoneName || item.pairId) &&(item.stoneName === lastCreatedTab || item.pairId === lastCreatedTab)}">
+            <span id="{{item.name}}Heading" class="search-font-box">{{item.name | translate}}
+              <span *ngIf="item.count > 0 && (item.id===2 || item.id===3)">({{item.count}})</span>
+            </span>
+            <span *ngIf="item.stoneName" id="{{item.stoneName}}Id" class="search-font-box">{{item.stoneName}}
+              <span class="icon-close circle-close-icon" (click)="removeDetailedPacketTab(item.stoneName)"></span>
+            </span>
+            <span *ngIf="item.pairId" id="{{item.pairId}}pairId" class="search-font-box">{{item.pairId}}
+              <img id="removeIcon" class="menu-item-icon close-btn" (click)="removeDetailedPacketTab(item.pairId)" src='../../../../assets/icons/close.svg'
+              />
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="tab-content">
+      <div id="tabRowId" class="tabpanel-item">
+        <div *ngFor="let data of daypTabs">
+          <div id="{{data.name}}Container" class="tabpanel-item">
+            <div id="{{data.name}}{{data.id}}Container" class="ui-g-12 ui-g-nopad" *ngIf="data.id === 0 && showPreDaypTab && currentTabSelected === data.name">
+              <app-dayp-pre-selected #predaypComponent [visiblePacketIcon]="visiblePacketIcon" [daypStatus]="isDaypActive" [preDaypStatus]="isPreDaypActive"
+                [packetStoneArray]="packetStoneArray" [isEditableMode]="isEditableMode" [daypTabStatus]="showPreDaypTab"></app-dayp-pre-selected>
+            </div>
+
+            <div id="{{data.name}}{{data.id}}Container" class="ui-g-12 ui-g-nopad" *ngIf="data.id === 1 && currentTabSelected === data.name">
+              <div *ngIf="!isDaypSearch;else showDAYPTable">
+                <app-specific-search [searchBtnLabel]="'DAYP Search'" [searchType]="'DAYP_SEARCH'" [modifiySearchData]="searchFilterConfig"
+                  [searchFiltersValue]="searchFiltersValue" (returnSearchConfig)="getDaypSearchResult($event)" [showCancelBtn]="isResultModified"
+                  (cancelSearch)="cancelModifySearch($event,daypSearchStones)" (resetSearchEvent)="resetSearchConfig($event)"></app-specific-search>
+              </div>
+              <ng-template #showDAYPTable>
+                <app-dayp-search #daypSearchComponent [isPageSearch]="isPageSearch" [visiblePacketIcon]="visiblePacketIcon" [daypSearchStones]="daypSearchStones"
+                  [packetStoneArray]="packetStoneArray" [daypStatus]="isDaypActive" (modifyResult)="modifySearch($event)"></app-dayp-search>
+              </ng-template>
+            </div>
+
+            <div id="{{data.name}}{{data.id}}Container" class="ui-g-12 ui-g-nopad" *ngIf="data.id === 2 && currentTabSelected === data.name">
+              <app-dayp-basket #daypBasketComponent [visiblePacketIcon]="visiblePacketIcon" [daypStatus]="isDaypActive" [isEditableMode]="isEditableMode"
+                [packetStoneArray]="packetStoneArray"></app-dayp-basket>
+            </div>
+
+            <div id="{{data.name}}{{data.id}}Container" class="ui-g-12 ui-g-nopad" *ngIf="data.id === 3 && currentTabSelected === data.name">
+              <app-dayp-my-submitted #daypSubmitedComponent [visiblePacketIcon]="visiblePacketIcon" [daypStatus]="isDaypActive" [isEditableMode]="isEditableMode"
+                [packetStoneArray]="packetStoneArray" [isResultDeclared]="isResultDeclared"></app-dayp-my-submitted>
+            </div>
+
+            <div id="stonedetailssearch" class="tabpanel-item struck-details-page sms-page-container" *ngIf="data.stoneName && currentTabSelected === data.stoneName">
+              <thm-stone-details [stoneDetails]="data.stoneInfo" [isDaypActive]="isDaypActive"></thm-stone-details>
+            </div>
+
+            <div id="{{data.pairId}}Id" class="tabpanel-item sms-page-container struck-details-page" *ngIf="data.pairId && currentTabSelected === data.pairId">
+              <thm-twin-stone-detail [twinStones]="data.twinStones" [isDaypActive]="isDaypActive"></thm-twin-stone-detail>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #loadDaypData>
+  <div class="ui-g-12 sms-page-container coming-soon">
+    {{ message | translate}}
+  </div>
+</ng-template>

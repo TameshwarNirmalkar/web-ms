@@ -39,7 +39,7 @@ export class SearchService {
     private notifyService: NotifyService,
     private auditService: ApplicationAuditService) { }
 
-  getSearchFilterData(): any {
+  getSearchFilterData(): Observable<any> {
     if (!this.searchFilterParameters$) {
       this.searchFilterParameters$ = this.http.get(`
         ${this.applicationDataService.getEnvironment().DashboardApi}
@@ -52,7 +52,7 @@ export class SearchService {
     return this.searchFilterParameters$;
   }
 
-  getSearchElement(): any {
+  getSearchElement(): Observable<any> {
     if (!this.searchFilterStsticParameters$) {
       this.searchFilterStsticParameters$ = this.http.get('/assets/JSON/search-elements.json').pipe(
         map((res) => {
@@ -143,7 +143,7 @@ export class SearchService {
     return resultConfig;
   }
 
-  specificSearch(object, searchString, id, order_details) {
+  specificSearch(object, searchString, id, order_details): Observable<any> {
     const event_id = id ? id : 0;
     this.searchConfig = {};
     this.searchResultConfig = {};
@@ -261,7 +261,7 @@ export class SearchService {
     }
   }
 
-  fetchExclusiveStoneDetails(stoneIDList) {
+  fetchExclusiveStoneDetails(stoneIDList): Observable<any> {
     const config = {
       filter: {
         values: {
@@ -309,7 +309,7 @@ export class SearchService {
     return listArray;
   }
 
-  getDetailedSavedSearchList() {
+  getDetailedSavedSearchList(): Observable<any> {
     const body = {};
     return this.http.get(this.applicationDataService.getEnvironment().SearchApi + '/saved/search/' +
       this.applicationDataService.getEnvironment().SearchApiVersion + '/' + this.authService.getLoginName()).pipe(
@@ -322,7 +322,7 @@ export class SearchService {
       );
   }
 
-  getSavedStonesList(name, criteria, btnType) {
+  getSavedStonesList(name, criteria, btnType): Observable<any> {
     let type, searchType;
     switch (btnType) {
       case 'new': type = 'newArrival';
@@ -365,14 +365,12 @@ export class SearchService {
     return searchData;
   }
 
-  storeSavedSearch(saveSearchJson) {
+  storeSavedSearch(saveSearchJson): Observable<any> {
     const savedSearchType = 'all';
     return this.http.put(this.applicationDataService.getEnvironment().SearchApi + '/saved/search/' +
       this.applicationDataService.getEnvironment().SearchApiVersion + '/'
       + this.authService.getLoginName() + '/' + savedSearchType, JSON.stringify(saveSearchJson)).pipe(
-        map((res) => {
-          return res;
-        }),
+        map(res => res),
         catchError(err => this.errorHandler.handleError('SearchService:storeSavedSearch', err))
       );
   }
@@ -450,7 +448,7 @@ export class SearchService {
     let flag = false;
     this.selectedSearchData.forEach(element => {
       if ((element.key === '#carat' || element.key === 'carat')
-        && ((Array.isArray(element.value) && element.value.length > 0))) {
+        && ( Array.isArray(element.value) && element.value.length > 0) ) {
         flag = true;
       }
     });

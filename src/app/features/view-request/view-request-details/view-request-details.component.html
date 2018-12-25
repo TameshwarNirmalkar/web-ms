@@ -1,0 +1,200 @@
+<div id="errorMessagePastData" class="ui-g-12 no-view-request" *ngIf="showLoadingMessage; else loadVrData">
+  {{messageDisplay| translate}}
+</div>
+
+<ng-template #loadVrData>
+  <div class="ui-g-12 ui-g-nopad sms-page-container" *ngIf="selectedStones.length >= 0">
+    <thm-selected-stone-panel [showButtonList]="stoneButtonList" [stoneObj]="selectedStoneObj" (updateArray)="updateVRStoneArray($event)"
+      (refreshAllNotes)="refreshNotes()" (displayStoneDetails)="addTab($event)" [vrSelectedPanel]="true" (submitStone)="submitedStone($event)"
+      [showPacket]="visiblePacketIcon" (toggleSelectedTable)="toggleSelectedTable($event)" (stoneToAddPakcet)="stoneFromSelectedStone($event)"></thm-selected-stone-panel>
+    <div [hidden]="selectedTableToggle">
+      <div class=" ui-g-12 fade ui-g-nopad grid-container">
+        <div id="basketDataContainer" class="ui-g-12 ui-g-nopad">
+          <div id="basketTotalCountBox" class="ui-g-2 detail-box" [ngClass]="{'active-toggle': activeToggle === 'totalStone'}">
+            <a id="basketTotalCount" class="lbl-ddc-value-large" (click)="showAllStone()">{{totalStone}}</a>
+            <br>
+            <label id="basketCountLabel" class="lbl-ddc-value-small">{{'Total Stones' | translate}}</label>
+          </div>
+          <div id="basketNACountBox" class="ui-g-2 detail-box" [ngClass]="{'active-toggle': activeToggle === 'pendingStone'}">
+            <a id="basketNACount" class="lbl-ddc-value-large" (click)="showPendingStone()">{{pendingStone}}</a>
+            <br>
+            <label id="basketNALabel" class="lbl-ddc-value-small">{{'Pending' | translate}}</label>
+          </div>
+          <div id="basketInactiveCountBox" class="ui-g-2 detail-box" [ngClass]="{'active-toggle': activeToggle === 'onTableStone'}">
+            <a id="basketInactiveCount" class="lbl-ddc-value-large" (click)="showOnTable()">{{onTableStone}}</a>
+            <br>
+            <label id="basketNALabel" class="lbl-ddc-value-small">{{'On Table' | translate}}</label>
+          </div>
+          <div id="basketAvailableCountBox" class="ui-g-2 detail-box" [ngClass]="{'active-toggle': activeToggle === 'notAvailableStone'}">
+            <a id="basketAvailableCount" class="lbl-ddc-value-large" (click)="showNotAvaStone()">{{notAvalStone}}</a>
+            <br>
+            <label id="basketAvailableLabel" class="lbl-ddc-value-small">{{'Not Available' |translate}}</label>
+          </div>
+          <div id="basketAvailableCountBox" class="ui-g-2 detail-box" [ngClass]="{'active-toggle': activeToggle === 'seenStone'}">
+            <a id="basketAvailableCount" class="lbl-ddc-value-large" (click)="showSeenStone()">{{seenStone}}</a>
+            <br>
+            <label id="basketAvailableLabel" class="lbl-ddc-value-small">{{'Seen' |translate}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui-g-12 fade ui-g-nopad grid-container margin-top-none" style="position: relative">
+        <div class="ui-g-12 fade color-lagend-pan\el ">
+          <div class="color-lagend-container">
+            <div class="color-lagend">
+              <div (click)="setColorLegendFilterValue($event, 'bidToBuy')" [ngClass]="{'border-active-highlight':colorLegendFilterValue.indexOf('bidToBuy') > -1}"
+                class="box-color-lagend">
+                <span class="colorLagend_BTOB"></span>
+                <label>{{'Bid To Buy'|translate}}</label>
+              </div>
+              <div (click)="setColorLegendFilterValue($event, 'underBusinessProcess')" [ngClass]="{'border-active-highlight':colorLegendFilterValue.indexOf('underBusinessProcess') > -1}"
+                class="box-color-lagend ">
+                <span class="colorLagend_BusinessProcess"></span>
+                <label>
+                  {{'Under Business Process'|translate}}</label>
+              </div>
+              <div (click)="setColorLegendFilterValue($event, 'newArrival')" [ngClass]="{'border-active-highlight':colorLegendFilterValue.indexOf('newArrival') > -1}"
+                class="box-color-lagend">
+                <span class="colorLagend_NewArrival"></span>
+                <label>{{'New Arrival'|translate}}</label>
+              </div>
+              <div (click)="setColorLegendFilterValue($event, 'recentlyUploaded')" [ngClass]="{'border-active-highlight':colorLegendFilterValue.indexOf('recentlyUploaded') > -1}"
+                class="box-color-lagend">
+                <span class="colorLagend_RecentlyUploded"></span>
+                <label>{{'Recently Uploaded'|translate}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <vr-infra-grid [(upcomingTableData)]="headerData.table" *ngIf="upcomingRequestData && upcomingRequestData.table"
+          class="scrollHide" [widthInfo]="allColumnWidth" (stoneDetailInNewTab)="openStoneInNewTabTrigger($event, upcomingRequestData.table)"
+          (allRowsSelected)="isAllCheckboxSelected(headerData, $event)" (singleRowSelected)="unSelectAllStone($event)"
+          (updateDDCClicked)="updateDDC($event)" [gridName]="'headerGrid'" [resultObject]="headerData"
+          [selectedStoneTableIsVisible]="!selectedTableToggle" (displayNotesForSingleStoneInDialog)="showAllCommentsForStone($event)"
+          [selectedStonesArray]="headerData.selectedStones" (addStoneToPacket)="stoneToOperateInPacket($event)"
+          [visiblePacketIcon]="visiblePacketIcon" [userSelectedColumns]="selectedColumnList" [currentSelectedStones]="headerData.selectedStones"
+          (displayIconsOverlay)="stoneMediaIconPanel($event)" [tabActive]="headerData.isActive" (b2bIconPopup)="openBTB($event)">
+        </vr-infra-grid>
+      </div>
+      <div class="clearfix"></div>
+      <div id="scroll-grid-v" [style.height.px]='gridHeight' style="overflow-y: scroll;">
+
+        <div class="ui-g-12 fade ui-g-nopad grid-container botmgrid " *ngIf="upcomingRequestData && upcomingRequestData.table">
+          <div class="past_reqhead" (click)="updateTogglingTable(upcomingRequestData,'upcoming')">
+            <span *ngIf="!upcomingRequestData.toggleTable">
+              <i class="fa fa-angle-right	"></i>
+            </span>
+            <span *ngIf="upcomingRequestData.toggleTable">
+              <i class="fa fa-angle-down	"></i>
+            </span>
+            {{'YOUR_UPCOMING_REQUEST' | translate}}
+          </div>
+          <past-infra-grid #upcomingPanel id="upcomingGrid" class="scrollHide" [ngClass]="{'hide hidden' : !upcomingRequestData.toggleTable}" [(tableData)]="upcomingRequestData.table"
+            (totalStone)="stoneCount($event)" [widthInfo]="allColumnWidth" (stoneDetailInNewTab)="addStoneDetailTabOfPast($event)"
+            (twinDiamondDetailInNewTab)="addTwinStoneInfoTab($event)" (allRowsSelected)="isAllCheckboxSelected(upcomingRequestData, $event)"
+            (singleRowSelected)="filterSelectedStones(upcomingRequestData, $event , 'upcomingData')" (updateDDCClicked)="updateDDC($event)"
+            [gridName]="upcomingRequestData.gridName" [resultObject]="upcomingRequestData" [selectedStoneTableIsVisible]="upcomingRequestData.toggleTable"
+            (displayNotesForSingleStoneInDialog)="showAllCommentsForStone($event)" [selectedStonesArray]="selectedStones"
+            (addStoneToPacket)="stoneToOperateInPacket($event)" [visiblePacketIcon]="visiblePacketIcon"
+            [packetIconDataForGrid]="packetIconDataForGrid" [userSelectedColumns]="selectedColumnList" [submitStone]="submitedStoneList"
+            [currentSelectedStones]="selectedStones" [stonesActedOn]="stonesActedOnUpcoming" (displayIconsOverlay)="stoneMediaIconPanel($event)"
+            [tabActive]="upcomingRequestData.isActive" (b2bIconPopup)="openBTB($event)" [colorLegendFilter]="colorLegendFilterValue"
+            (colorLegendStone)="colorFilterStone($event)">
+          </past-infra-grid>
+        </div>
+        <div class="clearfix"></div>
+        <div class="ui-g-12 fade ui-g-nopad grid-container botmgrid " *ngIf="todayRequestedData && todayRequestedData.table">
+          <div class="past_reqhead prtwo" (click)="updateTogglingTable(todayRequestedData,'today')">
+            <span *ngIf="!todayRequestedData.toggleTable">
+              <i class="fa fa-angle-right	"></i>
+            </span>
+            <span *ngIf="todayRequestedData.toggleTable">
+              <i class="fa fa-angle-down	"></i>
+            </span>
+            {{'YOUR_TODAY_REQUEST' | translate}}
+          </div>
+          <past-infra-grid id="todayGrid" [ngClass]="{'hide hidden' : !todayRequestedData.toggleTable}" class="scrollHide" [(tableData)]="todayRequestedData.table"
+            [widthInfo]="allColumnWidth" (totalStone)="stoneCount($event)" (stoneDetailInNewTab)="addStoneDetailTabOfPast($event)"
+            (twinDiamondDetailInNewTab)="addTwinStoneInfoTab($event)" (allRowsSelected)="isAllCheckboxSelected(todayRequestedData, $event)"
+            (singleRowSelected)="filterSelectedStones(todayRequestedData, $event , 'todayData')" (updateDDCClicked)="updateDDC($event)"
+            [gridName]="todayRequestedData.gridName" [resultObject]="todayRequestedData" [selectedStoneTableIsVisible]="todayRequestedData.toggleTable"
+            (displayNotesForSingleStoneInDialog)="showAllCommentsForStone($event)" [selectedStonesArray]="selectedStones"
+            [submitStone]="submitedStoneList" (addStoneToPacket)="stoneToOperateInPacket($event)" [visiblePacketIcon]="visiblePacketIcon"
+            [packetIconDataForGrid]="packetIconDataForGrid" [userSelectedColumns]="selectedColumnList"
+            [currentSelectedStones]="todayRequestedData.selectedStones" [stonesActedOn]="stonesActedOnToday"
+            (displayIconsOverlay)="stoneMediaIconPanel($event)" [tabActive]="todayRequestedData.isActive"
+            (b2bIconPopup)="openBTB($event)" [colorLegendFilter]="colorLegendFilterValue" (colorLegendStone)="colorFilterStone($event)">
+          </past-infra-grid>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="ui-g-12 fade ui-g-nopad grid-container botmgrid" *ngIf="pastRequestData && pastRequestData.table">
+          <div class="past_reqhead prthree" (click)="updateTogglingTable(pastRequestData,'past')">
+            <span *ngIf="!pastRequestData.toggleTable">
+              <i class="fa fa-angle-right	"></i>
+            </span>
+            <span *ngIf="pastRequestData.toggleTable">
+              <i class="fa fa-angle-down	"></i>
+            </span>
+            {{'YOUR_PAST_REQUEST' | translate}}
+          </div>
+          <past-infra-grid #pastPanel id="pastGrid" [ngClass]="{'hide hidden' : !pastRequestData.toggleTable}"
+            [(tableData)]="pastRequestData.table" (totalStone)="stoneCount($event)" [widthInfo]="allColumnWidth"
+            (stoneDetailInNewTab)="addStoneDetailTabOfPast($event)" (twinDiamondDetailInNewTab)="addTwinStoneInfoTab($event)"
+            (allRowsSelected)="isAllCheckboxSelected(pastRequestData, $event)" (singleRowSelected)="filterSelectedStones(pastRequestData, $event , 'pastData')"
+            (updateDDCClicked)="updateDDC($event)" [gridName]="pastRequestData.gridName" [resultObject]="pastRequestData"
+            [selectedStoneTableIsVisible]="pastRequestData.toggleTable" (displayNotesForSingleStoneInDialog)="showAllCommentsForStone($event)"
+            [selectedStonesArray]="selectedStones" [submitStone]="submitedStoneList" (addStoneToPacket)="stoneToOperateInPacket($event)"
+            [visiblePacketIcon]="visiblePacketIcon" [packetIconDataForGrid]="packetIconDataForGrid"
+            [userSelectedColumns]="selectedColumnList" [currentSelectedStones]="pastRequestData?.selectedStones"
+            [stonesActedOn]="stonesActedOnPast" (displayIconsOverlay)="stoneMediaIconPanel($event)" [tabActive]="pastRequestData.isActive"
+            (b2bIconPopup)="openBTB($event)" [colorLegendFilter]="colorLegendFilterValue" (colorLegendStone)="colorFilterStone($event)">
+          </past-infra-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<p-dialog appendTo="body" [draggable]=false [resizable]=false width="400" height="auto" [header]="popUpTitle"
+  [(visible)]="showCommentPopUp" modal="modal" responsive="true">
+  <div id="viewCommentsBox" class="ui-g-12" *ngIf="currentPopUp === 'commentList'; else addComment">
+    <div id="commentsList" class="ui-g ui-g-nopad" *ngFor="let commentData of pastRequestComment">
+      <div class="ui-g-2 ">
+        <span class="comment-image-icon">&nbsp;</span>
+      </div>
+      <div class="ui-g-10 ">
+        <div class="ui-g-12 ui-g-nopad comment-name">{{clientName}}</div>
+        <div id="{{commentData}}Id" class="ui-g-12  ui-g-nopad comment-comments">{{commentData.comment}}</div>
+        <div id="commentTime" class="ui-g-12  ui-g-nopad comment-datetime">
+          {{commentData.comment_date_time | customDate:'date'}} {{commentData.comment_date_time | customDate:'month'}}
+          {{commentData.comment_date_time
+          | customDate:'timeAMPM'}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #addComment>
+    <div id="addCommentsBox" class="ui-g ui-g-nopad">
+      <div id="{{commentData}}Id" class="ui-g-12">
+        <input type="text" [(ngModel)]="newComments" placeholder="{{'Add comment' | translate}}">
+      </div>
+      <div class="ui-g-12 ui-g-nopad text-right" id="addCommentButtonBox">
+        <button id="saveCommentButtonId" class="custom-btnPrimary" [disabled]="blockSaveCommentBtn" (click)="saveNewComments(newComments)">{{'Save'
+          | translate}}</button>
+      </div>
+    </div>
+  </ng-template>
+
+</p-dialog>
+<!-- <thm-mediaicon #thmMediaIcon></thm-mediaicon> -->
+<thm-media-icon *ngIf="displayIconOverlay" [stoneObj]="iconDisplayStoneObject" [posX]="iconOverlayXPosition" [posY]="iconOverlayYPosition"
+  (closeIconOverlay)="closeGridIconOverlay($event)">
+</thm-media-icon>
+<thm-ddc-overlay #thmDdcOverlay [visibleDdcOverlay]="ddcOverlayVisible" [stoneList]="ddcStones" [previousDdcHour]="definedDDCHour"
+  (toggleDdcOverlay)="toggleDdcOverlay($event)"></thm-ddc-overlay>
+<thm-multimedia-popup #themeMultimediaPopUp [displayMultimediaPopup]="toggleMultimediaPopup" [popUpMultimediaInfo]="stoneMultimediaInfo"
+  (closePopup)="toggleCloseMultimediaPopUp($event)"></thm-multimedia-popup>
+<thm-bid-to-buy-overlay [visibleBTBOverlay]="btbOverlayVisible" [stoneList]="btbSelectedStones" (toggleBTBOverlay)="toggleBTBOverlay($event)"
+  [BTBdataLoaded]="isBTBDataLoaded" [BTBClosed]="isBTBClosed"></thm-bid-to-buy-overlay>
+<thm-addnote-overlay #thmAddnoteOverlay [visibleAddnoteOverlay]="addnoteOverlayVisible" [visibleShownoteOverlay]="commentsOverlayVisible"
+  [stoneIdList]="selectedStones" [CommentListForStone]="allNotesForStone" (toggleAddNoteOverlay)="toggleAddNoteOverlay($event)"></thm-addnote-overlay>

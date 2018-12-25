@@ -1,0 +1,52 @@
+app-search-finishing .actionButton {
+  background: #ffffff;
+  border: 1px solid #c0c0c0;
+  cursor: pointer;
+  height: 25px;
+  width: 50px;
+  font-size: 12px;
+  padding: 0px;
+}
+
+app-search-finishing .middle-container-heading {
+  font-size: 14px;
+  font-weight: normal;
+  float: right;
+}
+
+app-search-finishing .ui-togglebutton.ui-button.ui-state-default,
+app-search-finishing .ui-selectbutton .ui-button.ui-state-default {
+  margin-left: 5px;
+  font-size: 12px;
+}
+
+app-search-finishing .ui-selectbutton .ui-button.ui-state-active {
+  border: 1px solid #ccc;
+}
+
+app-search-finishing .ui-button-text-only .ui-button-text {
+  font-size: 12px;
+  /*padding: 0px !important;*/
+}
+
+@media (max-width:1024px) {
+  app-search-finishing .middle-container {
+    width: 100%;
+  }
+  .finishing-componet-heading {
+    width: 15%;
+  }
+  .finishing-componet-selectvalue {
+    width: 85%;
+  }
+  .finishing-component-cutbox {
+    padding: 0px;
+  }
+  app-search-finishing .ui-togglebutton.ui-button.ui-state-default,
+  app-search-finishing .ui-selectbutton .ui-button.ui-state-default {
+    width: 32px;
+  }
+  app-search-finishing .ui-button-text-only .ui-button-text{
+    padding: .25em .5em;
+  }
+}

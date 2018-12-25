@@ -1,0 +1,51 @@
+<div id="fixedConfirmationPanel" class="fixed-panel-class"></div>
+
+<div dirScrollTop id="confirmationContainer" class="ui-g-12 ui-g-nopad">
+  <div #confirmationPanel class="container">
+    <div class="scroller scroller-left" (click)="scrollTabPanelLeft()">
+      <i class="fa fa-chevron-left" aria-hidden="true"></i>
+    </div>
+    <div class="scroller scroller-right" (click)="scrollTabPanelRight()">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+    </div>
+    <div class="wrapper-search-tab">
+      <ul class="nav nav-tabs list" id="myTab">
+        <li id="confirmationMenubar" *ngFor="let tab of confirmationsTab" (click)="handleConfirmationTabSelect(tab)" [ngClass]="{'active-filter': (tab.text === currentTabSelected || tab.stoneName === currentTabSelected),
+              'blink_me':lastCreatedTab && (tab.stoneName) &&(tab.stoneName === lastCreatedTab)}">
+          <a *ngIf="tab.text">
+            <span>
+              <label class="search-font-box" id="{{tab.text}}textId">{{tab.text|translate}} </label>
+            </span>
+          </a>
+          <a *ngIf="tab.stoneName" id="{{tab.stoneName}}NameLink">
+            <span id="{{tab.stoneName}}NameId" class="search-font-box">{{tab.stoneName}} </span>
+            <span id="removeIcon" class="icon-close circle-close-icon" (click)="removeDetailedPacketTab(tab.stoneName)"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="tab-content">
+    <div id="tabRowId" class="tabpanel-item">
+      <div *ngFor="let item of confirmationsTab">
+        <div *ngIf="item.myConfirmations && currentTabSelected === item.text">
+          <app-my-confirmations></app-my-confirmations>
+        </div>
+
+        <div *ngIf="item.myInvoices && currentTabSelected === item.text">
+          <app-my-invoices></app-my-invoices>
+        </div>
+
+        <div *ngIf="item.generateInvoice && currentTabSelected === item.text">
+          <app-generate-invoices></app-generate-invoices>
+        </div>
+
+        <div *ngIf="item.stoneName && currentTabSelected === item.stoneName" class="sms-page-container">
+          <thm-stone-details [stoneDetails]="item.stoneInfo" [parentScreenName]="screenName"></thm-stone-details>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>

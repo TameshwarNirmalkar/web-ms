@@ -1,0 +1,67 @@
+<ng-template [ngIf]="showEventCelebration">
+  <div class="full-div" id="topScroll">
+    <img src="https://pck2.azureedge.net/srkweb/images/SRK_Disc_Banner_2.gif" class="celebration-banner" width="100%">
+    <div class="continue-shopping">
+      <button pButton class="custom-btnPrimary" (click)="continueShopping()" label="{{'CONTINUE_SHOPPING' | translate}}"></button>
+    </div>
+  </div>
+  <canvas #myCanvas id="canvas"></canvas>
+</ng-template>
+<div class="ui-g-12 ui-g-nopad" [ngClass]="{'full-div-data':showEventCelebration}">
+  <div id="headers" class="ui-g-nopad">
+    <thm-header (stoneIDs)="globalSearchStone($event)" (redirectUser)="navigateUser($event)"></thm-header>
+  </div>
+  <div class="ui-g-12 ui-g-nopad">
+    <thm-menu class="thm-menu" [menuList]="menuItems"></thm-menu>
+    <div class="wrapper__minify">
+      <div class="ui-g-12 ui-g-nopad" *ngIf="downloadArray && downloadArray.length > 0">
+        <div class="ui-g-12 ui-g-nopad" *ngFor="let download of downloadArray">
+          <thm-download-progress-bar [downloadItem]="download"></thm-download-progress-bar>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div *ngIf="enableBot">
+    <div class="chat-bot-btn-container">
+      <button type="text" (click)="chatBot.toggle($event)" class="chat-bot-button">
+        <span class="icon-chat"></span> <span class="chatboat-text">How may I help you ?</span>
+      </button>
+    </div>
+    <p-overlayPanel #chatBot styleClass="chat-bot-popup">
+      <!-- <app-chat-bot (toggleChatBot)="closeChatPopup($event,chatBot)"></app-chat-bot> -->
+      Enable Chat Bot
+    </p-overlayPanel>
+    <p-growl [value]="msgs" [life]="7000"></p-growl>
+  </div>
+  <thm-timeout></thm-timeout>
+  <p-dialog appendTo="body" id="tncPopUp" [(visible)]="toggleTcPopup" [closeOnEscape]="false" [modal]="true" [closable]="false"
+    [width]="1000" [responsive]="true" [height]="650">
+    <p-header>
+      <b><i class="header-top">{{'TERMS AND CONDITIONS' | translate}}</i></b>
+      <img src="/assets/img/srk-logo.png" class="event-compnay-logo imag-tc">
+    </p-header>
+    <div class="ui-g-12 body-popup">
+      <div class="sms-popup" *ngIf="selectedFileObject">
+        <p-editor id="hideEditorBox" [styleClass]="noselect" class="noselect" #editor [(ngModel)]="selectedFileObject"
+          [readonly]="true"></p-editor>
+      </div>
+      <div class="ui-g-12 sms-remarks" *ngIf="selectedRemarksObject"><b>What's new : </b>{{selectedRemarksObject}}</div>
+      <br>
+      <p-checkbox [(ngModel)]="checked" [style.padding.px]="7" binary="true" label="{{'I accept the Terms and Conditions' |translate}}"></p-checkbox>
+      <div class="ui-g-12 ui-g-nopad">
+        <div class="ui-g-6"></div>
+        <div class="ui-g-6 text-right ui-g-nopad">
+          <button class="custom-btnPrimary custom-btnPrimary-Disable" id="termsButton" *ngIf="!checked; else showActiveButton">{{'Submit'
+            | translate}}</button>
+          <ng-template #showActiveButton>
+            <button id="savedSearchButton" class="custom-btnPrimary" (click)="TcSubmitBotton()">
+              <i *ngIf="submitRequested" class="fa fa-spinner fa-pulse" aria-hidden="true"></i>
+              {{'Submit' |translate}}</button>
+          </ng-template>
+          <button class="custom-btnPrimary" id="logoutBotton" (click)="  logout()">{{'Logout' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </p-dialog>
+</div>

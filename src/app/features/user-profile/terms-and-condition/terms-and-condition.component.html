@@ -1,0 +1,10 @@
+<div class="ui-g-12 sms-page-container">
+  <div class="ui-g-12" *ngIf="termsDetails;else showMessage">
+    <div [innerHtml]="termsDetails"></div>
+  </div>
+  <ng-template #showMessage>
+    <div class="ui-g-12 no-view-request">
+      {{message}}
+    </div>
+  </ng-template>
+</div>

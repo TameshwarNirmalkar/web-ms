@@ -1,0 +1,46 @@
+/*.fa{  float: right;}*/
+.box { border-radius: 5px;  padding: 5px;  display: table; width: 100%;}
+.box-iconbox {  float: right;}
+.box-icon {  width: 25px;  height: 25px;  margin: 0 3px;  float: left;  padding: 0 3px 3px;  font-size: 20px;  border-radius: 30px;  border-style: dashed;  text-align: center;}
+.box-icon a {  }
+.empty-box{ font-size: large;}
+state-default a, .ui-state-default a :hover{}
+
+.close-btn {border-radius: 30px;padding: 3px;height: 16px;width: 16px;margin-left: 10px;
+}
+
+
+.packet-heading-label{white-space: nowrap;  overflow: hidden;  text-overflow: ellipsis;  display:inline-block; max-width: 80%;}
+.packet-link{vertical-align: top;}
+
+@media (max-width: 1600px)
+{
+  .packet-heading-label
+  {
+    max-width: 300px;
+  }
+}
+@media (max-width: 1366px)
+{
+  .packet-heading-label
+  {
+    max-width: 265px;
+  }
+}
+@media (max-width: 1280px)
+{
+  .packet-heading-label
+  {
+    max-width: 250px;
+  }
+}
+@media (max-width: 1024px)
+{
+  .packet-heading-label
+  {
+    max-width: 300px;
+  }
+}
+
+
+.packet-tab-panel {padding: 0px;}

@@ -1,0 +1,39 @@
+  <div class="ui-g-12 chat-bot-header">
+    <div class="ui-g-2 ui-g-nopad">
+    <span id="profileImage" class=" icon-profile-place fl"></span>
+  </div>
+      <div class="ui-g-8 ui-g-nopad chat-bot-header-title-container">
+    <label class="chat-bot-header-title">How may I help you?</label>
+   </div>
+    <div class="ui-g-2">
+     <a class="icon-close" (click)="closeChatBot()"></a>
+    </div>
+  </div>
+  <div id="chatContainer" class="ui-g-12 mesaage-container">
+    <div *ngFor="let msg of messageList">
+
+      <div class="chat-bubble you" *ngIf="msg.type=='SENDER'">
+        {{msg.text}}
+      </div>
+
+      <div class="chat-bubble them" *ngIf="msg.type=='RECEIVER'">
+         <span [innerHTML]="msg.text"></span>
+
+        <div *ngIf="msg.text =='UPLOAD EXCEL'">
+          <input type="file" [multiple]="multiple" #fileInput (change)="upload()" placeholder="Upload file">
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="ui-g-12 chat-bot-footer" style="border:1px slid gray">
+
+  <div class="ui-g-11 ui-g-nopad">
+    <textarea class="mesaage-type" (keyup.enter)="sendMessage(message)"  placeholder="Send a message…" rows="2" cols="34" type="text" [(ngModel)]="message"></textarea>
+  </div>
+  <div class="ui-g-1 ui-g-nopad message-button-container ">
+    <button (click)="sendMessage(message)"  class="message-send-button"><img class="message-send-image" src="../../../../assets/img/bot-send-button.png"></button>
+    <!-- <button  class="message-voice-button">
+      <img class="message-send-image" src="../../../../assets/icons/microphone.svg"></button> -->
+  </div>
+  </div>

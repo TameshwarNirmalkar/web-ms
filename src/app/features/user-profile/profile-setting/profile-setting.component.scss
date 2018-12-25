@@ -1,0 +1,92 @@
+.profile-setting-container{overflow: auto;margin-bottom: 70px;}
+.button-box{position: relative;bottom:0px ; width: 100%;border-color: #fff;padding-right: 0px;}
+.marg10{margin:10px 0px;}
+h3{    margin: 5px 0px;}
+nav {
+  width: 100%;
+  background: #f7f7f7;
+}
+
+nav ul {
+  -webkit-padding-start: 0 !important;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+nav ul li {
+  list-style: none;
+  float: left;
+  text-align: center;
+  width: 100%;
+  height: 34px;
+  cursor: pointer;
+}
+.bgnew{
+background-color: lightgray;
+}
+nav ul li a {
+  display: block;
+  text-decoration: none;  overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+nav[_ngcontent-c7] ul[_ngcontent-c7] {
+  padding: 0;
+}
+
+.raw-box-container {
+  border: 1px solid;
+  margin: 10px 0 0;
+  padding: 0px 15px 15px 15px;
+  border-radius: 4px;
+}
+
+.profile-label{font-size:16px; }
+.profile-label-light{font-size:14px; }
+
+//  //////////////////////////////////
+
+
+.dragdiv{
+  min-height: 100px;
+}
+
+.searchColumn{
+  border-radius: 25px;
+  width: 170px;
+  display: block;
+}
+
+.columnlable{
+    border-radius: 5px;
+    // background: #CAE1FF;
+    padding: 5px;
+    width: 170px;
+    display: block;
+    cursor: pointer;
+
+}
+
+.check-icon {
+right:50px;
+position:absolute;
+top:2px;
+}
+
+.dmrk {
+    position: absolute;
+    right: 1px;
+    top: 5px;
+}
+
+.prdrag{
+  position: relative;
+  border: 2px solid #87ceeb;
+}
+.refresh-button{
+  width: 30px;
+  float: left;
+}

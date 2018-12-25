@@ -1,0 +1,14 @@
+<div id="myConfirmationDetailsPanel" class="ui-g-12 sms-page-container">
+  <div *ngIf="displayConfirmations && displayConfirmations.length>0;else noConfirmationFound">
+    <div *ngFor="let weekDetails of displayConfirmations | slice:0:clientLimit; let i=index">
+      <app-confirmation-details [weekDetailsObject]="weekDetails"></app-confirmation-details>
+    </div>
+  </div>
+  <ng-template #noConfirmationFound>
+    <div class="ui-g-12 no-view-request">
+      {{message|translate}}
+    </div>
+  </ng-template>
+  <button class="custom-btnBorder View-button" id="loadMoreButton" (click)="loadMoreWeekDetails()"
+    *ngIf="totalConfirmationList > clientLimit">Load more</button>
+</div>

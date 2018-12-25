@@ -1,0 +1,19 @@
+<div id="checkboxContainer" *ngIf="valueSet">
+
+  <div id="checkboxList">
+    <div id="ckeckboxSelectAll" class="shape-box">
+      <a id="selectAllFlag" (click)="selectAll()">
+        <label class="icon icon-Twin-Shape-All" [class.icon-selected]="selectAllFlag">
+        <span class="shape-label" [class.icon-selected]="selectAllFlag">All</span>
+      </label>
+      </a>
+    </div>
+    <div id="checkboxListValues" class="shape-box" *ngFor="let item of valueSet" [ngClass]="{'pear-icon': item.class === 'icon-Shape-Pear','oval-icon': item.class === 'icon-Shape-Oval'}">
+      <a id="checkbox{{item.value}}" (click)="selectSearchValues(item.value)">
+        <label class="icon {{item.class}}" [class.icon-selected]="item.isSelected">
+        <span class="shape-label" [class.icon-selected]="item.isSelected">{{titleCaseLable ? (item.label | titlecase):item.label}}</span>
+      </label>
+      </a>
+    </div>
+  </div>
+</div>

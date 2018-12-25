@@ -1,0 +1,31 @@
+table {
+  border-spacing: 0px;
+  padding: 0px;
+  width: 100%;
+}
+
+app-search-inclusions .table-header {
+border-bottom: solid 1px #cacee1;
+text-align: center;
+font-size: 12px;
+font-weight: normal;
+}
+app-search-inclusions .table-header-data{
+  font-size: 12px;
+  font-weight: bold;
+  color: #262a42;
+}
+app-search-inclusions .ui-togglebutton.ui-button.ui-state-default,
+app-search-inclusions .ui-selectbutton .ui-button.ui-state-default{
+margin: 5px;
+font-size: 12px;
+}
+app-search-inclusions .ui-multiselect .ui-multiselect-label{
+  color: #7e868f ;
+}
+app-search-inclusions .ui-multiselect.ui-widget.ui-state-default.ui-corner-all{
+  width: 30% ;
+  height: auto;
+  
+}
+app-search-inclusions .ui-multiselect .ui-multiselect-label{ padding: 7px;}

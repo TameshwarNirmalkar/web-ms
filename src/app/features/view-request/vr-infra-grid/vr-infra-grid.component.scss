@@ -1,0 +1,43 @@
+.botmgrid{
+    margin-top: 0px;
+    margin-bottom: 25px;
+    position: relative;
+}
+.botmgrid .grid-search-input {
+  display: none; 
+}
+.botmgrid .infragistics-grid-container{
+    margin-top:0px!important;
+}
+.botmgrid thead th{
+    // display: none;
+    opacity: 0;
+    // visibility: collapse;
+}
+.scrollHide .ui-iggrid-scrolldiv::-webkit-scrollbar {
+    width: 1px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+.scrollHide .ui-iggrid-scrolldiv::-webkit-scrollbar-thumb,.scrollHide .ui-iggrid-scrolldiv::-webkit-scrollbar-track {
+    background:transparent!important;
+}
+#gridheaderGrid_fixedContainerScroller{
+    height: 1px!important;
+    background:transparent!important;
+}
+#gridheaderGrid_container{
+    // overflow: hidden;
+    height: 33px;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+
+// #pastGrid .ui-iggrid-scrolldiv::-webkit-scrollbar {
+//     width: 10px;  /* remove scrollbar space */
+//     background: #999999;  /* optional: just make scrollbar invisible */
+// }
+// /* optional: show position indicator in red */
+// #pastGrid .ui-iggrid-scrolldiv::-webkit-scrollbar-thumb,#pastGrid .ui-iggrid-scrolldiv::-webkit-scrollbar-track {
+//     background:#999999!important;
+// }
