@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { ErrorHandlerService } from './error-handler.service';
-import { empty } from 'rxjs';
+import { empty } from 'rxjs/observable/empty';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
@@ -62,9 +62,10 @@ export class ApplicationDataService {
 
   initEnvironments(): any {
     if (this.env === undefined || this.env === 'undefined' || this.env === null) {
-      return this.http.get('/assets/env/environment.json');
-    } else {
-      return empty();
+      return this.http.get('../../../assets/env/environment.json').map( (res: any) => {
+        this.env = res;
+        return this.env;
+      });
     }
   }
 

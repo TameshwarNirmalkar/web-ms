@@ -5,6 +5,7 @@ import { ErrorHandlerService } from '@srk/core';
 import { AuthService } from '@srk/core';
 import { catchError, map } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
+import { empty } from 'rxjs/observable/empty';
 
 @Injectable()
 export class LoginService {
@@ -89,8 +90,10 @@ export class LoginService {
   getVideoDetails(): Observable<any> {
     const headerData = new HttpHeaders();
     headerData.append('calling_entity', 'UI');
+    console.log('API ', `${this.applicationDataService.getEnvironment().AdminApi}`);
     return this.http.get(`${this.applicationDataService.getEnvironment().AdminApi}/solitaire-admin/loginPage/show/uploaded/video/files/
     ${this.applicationDataService.getEnvironment().AdminVersion}`, { headers: headerData });
+    // return empty();
   }
 
 }

@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: web-ms
+  labels:
+    app: web-ms
+  name: web-ms
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      name: web-ms
+      labels:
+        name: web-ms
+    spec:
+      containers:
+      - env:
+        - name: NODE_ENV
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        image: srkay.azurecr.io/dockerize/web-ms:GIT_COMMIT
+        name: web-ms
+        ports:
+        - containerPort: 80
+          name: web-ms-port
+        - containerPort: 4200
+          name: admin-ser-port
+        - containerPort: 4100
+          name: serice-port
+        resources: {}
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: srkay

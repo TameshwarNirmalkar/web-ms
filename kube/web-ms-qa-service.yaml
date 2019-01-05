@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-ms
+  labels:
+    name: web-ms
+  name: web-ms
+spec:
+  sessionAffinity: ClientIP
+  type: LoadBalancer
+  loadBalancerIP: 52.172.134.54
+  ports:
+  - name: "80"
+    port: 80
+#    targetPort: 80
+  - name: "4200"
+    port: 4200
+#   targetPort: 4200
+  selector:
+    name: web-ms

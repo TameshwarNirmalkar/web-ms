@@ -13,6 +13,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { LoginAsComponent } from './login-as/login-as.component';
 import { LoginService } from './login.service';
 
+declare var jQuery;
 
 @Component({
   selector: 'app-login',
@@ -43,7 +44,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     const heightvid = jQuery('#bgvid').height();
     const position = (height - heightvid) / 2;
     jQuery('#bgvid').css('margin-top', position - 30);
+
     if (!componentObject) {
+      console.log( componentObject );
       componentObject = new Login(LoginPageComponent.Authentication, AuthenticationComponent, {});
     }
     this.renderComponent(componentObject);

@@ -1,0 +1,22 @@
+{
+  "name": "@srk/shared",
+  "version": "1.0.0",
+  "main": "bundles/shared.umd.js",
+  "module": "index.js",
+  "jsnext:main": "index.js",
+  "types": "index.d.ts",
+  "private": true,
+  "description": "Shared Packages made by SRK ",
+  "dependencies": {
+    "@ngx-translate/core": "6.0.0",
+    "typescript-string-enums": "0.3.4",
+    "primeng": "4.1.3",
+    "underscore": "1.8.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "SRKCG",
+  "license": "ISC"
+}
